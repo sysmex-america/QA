@@ -1,0 +1,92 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/29/2017 3:19:07 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="SCRIBEDEV"
+  DTS:CreatorName="SONOMAPARTNERS\rjasinski"
+  DTS:DTSID="{F56CD8E8-8C92-44E8-A920-BDC7B74C4782}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="14.0.3002.101"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="LabToCRM"
+  DTS:PackageType="5"
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{65747EE6-46A2-4B7E-9F26-0A307D1C1E21}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Metric]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{CA788C1E-2EEC-4741-BBDE-01BFA8E5FE34}"
+      DTS:ObjectName="Metric">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=dsql08r202.dev.sonomapartners.local;Initial Catalog=Metrix_M5_Pub;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-RefreshViews-{6FDAB3FB-0463-4941-BFB2-5D336E239100}dsql08r202.dev.sonomapartners.local.Metrix_M5_Pub;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MSCRM]"
+      DTS:CreationName="DynamicsCRM"
+      DTS:DTSID="{14429ED8-8949-46E5-90F9-CFBDA5A707EB}"
+      DTS:ObjectName="MSCRM">
+      <DTS:ObjectData>
+        <CrmConnectionManager
+          ConnectionString="AuthenticationType=OnlineFederation;ServiceEndpoint=Soap2011;DiscoveryServerUrl=https://disco.crm.dynamics.com;UserName=anargyrosa@sysmex.com;Domain=;OrganizationName=&quot;Sysmex Dev&quot;;CrmServerUrl=https://sysmexdev.api.crm.dynamics.com;ProxyUsername=;ProxyMode=NoProxy;ProxyServer=;ProxyServerPort=0;BypassProxyOnLocal=False;HomeRealmUri=;ApiVersion=;ServiceTimeout=120;RetryOnIntermittentErrors=True;IgnoreCertificateErrors=False">
+          <Password
+            Sensitive="1" xmlns="www.microsoft.com/SqlServer/Dts"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAz4e01GfNqU2WSM5bew96YAAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADanZv4EzjH69h1IF0J6MqHAAAAAASAAACgAAAAEAAAAElvoMuQDRBU431YkOiBSwwgAAAAUquKcsz/J+wvdKHc3Eb+rAPDV9nExinIK0Undv8vd3MUAAAAeNVysg5sOfMyd5F6W/+I9wUGiLI</Password>
+        </CrmConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Staging]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{06C25D55-F5BC-4265-80BE-2AE69EF223BD}"
+      DTS:ObjectName="Staging">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DSQL12R201.dev.sonomapartners.local;Initial Catalog=SysmexStaging;Provider=SQLNCLI11;Integrated Security=SSPI;Application Name=SSIS-LabToCRM-{06C25D55-F5BC-4265-80BE-2AE69EF223BD}DSQL12R201.dev.sonomapartners.local.SysmexStaging;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{6E3FE6A5-D1E5-409F-9219-2AFAEA1CC724}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Data Flow Task"
+          TopLeft="159,137" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
