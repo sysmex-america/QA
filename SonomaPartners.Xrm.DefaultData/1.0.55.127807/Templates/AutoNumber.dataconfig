@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ImportConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Entity Name="sonoma_autonumber">
+    <Attribute>sonoma_name</Attribute>
+    <Attribute>sonoma_autonumberid</Attribute>
+    <Attribute>sonoma_entity</Attribute>
+    <Attribute>sonoma_isnumeric</Attribute>
+    <Attribute>sonoma_maxlength</Attribute>
+    <Attribute>sonoma_updating</Attribute>
+  </Entity>
+</ImportConfiguration>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="Sysmex_CRM"
+  DTS:DTSID="{AE9846A7-8EFA-4BEB-A233-D4B08C771D6C}"
+  DTS:CreationName="DynamicsCRM">
+  <DTS:ObjectData>
+    <CrmConnectionManager
+      ConnectionString="AuthenticationType=OnlineFederation;ServiceEndpoint=Soap2011;DiscoveryServerUrl=https://disco.crm.dynamics.com;UserName=anargyrosa@sysmex.com;Domain=;OrganizationName=&quot;Sysmex America, Inc.&quot;;CrmServerUrl=https://sysmexamericas.api.crm.dynamics.com;ProxyUsername=;ProxyMode=NoProxy;ProxyServer=;ProxyServerPort=0;BypassProxyOnLocal=False;HomeRealmUri=;ApiVersion=;ServiceTimeout=645;RetryOnIntermittentErrors=True;IgnoreCertificateErrors=False">
+      <Password
+        Sensitive="1" xmlns="www.microsoft.com/SqlServer/Dts">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA5Re3Ni9oxUSHIg96tJRR2gAAAAACAAAAAAADZgAAwAAAABAAAAADaEltj0NAIvt4xCQmqSa1AAAAAASAAACgAAAAEAAAAM8+2yZM3Pf9qSVl+7A6kLxgAAAABstMxuCdlIEI7RCWp2mwxsd6aA1vHTEAtyx3m04Q9E8txrBRRlXVvt0FLNudUb/dyJaRB8/hohlepbOLZ5KaH0182vFaZ+b+JB/XoZkrHlRF/q96hIhb1Qz50xbfXbs1FAAAAJbofj6+a8qEO1w8I+xiIyz8yFuc</Password>
+    </CrmConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://sws.sysmex.com/CPQSAPWebService/SalesContract/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s1="http://Microsoft.LobServices.Sap/2007/03/Rfc/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s2="http://Microsoft.LobServices.Sap/2007/03/Types/Rfc/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://sws.sysmex.com/CPQSAPWebService/SalesContract/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://sws.sysmex.com/CPQSAPWebService/SalesContract/">
+      <s:import namespace="http://Microsoft.LobServices.Sap/2007/03/Rfc/" />
+      <s:element name="Create">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:Z_BIZ_BAPI_CONTRACT_CREATE" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:Z_BIZ_BAPI_CONTRACT_CREATEResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://Microsoft.LobServices.Sap/2007/03/Rfc/">
+      <s:import namespace="http://Microsoft.LobServices.Sap/2007/03/Types/Rfc/" />
+      <s:element name="Z_BIZ_BAPI_CONTRACT_CREATE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CONTRACT_HEADER" nillable="true" type="s2:ZBAPI_CON_HEADER" />
+            <s:element minOccurs="1" maxOccurs="1" name="CONTRACT_ITEM" nillable="true" type="s2:ArrayOfZBAPI_CON_ITEM_TT" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Z_BIZ_BAPI_CONTRACT_CREATEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RETURN" nillable="true" type="s2:ZBAPI_RETURN" />
+            <s:element minOccurs="1" maxOccurs="1" name="SALESDOCUMENT" nillable="true" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://Microsoft.LobServices.Sap/2007/03/Types/Rfc/">
+      <s:complexType name="ZBAPI_CON_HEADER">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DOC_TYPE" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SALES_ORG" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DISTR_CHAN" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DIVISION" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SOLD_TO_PARTY" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SHIP_TO_PARTY" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BILL_TO_PARTY" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PAYER" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PURCH_NO_C" nillable="true" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PURCH_DATE" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="CONTRACT_START" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="CONTRACT_END" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="BILLING_BLOCK" nillable="true" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PRICE_DATE" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ORD_REASON" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SHIP_COND" nillable="true" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ADD_VAL_DY" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DEA_NUMBER" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CUST_GRP2" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SHIP_TO" nillable="true" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZSITES" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZTCOUNT" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZMCOUNT" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ZSTCOM" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ZMINMBILL" nillable="true" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZKBETR" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ZCONIN5" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ZCONIN4" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ZCONIN6" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfZBAPI_CON_ITEM_TT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZBAPI_CON_ITEM_TT" type="s2:ZBAPI_CON_ITEM_TT" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZBAPI_CON_ITEM_TT">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="MATERIAL_NUMBER" nillable="true" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TARGET_QUANTITY" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="UOM" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SHORT_TEXT" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ITEM_CATEG" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LINKED" nillable="true" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PRICE" nillable="true" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZBAPI_RETURN">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="TYPE" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MESSAGE" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CreateSoapIn">
+    <wsdl:part name="parameters" element="tns:Create" />
+  </wsdl:message>
+  <wsdl:message name="CreateSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateResponse" />
+  </wsdl:message>
+  <wsdl:portType name="SalesContractSoap">
+    <wsdl:operation name="Create">
+      <wsdl:input message="tns:CreateSoapIn" />
+      <wsdl:output message="tns:CreateSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SalesContractSoap" type="tns:SalesContractSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Create">
+      <soap:operation soapAction="http://sws.sysmex.com/CPQSAPWebService/SalesContract/SalesContract/Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SalesContractSoap12" type="tns:SalesContractSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Create">
+      <soap12:operation soapAction="http://sws.sysmex.com/CPQSAPWebService/SalesContract/SalesContract/Create" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SalesContract">
+    <wsdl:port name="SalesContractSoap" binding="tns:SalesContractSoap">
+      <soap:address location="http://localhost/CPQSAPWebService/SalesContract.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SalesContractSoap12" binding="tns:SalesContractSoap12">
+      <soap12:address location="http://localhost/CPQSAPWebService/SalesContract.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

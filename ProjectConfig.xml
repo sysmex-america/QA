@@ -1,0 +1,8 @@
+<ProjectConfig>
+	<ClientName>Sysmex</ClientName>
+	<ProjectName>Sysmex</ProjectName>
+	<ServerName>ServerNameToken</ServerName>
+	<OrganizationName>OrganizationNameToken</OrganizationName>
+	<GrapevineProjectName>GrapevineSysmex</GrapevineProjectName>
+	<SolutionPrefix>SolutionPrefixToken</SolutionPrefix>
+</ProjectConfig>

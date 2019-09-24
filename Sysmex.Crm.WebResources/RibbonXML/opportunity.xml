@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-16"?>
+<RibbonDiffXml xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <CustomActions>
+    <CustomAction Id="smx.apts.opportunity.Button2.Button.CustomAction" Location="Mscrm.Form.opportunity.MainTab.Actions.Controls._children" Sequence="6">
+      <CommandUIDefinition>
+        <Button Command="apts.opportunity.Command2.Command" Id="apts.opportunity.Button2.Button" Image32by32="$webresource:cc_MscrmControls.LinearGauge.LinearGaugeControl/img/preview.png" Image16by16="$webresource:LeadManagement/_imgs/ribbon/MergeRecords_16.png" LabelText="$LocLabels:apts.opportunity.Button2.Button.LabelText" Sequence="6" TemplateAlias="o1" ModernImage="$webresource:AppCommon/ControlWS/SummaryPageImages/ExportData.svg" />
+      </CommandUIDefinition>
+    </CustomAction>
+    <CustomAction Id="smx.opportunity.Button.SplitOpportunity.CustomAction" Location="Mscrm.Form.opportunity.MainTab.Actions.Controls._children" Sequence="5">
+      <CommandUIDefinition>
+        <Button Command="smx.opportunity.Command.SplitOpportunity" Id="smx.opportunity.Button.SplitOpportunity" Image32by32="$webresource:smx_/Images/OpportunitySplit32.png" Image16by16="$webresource:smx_/Images/OpportunitySplit16.png" LabelText="$LocLabels:smx.opportunity.Button.SplitOpportunity.LabelText" Sequence="5" TemplateAlias="o1" />
+      </CommandUIDefinition>
+    </CustomAction>
+    <HideCustomAction HideActionId="smx.Mscrm.Form.opportunity.NewRecord.Hide" Location="Mscrm.Form.opportunity.NewRecord" />
+    <HideCustomAction HideActionId="smx.Mscrm.Form.opportunity.NewRecordForBPFEntity.Hide" Location="Mscrm.Form.opportunity.NewRecordForBPFEntity" />
+    <HideCustomAction HideActionId="smx.Mscrm.SubGrid.opportunity.NewRecord.Hide" Location="Mscrm.SubGrid.opportunity.NewRecord" />
+  </CustomActions>
+  <Templates>
+    <RibbonTemplates Id="Mscrm.Templates" />
+  </Templates>
+  <CommandDefinitions>
+    <CommandDefinition Id="apts.opportunity.Command2.Command">
+      <EnableRules />
+      <DisplayRules />
+      <Actions>
+        <JavaScriptFunction FunctionName="CreateQuoteFromOpportunity" Library="$webresource:apts_CreateQuoteFromOpporytunity" />
+      </Actions>
+    </CommandDefinition>
+    <CommandDefinition Id="Mscrm.AddNewRecordFromSubGridStandard">
+      <EnableRules>
+        <EnableRule Id="Mscrm.AppendToPrimary" />
+        <EnableRule Id="Mscrm.EntityFormIsEnabled" />
+        <EnableRule Id="Mscrm.IsEntityAvailableForUserInMocaOffline" />
+        <EnableRule Id="smx.opportunity.EnableRule.AccountStatusReason" />
+      </EnableRules>
+      <DisplayRules>
+        <DisplayRule Id="Mscrm.ShowForOneToManyGrids" />
+        <DisplayRule Id="Mscrm.AppendToPrimary" />
+        <DisplayRule Id="Mscrm.CreateSelectedEntityPermission" />
+        <DisplayRule Id="Mscrm.AppendSelected" />
+        <DisplayRule Id="Mscrm.HideAddNewForChildEntities" />
+      </DisplayRules>
+      <Actions>
+        <JavaScriptFunction FunctionName="Mscrm.GridCommandActions.addNewFromSubGridStandard" Library="/_static/_common/scripts/CommandBarActions.js">
+          <CrmParameter Value="SelectedEntityTypeCode" />
+          <CrmParameter Value="PrimaryEntityTypeCode" />
+          <CrmParameter Value="FirstPrimaryItemId" />
+          <CrmParameter Value="PrimaryControl" />
+          <CrmParameter Value="SelectedControl" />
+        </JavaScriptFunction>
+      </Actions>
+    </CommandDefinition>
+    <CommandDefinition Id="smx.opportunity.Command.SplitOpportunity">
+      <EnableRules>
+        <EnableRule Id="smx.opportunity.EnableRule.ShowOnActive" />
+        <EnableRule Id="smx.opportunity.EnableRule.HideOnMobile" />
+      </EnableRules>
+      <DisplayRules />
+      <Actions>
+        <JavaScriptFunction FunctionName="NaN" Library="$webresource:smx_/Scripts/Libraries/sonoma.js" />
+        <JavaScriptFunction FunctionName="NaN" Library="$webresource:smx_/Scripts/Libraries/SP.Window.js" />
+        <JavaScriptFunction FunctionName="SMX.opportunityRibbon.showProductDialog" Library="$webresource:smx_/Scripts/Ribbons/ribbon.opportunity.js" />
+      </Actions>
+    </CommandDefinition>
+  </CommandDefinitions>
+  <RuleDefinitions>
+    <TabDisplayRules />
+    <DisplayRules>
+      <DisplayRule Id="Mscrm.AppendSelected">
+        <EntityPrivilegeRule PrivilegeType="Append" PrivilegeDepth="Basic" AppliesTo="SelectedEntity" />
+      </DisplayRule>
+      <DisplayRule Id="Mscrm.AppendToPrimary">
+        <EntityPrivilegeRule PrivilegeType="AppendTo" PrivilegeDepth="Basic" AppliesTo="PrimaryEntity" />
+      </DisplayRule>
+      <DisplayRule Id="Mscrm.CreateSelectedEntityPermission">
+        <EntityPrivilegeRule PrivilegeType="Create" PrivilegeDepth="Basic" AppliesTo="SelectedEntity" />
+      </DisplayRule>
+      <DisplayRule Id="Mscrm.HideAddNewForChildEntities">
+        <OrRule>
+          <Or>
+            <EntityPropertyRule AppliesTo="SelectedEntity" PropertyName="IsChildEntity" PropertyValue="false" />
+          </Or>
+          <Or>
+            <RelationshipTypeRule AppliesTo="SelectedEntity" AllowCustomRelationship="false" />
+          </Or>
+        </OrRule>
+      </DisplayRule>
+      <DisplayRule Id="Mscrm.ShowForOneToManyGrids">
+        <RelationshipTypeRule AppliesTo="SelectedEntity" RelationshipType="OneToMany" />
+      </DisplayRule>
+    </DisplayRules>
+    <EnableRules>
+      <EnableRule Id="Mscrm.AppendToPrimary">
+        <RecordPrivilegeRule PrivilegeType="AppendTo" AppliesTo="PrimaryEntity" />
+      </EnableRule>
+      <EnableRule Id="Mscrm.EntityFormIsEnabled">
+        <FormStateRule State="Disabled" InvertResult="true" />
+      </EnableRule>
+      <EnableRule Id="Mscrm.IsEntityAvailableForUserInMocaOffline">
+        <CustomRule FunctionName="XrmCore.Rules.Online.IsEntityAvailableForUserInMocaOffline" Library="$webresource:Main_system_library.js">
+          <CrmParameter Value="SelectedEntityTypeName" />
+        </CustomRule>
+      </EnableRule>
+      <EnableRule Id="smx.opportunity.EnableRule.AccountStatusReason">
+        <CustomRule FunctionName="SMX.opportunityRibbon.enableAddNewButton" Library="$webresource:smx_/Scripts/Ribbons/ribbon.opportunity.js">
+          <CrmParameter Value="PrimaryControl" />
+        </CustomRule>
+      </EnableRule>
+      <EnableRule Id="smx.opportunity.EnableRule.HideOnMobile">
+        <CustomRule FunctionName="SMX.opportunityRibbon.enableSplitOpportunityButton" Library="$webresource:smx_/Scripts/Ribbons/ribbon.opportunity.js">
+          <CrmParameter Value="PrimaryControl" />
+        </CustomRule>
+      </EnableRule>
+      <EnableRule Id="smx.opportunity.EnableRule.ShowOnActive">
+        <FormStateRule State="Existing" InvertResult="false" />
+        <FormStateRule State="Disabled" InvertResult="true" />
+      </EnableRule>
+    </EnableRules>
+  </RuleDefinitions>
+  <LocLabels>
+    <LocLabel Id="apts.opportunity.Button2.Button.LabelText">
+      <Titles>
+        <Title description="Create Quote" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+    <LocLabel Id="smx.opportunity.Button.SplitOpportunity.LabelText">
+      <Titles>
+        <Title description="Split Opportunity" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+  </LocLabels>
+</RibbonDiffXml>

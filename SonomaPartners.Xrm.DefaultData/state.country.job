@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Root>
+  <Jobs>
+    <Job Id="5d9ca733-9276-45eb-8af6-2872726c3e77">
+      <ProfileId>484829cf-fe7b-41e5-9877-27dfa22c9521</ProfileId>
+      <Type>Export</Type>
+    </Job>
+    <Job Id="2408f0bd-cbf6-42e3-97ac-471d6cfee0ea">
+      <ProfileId>a297a9b3-b286-4a2d-b4d7-0bad8852133c</ProfileId>
+      <Type>Import</Type>
+    </Job>
+  </Jobs>
+  <Profiles>
+    <Profile Name="Sysmex Dev Export State Country" Id="484829cf-fe7b-41e5-9877-27dfa22c9521">
+      <ConnectionString>Url=https://sysmexdev.api.crm.dynamics.com/XRMServices/2011/Organization.svc;Username=anargyrosa@sysmex.com;Password=Nongovernment67</ConnectionString>
+      <ConfigFilePath>C:\workspace\Sysmex\SourceCode\SonomaPartners.Xrm.DefaultData\state.country.dataconfig</ConfigFilePath>
+      <DataFilePath>C:\workspace\Sysmex\SourceCode\SonomaPartners.Xrm.DefaultData\state.country.data</DataFilePath>
+      <UseRandomData>false</UseRandomData>
+      <DoNotRun>false</DoNotRun>
+    </Profile>
+    <Profile Name="Import QA State Country" Id="a297a9b3-b286-4a2d-b4d7-0bad8852133c">
+      <ConnectionString>Url=https://sysmexcpqqa.api.crm.dynamics.com/XRMServices/2011/Organization.svc;Username=anargyrosa@sysmex.com;Password=Nongovernment67</ConnectionString>
+      <DataFilePath>C:\workspace\Sysmex\SourceCode\SonomaPartners.Xrm.DefaultData\state.country.data</DataFilePath>
+      <UseRandomData>false</UseRandomData>
+      <DoNotRun>false</DoNotRun>
+    </Profile>
+  </Profiles>
+</Root>

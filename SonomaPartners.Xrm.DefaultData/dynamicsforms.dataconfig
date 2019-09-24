@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ImportConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Entity Name="sonoma_autonumber">
+    <Attribute>importsequencenumber</Attribute>
+    <Attribute>overriddencreatedon</Attribute>
+    <Attribute>sonoma_autonumberid</Attribute>
+    <Attribute>sonoma_entity</Attribute>
+    <Attribute>sonoma_entity_field</Attribute>
+    <Attribute>sonoma_formatstring</Attribute>
+    <Attribute>sonoma_isnumeric</Attribute>
+    <Attribute>sonoma_maxlength</Attribute>
+    <Attribute>sonoma_name</Attribute>
+    <Attribute>sonoma_number</Attribute>
+    <Attribute>sonoma_prefix</Attribute>
+    <Attribute>sonoma_updating</Attribute>
+    <Attribute>statecode</Attribute>
+    <Attribute>statuscode</Attribute>
+    <Attribute>timezoneruleversionnumber</Attribute>
+    <Attribute>utcconversiontimezonecode</Attribute>
+  </Entity>
+  <Entity Name="sonoma_debug">
+    <Attribute>importsequencenumber</Attribute>
+    <Attribute>overriddencreatedon</Attribute>
+    <Attribute>ownerid</Attribute>
+    <Attribute>sonoma_debugid</Attribute>
+    <Attribute>sonoma_logs</Attribute>
+    <Attribute>sonoma_name</Attribute>
+    <Attribute>statecode</Attribute>
+    <Attribute>statuscode</Attribute>
+    <Attribute>timezoneruleversionnumber</Attribute>
+    <Attribute>utcconversiontimezonecode</Attribute>
+  </Entity>
+  <Entity Name="sonoma_formaction">
+    <Attribute>importsequencenumber</Attribute>
+    <Attribute>overriddencreatedon</Attribute>
+    <Attribute>sonoma_formactionid</Attribute>
+    <Attribute>sonoma_formruleid</Attribute>
+    <Attribute>sonoma_name</Attribute>
+    <Attribute>sonoma_uidata</Attribute>
+    <Attribute>sonoma_valuedata</Attribute>
+    <Attribute>statecode</Attribute>
+    <Attribute>statuscode</Attribute>
+    <Attribute>timezoneruleversionnumber</Attribute>
+    <Attribute>utcconversiontimezonecode</Attribute>
+  </Entity>
+  <Entity Name="sonoma_formcondition">
+    <Attribute>importsequencenumber</Attribute>
+    <Attribute>overriddencreatedon</Attribute>
+    <Attribute>sonoma_formconditiongroupid</Attribute>
+    <Attribute>sonoma_formconditionid</Attribute>
+    <Attribute>sonoma_formruleid</Attribute>
+    <Attribute>sonoma_name</Attribute>
+    <Attribute>sonoma_uidata</Attribute>
+    <Attribute>sonoma_valuedata</Attribute>
+    <Attribute>statecode</Attribute>
+    <Attribute>statuscode</Attribute>
+    <Attribute>timezoneruleversionnumber</Attribute>
+    <Attribute>utcconversiontimezonecode</Attribute>
+  </Entity>
+  <Entity Name="sonoma_formconditiongroup">
+    <Attribute>importsequencenumber</Attribute>
+    <Attribute>overriddencreatedon</Attribute>
+    <Attribute>sonoma_formconditiongroupid</Attribute>
+    <Attribute>sonoma_formruleid</Attribute>
+    <Attribute>sonoma_name</Attribute>
+    <Attribute>sonoma_parentformcondtiongroupid</Attribute>
+    <Attribute>statecode</Attribute>
+    <Attribute>statuscode</Attribute>
+    <Attribute>timezoneruleversionnumber</Attribute>
+    <Attribute>utcconversiontimezonecode</Attribute>
+  </Entity>
+  <Entity Name="sonoma_formrule">
+    <Attribute>importsequencenumber</Attribute>
+    <Attribute>overriddencreatedon</Attribute>
+    <Attribute>sonoma_entityname</Attribute>
+    <Attribute>sonoma_formruleid</Attribute>
+    <Attribute>sonoma_formsettingid</Attribute>
+    <Attribute>sonoma_name</Attribute>
+    <Attribute>sonoma_order</Attribute>
+    <Attribute>sonoma_publishedon</Attribute>
+    <Attribute>sonoma_savedon</Attribute>
+    <Attribute>statecode</Attribute>
+    <Attribute>statuscode</Attribute>
+    <Attribute>timezoneruleversionnumber</Attribute>
+    <Attribute>utcconversiontimezonecode</Attribute>
+  </Entity>
+  <Entity Name="sonoma_formsetting">
+    <Attribute>importsequencenumber</Attribute>
+    <Attribute>overriddencreatedon</Attribute>
+    <Attribute>sonoma_formsettingid</Attribute>
+    <Attribute>sonoma_name</Attribute>
+    <Attribute>statecode</Attribute>
+    <Attribute>statuscode</Attribute>
+    <Attribute>timezoneruleversionnumber</Attribute>
+    <Attribute>utcconversiontimezonecode</Attribute>
+  </Entity>
+</ImportConfiguration>

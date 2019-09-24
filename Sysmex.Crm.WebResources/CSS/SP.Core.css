@@ -1,0 +1,165 @@
+﻿/* -- Default Body Styles --*/
+html, body
+{
+    height: 100%;
+    width: 100%;
+    border-width: 0;
+}
+
+body, input, button, select, textarea, label
+{
+    font-family: Segoe UI, Tahoma, Arial;
+    font-size: 11px;   
+}
+
+body
+{
+    background-color: #F6F8FA;
+    color: #000;
+    margin: 0px;
+    padding: 0px;
+    
+    scrollbar-arrow-color: #3b3b3b;
+    scrollbar-face-color: #e9edf1;
+    scrollbar-darkshadow-color: #a5acb5;
+    scrollbar-base-color: #e9edf1;
+    scrollbar-highlight-color: #e9edf1;
+    scrollbar-shadow-color: #e9edf1;
+    scrollbar-track-color: #e3e8ed;
+    scrollbar-3dlight-color: #a5acb5;
+}
+
+/* -- Default CRM Link Styles --*/
+a:link
+{
+    color: #000;
+    text-decoration: none;
+}
+a:hover
+{
+    color: #000;
+    text-decoration: underline;
+}
+a:visited:hover
+{
+    color: #000;
+    text-decoration: underline;
+}
+a:visited
+{
+    color: #000;
+    text-decoration: none;
+}
+
+.xrm-main-content
+{
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+/*-- Form control styles --*/
+input
+{
+    height: 19px;
+}
+
+input[type=radio]
+{
+    width: 16px;
+    border: 0px;
+    cursor: hand;
+}
+
+input[type=checkbox]
+{
+    border: 0px;
+    cursor: hand;
+}
+
+label
+{
+    cursor: hand;
+}
+
+button
+{
+    border-color: #666;
+    background-image: url("/_imgs/theme/Outlook14Silver/ButtonNormalGradient.png");
+    line-height: 18px;
+    height: 22px;
+    width: 84px;
+    text-align: center;
+    cursor: pointer;
+    border-width: 1px;
+    border-style: solid;
+    background-repeat: repeat-x;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-right: 8px;
+}
+
+.button-hover
+{
+    border-color:#336699;
+    background-image:url("/_imgs/theme/Outlook14Silver/ButtonSelectedGradient.png");
+}
+
+select 
+{
+    color: #000;
+    width: 100%;
+    height: 19px;
+}
+
+textarea
+{
+    color: #000;
+    height: 153px;
+    width: 100%;
+}
+
+.xrm-form label, .xrm-field-label
+{
+    color: #3b3b3b;
+    font-weight: normal;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding-top: 5px;
+    text-align: left;
+    cursor: hand;
+}
+
+.xrm-textarea-field
+{
+    height: 174px;
+    margin-right: 8px;
+}
+
+/* -- Form Layout Styles -- */
+
+.xrm-form TABLE
+{
+    table-layout: fixed;
+}
+
+.xrm-form col
+{
+    padding-left: 20px;
+}
+
+/* Section Header */
+.xrm-form H3
+{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 13px;
+    color: #3b3b3b;
+    font-weight: bold;
+    width: 100%;
+    padding-bottom: 2px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    border-bottom: 1px solid #c0c0c0;
+}
+

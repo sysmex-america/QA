@@ -1,0 +1,6 @@
+﻿{
+  "CrmUrl": "https://sysmexdev.crm.dynamics.com",
+  "Username": "martinh@sysmex.com",
+  "Password": "Thisis15long!23",
+  "AuthenticationType":  "Office365" 
+}

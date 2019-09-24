@@ -1,0 +1,2582 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/29/2017 3:19:07 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="SCRIBEDEV"
+  DTS:CreatorName="SONOMAPARTNERS\rjasinski"
+  DTS:DTSID="{697EA488-798E-4A9D-A468-4D159B24C2BD}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.6020.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="LabToCRM"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="2"
+  DTS:VersionBuild="72"
+  DTS:VersionGUID="{9FE9D5F7-63DF-48DC-A35E-03EE518B8BE7}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{E063ACC2-D44B-4E99-B977-C9C74B85A354}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::FileName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="129"
+              DTS:ObjectName="SalesDoc"
+              DTS:DTSID="{0C2D1E4B-F103-4408-A979-5E02CA1528CD}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="129"
+              DTS:ObjectName="Item"
+              DTS:DTSID="{36A8077A-C5C2-49C0-BB70-86D3C040AFC7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="129"
+              DTS:ObjectName="ContractType"
+              DTS:DTSID="{D0752AF0-873C-43EE-A990-0166AA3BD607}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="129"
+              DTS:ObjectName="StartDate"
+              DTS:DTSID="{01447ECD-E80B-492D-8670-F17F1B23DB29}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="129"
+              DTS:ObjectName="EndDate"
+              DTS:DTSID="{EA4A063C-DB17-458E-858F-154E5A2CB477}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="129"
+              DTS:ObjectName="Status"
+              DTS:DTSID="{9F47A135-EB4F-489F-ACC6-D3662E7A16C7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="129"
+              DTS:ObjectName="SoldTo"
+              DTS:DTSID="{7DE80C66-17D5-4104-9028-2B9EB4BB9A2B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="129"
+              DTS:ObjectName="SoldToName"
+              DTS:DTSID="{1D4D16A1-AC70-4ECE-9D5E-9EC11C2B89C8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="129"
+              DTS:ObjectName="ShipTp"
+              DTS:DTSID="{2A8B874C-6AD3-431C-A89B-28AD7984B13E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="129"
+              DTS:ObjectName="Material"
+              DTS:DTSID="{3E76B1C3-4FBE-4CB4-9C04-8FC61506E6B6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="129"
+              DTS:ObjectName="MaterialDescription"
+              DTS:DTSID="{CA3FEC5A-04F9-4CD5-AE88-BCCDA2FE7AEB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="129"
+              DTS:ObjectName="ICNDate"
+              DTS:DTSID="{9A3A6F32-8FF3-4859-8105-93F7DF679361}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="129"
+              DTS:ObjectName="InvoiceDocument"
+              DTS:DTSID="{1C11E3D6-13E8-414A-9AE7-0B4D1C74AEAE}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Metric]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{1B3744A7-F685-4387-8A20-6ED954265507}"
+      DTS:ObjectName="Metric">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=dsql08r202.dev.sonomapartners.local;Initial Catalog=Metrix_M5_Pub;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-RefreshViews-{6FDAB3FB-0463-4941-BFB2-5D336E239100}dsql08r202.dev.sonomapartners.local.Metrix_M5_Pub;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MSCRM]"
+      DTS:CreationName="DynamicsCRM"
+      DTS:DTSID="{53C454E6-C7AB-4480-AC22-B03E7DE4908F}"
+      DTS:ObjectName="MSCRM">
+      <DTS:ObjectData>
+        <CrmConnectionManager
+          ConnectionString="AuthenticationType=OnlineFederation;ServiceEndpoint=Soap2011;DiscoveryServerUrl=https://disco.crm.dynamics.com;UserName=anargyrosa@sysmex.com;Domain=;OrganizationName=&quot;Sysmex QA&quot;;CrmServerUrl=https://sysmexqa.api.crm.dynamics.com;ProxyUsername=;ProxyMode=NoProxy;ProxyServer=;ProxyServerPort=0;BypassProxyOnLocal=False;HomeRealmUri=;ApiVersion=;ServiceTimeout=120;RetryOnIntermittentErrors=True;IgnoreCertificateErrors=False">
+          <EncryptedData
+            Type="http://www.w3.org/2001/04/xmlenc#Element"
+            Salt="wq6paMH0ZA=="
+            IV="vvwQcWiRi9g=" xmlns="http://www.w3.org/2001/04/xmlenc#">
+            <EncryptionMethod
+              Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc" />
+            <CipherData>
+              <CipherValue>vvwQcWiRi9ii6Z3AyTylFHyWh46Bo0Pnu/kD5m4NPSh7gCXwTmmjAVkOcurYTLe/EhF3+qirM1jv/2Mp023zvUK2WxV0fjkJ51O4X0rel/UYsnPG9D6t0PZeM48vZDyzgpvejPyrf5k=</CipherValue>
+            </CipherData>
+          </EncryptedData>
+        </CrmConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Staging]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{4E3624CD-33C0-49D5-9012-091D3DFF9CDB}"
+      DTS:ObjectName="Staging">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DSQL12R201.dev.sonomapartners.local;Initial Catalog=SysmexStaging;Provider=SQLNCLI11;Integrated Security=SSPI;Application Name=SSIS-LabToCRM-{4E3624CD-33C0-49D5-9012-091D3DFF9CDB}DSQL12R201.dev.sonomapartners.local.SysmexStaging;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{9745588B-4901-43B5-84B8-BC8D74BB5701}"
+      DTS:ObjectName="FlatFileLocation"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">F:\Data\Sysmex\Sales_Contracts\</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C27A478B-3DD0-4E6E-9C60-E415478328F6}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DFC7AD84-21EF-483F-B405-65BF65570BC5}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="IntegrationExecutionLogID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7C8A485B-BB5E-4BCF-9E44-4529F8E7FEDD}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="IntegrationName">
+      <DTS:VariableValue
+        DTS:DataType="8">SalesContractToCRM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B0C2E4BD-30D0-47D8-80E4-7BE28E5F8B10}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="LastRunDate">
+      <DTS:VariableValue
+        DTS:DataType="7">3/30/2017 12:38:00 PM</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Foreach Loop Container"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{392B7C00-B893-44A4-8117-F1C5C7539F53}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach Loop Container">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="DTS.ForEachFileEnumerator.3"
+        DTS:DTSID="{B892A9B5-0F6E-4875-854C-D1D63B07CE5C}"
+        DTS:ObjectName="{B892A9B5-0F6E-4875-854C-D1D63B07CE5C}">
+        <DTS:PropertyExpression
+          DTS:Name="Directory">@[$Package::FlatFileLocation]</DTS:PropertyExpression>
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="F:\Data\Sysmex\Sales_Contracts\" />
+            <FEFEProperty
+              FileSpec="*.csv" />
+            <FEFEProperty
+              FileNameRetrievalType="0" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\File System Task"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="File System Task"
+          DTS:Disabled="True"
+          DTS:DTSID="{88086B20-E1ED-463B-92D7-208D81B88F69}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="File System Task"
+          DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="DeleteFile"
+              TaskSourcePath="{E063ACC2-D44B-4E99-B977-C9C74B85A354}" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Get Last Run Date"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{DED5D988-F781-4F71-99A1-DDEF9791065C}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get Last Run Date"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{4E3624CD-33C0-49D5-9012-091D3DFF9CDB}"
+              SQLTask:SqlStatementSource="select max(StartDate) as LastRunDate from CRMIntegrationExecutionLog where IntegrationName = ? and StatusCode = 'S'"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="LastRunDate"
+                SQLTask:DtsVariableName="User::LastRunDate" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::IntegrationName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Sales Contract to CRM"
+          DTS:CreationName="SSIS.Pipeline.3"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{350876AA-0F6D-4815-BF34-D3C68AAC415B}"
+          DTS:ExecutableType="SSIS.Pipeline.3"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Sales Contract to CRM"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              BLOBTempStoragePath=""
+              bufferTempStoragePath=""
+              version="1">
+              <components>
+                <component
+                  refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column"
+                  componentClassID="{49928E82-9C4E-49F0-AABE-3812B82707EC}"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Inputs[Derived Column Input].Columns[ShipTp]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="ShipTp"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[ShipTp]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Inputs[Derived Column Input].Columns[SalesDoc]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="SalesDoc"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[SalesDoc]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Inputs[Derived Column Input].Columns[Item]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="Item"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[Item]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Inputs[Derived Column Input].Columns[Status]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="Status"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[Status]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Inputs[Derived Column Input].Columns[StartDate]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="StartDate"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[StartDate]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Inputs[Derived Column Input].Columns[EndDate]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="EndDate"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[EndDate]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Inputs[Derived Column Input].Columns[ICNDate]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="ICNDate"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[ICNDate]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[LabSAPID]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[LabSAPID]"
+                          name="LabSAPID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">#{Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[ShipTp]}</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">ShipTp</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[IntegrationExecutionLogID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[IntegrationExecutionLogID]"
+                          name="IntegrationExecutionLogID"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">@[User::IntegrationExecutionLogID]</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">@[User::IntegrationExecutionLogID]</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[smx_name]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="43"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[smx_name]"
+                          name="smx_name"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">(DT_WSTR,20)#{Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[SalesDoc]} + " (" + (DT_WSTR,20)#{Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[Item]} + ")"</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_WSTR,20)SalesDoc + " (" + (DT_WSTR,20)Item + ")"</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[statecode]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[statecode]"
+                          name="statecode"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">[ISNULL](#{Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[Status]}) ==  TRUE  ? 0 : 1</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">ISNULL(Status) ==  TRUE  ? 0 : 1</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[statuscode]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[statuscode]"
+                          name="statuscode"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">[ISNULL](#{Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[Status]}) ==  TRUE  ? 1 : 2</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">ISNULL(Status) ==  TRUE  ? 1 : 2</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[IntegrationName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="18"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[IntegrationName]"
+                          name="IntegrationName"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">@[User::IntegrationName]</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">@[User::IntegrationName]</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[StartDateDT]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[StartDateDT]"
+                          name="StartDateDT"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">#{Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[StartDate]} == "00000000" ? NULL(DT_DBDATE) : (DT_DBDATE)([SUBSTRING](#{Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[StartDate]},5,2) + "/" + [SUBSTRING](#{Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[StartDate]},7,2) + "/" + [SUBSTRING](#{Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[StartDate]},1,4))</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">StartDate == "00000000" ? NULL(DT_DBDATE) : (DT_DBDATE)(SUBSTRING(StartDate,5,2) + "/" + SUBSTRING(StartDate,7,2) + "/" + SUBSTRING(StartDate,1,4))</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[EndDateDT]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[EndDateDT]"
+                          name="EndDateDT"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">#{Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[EndDate]} == "00000000" ? NULL(DT_DBDATE) : (DT_DBDATE)([SUBSTRING](#{Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[EndDate]},5,2) + "/" + [SUBSTRING](#{Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[EndDate]},7,2) + "/" + [SUBSTRING](#{Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[EndDate]},1,4))</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">EndDate == "00000000" ? NULL(DT_DBDATE) : (DT_DBDATE)(SUBSTRING(EndDate,5,2) + "/" + SUBSTRING(EndDate,7,2) + "/" + SUBSTRING(EndDate,1,4))</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[ICNDateDT]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="IgnoreFailure"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[ICNDateDT]"
+                          name="ICNDateDT"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">#{Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[ICNDate]} == "00000000" ? NULL(DT_DBDATE) : (DT_DBDATE)([SUBSTRING](#{Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[ICNDate]},5,2) + "/" + [SUBSTRING](#{Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[ICNDate]},7,2) + "/" + [SUBSTRING](#{Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[ICNDate]},1,4))</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">ICNDate == "00000000" ? NULL(DT_DBDATE) : (DT_DBDATE)(SUBSTRING(ICNDate,5,2) + "/" + SUBSTRING(ICNDate,7,2) + "/" + SUBSTRING(ICNDate,1,4))</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column 1"
+                  componentClassID="{49928E82-9C4E-49F0-AABE-3812B82707EC}"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column 1"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column 1.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column 1.Inputs[Derived Column Input].Columns[IsNew]"
+                          cachedDataType="bool"
+                          cachedName="IsNew"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Outputs[Default Output].Columns[IsNew]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column 1.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column 1.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column 1.Outputs[Derived Column Output].Columns[RecordAction]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="1"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column 1.Outputs[Derived Column Output].Columns[RecordAction]"
+                          name="RecordAction"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">#{Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Outputs[Default Output].Columns[IsNew]} ==  TRUE  ? "I" : "U"</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">IsNew ==  TRUE  ? "I" : "U"</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column 1.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column 1.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Sales Contract to CRM\ErrorLog"
+                  componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="ErrorLog"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[CRMIntegrationErrorLog]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Sales Contract to CRM\ErrorLog.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Staging]"
+                      connectionManagerRefId="Package.ConnectionManagers[Staging]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Sales Contract to CRM\ErrorLog.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\ErrorLog.Inputs[OLE DB Destination Input].Columns[CrmErrorMessage]"
+                          cachedDataType="wstr"
+                          cachedLength="2048"
+                          cachedName="CrmErrorMessage"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\ErrorLog.Inputs[OLE DB Destination Input].ExternalColumns[ErrorMessage]"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Outputs[Error Output].Columns[CrmErrorMessage]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\ErrorLog.Inputs[OLE DB Destination Input].Columns[IntegrationName]"
+                          cachedDataType="wstr"
+                          cachedLength="18"
+                          cachedName="IntegrationName"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\ErrorLog.Inputs[OLE DB Destination Input].ExternalColumns[IntegrationName]"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[IntegrationName]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\ErrorLog.Inputs[OLE DB Destination Input].Columns[IntegrationExecutionLogID]"
+                          cachedDataType="i4"
+                          cachedName="IntegrationExecutionLogID"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\ErrorLog.Inputs[OLE DB Destination Input].ExternalColumns[CRMIntegrationExecutionLogID]"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[IntegrationExecutionLogID]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\ErrorLog.Inputs[OLE DB Destination Input].Columns[smx_name]"
+                          cachedDataType="wstr"
+                          cachedLength="43"
+                          cachedName="smx_name"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\ErrorLog.Inputs[OLE DB Destination Input].ExternalColumns[ObjectID]"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[smx_name]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\ErrorLog.Inputs[OLE DB Destination Input].ExternalColumns[IntegrationName]"
+                          dataType="wstr"
+                          length="100"
+                          name="IntegrationName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\ErrorLog.Inputs[OLE DB Destination Input].ExternalColumns[CRMIntegrationExecutionLogID]"
+                          dataType="i4"
+                          name="CRMIntegrationExecutionLogID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\ErrorLog.Inputs[OLE DB Destination Input].ExternalColumns[ObjectID]"
+                          dataType="wstr"
+                          length="100"
+                          name="ObjectID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\ErrorLog.Inputs[OLE DB Destination Input].ExternalColumns[ErrorMessage]"
+                          dataType="wstr"
+                          length="2048"
+                          name="ErrorMessage" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\ErrorLog.Inputs[OLE DB Destination Input].ExternalColumns[ErrorDate]"
+                          dataType="dbTimeStamp"
+                          name="ErrorDate" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Sales Contract to CRM\ErrorLog.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\Sales Contract to CRM\ErrorLog.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\ErrorLog.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\ErrorLog.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\ErrorLog.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\ErrorLog.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source"
+                  componentClassID="{D23FD76B-F51D-420F-BBCB-19CBF6AC1AB4}"
+                  contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Flat File Source"
+                  localeId="1033"
+                  name="Flat File Source"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether zero-length columns are treated as null."
+                      name="RetainNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                      name="FileNameColumnName"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Connections[FlatFileConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager]"
+                      connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager]"
+                      name="FlatFileConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output]"
+                      name="Flat File Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[SalesDoc]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[SalesDoc]"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[SalesDoc]"
+                          name="SalesDoc"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[Item]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Item]"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[Item]"
+                          name="Item"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[ContractType]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[ContractType]"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[ContractType]"
+                          name="ContractType"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[StartDate]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[StartDate]"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[StartDate]"
+                          name="StartDate"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[EndDate]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[EndDate]"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[EndDate]"
+                          name="EndDate"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[Status]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Status]"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[Status]"
+                          name="Status"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[SoldTo]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[SoldTo]"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[SoldTo]"
+                          name="SoldTo"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[SoldToName]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[SoldToName]"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[SoldToName]"
+                          name="SoldToName"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[ShipTp]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[ShipTp]"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[ShipTp]"
+                          name="ShipTp"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[Material]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Material]"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[Material]"
+                          name="Material"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[MaterialDescription]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[MaterialDescription]"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[MaterialDescription]"
+                          name="MaterialDescription"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[ICNDate]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[ICNDate]"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[ICNDate]"
+                          name="ICNDate"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[InvoiceDocument]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[InvoiceDocument]"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[InvoiceDocument]"
+                          name="InvoiceDocument"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[SalesDoc]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="SalesDoc" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Item]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="Item" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[ContractType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="ContractType" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[StartDate]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="StartDate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[EndDate]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="EndDate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Status]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="Status" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[SoldTo]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="SoldTo" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[SoldToName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="SoldToName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[ShipTp]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="ShipTp" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Material]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="Material" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[MaterialDescription]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="MaterialDescription" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[ICNDate]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="ICNDate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[InvoiceDocument]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="InvoiceDocument" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Error Output]"
+                      isErrorOut="true"
+                      name="Flat File Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          codePage="1252"
+                          dataType="text"
+                          description="Flat File Source Error Output Column"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          name="Flat File Source Error Output Column" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM"
+                  componentClassID="{874F7595-FB5F-40FF-96AF-FBFF8250E3EF}"
+                  contactInfo="KingswaySoft Inc.; http://www.kingswaysoft.com; support@kingswaysoft.com; Copyright 2011-2017 KingswaySoft Inc."
+                  description="Populate data into Microsoft Dynamics CRM."
+                  name="MSCRM"
+                  usesDispositions="true"
+                  version="3">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Destination entity to write data."
+                      expressionType="Notify"
+                      name="DestinationEntity">smx_salescontract</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies how data is written to CRM server."
+                      name="ActionType"
+                      typeConverter="KingswaySoft.IntegrationToolkit.DynamicsCrm.CrmDestinationActionType, KingswaySoft.IntegrationToolkit.DynamicsCrm, Version=1.0.2012.0, Culture=neutral, PublicKeyToken=705df8e0751bcea7">5</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether the values of CRM lookup fields should be removed if the reference records cannot be found. "
+                      expressionType="Notify"
+                      name="RemoveUnresolvableReferences">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether duplicate detection should be enabled when creating or updating CRM records. Duplicate records are determined by the duplicate detection rules and settings defined in Microsoft Dynamics CRM."
+                      expressionType="Notify"
+                      name="EnableDuplicateDetection">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specify the matching criteria to be used when Upsert action is chosen."
+                      expressionType="Notify"
+                      name="UpsertMatchingCriteria"
+                      typeConverter="KingswaySoft.IntegrationToolkit.Common.DescriptiveEnumTypeConverter`1[[KingswaySoft.IntegrationToolkit.DynamicsCrm.CrmUpsertMatchingCriteria, KingswaySoft.IntegrationToolkit.DynamicsCrm, Version=1.0.2012.0, Culture=neutral, PublicKeyToken=705df8e0751bcea7]], KingswaySoft.IntegrationToolkit.DynamicsCrm, Version=1.0.2012.0, Culture=neutral, PublicKeyToken=705df8e0751bcea7">3</property>
+                    <property
+                      dataType="System.String"
+                      description="Specify the matching fields to be used to determine the matching records that exist in CRM when Manually Specify option is chosen for Upsert action."
+                      expressionType="Notify"
+                      name="UpsertMatchingFields">smx_name</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether to ignore those NULL-valued fields."
+                      expressionType="Notify"
+                      name="IgnoreNullValuedFields">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether to ignore those fields that have no value changes in the target system. "
+                      expressionType="Notify"
+                      name="IgnoreUnchangedFields">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specify whether to remove those invalid characters before writing to CRM."
+                      expressionType="Notify"
+                      name="RemoveInvalidCharacters">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specify the flag field(s) that are used to track the source of changes. The field(s) will not posted to CRM server unless there are changes to other fields if specified. &quot;Ignore Unchange Fields&quot; option is required in order for the specified flag field(s) to work. "
+                      expressionType="Notify"
+                      name="ChangeFlagFields"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specify what action will be taken when multiple matches are found with Upsert action."
+                      expressionType="Notify"
+                      name="HandlingOfMultipleMatches"
+                      typeConverter="KingswaySoft.IntegrationToolkit.Common.DescriptiveEnumTypeConverter`1[[KingswaySoft.IntegrationToolkit.DynamicsCrm.CrmUpsertHandlingOfMultipleMatches, KingswaySoft.IntegrationToolkit.DynamicsCrm, Version=1.0.2012.0, Culture=neutral, PublicKeyToken=705df8e0751bcea7]], KingswaySoft.IntegrationToolkit.DynamicsCrm, Version=1.0.2012.0, Culture=neutral, PublicKeyToken=705df8e0751bcea7">1</property>
+                    <property
+                      dataType="System.String"
+                      description="Workflow to be executed."
+                      expressionType="Notify"
+                      name="Workflow"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the number of records to be sent to Microsoft Dynamics CRM in each batch (CRM 2011 Update Rollup 12 or later is required if batch size is greater than 1)."
+                      expressionType="Notify"
+                      name="BatchSize">200</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether datetime values should be sent to CRM server in UTC format."
+                      expressionType="Notify"
+                      name="SendDateTimeInUtcFormat">false</property>
+                    <property
+                      dataType="System.String"
+                      name="UserComponentTypeName">KingswaySoft.IntegrationToolkit.DynamicsCrm.CrmDestinationComponent, KingswaySoft.IntegrationToolkit.DynamicsCrm, Version=1.0.2012.0, Culture=neutral, PublicKeyToken=705df8e0751bcea7</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Connections[DynamicsCRM]"
+                      connectionManagerID="Package.ConnectionManagers[MSCRM]"
+                      connectionManagerRefId="Package.ConnectionManagers[MSCRM]"
+                      description="Dynamics CRM Connection Manager"
+                      name="DynamicsCRM" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="RedirectRow"
+                      hasSideEffects="true"
+                      name="Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].Columns[SalesDoc]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="SalesDoc"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_salesdoc]"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[SalesDoc]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].Columns[Item]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="Item"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_item]"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[Item]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].Columns[ContractType]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="ContractType"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_contracttype]"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[ContractType]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].Columns[SoldTo]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="SoldTo"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_soldto]"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[SoldTo]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].Columns[SoldToName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="SoldToName"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_soldtoname]"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[SoldToName]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].Columns[LabSAPID]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="LabSAPID"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_shipto]"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[LabSAPID]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].Columns[Material]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="Material"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_material]"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[Material]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].Columns[MaterialDescription]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="MaterialDescription"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_materialdescription]"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[MaterialDescription]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].Columns[InvoiceDocument]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="InvoiceDocument"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_invoicedocument]"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output].Columns[InvoiceDocument]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].Columns[smx_name]"
+                          cachedDataType="wstr"
+                          cachedLength="43"
+                          cachedName="smx_name"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_name]"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[smx_name]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].Columns[statecode]"
+                          cachedDataType="i4"
+                          cachedName="statecode"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[statecode]"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[statecode]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].Columns[statuscode]"
+                          cachedDataType="i4"
+                          cachedName="statuscode"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[statuscode]"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[statuscode]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].Columns[EndDateDT]"
+                          cachedDataType="dbDate"
+                          cachedName="EndDateDT"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_enddate]"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[EndDateDT]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].Columns[ICNDateDT]"
+                          cachedDataType="dbDate"
+                          cachedName="ICNDateDT"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_icndate]"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[ICNDateDT]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].Columns[StartDateDT]"
+                          cachedDataType="dbDate"
+                          cachedName="StartDateDT"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_startdate]"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[StartDateDT]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[createdby]"
+                          dataType="guid"
+                          name="createdby">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="CrmFieldType">Lookup</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes">systemuser</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[importsequencenumber]"
+                          dataType="i4"
+                          name="importsequencenumber">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="CrmFieldType">Integer</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[overriddencreatedon]"
+                          dataType="dbTimeStamp"
+                          name="overriddencreatedon">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="CrmFieldType">DateTime</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[ownerid]"
+                          dataType="guid"
+                          name="ownerid">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="CrmFieldType">Owner</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes">systemuser;team</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[owneridtype]"
+                          dataType="wstr"
+                          length="64"
+                          name="owneridtype">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="CrmFieldType">EntityName</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_billingdate]"
+                          dataType="dbTimeStamp"
+                          name="smx_billingdate">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="CrmFieldType">DateTime</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_contracttype]"
+                          dataType="wstr"
+                          length="200"
+                          name="smx_contracttype">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="CrmFieldType">String</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_enddate]"
+                          dataType="dbTimeStamp"
+                          name="smx_enddate">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="CrmFieldType">DateTime</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_extmatlgroup]"
+                          dataType="wstr"
+                          length="3"
+                          name="smx_extmatlgroup">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="CrmFieldType">String</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_icndate]"
+                          dataType="dbTimeStamp"
+                          name="smx_icndate">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="CrmFieldType">DateTime</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_invoicedocument]"
+                          dataType="i4"
+                          name="smx_invoicedocument">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="CrmFieldType">Integer</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_item]"
+                          dataType="i4"
+                          name="smx_item">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="CrmFieldType">Integer</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_material]"
+                          dataType="wstr"
+                          length="100"
+                          name="smx_material">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="CrmFieldType">String</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_materialdescription]"
+                          dataType="wstr"
+                          length="100"
+                          name="smx_materialdescription">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="CrmFieldType">String</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_name]"
+                          dataType="wstr"
+                          length="100"
+                          name="smx_name">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="CrmFieldType">String</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_salescontractid]"
+                          dataType="guid"
+                          name="smx_salescontractid">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="CrmFieldType">Uniqueidentifier</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_salesdoc]"
+                          dataType="i4"
+                          name="smx_salesdoc">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="CrmFieldType">Integer</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_salesorder]"
+                          dataType="i4"
+                          name="smx_salesorder">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="CrmFieldType">Integer</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_shipto]"
+                          dataType="guid"
+                          name="smx_shipto">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="CrmFieldType">Lookup</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes">smx_lab</property>
+                            <property
+                              dataType="System.String"
+                              name="TextLookup">&lt;TextLookupSetting&gt;
+  &lt;IgnoreCase&gt;true&lt;/IgnoreCase&gt;
+  &lt;CacheStrategy&gt;FullCache&lt;/CacheStrategy&gt;
+  &lt;LookupTargets&gt;
+    &lt;LookupTarget&gt;
+      &lt;TargetEntity&gt;smx_lab&lt;/TargetEntity&gt;
+      &lt;TargetTextField&gt;smx_sapid&lt;/TargetTextField&gt;
+    &lt;/LookupTarget&gt;
+  &lt;/LookupTargets&gt;
+&lt;/TextLookupSetting&gt;</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_soldto]"
+                          dataType="i4"
+                          name="smx_soldto">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="CrmFieldType">Integer</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_soldtoname]"
+                          dataType="wstr"
+                          length="200"
+                          name="smx_soldtoname">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="CrmFieldType">String</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_startdate]"
+                          dataType="dbTimeStamp"
+                          name="smx_startdate">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="CrmFieldType">DateTime</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[statecode]"
+                          dataType="i4"
+                          name="statecode">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="CrmFieldType">State</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[statuscode]"
+                          dataType="i4"
+                          name="statuscode">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="CrmFieldType">Status</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[timezoneruleversionnumber]"
+                          dataType="i4"
+                          name="timezoneruleversionnumber">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="CrmFieldType">Integer</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input].ExternalColumns[utcconversiontimezonecode]"
+                          dataType="i4"
+                          name="utcconversiontimezonecode">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="CrmFieldType">Integer</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Outputs[Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Outputs[Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Outputs[Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Outputs[Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Outputs[Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Outputs[Error Output].Columns[CrmErrorMessage]"
+                          dataType="wstr"
+                          length="2048"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Outputs[Error Output].Columns[CrmErrorMessage]"
+                          name="CrmErrorMessage" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Outputs[Default Output]"
+                      exclusionGroup="1"
+                      name="Default Output"
+                      synchronousInputId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Outputs[Default Output].Columns[CrmRecordId]"
+                          dataType="guid"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Outputs[Default Output].Columns[CrmRecordId]"
+                          name="CrmRecordId" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Outputs[Default Output].Columns[IsNew]"
+                          dataType="bool"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Outputs[Default Output].Columns[IsNew]"
+                          name="IsNew" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Sales Contract to CRM\Success"
+                  componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Success"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[CRMIntegrationSuccessLog]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Sales Contract to CRM\Success.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Staging]"
+                      connectionManagerRefId="Package.ConnectionManagers[Staging]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Sales Contract to CRM\Success.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Success.Inputs[OLE DB Destination Input].Columns[IntegrationName]"
+                          cachedDataType="wstr"
+                          cachedLength="18"
+                          cachedName="IntegrationName"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\Success.Inputs[OLE DB Destination Input].ExternalColumns[IntegrationName]"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[IntegrationName]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Success.Inputs[OLE DB Destination Input].Columns[RecordAction]"
+                          cachedDataType="wstr"
+                          cachedLength="1"
+                          cachedName="RecordAction"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\Success.Inputs[OLE DB Destination Input].ExternalColumns[RecordAction]"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column 1.Outputs[Derived Column Output].Columns[RecordAction]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Success.Inputs[OLE DB Destination Input].Columns[CrmRecordId]"
+                          cachedDataType="guid"
+                          cachedName="CrmRecordId"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\Success.Inputs[OLE DB Destination Input].ExternalColumns[CRMID]"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Outputs[Default Output].Columns[CrmRecordId]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Success.Inputs[OLE DB Destination Input].Columns[IntegrationExecutionLogID]"
+                          cachedDataType="i4"
+                          cachedName="IntegrationExecutionLogID"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\Success.Inputs[OLE DB Destination Input].ExternalColumns[CRMIntegrationExecutionLogID]"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[IntegrationExecutionLogID]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Success.Inputs[OLE DB Destination Input].Columns[smx_name]"
+                          cachedDataType="wstr"
+                          cachedLength="43"
+                          cachedName="smx_name"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Sales Contract to CRM\Success.Inputs[OLE DB Destination Input].ExternalColumns[ObjectID]"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output].Columns[smx_name]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Success.Inputs[OLE DB Destination Input].ExternalColumns[IntegrationName]"
+                          dataType="wstr"
+                          length="100"
+                          name="IntegrationName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Success.Inputs[OLE DB Destination Input].ExternalColumns[CRMIntegrationExecutionLogID]"
+                          dataType="i4"
+                          name="CRMIntegrationExecutionLogID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Success.Inputs[OLE DB Destination Input].ExternalColumns[ObjectID]"
+                          dataType="wstr"
+                          length="100"
+                          name="ObjectID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Success.Inputs[OLE DB Destination Input].ExternalColumns[CRMID]"
+                          dataType="guid"
+                          name="CRMID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Success.Inputs[OLE DB Destination Input].ExternalColumns[RecordAction]"
+                          dataType="wstr"
+                          length="1"
+                          name="RecordAction" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Success.Inputs[OLE DB Destination Input].ExternalColumns[ProcessDate]"
+                          dataType="dbTimeStamp"
+                          name="ProcessDate" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Sales Contract to CRM\Success.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\Sales Contract to CRM\Success.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Success.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Success.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Sales Contract to CRM\Success.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Sales Contract to CRM\Success.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Foreach Loop Container\Sales Contract to CRM.Paths[Default Output]"
+                  endId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column 1.Inputs[Derived Column Input]"
+                  name="Default Output"
+                  startId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Outputs[Default Output]" />
+                <path
+                  refId="Package\Foreach Loop Container\Sales Contract to CRM.Paths[Derived Column Output]"
+                  endId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Inputs[Input]"
+                  name="Derived Column Output"
+                  startId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Foreach Loop Container\Sales Contract to CRM.Paths[Derived Column Output1]"
+                  endId="Package\Foreach Loop Container\Sales Contract to CRM\Success.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column 1.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Foreach Loop Container\Sales Contract to CRM.Paths[Error Output]"
+                  endId="Package\Foreach Loop Container\Sales Contract to CRM\ErrorLog.Inputs[OLE DB Destination Input]"
+                  name="Error Output"
+                  startId="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM.Outputs[Error Output]" />
+                <path
+                  refId="Package\Foreach Loop Container\Sales Contract to CRM.Paths[Flat File Source Output]"
+                  endId="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column.Inputs[Derived Column Input]"
+                  name="Flat File Source Output"
+                  startId="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source.Outputs[Flat File Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Start Execution Log"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{AAC4CF13-13DC-49EC-B223-750C20FFBFDB}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Start Execution Log"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{4E3624CD-33C0-49D5-9012-091D3DFF9CDB}"
+              SQLTask:SqlStatementSource="insert CRMIntegrationExecutionLog (IntegrationName, StartDate, StatusCode, StatusMessage)&#xA;values (?, getdate(), 'P', 'Processing');&#xA;select @@identity as IntegrationExecutionLogID;"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="IntegrationExecutionLogID"
+                SQLTask:DtsVariableName="User::IntegrationExecutionLogID" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::IntegrationName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Stop Execution Log"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{2106BBFF-B79D-49BE-AE95-7A34B4A8B541}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Stop Execution Log"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{4E3624CD-33C0-49D5-9012-091D3DFF9CDB}"
+              SQLTask:SqlStatementSource="update CRMIntegrationExecutionLog set StatusCode = 'S', StatusMessage = 'Completed Succesfully', EndDate = getdate(), FileNameProcessed = ?  where CRMIntegrationExecutionLogID = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::FileName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::IntegrationExecutionLogID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Stop Execution Log Error"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{3b5c235c-4aec-48d6-822f-77b3e35391a4}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Stop Execution Log Error"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{4E3624CD-33C0-49D5-9012-091D3DFF9CDB}"
+              SQLTask:SqlStatementSource="update CRMIntegrationExecutionLog set StatusCode = 'E', StatusMessage = 'Error Encountered', EndDate = getdate(), FileNameProcessed = ?  where CRMIntegrationExecutionLogID = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::FileName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::IntegrationExecutionLogID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{98E03B1C-CEE6-4B4C-BA60-D6DA17C07AD0}"
+          DTS:From="Package\Foreach Loop Container\Get Last Run Date"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Foreach Loop Container\Start Execution Log" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{15A11D4A-A08B-4AE4-9FDC-0A8691FC0F24}"
+          DTS:From="Package\Foreach Loop Container\Start Execution Log"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Foreach Loop Container\Sales Contract to CRM" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{003B8794-E82F-4123-A969-B4E914870CC5}"
+          DTS:From="Package\Foreach Loop Container\Sales Contract to CRM"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Foreach Loop Container\Stop Execution Log" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{AAA39F07-F393-40E3-8C35-39DEE5793780}"
+          DTS:From="Package\Foreach Loop Container\Stop Execution Log"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Foreach Loop Container\File System Task" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{7F0BE297-2B2D-479E-A1A9-D785F42EE5AA}"
+          DTS:From="Package\Foreach Loop Container\Sales Contract to CRM"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\Foreach Loop Container\Stop Execution Log Error"
+          DTS:Value="1" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{AFDDF3D6-568E-4C95-BD76-D3EA5A52D386}"
+          DTS:ObjectName="{AFDDF3D6-568E-4C95-BD76-D3EA5A52D386}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::FileName" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Foreach Loop Container\File System Task"
+          TopLeft="134,430" />
+        <NodeLayout
+          Size="174,44"
+          Id="Package\Foreach Loop Container\Get Last Run Date"
+          TopLeft="113.5,55.5" />
+        <NodeLayout
+          Size="184,42"
+          Id="Package\Foreach Loop Container\Sales Contract to CRM"
+          TopLeft="113.5,226.216981132075" />
+        <NodeLayout
+          Size="173,44"
+          Id="Package\Foreach Loop Container\Start Execution Log"
+          TopLeft="113.575471698113,137.38679245283" />
+        <NodeLayout
+          Size="169,42"
+          Id="Package\Foreach Loop Container\Stop Execution Log"
+          TopLeft="122,323" />
+        <NodeLayout
+          Size="196,42"
+          Id="Package\Foreach Loop Container\Stop Execution Log Error"
+          TopLeft="381,232" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
+          TopLeft="200.287735849057,99.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.8867924528302"
+              Start="0,0"
+              End="0,30.3867924528302">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.3867924528302" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 1]"
+          TopLeft="202.787735849057,181.38679245283">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44.8301886792448"
+              Start="0,0"
+              End="0,37.3301886792448">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.3301886792448" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 2]"
+          TopLeft="206,268.216981132075">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,54.783018867925"
+              Start="0,0"
+              End="0,47.283018867925">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.283018867925" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 3]"
+          TopLeft="209.75,365">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,65"
+              Start="0,0"
+              End="0,57.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,57.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 4]"
+          TopLeft="297.5,250.108490566038">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="83.5,0"
+              Start="0,0"
+              End="76,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="76,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="22.75865234375,5,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="757,663"
+          Size="757,706"
+          Id="Package\Foreach Loop Container"
+          TopLeft="474,216" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Foreach Loop Container\Sales Contract to CRM">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="116,42"
+          Id="Package\Foreach Loop Container\Sales Contract to CRM\Success"
+          TopLeft="446,383" />
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Foreach Loop Container\Sales Contract to CRM\Flat File Source"
+          TopLeft="212,73" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column 1"
+          TopLeft="425,286" />
+        <NodeLayout
+          Size="114,42"
+          Id="Package\Foreach Loop Container\Sales Contract to CRM\MSCRM"
+          TopLeft="221,284" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Foreach Loop Container\Sales Contract to CRM\Derived Column"
+          TopLeft="205,189" />
+        <NodeLayout
+          Size="119,42"
+          Id="Package\Foreach Loop Container\Sales Contract to CRM\ErrorLog"
+          TopLeft="213,384" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Sales Contract to CRM.Paths[Derived Column Output1]"
+          TopLeft="505.25,328">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,55"
+              Start="0,0"
+              End="0,47.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Sales Contract to CRM.Paths[Derived Column Output]"
+          TopLeft="280,231">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53"
+              Start="0,0"
+              End="0,45.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Sales Contract to CRM.Paths[Default Output]"
+          TopLeft="335,306">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="90,0"
+              Start="0,0"
+              End="82.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="82.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Sales Contract to CRM.Paths[Flat File Source Output]"
+          TopLeft="284.75,115">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,74"
+              Start="0,0"
+              End="0,66.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,66.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Sales Contract to CRM.Paths[Error Output]"
+          TopLeft="275.25,326">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,58"
+              Start="0,0"
+              End="0,50.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-28.33638671875,19.533203125,56.6727734375,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\Sales Contract to CRM\Success">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\Sales Contract to CRM\ErrorLog">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

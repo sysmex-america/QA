@@ -1,0 +1,2119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Sysmex.Crm.Model.Account" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>91/uvE3u6TX/9//9K7fe/H+n+3oK+/3q++Prrmf8ZLc=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.Competitor" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>4hgmHABm4hBIkWqcIJLgwlQVy0BKVOQAAMDJhCBcJIM=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.Contact" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>85+2eEDu+XHtR/vvu/Xw7Ncv2zjfU/dS9PdBnyRu5ps=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.CustomerAddress" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACGGHogEQAAELMo5AqAIQFoAICQGEgAoAARGQhIAE=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.new_clm_agreement" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQKCmEbIAAAAAEAAIQgCAAgHgACCQGAgMIYABCABoQE=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.new_cpq_lineitem_tmp" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>kgCiWELIgABACEIQMIABEAhlsIIC0GQQIIAFBOAgKWE=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.new_cpq_quote" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BACCGdLogAgIAGIcMMIAEAgPgAACYOBAoIIABCRBaSE=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.Opportunity" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>z4TzPHbqW0/5ZvMfLvp9pkw/1JA/2Hd0p92YzqZHoF8=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.OpportunityClose" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>pwGDGGLsYIKzCFoEKIZYBkwFoCsKUGkCpYHQhCCQKBk=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.Organization" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AhBAEAAAAAAAAAAIIAAHAAQBgABASCAAAAAEACAgEAE=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.ProcessStage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIACEEAIAAAAAEACJAAAQBABgAIAGKgAAEAIAiAAAEA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.smx_address" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>eggi2IBBBoARRmwUoAJVEAwFlQBnYm1AIJACRKwFtgc=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.smx_commission" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AUWLONLsDoAAAECAIIABoI0noIgiZ+iELKQChCgAPCM=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.smx_demoeval" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QgaGeOHIAWZCYHBYKDACSAhnlWRaQGAAYvOkNCBQoZM=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.smx_fcsopportunity" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACCaGtDYaYMgQEqWIpiBClhFgagCSeigNIYQRCAIIBs=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.smx_flowcytometryproduct" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAKimFjJCKAAJkIAIILwQggFiAICRWgAKIIARCAwLgE=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.smx_gpo" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgCCGMDIAEBAyGEQIQAIAAiHiEBCQHwBIIIIBKAAIAE=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.smx_ihn" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AhGCGMDIAEBAwGAgKAAAAAgFgEACQGwIIIIABOAAIAE=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.smx_instrument" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAjLWETIAAMAAEIQagCSCBkFgIFDQWwAYKAABiQAKQM=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.smx_instrumentupdate" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACSGETYAAAgAEAAIIgABEgFgIICQGghJICABSAAIIE=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.smx_lab" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IgCKWEDKEHhDRmEAIEg1mBgFgUBHQWwAIIIgHCSAKQM=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.smx_manufacturer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAGCGFTIAAAAAEAIIACAAAhFgAAKQmgApKAABCACIAE=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.smx_model" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ECHiWEDJIAEEgEMAIIAATEgFgAACQGhAIIAIBCAAIAE=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.smx_opportunitylab" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CACSGEDoACAAAEIAMIIACAgFkAACQmwEIpAIFKEAIIE=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.smx_pricelist" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACiGEDIFCAAQMIAMIa4AAoFiERCTGgBcIsABCAAOAE=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.smx_product" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gACCGEHNDCBgAGIAoIDNRQxFkAEiQGoQMICKBGIQKAk=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.smx_productline" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>kACiGEDIAgAAEEAAIAACAAgFgAAKQmgAoIAABCAAIgE=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.smx_salesorder" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>e6TvfdTNPbw+YHLlq74btSrFnQC34m1w/v5TbKjB/J8=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.smx_salesorderbusinessprocess" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAGWABAGAAAQEAEIAgIAEhFoQACUGAAIMAABCAgIIE=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.smx_stageduration" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>owWCGGLtMCKgCFoEqIRchEwFiAsKUGECoIGwhCAQIBk=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.smx_state" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAACHARIAABAAUAAIBABQAgH0QACQGiAIYAABCABJAE=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.smx_sysmexconfig" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAGXGFDIEQYEgmCAIAABIggHpDAiYPgQJKAABiAEKgE=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.smx_zippostalcode" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AiSCWEXMCBRkFGAAKBwCIAgXgAACQGgAYoKhBSAAIAE=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.SystemUser" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>9+9vXl7v87t//++9vZ7/7P9/+1PeevVfee6t7nz+7fs=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.Team" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gChDGQpgAAAgEEYEKagQAMQzgQfaXGIAA6AhGGBQMAE=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.Territory" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QABCHARAAEAgAGIIqIBKgBUFwRACRGDAIoC0NCBAKAE=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sysmex.Crm.Model.SysmexContext" Collapsed="true">
+    <Position X="18" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IMAQgAEAAAAIAgCAIMAgEoBESBAAIGAQAAlShAAAIFA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_RetrieveKpiValuesFromRIRequest" Collapsed="true">
+    <Position X="19.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_RetrieveKpiValuesFromRIResponse" Collapsed="true">
+    <Position X="21.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.smx_CreateContractRequest">
+    <Position X="19.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAACAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.smx_CreateContractResponse">
+    <Position X="21.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.apts_CreateQuoteFromOpportunityRequest" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.apts_CreateQuoteFromOpportunityResponse" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.smx_CollapseProcessRequest" Collapsed="true">
+    <Position X="14.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.smx_CollapseProcessResponse" Collapsed="true">
+    <Position X="16.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_GetSIPackageStatusRequest" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_GetSIPackageStatusResponse" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_GDPROptoutContactRequest" Collapsed="true">
+    <Position X="18" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_GDPROptoutContactResponse" Collapsed="true">
+    <Position X="19.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_GDPROptoutLeadRequest" Collapsed="true">
+    <Position X="21.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_GDPROptoutLeadResponse" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_GDPROptoutUserRequest" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_GDPROptoutUserResponse" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_MarketingMetadataUpdateRequest" Collapsed="true">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_MarketingMetadataUpdateResponse" Collapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.none_RemoveMarketingListMembersByIdsRequest" Collapsed="true">
+    <Position X="21.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.none_RemoveMarketingListMembersByIdsResponse" Collapsed="true">
+    <Position X="0.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_PerformNotesAnalysisActionRequest" Collapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAACAAAQAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_PerformNotesAnalysisActionResponse" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_SetTalkingPointLikedStatusRequest" Collapsed="true">
+    <Position X="14.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAAAAAAAAABAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_SetTalkingPointLikedStatusResponse" Collapsed="true">
+    <Position X="16.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.sonoma_DFRetrieveAllEntitiesRequest" Collapsed="true">
+    <Position X="19.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.sonoma_DFRetrieveAllEntitiesResponse" Collapsed="true">
+    <Position X="21.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.sonoma_DFRetrieveEntityRulesRequest" Collapsed="true">
+    <Position X="4" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.sonoma_DFRetrieveEntityRulesResponse" Collapsed="true">
+    <Position X="5.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.sonoma_DFSaveDFEntitiesRequest" Collapsed="true">
+    <Position X="7.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.sonoma_DFSaveDFEntitiesResponse" Collapsed="true">
+    <Position X="9.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.sonoma_DFPublishRequest" Collapsed="true">
+    <Position X="16.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.sonoma_DFPublishResponse" Collapsed="true">
+    <Position X="18" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.sonoma_DFRetrieveAllEntityRulesRequest" Collapsed="true">
+    <Position X="0.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.sonoma_DFRetrieveAllEntityRulesResponse" Collapsed="true">
+    <Position X="2.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.sonoma_MetablastCreateCSVActionRequest" Collapsed="true">
+    <Position X="11" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.sonoma_MetablastCreateCSVActionResponse" Collapsed="true">
+    <Position X="12.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.sonoma_RetrieveEntityListRequest" Collapsed="true">
+    <Position X="14.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.sonoma_RetrieveEntityListResponse" Collapsed="true">
+    <Position X="16.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_GetRecordUsersRequest" Collapsed="true">
+    <Position X="16.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABMAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_GetRecordUsersResponse" Collapsed="true">
+    <Position X="18" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_ProvisionSharePointDocumentLibrariesRequest" Collapsed="true">
+    <Position X="9.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_ProvisionSharePointDocumentLibrariesResponse" Collapsed="true">
+    <Position X="11" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_IsSharePointEnabledRequest" Collapsed="true">
+    <Position X="18" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_IsSharePointEnabledResponse" Collapsed="true">
+    <Position X="19.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_EnableSharePointRequest" Collapsed="true">
+    <Position X="14.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_EnableSharePointResponse" Collapsed="true">
+    <Position X="16.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_SetTeamsDocumentStatusRequest" Collapsed="true">
+    <Position X="18" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_SetTeamsDocumentStatusResponse" Collapsed="true">
+    <Position X="19.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAAAAEBAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_SetSharePointDocumentStatusRequest" Collapsed="true">
+    <Position X="11" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_SetSharePointDocumentStatusResponse" Collapsed="true">
+    <Position X="12.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAAAAEBAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_IsLinkedInDataValidationEnabledRequest" Collapsed="true">
+    <Position X="14.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_IsLinkedInDataValidationEnabledResponse" Collapsed="true">
+    <Position X="16.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_GetLegalAcceptanceStatusRequest" Collapsed="true">
+    <Position X="9.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_GetLegalAcceptanceStatusResponse" Collapsed="true">
+    <Position X="11" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_SetLegalAcceptanceStatusRequest" Collapsed="true">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_SetLegalAcceptanceStatusResponse" Collapsed="true">
+    <Position X="9.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_MarketingListMetadataUpdateRequest" Collapsed="true">
+    <Position X="21.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_MarketingListMetadataUpdateResponse" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_EnableLinkedInDataValidationRequest" Collapsed="true">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_EnableLinkedInDataValidationResponse" Collapsed="true">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_TrackExchangeActivityRequest" Collapsed="true">
+    <Position X="2.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAEAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_TrackExchangeActivityResponse" Collapsed="true">
+    <Position X="4" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_GetNotesAnalysisRequest" Collapsed="true">
+    <Position X="12.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_GetNotesAnalysisResponse" Collapsed="true">
+    <Position X="14.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_RetrieveTypeValuesFromDCIRequest" Collapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAABAAAAAAAAAAAAAQAAgAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_RetrieveTypeValuesFromDCIResponse" Collapsed="true">
+    <Position X="2.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_GetTalkingPointsRequest" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_GetTalkingPointsResponse" Collapsed="true">
+    <Position X="9.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_GetRIProvisioningStatusRequest" Collapsed="true">
+    <Position X="19.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_GetRIProvisioningStatusResponse" Collapsed="true">
+    <Position X="21.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAgAAAAAAAAAAAAAAAAAABQAAAAAAAAACA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_SetFeatureStatusRequest" Collapsed="true">
+    <Position X="4" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAEAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_SetFeatureStatusResponse" Collapsed="true">
+    <Position X="5.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_GetACIMarsConnectorStatusRequest" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_GetACIMarsConnectorStatusResponse" Collapsed="true">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_StartRIProvisioningRequest" Collapsed="true">
+    <Position X="21.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_StartRIProvisioningResponse" Collapsed="true">
+    <Position X="0.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_GetRITenantEndpointRequest" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_GetRITenantEndpointResponse" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_UpdatefeatureconfigRequest" Collapsed="true">
+    <Position X="5.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAACAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_UpdatefeatureconfigResponse" Collapsed="true">
+    <Position X="7.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_UpdateRITenantInfoRequest" Collapsed="true">
+    <Position X="9.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_UpdateRITenantInfoResponse" Collapsed="true">
+    <Position X="11" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_RetrieveKPIvaluesfromDCIRequest" Collapsed="true">
+    <Position X="16.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_RetrieveKPIvaluesfromDCIResponse" Collapsed="true">
+    <Position X="18" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.rwb_CustomiseRibbonRequest" Collapsed="true">
+    <Position X="9.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAEAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.rwb_CustomiseRibbonResponse" Collapsed="true">
+    <Position X="11" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_UpgradeTelemetryRequest" Collapsed="true">
+    <Position X="12.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BQAAAAAgAAAHAAAAAAAIAAAAAgA0AAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_UpgradeTelemetryResponse" Collapsed="true">
+    <Position X="14.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_QueryExchangeRequest" Collapsed="true">
+    <Position X="12.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAQAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_QueryExchangeResponse" Collapsed="true">
+    <Position X="14.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_InvokeServiceStoredProcRequest" Collapsed="true">
+    <Position X="11" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAg=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.msdyn_InvokeServiceStoredProcResponse" Collapsed="true">
+    <Position X="12.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.smx_SplitOpportunityRequest" Collapsed="true">
+    <Position X="5.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAIBAAAAACAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sysmex.Crm.Model.smx_SplitOpportunityResponse" Collapsed="true">
+    <Position X="7.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Sysmex.Crm.Model.smx_producttype" Collapsed="true">
+    <Position X="4" Y="19.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAgAAAIEAAAAAAAIAAAQAOCAASAAAAIACAAEECAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_paymentterms" Collapsed="true">
+    <Position X="14.5" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAABAAAAAAAAAAAABAAABAAAAAAAAAACAAAAAAI=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_contractoption">
+    <Position X="19.75" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAEAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_contracttype" Collapsed="true">
+    <Position X="21.5" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAACACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_termsofpayment" Collapsed="true">
+    <Position X="9.25" Y="20" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>FAQAAIIIDAQAAAAADrADAQAAAgF4EBoBgAAQAAA+BAQ=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_sapcustomertype" Collapsed="true">
+    <Position X="12.75" Y="19.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAAAAAIAAAAAAAAAAAACAQCAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_function" Collapsed="true">
+    <Position X="5.75" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AMD3///7AAAAAAAAAID///9/H6Dk/////wDw////fwA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_department" Collapsed="true">
+    <Position X="7.5" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>Eg0AAAAYPAYAAAAIFgAAAAAAiwUAAAAAwAAwAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_companyclasstype" Collapsed="true">
+    <Position X="18" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAIAAAAQAAAAQEAAAAAAACAAAAAAAEAJCAQAAEAgAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_sapsourcecode" Collapsed="true">
+    <Position X="14.5" Y="19.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAADAPwAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_freefreightcodeforthiscase" Collapsed="true">
+    <Position X="4" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAADgHwYAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.account_accountcategorycode" Collapsed="true">
+    <Position X="0.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.account_accountclassificationcode" Collapsed="true">
+    <Position X="2.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.account_accountratingcode" Collapsed="true">
+    <Position X="4" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.account_address1_addresstypecode" Collapsed="true">
+    <Position X="5.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAIACAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.account_address1_freighttermscode" Collapsed="true">
+    <Position X="7.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.account_address1_shippingmethodcode" Collapsed="true">
+    <Position X="9.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAQAAAAARAAAAAAAAEIAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.account_address2_addresstypecode" Collapsed="true">
+    <Position X="11" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.account_address2_freighttermscode" Collapsed="true">
+    <Position X="12.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.account_address2_shippingmethodcode" Collapsed="true">
+    <Position X="14.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.account_businesstypecode" Collapsed="true">
+    <Position X="16.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.account_customersizecode" Collapsed="true">
+    <Position X="18" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.account_customertypecode" Collapsed="true">
+    <Position X="19.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>FAEAAAAAIAAAAIAAAAAAAAAAAAAAIABAQAAAAQAAEAg=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.account_industrycode" Collapsed="true">
+    <Position X="21.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YgCAAACJABAYAAAQgFAABAABkAAIAAAAyCCAAIAIKCQ=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.account_ownershipcode" Collapsed="true">
+    <Position X="0.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAIAAAAEAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.account_paymenttermscode" Collapsed="true">
+    <Position X="2.25" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAIAQAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.account_preferredappointmentdaycode" Collapsed="true">
+    <Position X="4" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAIAACAAAAAAAAAAACAAIACAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.account_preferredappointmenttimecode" Collapsed="true">
+    <Position X="5.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAAACAAAAAABAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.account_preferredcontactmethodcode" Collapsed="true">
+    <Position X="7.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAgCAAAAAAAAAAAAAAAAAAAAAAAAAAIQAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.account_shippingmethodcode" Collapsed="true">
+    <Position X="9.25" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_account_smx_customermasterreview" Collapsed="true">
+    <Position X="7.5" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAAAAAACAAIAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_account_smx_leadgeneration" Collapsed="true">
+    <Position X="9.25" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAACAAAAgAAAAAAAAAAgAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.AccountState" Collapsed="true">
+    <Position X="14.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.account_statuscode" Collapsed="true">
+    <Position X="11" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAgAAAAAAAAAAAAAAAABAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.account_territorycode" Collapsed="true">
+    <Position X="12.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.competitor_address1_addresstypecode" Collapsed="true">
+    <Position X="16.25" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.competitor_address1_shippingmethodcode" Collapsed="true">
+    <Position X="18" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.competitor_address2_addresstypecode" Collapsed="true">
+    <Position X="19.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.competitor_address2_shippingmethodcode" Collapsed="true">
+    <Position X="21.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.contact_accountrolecode" Collapsed="true">
+    <Position X="0.5" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAAAAAACAAAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.contact_address1_addresstypecode" Collapsed="true">
+    <Position X="2.25" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAIACAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.contact_address1_freighttermscode" Collapsed="true">
+    <Position X="4" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.contact_address1_shippingmethodcode" Collapsed="true">
+    <Position X="5.75" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAQAAAAARAAAAAAAAEIAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.contact_address2_addresstypecode" Collapsed="true">
+    <Position X="7.5" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.contact_address2_freighttermscode" Collapsed="true">
+    <Position X="9.25" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.contact_address2_shippingmethodcode" Collapsed="true">
+    <Position X="11" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.contact_address3_addresstypecode" Collapsed="true">
+    <Position X="12.75" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.contact_address3_freighttermscode" Collapsed="true">
+    <Position X="14.5" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.contact_address3_shippingmethodcode" Collapsed="true">
+    <Position X="16.25" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.contact_customersizecode" Collapsed="true">
+    <Position X="18" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.contact_customertypecode" Collapsed="true">
+    <Position X="19.75" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.contact_educationcode" Collapsed="true">
+    <Position X="21.5" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.contact_familystatuscode" Collapsed="true">
+    <Position X="0.5" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAAEACAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.contact_gendercode" Collapsed="true">
+    <Position X="2.25" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.contact_haschildrencode" Collapsed="true">
+    <Position X="4" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.contact_leadsourcecode" Collapsed="true">
+    <Position X="5.75" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.contact_msdyn_orgchangestatus" Collapsed="true">
+    <Position X="7.5" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAQAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.contact_paymenttermscode" Collapsed="true">
+    <Position X="9.25" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAIAQAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.contact_preferredappointmentdaycode" Collapsed="true">
+    <Position X="11" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAIAACAAAAAAAAAAACAAIACAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.contact_preferredappointmenttimecode" Collapsed="true">
+    <Position X="12.75" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAAACAAAAAABAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.contact_preferredcontactmethodcode" Collapsed="true">
+    <Position X="14.5" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAgCAAAAAAAAAAAAAAAAAAAAAAAAAAIQAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.contact_shippingmethodcode" Collapsed="true">
+    <Position X="16.25" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.ContactState" Collapsed="true">
+    <Position X="21.5" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.contact_statuscode" Collapsed="true">
+    <Position X="18" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.contact_territorycode" Collapsed="true">
+    <Position X="19.75" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.customeraddress_addresstypecode" Collapsed="true">
+    <Position X="0.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAIACAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.customeraddress_freighttermscode" Collapsed="true">
+    <Position X="2.25" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.customeraddress_shippingmethodcode" Collapsed="true">
+    <Position X="4" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAQAAAAARAAAAAAAAEIAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.new_clm_agreement_new_deferredbilling" Collapsed="true">
+    <Position X="5.75" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>KAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.new_clm_agreement_new_ext_firmpricing" Collapsed="true">
+    <Position X="7.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.new_clm_agreement_new_extendedpaymentterms" Collapsed="true">
+    <Position X="9.25" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAABAAAAAAAAAAAABAAABAAAAAAAAAACAAAAAAI=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.new_clm_agreement_new_status" Collapsed="true">
+    <Position X="11" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAIBIAAYIAvAAAEEAAACACAAgABBEhAUBAAEgAQ=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.new_clm_agreementState" Collapsed="true">
+    <Position X="14.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.new_clm_agreement_statuscode" Collapsed="true">
+    <Position X="12.75" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.new_cpq_lineitem_tmp_new_adjustmenttype" Collapsed="true">
+    <Position X="16.25" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ASAIAQAAAAAAAAAAAAACAAAAAAIACAAAAgAAAQAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.new_cpq_lineitem_tmpState" Collapsed="true">
+    <Position X="19.75" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.new_cpq_lineitem_tmp_statuscode" Collapsed="true">
+    <Position X="18" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.new_cpq_quote_new_acquisitiontype" Collapsed="true">
+    <Position X="21.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAACACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.new_cpq_quote_new_approvalstage" Collapsed="true">
+    <Position X="0.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAACAAAAAEAAAAAAAAIAAAAAAABAIAAAAUAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.new_cpq_quote_new_financing" Collapsed="true">
+    <Position X="2.25" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.new_cpq_quote_new_hybridcpr" Collapsed="true">
+    <Position X="4" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAAAEAAAAAAAAAEAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.new_cpq_quote_new_leasetype" Collapsed="true">
+    <Position X="5.75" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.new_cpq_quote_new_printtype" Collapsed="true">
+    <Position X="7.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAEAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.new_cpq_quoteState" Collapsed="true">
+    <Position X="11" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.new_cpq_quote_statuscode" Collapsed="true">
+    <Position X="9.25" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.opportunity_opportunityratingcode" Collapsed="true">
+    <Position X="16.25" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAIAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.opportunity_prioritycode" Collapsed="true">
+    <Position X="18" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.opportunity_salesstagecode" Collapsed="true">
+    <Position X="19.75" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.OpportunityState" Collapsed="true">
+    <Position X="5.75" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAIAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.opportunity_statuscode" Collapsed="true">
+    <Position X="21.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAQAQABAAAAABAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.opportunity_timeline" Collapsed="true">
+    <Position X="0.5" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAgAAAQAAAAAAAAAAAAAAAAAEAAAAAAAIAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.none_opportunityclose_instancetypecode" Collapsed="true">
+    <Position X="12.75" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAACAAAAAQAAAAAAQAAAAIAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.none_opportunityclose_prioritycode" Collapsed="true">
+    <Position X="14.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAgIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.OpportunityCloseState" Collapsed="true">
+    <Position X="4" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAIAgAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.opportunityclose_statuscode" Collapsed="true">
+    <Position X="2.25" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAIAgAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_addressState" Collapsed="true">
+    <Position X="12.75" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_address_statuscode" Collapsed="true">
+    <Position X="11" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_commissionState" Collapsed="true">
+    <Position X="16.25" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_commission_statuscode" Collapsed="true">
+    <Position X="14.5" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_demoeval_smx_evaluationlevel" Collapsed="true">
+    <Position X="0.5" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_demoeval_smx_typeofrequest" Collapsed="true">
+    <Position X="2.25" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_demoevalState" Collapsed="true">
+    <Position X="5.75" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_demoeval_statuscode" Collapsed="true">
+    <Position X="4" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAACAAAAAEAAAAAAAAAAAAAAAgAAAAAAgAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_fcsopportunity_smx_discountapproval" Collapsed="true">
+    <Position X="9.25" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_fcsopportunity_smx_milestone" Collapsed="true">
+    <Position X="11" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAABAAGAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_fcsopportunity_smx_opportunitytype" Collapsed="true">
+    <Position X="12.75" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_fcsopportunity_smx_orderfrequency" Collapsed="true">
+    <Position X="14.5" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAEAAAABAAAgA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_fcsopportunity_smx_salescategory" Collapsed="true">
+    <Position X="16.25" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAEAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_fcsopportunityState" Collapsed="true">
+    <Position X="19.75" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_fcsopportunity_statuscode" Collapsed="true">
+    <Position X="18" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAQACAAAAAQAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_flowcytometryproduct_smx_reagentcategory" Collapsed="true">
+    <Position X="21.5" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAIAAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_flowcytometryproductState" Collapsed="true">
+    <Position X="2.25" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_flowcytometryproduct_statuscode" Collapsed="true">
+    <Position X="0.5" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACACAAAAAAAAAAAAAAAAAAAAQAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_gpoState" Collapsed="true">
+    <Position X="9.25" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_gpo_statuscode" Collapsed="true">
+    <Position X="7.5" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_ihnState" Collapsed="true">
+    <Position X="12.75" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_ihn_statuscode" Collapsed="true">
+    <Position X="11" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_instrumentState" Collapsed="true">
+    <Position X="16.25" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_instrument_statuscode" Collapsed="true">
+    <Position X="14.5" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_instrumentupdateState" Collapsed="true">
+    <Position X="19.75" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_instrumentupdate_statuscode" Collapsed="true">
+    <Position X="18" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>FAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_labState" Collapsed="true">
+    <Position X="0.5" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_lab_statuscode" Collapsed="true">
+    <Position X="21.5" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_manufacturerState" Collapsed="true">
+    <Position X="4" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_manufacturer_statuscode" Collapsed="true">
+    <Position X="2.25" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_model_smx_demotype" Collapsed="true">
+    <Position X="5.75" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_modelState" Collapsed="true">
+    <Position X="9.25" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_model_statuscode" Collapsed="true">
+    <Position X="7.5" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_opportunitylabState" Collapsed="true">
+    <Position X="12.75" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_opportunitylab_statuscode" Collapsed="true">
+    <Position X="11" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_pricelistState" Collapsed="true">
+    <Position X="18" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_pricelist_statuscode" Collapsed="true">
+    <Position X="16.25" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_productState" Collapsed="true">
+    <Position X="2.25" Y="19.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_product_statuscode" Collapsed="true">
+    <Position X="19.75" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_productlineState" Collapsed="true">
+    <Position X="0.5" Y="19.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_productline_statuscode" Collapsed="true">
+    <Position X="21.5" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_salesorderState" Collapsed="true">
+    <Position X="11" Y="19.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_salesorder_statuscode" Collapsed="true">
+    <Position X="5.75" Y="19.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_salesorderbusinessprocessState" Collapsed="true">
+    <Position X="9.25" Y="19.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_salesorderbusinessprocess_statuscode" Collapsed="true">
+    <Position X="7.5" Y="19.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAgAAAAAAAAAgA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_stageduration_instancetypecode" Collapsed="true">
+    <Position X="16.25" Y="19.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAACAAAAAQAAAAAAQAAAAIAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_stageduration_prioritycode" Collapsed="true">
+    <Position X="18" Y="19.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAgIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_stagedurationState" Collapsed="true">
+    <Position X="21.5" Y="19.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAIAgAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_stageduration_statuscode" Collapsed="true">
+    <Position X="19.75" Y="19.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAIAgAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_stateState" Collapsed="true">
+    <Position X="2.25" Y="20" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_state_statuscode" Collapsed="true">
+    <Position X="0.5" Y="20" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_sysmexconfigState" Collapsed="true">
+    <Position X="5.75" Y="20" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_sysmexconfig_statuscode" Collapsed="true">
+    <Position X="4" Y="20" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_zippostalcodeState" Collapsed="true">
+    <Position X="12.75" Y="20" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_zippostalcode_statuscode" Collapsed="true">
+    <Position X="11" Y="20" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.systemuser_accessmode" Collapsed="true">
+    <Position X="14.5" Y="20" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAIAAQAAAAAgAAAAAgAAAAAAACAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.systemuser_address1_addresstypecode" Collapsed="true">
+    <Position X="16.25" Y="20" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.systemuser_address1_shippingmethodcode" Collapsed="true">
+    <Position X="18" Y="20" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.systemuser_address2_addresstypecode" Collapsed="true">
+    <Position X="19.75" Y="20" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.systemuser_address2_shippingmethodcode" Collapsed="true">
+    <Position X="21.5" Y="20" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.systemuser_caltype" Collapsed="true">
+    <Position X="0.5" Y="20.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAEACBAAAAAAAAAAAABAAAEAAEQgEAACAAACCAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.systemuser_emailrouteraccessapproval" Collapsed="true">
+    <Position X="2.25" Y="20.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAQAAAAAAAIAAAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.systemuser_incomingemaildeliverymethod" Collapsed="true">
+    <Position X="4" Y="20.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAQAAAAAAAAAAAAAAABAAEAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.systemuser_invitestatuscode" Collapsed="true">
+    <Position X="5.75" Y="20.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACCAAAAAAABAAAIAAAgAAAAAAAAAAAAEQAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.systemuser_outgoingemaildeliverymethod" Collapsed="true">
+    <Position X="7.5" Y="20.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAQAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.systemuser_preferredaddresscode" Collapsed="true">
+    <Position X="9.25" Y="20.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.systemuser_preferredemailcode" Collapsed="true">
+    <Position X="11" Y="20.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.systemuser_preferredphonecode" Collapsed="true">
+    <Position X="12.75" Y="20.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAQAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_systemuser_smx_cpqapprovalrole" Collapsed="true">
+    <Position X="7.5" Y="20" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>JAABAEAAAAAAACgEAAAgAAAAAAIAAAAAAEIAAACABAA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.team_type" Collapsed="true">
+    <Position X="14.5" Y="20.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAgAIA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sysmex.Crm.Model.smx_orderreason">
+    <Position X="23.75" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEAAAACAgAAQEAQAAAAAAERZBAJHBICCQGBAKAIA=</HashCode>
+      <FileName>Sysmex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

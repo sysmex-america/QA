@@ -1,0 +1,1634 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/16/2017 12:56:39 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="REBERNAK"
+  DTS:CreatorName="SONOMAPARTNERS\rrebernak"
+  DTS:DTSID="{3C8272F9-4066-4F68-AAFD-867A25691F17}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3002.101"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Account_Stage"
+  DTS:PackageType="5"
+  DTS:VersionBuild="32"
+  DTS:VersionGUID="{D582D095-5F5F-4907-8B04-A20F7BCC92A8}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7F8C65F5-CAA9-4554-BD21-73648E8DD3C0}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ErrorCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2B68A101-51F5-4278-8563-A76CC1B1CAD7}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="InsertCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{CEC6BC3D-5908-4A12-8BD4-A4EE675D4E76}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="LoadDate">
+      <DTS:VariableValue
+        DTS:DataType="7">11/16/2017 2:57:07 PM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B9C3A872-C4FD-4A64-947A-1360950ED5D6}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="PackageRunID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8FB4FE64-913F-4DB5-9594-64E0013EF548}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{30E0F70D-C679-4D20-8B44-FB4769073A2C}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="UpdateCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Stage Account Records from TestProd_ED"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{2D6A31CC-B167-4682-911A-44825B8D07BD}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Stage Account Records from TestProd_ED"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Stage Account Records from TestProd_ED\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select 
+[name] = c.company_name
+--,c.cfSales_Company
+,smx_MigrationSourceId = convert(nvarchar(100), convert(bigint, c.company_id))
+,smx_NewMigrationSourceId = convert(nvarchar(100), '0x' + c.companyid)
+,smx_accounttype = sm.attributevalue
+,smx_classtype = sm2.attributevalue
+,smx_GPO = g.smx_gpoid
+,smx_IHN = i.smx_ihnid
+,smx_ihncae = (
+	case 
+		when i.smx_ihnid is null then null
+		when i.smx_ihnid is not null and i.ownerid is not null then i.ownerid 
+		when i.smx_ihnid is not null and i.ownerid is null then ? 
+	end
+)
+,smx_IHNSecondary = i2.smx_ihnid
+,smx_bedsize = c.cfBed_Size
+,smx_Compass = c.cfcompass
+,new_duns = c.duns
+,smx_DUNSFileName = c.cfDUNS_File_Name
+,smx_DUNSFilePath = c.cfDUNS_File_path
+,smx_language = sm3.attributevalue
+,smx_partneraccount = c3.company_id
+,smx_partnercontact = c4.Contact_Id
+,WebSiteURL = c.www
+,TransactionCurrencyID = (select transactioncurrencyid from [SysmexMigration_Prod].dbo.crm_transactioncurrency where [currencyname] = 'US Dollar')
+,smx_VerispanNumber = c.cfverispan_number
+,z.smx_tis
+,z.smx_lsc
+,z.smx_dsm
+,/*z.*/smx_altterritory = NULL	--(NEED MAPPING)
+,/*z.*/smx_aaltterritoymanager = NULL	--(NEED MAPPING)
+--==================
+,aa_smx_name = 'Sold To - '+c.companyid /*as 'Address'*/
+,aa_smx_type = 'Sold To'
+,aa_smx_addressstreet1 = c.Address_1
+,aa_smx_addressstreet2 = c.Address_2
+,aa_smx_addressstret3 = c.Address_3
+,aa_smx_city = c.city
+,aa_smx_stateprovinceid = c.State_
+,aa_smx_zippostalcode = c.zip
+,aa_smx_country = c.Country
+--==================
+from [dbo].[Company] c (nolock) 
+left outer join SysmexMigration_Prod.dbo.crm_stringmap sm (nolock)
+	on sm.value = c.[Type]
+	and sm.attributename = 'smx_accounttype'
+	and sm.objecttypecode = 'account'
+left outer join SysmexMigration_Prod.dbo.crm_stringmap sm2 (nolock)
+	on sm2.value = c.cfclass_type
+	and sm2.attributename = 'smx_classtype'	
+	and sm2.objecttypecode = 'account'
+left outer join SysmexMigration_Prod.dbo.crm_smx_gpo g (nolock)
+	on g.smx_migrationsourceid = c.ctGPO_Id
+left outer join SysmexMigration_Prod.dbo.crm_smx_IHN i (nolock)
+	on i.smx_migrationsourceid = c.ctihn_id
+left outer join SysmexMigration_Prod.dbo.crm_stringmap sm3 (nolock)
+	on sm3.value = c.cflanguage
+	and sm3.attributename = 'smx_language'
+	and sm3.objecttypecode = 'account'
+left outer join SysmexMigration_Prod.dbo.crm_smx_IHN i2 (nolock)
+	on i2.smx_migrationsourceid = c.ctIHN_Secondary_Id
+left outer join Company c3 (nolock)
+	on c3.companyid = c.[Partner_Company_Id]
+left outer join Contact c4 (nolock)
+	on c4.contact_id = c.partner_contact_id  --52466
+left outer join [SysmexMigration_Prod].[dbo].[crm_smx_zippostalcode] z (nolock)
+	on c.zip = z.smx_name  --52466
+where c.cfsales_company = 1 and c.Country = 'US' and c.cfClass_Type is null</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"Parameter0:Input",{B0650946-F4BA-434A-9F66-FCDA1F948FD3};</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{FE9E9583-D8F3-4322-8249-0BCA4E501F7E}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[TestProd_ED]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                      length="40"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]"
+                      name="name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_MigrationSourceId]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_MigrationSourceId]"
+                      length="100"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_MigrationSourceId]"
+                      name="smx_MigrationSourceId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_NewMigrationSourceId]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_NewMigrationSourceId]"
+                      length="100"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_NewMigrationSourceId]"
+                      name="smx_NewMigrationSourceId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_accounttype]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_accounttype]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_accounttype]"
+                      name="smx_accounttype"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_classtype]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_classtype]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_classtype]"
+                      name="smx_classtype"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_GPO]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_GPO]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_GPO]"
+                      name="smx_GPO"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_IHN]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_IHN]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_IHN]"
+                      name="smx_IHN"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_ihncae]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_ihncae]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_ihncae]"
+                      name="smx_ihncae"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_IHNSecondary]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_IHNSecondary]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_IHNSecondary]"
+                      name="smx_IHNSecondary"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_bedsize]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_bedsize]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_bedsize]"
+                      name="smx_bedsize"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_Compass]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_Compass]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_Compass]"
+                      name="smx_Compass"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[new_duns]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[new_duns]"
+                      length="25"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[new_duns]"
+                      name="new_duns"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_DUNSFileName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_DUNSFileName]"
+                      length="100"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_DUNSFileName]"
+                      name="smx_DUNSFileName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_DUNSFilePath]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_DUNSFilePath]"
+                      length="250"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_DUNSFilePath]"
+                      name="smx_DUNSFilePath"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_language]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_language]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_language]"
+                      name="smx_language"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_partneraccount]"
+                      dataType="bytes"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_partneraccount]"
+                      length="8"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_partneraccount]"
+                      name="smx_partneraccount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_partnercontact]"
+                      dataType="bytes"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_partnercontact]"
+                      length="8"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_partnercontact]"
+                      name="smx_partnercontact"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[WebSiteURL]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[WebSiteURL]"
+                      length="150"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[WebSiteURL]"
+                      name="WebSiteURL"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransactionCurrencyID]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TransactionCurrencyID]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransactionCurrencyID]"
+                      name="TransactionCurrencyID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_VerispanNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_VerispanNumber]"
+                      length="10"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_VerispanNumber]"
+                      name="smx_VerispanNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_tis]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_tis]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_tis]"
+                      name="smx_tis"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_lsc]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_lsc]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_lsc]"
+                      name="smx_lsc"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_dsm]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_dsm]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_dsm]"
+                      name="smx_dsm"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_altterritory]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_altterritory]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_altterritory]"
+                      name="smx_altterritory"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_aaltterritoymanager]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_aaltterritoymanager]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_aaltterritoymanager]"
+                      name="smx_aaltterritoymanager"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[aa_smx_name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[aa_smx_name]"
+                      length="30"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[aa_smx_name]"
+                      name="aa_smx_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[aa_smx_type]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[aa_smx_type]"
+                      length="7"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[aa_smx_type]"
+                      name="aa_smx_type"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[aa_smx_addressstreet1]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[aa_smx_addressstreet1]"
+                      length="50"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[aa_smx_addressstreet1]"
+                      name="aa_smx_addressstreet1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[aa_smx_addressstreet2]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[aa_smx_addressstreet2]"
+                      length="50"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[aa_smx_addressstreet2]"
+                      name="aa_smx_addressstreet2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[aa_smx_addressstret3]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[aa_smx_addressstret3]"
+                      length="50"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[aa_smx_addressstret3]"
+                      name="aa_smx_addressstret3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[aa_smx_city]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[aa_smx_city]"
+                      length="40"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[aa_smx_city]"
+                      name="aa_smx_city"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[aa_smx_stateprovinceid]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[aa_smx_stateprovinceid]"
+                      length="10"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[aa_smx_stateprovinceid]"
+                      name="aa_smx_stateprovinceid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[aa_smx_zippostalcode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[aa_smx_zippostalcode]"
+                      length="12"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[aa_smx_zippostalcode]"
+                      name="aa_smx_zippostalcode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[aa_smx_country]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[aa_smx_country]"
+                      length="35"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[aa_smx_country]"
+                      name="aa_smx_country"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="40"
+                      name="name" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_MigrationSourceId]"
+                      dataType="wstr"
+                      length="100"
+                      name="smx_MigrationSourceId" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_NewMigrationSourceId]"
+                      dataType="wstr"
+                      length="100"
+                      name="smx_NewMigrationSourceId" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_accounttype]"
+                      dataType="i4"
+                      name="smx_accounttype" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_classtype]"
+                      dataType="i4"
+                      name="smx_classtype" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_GPO]"
+                      dataType="guid"
+                      name="smx_GPO" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_IHN]"
+                      dataType="guid"
+                      name="smx_IHN" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_ihncae]"
+                      dataType="guid"
+                      name="smx_ihncae" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_IHNSecondary]"
+                      dataType="guid"
+                      name="smx_IHNSecondary" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_bedsize]"
+                      dataType="i4"
+                      name="smx_bedsize" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_Compass]"
+                      dataType="ui1"
+                      name="smx_Compass" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[new_duns]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="new_duns" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_DUNSFileName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="smx_DUNSFileName" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_DUNSFilePath]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="smx_DUNSFilePath" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_language]"
+                      dataType="i4"
+                      name="smx_language" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_partneraccount]"
+                      dataType="bytes"
+                      length="8"
+                      name="smx_partneraccount" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_partnercontact]"
+                      dataType="bytes"
+                      length="8"
+                      name="smx_partnercontact" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[WebSiteURL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      name="WebSiteURL" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TransactionCurrencyID]"
+                      dataType="guid"
+                      name="TransactionCurrencyID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_VerispanNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="smx_VerispanNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_tis]"
+                      dataType="guid"
+                      name="smx_tis" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_lsc]"
+                      dataType="guid"
+                      name="smx_lsc" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_dsm]"
+                      dataType="guid"
+                      name="smx_dsm" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_altterritory]"
+                      dataType="i4"
+                      name="smx_altterritory" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_aaltterritoymanager]"
+                      dataType="i4"
+                      name="smx_aaltterritoymanager" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[aa_smx_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="aa_smx_name" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[aa_smx_type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="7"
+                      name="aa_smx_type" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[aa_smx_addressstreet1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="aa_smx_addressstreet1" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[aa_smx_addressstreet2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="aa_smx_addressstreet2" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[aa_smx_addressstret3]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="aa_smx_addressstret3" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[aa_smx_city]"
+                      codePage="1252"
+                      dataType="str"
+                      length="40"
+                      name="aa_smx_city" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[aa_smx_stateprovinceid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="aa_smx_stateprovinceid" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[aa_smx_zippostalcode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="aa_smx_zippostalcode" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[aa_smx_country]"
+                      codePage="1252"
+                      dataType="str"
+                      length="35"
+                      name="aa_smx_country" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="40"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[name]"
+                      name="name" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_MigrationSourceId]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_MigrationSourceId]"
+                      name="smx_MigrationSourceId" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_NewMigrationSourceId]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_NewMigrationSourceId]"
+                      name="smx_NewMigrationSourceId" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_accounttype]"
+                      dataType="i4"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_accounttype]"
+                      name="smx_accounttype" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_classtype]"
+                      dataType="i4"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_classtype]"
+                      name="smx_classtype" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_GPO]"
+                      dataType="guid"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_GPO]"
+                      name="smx_GPO" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_IHN]"
+                      dataType="guid"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_IHN]"
+                      name="smx_IHN" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_ihncae]"
+                      dataType="guid"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_ihncae]"
+                      name="smx_ihncae" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_IHNSecondary]"
+                      dataType="guid"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_IHNSecondary]"
+                      name="smx_IHNSecondary" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_bedsize]"
+                      dataType="i4"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_bedsize]"
+                      name="smx_bedsize" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_Compass]"
+                      dataType="ui1"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_Compass]"
+                      name="smx_Compass" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[new_duns]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[new_duns]"
+                      name="new_duns" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_DUNSFileName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_DUNSFileName]"
+                      name="smx_DUNSFileName" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_DUNSFilePath]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_DUNSFilePath]"
+                      name="smx_DUNSFilePath" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_language]"
+                      dataType="i4"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_language]"
+                      name="smx_language" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_partneraccount]"
+                      dataType="bytes"
+                      length="8"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_partneraccount]"
+                      name="smx_partneraccount" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_partnercontact]"
+                      dataType="bytes"
+                      length="8"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_partnercontact]"
+                      name="smx_partnercontact" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[WebSiteURL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[WebSiteURL]"
+                      name="WebSiteURL" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TransactionCurrencyID]"
+                      dataType="guid"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TransactionCurrencyID]"
+                      name="TransactionCurrencyID" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_VerispanNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_VerispanNumber]"
+                      name="smx_VerispanNumber" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_tis]"
+                      dataType="guid"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_tis]"
+                      name="smx_tis" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_lsc]"
+                      dataType="guid"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_lsc]"
+                      name="smx_lsc" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_dsm]"
+                      dataType="guid"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_dsm]"
+                      name="smx_dsm" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_altterritory]"
+                      dataType="i4"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_altterritory]"
+                      name="smx_altterritory" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_aaltterritoymanager]"
+                      dataType="i4"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_aaltterritoymanager]"
+                      name="smx_aaltterritoymanager" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[aa_smx_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[aa_smx_name]"
+                      name="aa_smx_name" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[aa_smx_type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="7"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[aa_smx_type]"
+                      name="aa_smx_type" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[aa_smx_addressstreet1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[aa_smx_addressstreet1]"
+                      name="aa_smx_addressstreet1" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[aa_smx_addressstreet2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[aa_smx_addressstreet2]"
+                      name="aa_smx_addressstreet2" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[aa_smx_addressstret3]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[aa_smx_addressstret3]"
+                      name="aa_smx_addressstret3" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[aa_smx_city]"
+                      codePage="1252"
+                      dataType="str"
+                      length="40"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[aa_smx_city]"
+                      name="aa_smx_city" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[aa_smx_stateprovinceid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[aa_smx_stateprovinceid]"
+                      name="aa_smx_stateprovinceid" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[aa_smx_zippostalcode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[aa_smx_zippostalcode]"
+                      name="aa_smx_zippostalcode" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[aa_smx_country]"
+                      codePage="1252"
+                      dataType="str"
+                      length="35"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[aa_smx_country]"
+                      name="aa_smx_country" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage Account Records from TestProd_ED\Stage_Account"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Stage_Account"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Stage_Account]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Connections[OleDbConnection]"
+                  connectionManagerID="{C5BC22F6-3A6D-40F0-9393-E9CD90B60BF6}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SysmexMigration_Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="40"
+                      cachedName="name"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[smx_MigrationSourceId]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="smx_MigrationSourceId"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_MigrationSourceId]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_MigrationSourceId]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[smx_accounttype]"
+                      cachedDataType="i4"
+                      cachedName="smx_accounttype"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_accounttype]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_accounttype]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[smx_classtype]"
+                      cachedDataType="i4"
+                      cachedName="smx_classtype"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_classtype]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_classtype]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[smx_GPO]"
+                      cachedDataType="guid"
+                      cachedName="smx_GPO"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_GPO]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_GPO]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[smx_IHN]"
+                      cachedDataType="guid"
+                      cachedName="smx_IHN"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_IHN]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_IHN]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[smx_IHNSecondary]"
+                      cachedDataType="guid"
+                      cachedName="smx_IHNSecondary"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_IHNSecondary]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_IHNSecondary]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[smx_bedsize]"
+                      cachedDataType="i4"
+                      cachedName="smx_bedsize"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_bedsize]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_bedsize]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[smx_Compass]"
+                      cachedDataType="ui1"
+                      cachedName="smx_Compass"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_Compass]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_Compass]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[new_duns]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="new_duns"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[new_duns]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[new_duns]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[smx_DUNSFileName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="smx_DUNSFileName"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_DUNSFileName]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_DUNSFileName]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[smx_DUNSFilePath]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="250"
+                      cachedName="smx_DUNSFilePath"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_DUNSFilePath]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_DUNSFilePath]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[smx_partneraccount]"
+                      cachedDataType="bytes"
+                      cachedLength="8"
+                      cachedName="smx_partneraccount"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_partneraccount]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_partneraccount]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[smx_partnercontact]"
+                      cachedDataType="bytes"
+                      cachedLength="8"
+                      cachedName="smx_partnercontact"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_partnercontact]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_partnercontact]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[WebSiteURL]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="150"
+                      cachedName="WebSiteURL"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[WebSiteURL]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[WebSiteURL]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[TransactionCurrencyID]"
+                      cachedDataType="guid"
+                      cachedName="TransactionCurrencyID"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[TransactionCurrencyID]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransactionCurrencyID]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[smx_VerispanNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="smx_VerispanNumber"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_VerispanNumber]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_VerispanNumber]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[smx_language]"
+                      cachedDataType="i4"
+                      cachedName="smx_language"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_language]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_language]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[smx_ihncae]"
+                      cachedDataType="guid"
+                      cachedName="smx_ihncae"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_ihncae]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_ihncae]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[smx_tis]"
+                      cachedDataType="guid"
+                      cachedName="smx_tis"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_tis]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_tis]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[smx_lsc]"
+                      cachedDataType="guid"
+                      cachedName="smx_lsc"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_lsc]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_lsc]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[smx_dsm]"
+                      cachedDataType="guid"
+                      cachedName="smx_dsm"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_dsm]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_dsm]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[aa_smx_name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="aa_smx_name"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[aa_smx_name]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[aa_smx_name]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[aa_smx_type]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="7"
+                      cachedName="aa_smx_type"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[aa_smx_type]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[aa_smx_type]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[aa_smx_addressstreet1]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="aa_smx_addressstreet1"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[aa_smx_addressstreet1]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[aa_smx_addressstreet1]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[aa_smx_addressstreet2]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="aa_smx_addressstreet2"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[aa_smx_addressstreet2]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[aa_smx_addressstreet2]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[aa_smx_addressstret3]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="aa_smx_addressstret3"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[aa_smx_addressstreet3]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[aa_smx_addressstret3]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[aa_smx_city]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="40"
+                      cachedName="aa_smx_city"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[aa_smx_city]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[aa_smx_city]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[aa_smx_stateprovinceid]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="aa_smx_stateprovinceid"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[aa_smx_stateprovinceid]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[aa_smx_stateprovinceid]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[aa_smx_zippostalcode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="12"
+                      cachedName="aa_smx_zippostalcode"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[aa_smx_zippostalcode]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[aa_smx_zippostalcode]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[aa_smx_country]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="35"
+                      cachedName="aa_smx_country"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[aa_smx_country]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[aa_smx_country]" />
+                    <inputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].Columns[smx_NewMigrationSourceId]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="smx_NewMigrationSourceId"
+                      externalMetadataColumnId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_NewMigrationSourceId]"
+                      lineageId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_NewMigrationSourceId]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[accountid]"
+                      dataType="guid"
+                      name="accountid" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="40"
+                      name="name" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_MigrationSourceId]"
+                      dataType="wstr"
+                      length="100"
+                      name="smx_MigrationSourceId" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_accounttype]"
+                      dataType="i4"
+                      name="smx_accounttype" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_classtype]"
+                      dataType="i4"
+                      name="smx_classtype" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_GPO]"
+                      dataType="guid"
+                      name="smx_GPO" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_IHN]"
+                      dataType="guid"
+                      name="smx_IHN" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_IHNSecondary]"
+                      dataType="guid"
+                      name="smx_IHNSecondary" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_bedsize]"
+                      dataType="i4"
+                      name="smx_bedsize" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_Compass]"
+                      dataType="ui1"
+                      name="smx_Compass" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[new_duns]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="new_duns" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_DUNSFileName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="smx_DUNSFileName" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_DUNSFilePath]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="smx_DUNSFilePath" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_partneraccount]"
+                      dataType="bytes"
+                      length="8"
+                      name="smx_partneraccount" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_partnercontact]"
+                      dataType="bytes"
+                      length="8"
+                      name="smx_partnercontact" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[WebSiteURL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      name="WebSiteURL" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[TransactionCurrencyID]"
+                      dataType="guid"
+                      name="TransactionCurrencyID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_VerispanNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="smx_VerispanNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_language]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="smx_language" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_ihncae]"
+                      dataType="guid"
+                      name="smx_ihncae" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_tis]"
+                      dataType="guid"
+                      name="smx_tis" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_lsc]"
+                      dataType="guid"
+                      name="smx_lsc" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_dsm]"
+                      dataType="guid"
+                      name="smx_dsm" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[aa_smx_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="aa_smx_name" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[aa_smx_type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="7"
+                      name="aa_smx_type" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[aa_smx_addressstreet1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="aa_smx_addressstreet1" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[aa_smx_addressstreet2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="aa_smx_addressstreet2" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[aa_smx_addressstreet3]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="aa_smx_addressstreet3" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[aa_smx_city]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="aa_smx_city" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[aa_smx_stateprovinceid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="aa_smx_stateprovinceid" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[aa_smx_zippostalcode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="aa_smx_zippostalcode" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[aa_smx_country]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="aa_smx_country" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[aa_smx_addressid]"
+                      dataType="guid"
+                      name="aa_smx_addressid" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[isnew]"
+                      dataType="ui1"
+                      name="isnew" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input].ExternalColumns[smx_NewMigrationSourceId]"
+                      dataType="wstr"
+                      length="100"
+                      name="smx_NewMigrationSourceId" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage Account Records from TestProd_ED\Stage_Account.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage Account Records from TestProd_ED\Stage_Account.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage Account Records from TestProd_ED\Stage_Account.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Stage Account Records from TestProd_ED.Paths[OLE DB Source Output]"
+              endId="Package\Stage Account Records from TestProd_ED\Stage_Account.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Stage Account Records from TestProd_ED\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate Account"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{526EF7D1-D80F-491E-B675-183AD7BD9C84}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate Account"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{C5BC22F6-3A6D-40F0-9393-E9CD90B60BF6}"
+          SQLTask:SqlStatementSource="truncate table Stage_Account;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{64D18CA3-5646-407E-A401-8864516D2418}"
+      DTS:From="Package\Truncate Account"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Stage Account Records from TestProd_ED" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="277,42"
+          Id="Package\Stage Account Records from TestProd_ED"
+          TopLeft="44,163" />
+        <NodeLayout
+          Size="161,42"
+          Id="Package\Truncate Account"
+          TopLeft="69,43" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="149.5,85">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="33,78"
+              Start="0,0"
+              End="33,70.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,35"
+                    Point2="0,39"
+                    Point3="4,39" />
+                  <mssgle:LineSegment
+                    End="29,39" />
+                  <mssgle:CubicBezierSegment
+                    Point1="29,39"
+                    Point2="33,39"
+                    Point3="33,43" />
+                  <mssgle:LineSegment
+                    End="33,70.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Stage Account Records from TestProd_ED">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="149,42"
+          Id="Package\Stage Account Records from TestProd_ED\Stage_Account"
+          TopLeft="46,205.5" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Stage Account Records from TestProd_ED\OLE DB Source"
+          TopLeft="56,56" />
+        <EdgeLayout
+          Id="Package\Stage Account Records from TestProd_ED.Paths[OLE DB Source Output]"
+          TopLeft="131,98">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-10.5,107.5"
+              Start="0,0"
+              End="-10.5,100">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,49.75"
+                    Point2="0,53.75"
+                    Point3="-4,53.75" />
+                  <mssgle:LineSegment
+                    End="-6.5,53.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-6.5,53.75"
+                    Point2="-10.5,53.75"
+                    Point3="-10.5,57.75" />
+                  <mssgle:LineSegment
+                    End="-10.5,100" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage Account Records from TestProd_ED\Stage_Account">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage Account Records from TestProd_ED\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

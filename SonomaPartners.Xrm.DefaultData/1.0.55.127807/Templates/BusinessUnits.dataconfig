@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ImportConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Entity Name="businessunit">
+    <Attribute>businessunitid</Attribute>
+    <Attribute>description</Attribute>
+    <Attribute>name</Attribute>
+    <Attribute>parentbusinessunitid</Attribute>
+  </Entity>
+</ImportConfiguration>

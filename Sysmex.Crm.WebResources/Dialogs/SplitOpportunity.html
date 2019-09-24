@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=8" />
+
+    <title>Send to Contract</title>
+    <!-- Styles -->
+    <link href="../CSS/SP.Core.css" rel="stylesheet" type="text/css" />
+    <link href="../CSS/SP.Dialog.css" rel="stylesheet" type="text/css" />
+    <link href="SplitOpportunity.css" rel="stylesheet" type="text/css" />
+
+    <!-- Script Libraries -->
+    <script type="text/javascript" src="../../ClientGlobalContext.js.aspx"></script>
+    <script type="text/javascript" src="../Scripts/Libraries/jquery.js"></script>
+    <script type="text/javascript" src="../Scripts/Libraries/sonoma.js"></script>
+    <script type="text/javascript" src="SplitOpportunity.js"></script>
+</head>
+<body>
+    <div class="xrm-dialog-header">
+        <h1><span id="headerMessage">Opportunity Products</span></h1>
+        <p id="descriptionText">Select the Opportunity Products and an associated Deactivation Method</p>
+    </div>
+
+    <div class="xrm-dialog-content">
+        <p>Product List:</p>
+        <div id="product-list"></div>
+        <div id="product-buttons">
+            <p>Deactivation Method:</p>
+            <label for="sendToContract">
+                <input type="radio" name="product-method" value="sendToContract" id="sendToContract" checked="checked">Send To Contract
+            </label>
+            <label for="lostProducts">
+                <input type="radio" name="product-method" value="lostProducts" id="lostProducts">Lost Products 
+            </label>
+        </div>
+        <div id="lost-reason-description">
+            <p>Reason for losing:</p>
+            <textarea id="reasonForLosing"></textarea>
+        </div>
+    </div>
+
+    <div class="xrm-dialog-footer">
+        <button id="finishButton">Finish</button>
+        <button id="cancel">Cancel</button>
+    </div>
+
+    <div id="overlay"></div>
+    <div id="loaderContainer">
+        <div class="sk-circle">
+            <div class="sk-circle1 sk-child"></div>
+            <div class="sk-circle2 sk-child"></div>
+            <div class="sk-circle3 sk-child"></div>
+            <div class="sk-circle4 sk-child"></div>
+            <div class="sk-circle5 sk-child"></div>
+            <div class="sk-circle6 sk-child"></div>
+            <div class="sk-circle7 sk-child"></div>
+            <div class="sk-circle8 sk-child"></div>
+            <div class="sk-circle9 sk-child"></div>
+            <div class="sk-circle10 sk-child"></div>
+            <div class="sk-circle11 sk-child"></div>
+            <div class="sk-circle12 sk-child"></div>
+        </div>
+        <span class="loaderText">Processing...</span>
+    </div>
+</body>
+</html>

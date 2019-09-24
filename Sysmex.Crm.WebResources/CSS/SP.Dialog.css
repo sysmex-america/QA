@@ -1,0 +1,49 @@
+﻿body 
+{
+    background-color: #E9EDF1;
+    overflow: hidden;
+}
+
+/*-- Standard Dialog --*/
+/* Header Container */
+.xrm-dialog-header 
+{
+   background-color: #fff;
+    border-bottom: 1px solid #a4abb2;
+    padding: 0 10px 0 10px;
+    height: 51px;
+    position: relative;
+}
+/* Header: Title */
+.xrm-dialog-header h1 
+{
+   font-size: 14px;
+    font-weight: bold;
+    margin: 5px 0px 3px 0px;
+}
+/* Header: Description/Detail Paragraph */
+.xrm-dialog-header p 
+{
+   margin: 0px;
+   height: 35px;
+}
+/* Button/Footer Container */
+.xrm-dialog-footer 
+{
+    background-color: #E9EDF1;
+    border-top: solid 1px #999;
+    text-align: right;
+    padding: 10px 8px 8px 15px;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    width: 100%;
+}
+/* Content Container */
+.xrm-dialog-content 
+{
+    background-color: #E9EDF1;
+    overflow: auto;
+    padding: 6px;
+}
+

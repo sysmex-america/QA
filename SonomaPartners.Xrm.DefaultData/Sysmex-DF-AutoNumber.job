@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Root>
+  <Jobs>
+    <Job Id="232778bf-5c34-48ed-8ad3-b699db06a327">
+      <ProfileId>262c2cda-420f-4228-a2fe-d72acb76f79e</ProfileId>
+      <Type>Export</Type>
+    </Job>
+    <Job Id="439d5d98-f2b2-42f7-8cd4-1332346c45ef">
+      <ProfileId>262c2cda-420f-4228-a2fe-d72acb76f79e</ProfileId>
+      <Type>Export</Type>
+    </Job>
+  </Jobs>
+  <Profiles>
+    <Profile Name="Sysmex Dev" Id="262c2cda-420f-4228-a2fe-d72acb76f79e">
+      <ConnectionString>Url=https://sysmexdev.api.crm.dynamics.com/XRMServices/2011/Organization.svc;Username=anargyrosa@sysmex.com;Password=Nongovernment67;RequireNewInstance=true;</ConnectionString>
+      <ConfigFilePath>C:\workspace\Sysmex\SourceCode\SonomaPartners.Xrm.DefaultData\dynamicsforms.dataconfig</ConfigFilePath>
+      <DataFilePath>C:\workspace\Sysmex\SourceCode\SonomaPartners.Xrm.DefaultData\dynamicforms.data</DataFilePath>
+      <UseRandomData>false</UseRandomData>
+      <DoNotRun>false</DoNotRun>
+    </Profile>
+  </Profiles>
+</Root>

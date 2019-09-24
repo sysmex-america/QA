@@ -1,0 +1,789 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/1/2018 3:51:03 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="REBERNAK"
+  DTS:CreatorName="SONOMAPARTNERS\RRebernak"
+  DTS:DTSID="{5859BFAC-B850-4142-B21A-19AA0E303C88}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3002.101"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Instruments_Stage"
+  DTS:PackageType="5"
+  DTS:VersionBuild="8"
+  DTS:VersionGUID="{A308C946-000E-4E14-BAC0-B89C4046ACAD}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load Instrument Stage Table"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{0C23EB77-5488-4FC3-A842-1426CCBAE626}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Instrument Stage Table"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load Instrument Stage Table\Instrument Source Query"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Instrument Source Query"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select 
+smx_instrumentid = newid()
+,m.model_description as smx_name
+,smx_account = (
+	select top(1) accountid from Stage_Account
+	where smx_MigrationSourceId = convert(nvarchar(100), convert(bigint, p.Company_Id))
+)
+,smx_lab = (select top(1) smx_labid from Stage_Lab where smx_migrationsourceid = convert(nvarchar(100), convert(bigint, p.Lab_Id)))
+,l.OwnerId
+,l.owneridtype
+,smx_metrixinstrument = 0
+,smx_productline = (
+	case	
+		when p.Placement_Filter = 'E' then (select smx_productlineid from crm_smx_productline where smx_name = 'ESR' )
+		when p.Placement_Filter = 'H' then (select smx_productlineid from crm_smx_productline where smx_name = 'Hematology' )
+		when p.Placement_Filter = 'A' then (select smx_productlineid from crm_smx_productline where smx_name = 'Chemistry/IA' )
+		when p.Placement_Filter = 'U' then (select smx_productlineid from crm_smx_productline where smx_name = 'Urinalysis' )
+		when p.Placement_Filter = 'F' then (select smx_productlineid from crm_smx_productline where smx_name = 'Flow' )
+		when p.Placement_Filter = 'C' then (select smx_productlineid from crm_smx_productline where smx_name = 'Coagulation' )
+		else (select smx_productlineid from crm_smx_productline where smx_name = 'Chemistry/IA' )
+	end
+)
+,smx_manufacturer = mfg.smx_manufacturerid
+,smx_model = mdl.smx_modelid
+,sm.attributevalue as smx_modeofacquisition
+,p.Year_of_Acquisition_Heme as smx_yearofacquisition
+,smx_frequencyofuse = 0
+,smx_migrationsourceid = convert(nvarchar(100), '0x' + placementid)
+--=========================================================
+from 
+	[TestProd_ED].dbo.[ctModel] m (nolock)
+	inner join [TestProd_ED].dbo.ctplacement p (nolock) on p.heme_model_id = m.ctmodel_id and p.heme_model_id is not null
+	inner join Stage_Lab l (nolock) on l.smx_migrationsourceid = convert(nvarchar(100), convert(bigint, p.Lab_Id))
+	left outer join crm_smx_manufacturer mfg (nolock) on mfg.smx_name = p.Heme_Manufacturer
+	left outer join crm_smx_model mdl (nolock) on mdl.smx_name = m.Model_Description
+	left outer join crm_stringmap sm (nolock) on sm.value = p.Mode_of_Acquisition_Heme</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Instrument Stage Table\Instrument Source Query.Connections[OleDbConnection]"
+                  connectionManagerID="{C5BC22F6-3A6D-40F0-9393-E9CD90B60BF6}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SysmexMigration_Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_instrumentid]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].ExternalColumns[smx_instrumentid]"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_instrumentid]"
+                      name="smx_instrumentid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].ExternalColumns[smx_name]"
+                      length="80"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_name]"
+                      name="smx_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_account]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].ExternalColumns[smx_account]"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_account]"
+                      name="smx_account"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_lab]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].ExternalColumns[smx_lab]"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_lab]"
+                      name="smx_lab"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[OwnerId]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].ExternalColumns[OwnerId]"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[OwnerId]"
+                      name="OwnerId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[owneridtype]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].ExternalColumns[owneridtype]"
+                      length="64"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[owneridtype]"
+                      name="owneridtype"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_metrixinstrument]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].ExternalColumns[smx_metrixinstrument]"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_metrixinstrument]"
+                      name="smx_metrixinstrument"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_productline]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].ExternalColumns[smx_productline]"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_productline]"
+                      name="smx_productline"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_manufacturer]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].ExternalColumns[smx_manufacturer]"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_manufacturer]"
+                      name="smx_manufacturer"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_model]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].ExternalColumns[smx_model]"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_model]"
+                      name="smx_model"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_frequencyofuse]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].ExternalColumns[smx_frequencyofuse]"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_frequencyofuse]"
+                      name="smx_frequencyofuse"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_modeofacquisition]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].ExternalColumns[smx_modeofacquisition]"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_modeofacquisition]"
+                      name="smx_modeofacquisition"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_yearofacquisition]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].ExternalColumns[smx_yearofacquisition]"
+                      length="15"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_yearofacquisition]"
+                      name="smx_yearofacquisition"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_migrationsourceid]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].ExternalColumns[smx_migrationsourceid]"
+                      length="100"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_migrationsourceid]"
+                      name="smx_migrationsourceid"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].ExternalColumns[smx_instrumentid]"
+                      dataType="guid"
+                      name="smx_instrumentid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].ExternalColumns[smx_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="80"
+                      name="smx_name" />
+                    <externalMetadataColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].ExternalColumns[smx_account]"
+                      dataType="guid"
+                      name="smx_account" />
+                    <externalMetadataColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].ExternalColumns[smx_lab]"
+                      dataType="guid"
+                      name="smx_lab" />
+                    <externalMetadataColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].ExternalColumns[OwnerId]"
+                      dataType="guid"
+                      name="OwnerId" />
+                    <externalMetadataColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].ExternalColumns[owneridtype]"
+                      dataType="wstr"
+                      length="64"
+                      name="owneridtype" />
+                    <externalMetadataColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].ExternalColumns[smx_metrixinstrument]"
+                      dataType="i4"
+                      name="smx_metrixinstrument" />
+                    <externalMetadataColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].ExternalColumns[smx_productline]"
+                      dataType="guid"
+                      name="smx_productline" />
+                    <externalMetadataColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].ExternalColumns[smx_manufacturer]"
+                      dataType="guid"
+                      name="smx_manufacturer" />
+                    <externalMetadataColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].ExternalColumns[smx_model]"
+                      dataType="guid"
+                      name="smx_model" />
+                    <externalMetadataColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].ExternalColumns[smx_frequencyofuse]"
+                      dataType="i4"
+                      name="smx_frequencyofuse" />
+                    <externalMetadataColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].ExternalColumns[smx_modeofacquisition]"
+                      dataType="i4"
+                      name="smx_modeofacquisition" />
+                    <externalMetadataColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].ExternalColumns[smx_yearofacquisition]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="smx_yearofacquisition" />
+                    <externalMetadataColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].ExternalColumns[smx_migrationsourceid]"
+                      dataType="wstr"
+                      length="100"
+                      name="smx_migrationsourceid" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[smx_instrumentid]"
+                      dataType="guid"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[smx_instrumentid]"
+                      name="smx_instrumentid" />
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[smx_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="80"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[smx_name]"
+                      name="smx_name" />
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[smx_account]"
+                      dataType="guid"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[smx_account]"
+                      name="smx_account" />
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[smx_lab]"
+                      dataType="guid"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[smx_lab]"
+                      name="smx_lab" />
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[OwnerId]"
+                      dataType="guid"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[OwnerId]"
+                      name="OwnerId" />
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[owneridtype]"
+                      dataType="wstr"
+                      length="64"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[owneridtype]"
+                      name="owneridtype" />
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[smx_metrixinstrument]"
+                      dataType="i4"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[smx_metrixinstrument]"
+                      name="smx_metrixinstrument" />
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[smx_productline]"
+                      dataType="guid"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[smx_productline]"
+                      name="smx_productline" />
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[smx_manufacturer]"
+                      dataType="guid"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[smx_manufacturer]"
+                      name="smx_manufacturer" />
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[smx_model]"
+                      dataType="guid"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[smx_model]"
+                      name="smx_model" />
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[smx_frequencyofuse]"
+                      dataType="i4"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[smx_frequencyofuse]"
+                      name="smx_frequencyofuse" />
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[smx_migrationsourceid]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[smx_migrationsourceid]"
+                      name="smx_migrationsourceid" />
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[smx_modeofacquisition]"
+                      dataType="i4"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[smx_modeofacquisition]"
+                      name="smx_modeofacquisition" />
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[smx_yearofacquisition]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Error Output].Columns[smx_yearofacquisition]"
+                      name="smx_yearofacquisition" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Instrument Stage Table\Stage_Instrument"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Stage_Instrument"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Stage_Instrument]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Instrument Stage Table\Stage_Instrument.Connections[OleDbConnection]"
+                  connectionManagerID="{C5BC22F6-3A6D-40F0-9393-E9CD90B60BF6}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SysmexMigration_Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].Columns[smx_instrumentid]"
+                      cachedDataType="guid"
+                      cachedName="smx_instrumentid"
+                      externalMetadataColumnId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].ExternalColumns[smx_instrumentid]"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_instrumentid]" />
+                    <inputColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].Columns[smx_name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="80"
+                      cachedName="smx_name"
+                      externalMetadataColumnId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].ExternalColumns[smx_name]"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_name]" />
+                    <inputColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].Columns[smx_account]"
+                      cachedDataType="guid"
+                      cachedName="smx_account"
+                      externalMetadataColumnId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].ExternalColumns[smx_account]"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_account]" />
+                    <inputColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].Columns[smx_lab]"
+                      cachedDataType="guid"
+                      cachedName="smx_lab"
+                      externalMetadataColumnId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].ExternalColumns[smx_lab]"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_lab]" />
+                    <inputColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].Columns[OwnerId]"
+                      cachedDataType="guid"
+                      cachedName="OwnerId"
+                      externalMetadataColumnId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].ExternalColumns[OwnerId]"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[OwnerId]" />
+                    <inputColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].Columns[owneridtype]"
+                      cachedDataType="wstr"
+                      cachedLength="64"
+                      cachedName="owneridtype"
+                      externalMetadataColumnId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].ExternalColumns[owneridtype]"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[owneridtype]" />
+                    <inputColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].Columns[smx_metrixinstrument]"
+                      cachedDataType="i4"
+                      cachedName="smx_metrixinstrument"
+                      externalMetadataColumnId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].ExternalColumns[smx_metrixinstrument]"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_metrixinstrument]" />
+                    <inputColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].Columns[smx_productline]"
+                      cachedDataType="guid"
+                      cachedName="smx_productline"
+                      externalMetadataColumnId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].ExternalColumns[smx_productline]"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_productline]" />
+                    <inputColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].Columns[smx_manufacturer]"
+                      cachedDataType="guid"
+                      cachedName="smx_manufacturer"
+                      externalMetadataColumnId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].ExternalColumns[smx_manufacturer]"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_manufacturer]" />
+                    <inputColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].Columns[smx_model]"
+                      cachedDataType="guid"
+                      cachedName="smx_model"
+                      externalMetadataColumnId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].ExternalColumns[smx_model]"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_model]" />
+                    <inputColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].Columns[smx_frequencyofuse]"
+                      cachedDataType="i4"
+                      cachedName="smx_frequencyofuse"
+                      externalMetadataColumnId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].ExternalColumns[smx_frequencyofuse]"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_frequencyofuse]" />
+                    <inputColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].Columns[smx_modeofacquisition]"
+                      cachedDataType="i4"
+                      cachedName="smx_modeofacquisition"
+                      externalMetadataColumnId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].ExternalColumns[smx_modeofacquisition]"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_modeofacquisition]" />
+                    <inputColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].Columns[smx_yearofacquisition]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="15"
+                      cachedName="smx_yearofacquisition"
+                      externalMetadataColumnId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].ExternalColumns[smx_yearofacquisition]"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_yearofacquisition]" />
+                    <inputColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].Columns[smx_migrationsourceid]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="smx_migrationsourceid"
+                      externalMetadataColumnId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].ExternalColumns[smx_MigrationSourceId]"
+                      lineageId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output].Columns[smx_migrationsourceid]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].ExternalColumns[smx_instrumentid]"
+                      dataType="guid"
+                      name="smx_instrumentid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].ExternalColumns[smx_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="80"
+                      name="smx_name" />
+                    <externalMetadataColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].ExternalColumns[smx_account]"
+                      dataType="guid"
+                      name="smx_account" />
+                    <externalMetadataColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].ExternalColumns[smx_lab]"
+                      dataType="guid"
+                      name="smx_lab" />
+                    <externalMetadataColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].ExternalColumns[OwnerId]"
+                      dataType="guid"
+                      name="OwnerId" />
+                    <externalMetadataColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].ExternalColumns[owneridtype]"
+                      dataType="wstr"
+                      length="64"
+                      name="owneridtype" />
+                    <externalMetadataColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].ExternalColumns[smx_metrixinstrument]"
+                      dataType="i4"
+                      name="smx_metrixinstrument" />
+                    <externalMetadataColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].ExternalColumns[smx_productline]"
+                      dataType="guid"
+                      name="smx_productline" />
+                    <externalMetadataColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].ExternalColumns[smx_manufacturer]"
+                      dataType="guid"
+                      name="smx_manufacturer" />
+                    <externalMetadataColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].ExternalColumns[smx_model]"
+                      dataType="guid"
+                      name="smx_model" />
+                    <externalMetadataColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].ExternalColumns[smx_frequencyofuse]"
+                      dataType="i4"
+                      name="smx_frequencyofuse" />
+                    <externalMetadataColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].ExternalColumns[smx_modeofacquisition]"
+                      dataType="i4"
+                      name="smx_modeofacquisition" />
+                    <externalMetadataColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].ExternalColumns[smx_yearofacquisition]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="smx_yearofacquisition" />
+                    <externalMetadataColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].ExternalColumns[smx_MigrationSourceId]"
+                      dataType="wstr"
+                      length="100"
+                      name="smx_MigrationSourceId" />
+                    <externalMetadataColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input].ExternalColumns[isnew]"
+                      dataType="ui1"
+                      name="isnew" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Instrument Stage Table\Stage_Instrument.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Instrument Stage Table\Stage_Instrument.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Instrument Stage Table\Stage_Instrument.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Instrument Stage Table\Stage_Instrument.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load Instrument Stage Table.Paths[OLE DB Source Output]"
+              endId="Package\Load Instrument Stage Table\Stage_Instrument.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load Instrument Stage Table\Instrument Source Query.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="216,42"
+          Id="Package\Load Instrument Stage Table"
+          TopLeft="74,129" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load Instrument Stage Table">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="198,42"
+          Id="Package\Load Instrument Stage Table\Instrument Source Query"
+          TopLeft="55,32" />
+        <NodeLayout
+          Size="164,42"
+          Id="Package\Load Instrument Stage Table\Stage_Instrument"
+          TopLeft="64,153" />
+        <EdgeLayout
+          Id="Package\Load Instrument Stage Table.Paths[OLE DB Source Output]"
+          TopLeft="154,74">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-8,79"
+              Start="0,0"
+              End="-8,71.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,35.5"
+                    Point2="0,39.5"
+                    Point3="-4,39.5" />
+                  <mssgle:LineSegment
+                    End="-4,39.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-4,39.5"
+                    Point2="-8,39.5"
+                    Point3="-8,43.5" />
+                  <mssgle:LineSegment
+                    End="-8,71.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Instrument Stage Table\Instrument Source Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Instrument Stage Table\Stage_Instrument">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

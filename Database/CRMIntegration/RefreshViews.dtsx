@@ -1,0 +1,1314 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/29/2017 4:41:27 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="SCRIBEDEV"
+  DTS:CreatorName="SONOMAPARTNERS\rjasinski"
+  DTS:DTSID="{8A79F0B6-5FCE-4A90-85F3-61B8E8CF8CBB}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.6020.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="RefreshViews"
+  DTS:PackageType="5"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{EE4E33C1-A3FB-4139-9209-D43711DAA021}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Metric]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{152314AE-D705-48F9-8101-CA75A82F9896}"
+      DTS:ObjectName="Metric">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=dsql08r202.dev.sonomapartners.local;Initial Catalog=Metrix_M5_Pub;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-RefreshViews-{152314AE-D705-48F9-8101-CA75A82F9896}dsql08r202.dev.sonomapartners.local.Metrix_M5_Pub;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MetricSynch]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{C47FEAE4-5FE9-46A8-8644-C0DD6C6089DE}"
+      DTS:ObjectName="MetricSynch">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=172.25.22.215;User ID=JasinskiR;Initial Catalog=Metrix_M5_Pub;Provider=SQLNCLI11;Persist Security Info=True;Application Name=SSIS-RefreshViews-{C47FEAE4-5FE9-46A8-8644-C0DD6C6089DE}172.25.22.215.Metrix_M5_Pub.JasinskiR;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MSCRM]"
+      DTS:CreationName="DynamicsCRM"
+      DTS:DTSID="{349A53E3-D344-4A04-829A-10ED961C3E80}"
+      DTS:ObjectName="MSCRM">
+      <DTS:ObjectData>
+        <CrmConnectionManager
+          ConnectionString="AuthenticationType=OnlineFederation;ServiceEndpoint=Soap2011;DiscoveryServerUrl=https://disco.crm.dynamics.com;UserName=anargyrosa@sysmex.com;Domain=;OrganizationName=&quot;Sysmex Dev&quot;;CrmServerUrl=https://sysmexdev.api.crm.dynamics.com;ProxyUsername=;ProxyMode=NoProxy;ProxyServer=;ProxyServerPort=0;BypassProxyOnLocal=False;HomeRealmUri=;ApiVersion=;ServiceTimeout=120;RetryOnIntermittentErrors=True;IgnoreCertificateErrors=False">
+          <Password
+            Sensitive="1" xmlns="www.microsoft.com/SqlServer/Dts"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAJ6qz1IM2f0GwQMMrbjOS1wAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADwPItZ4rJgjRJmN/t3TFERAAAAAASAAACgAAAAEAAAAGLElvtYCMB/jZDBP0ZmUKUoAAAA0sdl852Z7eEQRaa4IrxANMOw+EZ6h8tfcB6gpdFE3Oxl6uz5y3mMChQAAAC0y1iCVrybHBVJEILQTdoJuUZNuw</Password>
+        </CrmConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Staging]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{A7CB53E7-BCA4-4B07-AF11-91AA30A2DC02}"
+      DTS:ObjectName="Staging">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DSQL12R201.dev.sonomapartners.local;Initial Catalog=SysmexStaging;Provider=SQLNCLI11;Integrated Security=SSPI;Application Name=SSIS-RefreshViews-{A7CB53E7-BCA4-4B07-AF11-91AA30A2DC02}DSQL12R201.dev.sonomapartners.local.SysmexStaging;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Clear Tables"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{84DA55A0-0ACE-4BB3-A27D-0690F554D1EE}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Clear Tables"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{152314AE-D705-48F9-8101-CA75A82F9896}"
+          SQLTask:SqlStatementSource="truncate table Z_DYNAMICS_METRIX_INSTRUMENTS;&#xA;truncate table Z_DYNAMICS_METRIX_SERVICE_REQUESTS;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Instruments"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{32E58931-2C17-4EDC-A542-9B406ABC18CD}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Instruments"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\Instruments\OLE DB Destination"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Z_DYNAMICS_METRIX_INSTRUMENTS]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Instruments\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Metric]"
+                  connectionManagerRefId="Package.ConnectionManagers[Metric]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SAP_ID]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="SAP_ID"
+                      externalMetadataColumnId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SAP_ID]"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[SAP_ID]" />
+                    <inputColumn
+                      refId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[name]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="name"
+                      externalMetadataColumnId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]" />
+                    <inputColumn
+                      refId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[product_family]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="product_family"
+                      externalMetadataColumnId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product_family]"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[product_family]" />
+                    <inputColumn
+                      refId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[product_id]"
+                      cachedDataType="wstr"
+                      cachedLength="32"
+                      cachedName="product_id"
+                      externalMetadataColumnId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product_id]"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[product_id]" />
+                    <inputColumn
+                      refId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[model_id]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="model_id"
+                      externalMetadataColumnId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[model_id]"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[model_id]" />
+                    <inputColumn
+                      refId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[serial_id]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="serial_id"
+                      externalMetadataColumnId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[serial_id]"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[serial_id]" />
+                    <inputColumn
+                      refId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Status]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="Status"
+                      externalMetadataColumnId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Status]"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[Status]" />
+                    <inputColumn
+                      refId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SNCS_Status]"
+                      cachedDataType="wstr"
+                      cachedLength="256"
+                      cachedName="SNCS_Status"
+                      externalMetadataColumnId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SNCS_Status]"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[SNCS_Status]" />
+                    <inputColumn
+                      refId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Yr_Created]"
+                      cachedDataType="i4"
+                      cachedName="Yr_Created"
+                      externalMetadataColumnId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Yr_Created]"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[Yr_Created]" />
+                    <inputColumn
+                      refId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[modified_dttm]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="modified_dttm"
+                      externalMetadataColumnId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[modified_dttm]"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[modified_dttm]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SAP_ID]"
+                      dataType="wstr"
+                      length="128"
+                      name="SAP_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                      dataType="wstr"
+                      length="128"
+                      name="name" />
+                    <externalMetadataColumn
+                      refId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product_family]"
+                      dataType="wstr"
+                      length="128"
+                      name="product_family" />
+                    <externalMetadataColumn
+                      refId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product_id]"
+                      dataType="wstr"
+                      length="32"
+                      name="product_id" />
+                    <externalMetadataColumn
+                      refId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[model_id]"
+                      dataType="wstr"
+                      length="128"
+                      name="model_id" />
+                    <externalMetadataColumn
+                      refId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[serial_id]"
+                      dataType="wstr"
+                      length="128"
+                      name="serial_id" />
+                    <externalMetadataColumn
+                      refId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Status]"
+                      dataType="wstr"
+                      length="128"
+                      name="Status" />
+                    <externalMetadataColumn
+                      refId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SNCS_Status]"
+                      dataType="wstr"
+                      length="256"
+                      name="SNCS_Status" />
+                    <externalMetadataColumn
+                      refId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Yr_Created]"
+                      dataType="i4"
+                      name="Yr_Created" />
+                    <externalMetadataColumn
+                      refId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[modified_dttm]"
+                      dataType="dbTimeStamp"
+                      name="modified_dttm" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Instruments\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Instruments\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Instruments\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Instruments\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Instruments\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Instruments\OLE DB Source"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Z_DYNAMICS_METRIX_INSTRUMENTS]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Instruments\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MetricSynch]"
+                  connectionManagerRefId="Package.ConnectionManagers[MetricSynch]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[SAP_ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SAP_ID]"
+                      length="128"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[SAP_ID]"
+                      name="SAP_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                      length="128"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]"
+                      name="name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[product_family]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[product_family]"
+                      length="128"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[product_family]"
+                      name="product_family"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[product_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[product_id]"
+                      length="32"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[product_id]"
+                      name="product_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[model_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[model_id]"
+                      length="128"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[model_id]"
+                      name="model_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[serial_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[serial_id]"
+                      length="128"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[serial_id]"
+                      name="serial_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[Status]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Status]"
+                      length="128"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[Status]"
+                      name="Status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[SNCS_Status]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SNCS_Status]"
+                      length="256"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[SNCS_Status]"
+                      name="SNCS_Status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[Yr_Created]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Yr_Created]"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[Yr_Created]"
+                      name="Yr_Created"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[modified_dttm]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[modified_dttm]"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].Columns[modified_dttm]"
+                      name="modified_dttm"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SAP_ID]"
+                      dataType="wstr"
+                      length="128"
+                      name="SAP_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                      dataType="wstr"
+                      length="128"
+                      name="name" />
+                    <externalMetadataColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[product_family]"
+                      dataType="wstr"
+                      length="128"
+                      name="product_family" />
+                    <externalMetadataColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[product_id]"
+                      dataType="wstr"
+                      length="32"
+                      name="product_id" />
+                    <externalMetadataColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[model_id]"
+                      dataType="wstr"
+                      length="128"
+                      name="model_id" />
+                    <externalMetadataColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[serial_id]"
+                      dataType="wstr"
+                      length="128"
+                      name="serial_id" />
+                    <externalMetadataColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Status]"
+                      dataType="wstr"
+                      length="128"
+                      name="Status" />
+                    <externalMetadataColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SNCS_Status]"
+                      dataType="wstr"
+                      length="256"
+                      name="SNCS_Status" />
+                    <externalMetadataColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Yr_Created]"
+                      dataType="i4"
+                      name="Yr_Created" />
+                    <externalMetadataColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[modified_dttm]"
+                      dataType="dbTimeStamp"
+                      name="modified_dttm" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SAP_ID]"
+                      dataType="wstr"
+                      length="128"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SAP_ID]"
+                      name="SAP_ID" />
+                    <outputColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[name]"
+                      dataType="wstr"
+                      length="128"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[name]"
+                      name="name" />
+                    <outputColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[product_family]"
+                      dataType="wstr"
+                      length="128"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[product_family]"
+                      name="product_family" />
+                    <outputColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[product_id]"
+                      dataType="wstr"
+                      length="32"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[product_id]"
+                      name="product_id" />
+                    <outputColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[model_id]"
+                      dataType="wstr"
+                      length="128"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[model_id]"
+                      name="model_id" />
+                    <outputColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[serial_id]"
+                      dataType="wstr"
+                      length="128"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[serial_id]"
+                      name="serial_id" />
+                    <outputColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Status]"
+                      dataType="wstr"
+                      length="128"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Status]"
+                      name="Status" />
+                    <outputColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SNCS_Status]"
+                      dataType="wstr"
+                      length="256"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SNCS_Status]"
+                      name="SNCS_Status" />
+                    <outputColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Yr_Created]"
+                      dataType="i4"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Yr_Created]"
+                      name="Yr_Created" />
+                    <outputColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[modified_dttm]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[modified_dttm]"
+                      name="modified_dttm" />
+                    <outputColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Instruments.Paths[OLE DB Source Output]"
+              endId="Package\Instruments\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Instruments\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Service Requests"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{3877B47C-1433-4F59-AE24-FAA4360D8402}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Service Requests"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\Service Requests\OLE DB Destination"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Z_DYNAMICS_METRIX_SERVICE_REQUESTS]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Service Requests\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Metric]"
+                  connectionManagerRefId="Package.ConnectionManagers[Metric]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[request_id]"
+                      cachedDataType="wstr"
+                      cachedLength="32"
+                      cachedName="request_id"
+                      externalMetadataColumnId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[request_id]"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[request_id]" />
+                    <inputColumn
+                      refId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[req_type]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="req_type"
+                      externalMetadataColumnId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[req_type]"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[req_type]" />
+                    <inputColumn
+                      refId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[cust_prob_descr]"
+                      cachedDataType="nText"
+                      cachedName="cust_prob_descr"
+                      externalMetadataColumnId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[cust_prob_descr]"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[cust_prob_descr]" />
+                    <inputColumn
+                      refId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[req_status]"
+                      cachedDataType="wstr"
+                      cachedLength="32"
+                      cachedName="req_status"
+                      externalMetadataColumnId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[req_status]"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[req_status]" />
+                    <inputColumn
+                      refId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[created_dttm]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="created_dttm"
+                      externalMetadataColumnId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[created_dttm]"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[created_dttm]" />
+                    <inputColumn
+                      refId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[product_id]"
+                      cachedDataType="wstr"
+                      cachedLength="32"
+                      cachedName="product_id"
+                      externalMetadataColumnId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product_id]"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[product_id]" />
+                    <inputColumn
+                      refId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[product_family]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="product_family"
+                      externalMetadataColumnId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product_family]"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[product_family]" />
+                    <inputColumn
+                      refId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[model_id]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="model_id"
+                      externalMetadataColumnId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[model_id]"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[model_id]" />
+                    <inputColumn
+                      refId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[serial_id]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="serial_id"
+                      externalMetadataColumnId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[serial_id]"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[serial_id]" />
+                    <inputColumn
+                      refId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SAP ID]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="SAP ID"
+                      externalMetadataColumnId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SAP ID]"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[SAP ID]" />
+                    <inputColumn
+                      refId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Months]"
+                      cachedDataType="i4"
+                      cachedName="Months"
+                      externalMetadataColumnId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Months]"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[Months]" />
+                    <inputColumn
+                      refId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[modified_dttm]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="modified_dttm"
+                      externalMetadataColumnId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[modified_dttm]"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[modified_dttm]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[request_id]"
+                      dataType="wstr"
+                      length="32"
+                      name="request_id" />
+                    <externalMetadataColumn
+                      refId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[req_type]"
+                      dataType="wstr"
+                      length="128"
+                      name="req_type" />
+                    <externalMetadataColumn
+                      refId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[cust_prob_descr]"
+                      dataType="nText"
+                      name="cust_prob_descr" />
+                    <externalMetadataColumn
+                      refId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[req_status]"
+                      dataType="wstr"
+                      length="32"
+                      name="req_status" />
+                    <externalMetadataColumn
+                      refId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[created_dttm]"
+                      dataType="dbTimeStamp"
+                      name="created_dttm" />
+                    <externalMetadataColumn
+                      refId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product_id]"
+                      dataType="wstr"
+                      length="32"
+                      name="product_id" />
+                    <externalMetadataColumn
+                      refId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product_family]"
+                      dataType="wstr"
+                      length="128"
+                      name="product_family" />
+                    <externalMetadataColumn
+                      refId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[model_id]"
+                      dataType="wstr"
+                      length="128"
+                      name="model_id" />
+                    <externalMetadataColumn
+                      refId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[serial_id]"
+                      dataType="wstr"
+                      length="128"
+                      name="serial_id" />
+                    <externalMetadataColumn
+                      refId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SAP ID]"
+                      dataType="wstr"
+                      length="128"
+                      name="SAP ID" />
+                    <externalMetadataColumn
+                      refId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Months]"
+                      dataType="i4"
+                      name="Months" />
+                    <externalMetadataColumn
+                      refId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[modified_dttm]"
+                      dataType="dbTimeStamp"
+                      name="modified_dttm" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Service Requests\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Service Requests\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Service Requests\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Service Requests\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Service Requests\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Service Requests\OLE DB Source"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Z_DYNAMICS_METRIX_SERVICE_REQUESTS]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Service Requests\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MetricSynch]"
+                  connectionManagerRefId="Package.ConnectionManagers[MetricSynch]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[request_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[request_id]"
+                      length="32"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[request_id]"
+                      name="request_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[req_type]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[req_type]"
+                      length="128"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[req_type]"
+                      name="req_type"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[cust_prob_descr]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[cust_prob_descr]"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[cust_prob_descr]"
+                      name="cust_prob_descr"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[req_status]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[req_status]"
+                      length="32"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[req_status]"
+                      name="req_status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[created_dttm]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[created_dttm]"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[created_dttm]"
+                      name="created_dttm"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[product_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[product_id]"
+                      length="32"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[product_id]"
+                      name="product_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[product_family]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[product_family]"
+                      length="128"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[product_family]"
+                      name="product_family"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[model_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[model_id]"
+                      length="128"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[model_id]"
+                      name="model_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[serial_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[serial_id]"
+                      length="128"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[serial_id]"
+                      name="serial_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[SAP ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SAP ID]"
+                      length="128"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[SAP ID]"
+                      name="SAP ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[Months]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Months]"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[Months]"
+                      name="Months"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[modified_dttm]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[modified_dttm]"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].Columns[modified_dttm]"
+                      name="modified_dttm"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[request_id]"
+                      dataType="wstr"
+                      length="32"
+                      name="request_id" />
+                    <externalMetadataColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[req_type]"
+                      dataType="wstr"
+                      length="128"
+                      name="req_type" />
+                    <externalMetadataColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[cust_prob_descr]"
+                      dataType="nText"
+                      name="cust_prob_descr" />
+                    <externalMetadataColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[req_status]"
+                      dataType="wstr"
+                      length="32"
+                      name="req_status" />
+                    <externalMetadataColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[created_dttm]"
+                      dataType="dbTimeStamp"
+                      name="created_dttm" />
+                    <externalMetadataColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[product_id]"
+                      dataType="wstr"
+                      length="32"
+                      name="product_id" />
+                    <externalMetadataColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[product_family]"
+                      dataType="wstr"
+                      length="128"
+                      name="product_family" />
+                    <externalMetadataColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[model_id]"
+                      dataType="wstr"
+                      length="128"
+                      name="model_id" />
+                    <externalMetadataColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[serial_id]"
+                      dataType="wstr"
+                      length="128"
+                      name="serial_id" />
+                    <externalMetadataColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SAP ID]"
+                      dataType="wstr"
+                      length="128"
+                      name="SAP ID" />
+                    <externalMetadataColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Months]"
+                      dataType="i4"
+                      name="Months" />
+                    <externalMetadataColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[modified_dttm]"
+                      dataType="dbTimeStamp"
+                      name="modified_dttm" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[request_id]"
+                      dataType="wstr"
+                      length="32"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[request_id]"
+                      name="request_id" />
+                    <outputColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[req_type]"
+                      dataType="wstr"
+                      length="128"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[req_type]"
+                      name="req_type" />
+                    <outputColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[cust_prob_descr]"
+                      dataType="nText"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[cust_prob_descr]"
+                      name="cust_prob_descr" />
+                    <outputColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[req_status]"
+                      dataType="wstr"
+                      length="32"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[req_status]"
+                      name="req_status" />
+                    <outputColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[created_dttm]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[created_dttm]"
+                      name="created_dttm" />
+                    <outputColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[product_id]"
+                      dataType="wstr"
+                      length="32"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[product_id]"
+                      name="product_id" />
+                    <outputColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[product_family]"
+                      dataType="wstr"
+                      length="128"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[product_family]"
+                      name="product_family" />
+                    <outputColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[model_id]"
+                      dataType="wstr"
+                      length="128"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[model_id]"
+                      name="model_id" />
+                    <outputColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[serial_id]"
+                      dataType="wstr"
+                      length="128"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[serial_id]"
+                      name="serial_id" />
+                    <outputColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SAP ID]"
+                      dataType="wstr"
+                      length="128"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SAP ID]"
+                      name="SAP ID" />
+                    <outputColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Months]"
+                      dataType="i4"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Months]"
+                      name="Months" />
+                    <outputColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[modified_dttm]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[modified_dttm]"
+                      name="modified_dttm" />
+                    <outputColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Service Requests.Paths[OLE DB Source Output]"
+              endId="Package\Service Requests\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Service Requests\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{B7C772E8-C192-4B2A-9E51-C9E08418552B}"
+      DTS:From="Package\Instruments"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Service Requests" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{10FE0CBF-D5DF-4070-9859-920EF3365DA2}"
+      DTS:From="Package\Clear Tables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Instruments" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Clear Tables"
+          TopLeft="5.5754716981132,5.5" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Instruments"
+          TopLeft="5.53773584905662,94.1792452830189" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Service Requests"
+          TopLeft="5.5,197.990566037736" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="73.4245283018868,138.103773584906">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-0.0377358490565598,59.8867924528302"
+              Start="0,0"
+              End="-0.0377358490565598,52.3867924528302">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.9245283018868" />
+                  <mssgle:LineSegment
+                    End="-0.0377358490565598,29.9245283018868" />
+                  <mssgle:LineSegment
+                    End="-0.0377358490565598,52.3867924528302" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="73.4622641509434,49.4245283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-0.0377358490566166,44.7547169811321"
+              Start="0,0"
+              End="-0.0377358490566166,37.2547169811321">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.377358490566" />
+                  <mssgle:LineSegment
+                    End="-0.0377358490566166,22.377358490566" />
+                  <mssgle:LineSegment
+                    End="-0.0377358490566166,37.2547169811321" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

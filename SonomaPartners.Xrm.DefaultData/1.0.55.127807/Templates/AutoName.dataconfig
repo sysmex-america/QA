@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ImportConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Entity Name="sonoma_autoname">
+    <Attribute>sonoma_autonameid</Attribute>
+    <Attribute>sonoma_entitylogicalname</Attribute>
+    <Attribute>sonoma_field1</Attribute>
+    <Attribute>sonoma_field2</Attribute>
+    <Attribute>sonoma_field3</Attribute>
+    <Attribute>sonoma_fieldlogicalname</Attribute>
+    <Attribute>sonoma_name</Attribute>
+    <Attribute>sonoma_patternformat</Attribute>
+  </Entity>
+</ImportConfiguration>

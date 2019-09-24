@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Root>
+  <Profiles>
+    <Profile Name="GoodwinDev Export" Id="025ea0bb-9395-4fb8-9c7b-417666420071">
+      <ConnectionString>Url=https://goodwindev.api.crm.dynamics.com/XRMServices/2011/Organization.svc;Username=aanargyros@goodwinprocterllp.onmicrosoft.com;Password=Sonomap2!</ConnectionString>
+      <ConfigFilePath>C:\workspace\Goodwin\DynamicsSource\DefaultData\DefaultDataConfig.dataconfig</ConfigFilePath>
+      <DataFilePath>C:\workspace\Goodwin\DynamicsSource\DefaultData\DefaultData.data</DataFilePath>
+      <UseRandomData>false</UseRandomData>
+      <DoNotRun>false</DoNotRun>
+    </Profile>
+    <Profile Name="GoodwinQA Import" Id="8c24fabf-a37a-418f-b884-c360e5a6e161">
+      <ConnectionString>Url=https://goodwinqa.api.crm.dynamics.com/XRMServices/2011/Organization.svc;Username=aanargyros@goodwinprocterllp.onmicrosoft.com;Password=Sonomap2!</ConnectionString>
+      <DataFilePath>C:\workspace\Goodwin\DynamicsSource\DefaultData\DefaultData.data</DataFilePath>
+      <UseRandomData>false</UseRandomData>
+      <DoNotRun>false</DoNotRun>
+    </Profile>
+    <Profile Name="Goodwin UAT Import" Id="bb766ae1-cc44-4191-a785-ae7cb914db6d">
+      <ConnectionString>Url=https://goodwinuat.api.crm.dynamics.com/XRMServices/2011/Organization.svc;Username=aanargyros@goodwinprocterllp.onmicrosoft.com;Password=Sonomap2!</ConnectionString>
+      <DataFilePath>C:\workspace\Goodwin\DynamicsSource\DefaultData\DefaultData.data</DataFilePath>
+      <UseRandomData>false</UseRandomData>
+      <DoNotRun>false</DoNotRun>
+    </Profile>
+    <Profile Name="Sysmex Dev" Id="262c2cda-420f-4228-a2fe-d72acb76f79e">
+      <ConnectionString>Url=https://sysmexdev.api.crm.dynamics.com/XRMServices/2011/Organization.svc;Username=anargyrosa@sysmex.com;Password=Nongovernment67</ConnectionString>
+      <ConfigFilePath>C:\workspace\Sysmex\SourceCode\SonomaPartners.Xrm.DefaultData\dynamicsforms.dataconfig</ConfigFilePath>
+      <DataFilePath>C:\workspace\Sysmex\SourceCode\SonomaPartners.Xrm.DefaultData\SeedData_v2.data</DataFilePath>
+      <UseRandomData>false</UseRandomData>
+      <DoNotRun>false</DoNotRun>
+    </Profile>
+    <Profile Name="Sysmex Prod" Id="ce896417-bf1b-42c6-82bf-d2b190f16b55">
+      <ConnectionString>Url=https://sysmexamericas.api.crm.dynamics.com/XRMServices/2011/Organization.svc;Username=anargyrosa@sysmex.com;Password=Nongovernment67</ConnectionString>
+      <UseRandomData>false</UseRandomData>
+      <DoNotRun>false</DoNotRun>
+    </Profile>
+    <Profile Name="Sysmex Dev Export State Country" Id="484829cf-fe7b-41e5-9877-27dfa22c9521">
+      <ConnectionString>Url=https://sysmexdev.api.crm.dynamics.com/XRMServices/2011/Organization.svc;Username=anargyrosa@sysmex.com;Password=Nongovernment67</ConnectionString>
+      <ConfigFilePath>C:\workspace\Sysmex\SourceCode\SonomaPartners.Xrm.DefaultData\state.country.dataconfig</ConfigFilePath>
+      <DataFilePath>C:\workspace\Sysmex\SourceCode\SonomaPartners.Xrm.DefaultData\state.country.data</DataFilePath>
+      <UseRandomData>false</UseRandomData>
+      <DoNotRun>false</DoNotRun>
+    </Profile>
+    <Profile Name="Import QA State Country" Id="a297a9b3-b286-4a2d-b4d7-0bad8852133c">
+      <ConnectionString>Url=https://sysmexcpqqa.api.crm.dynamics.com/XRMServices/2011/Organization.svc;Username=anargyrosa@sysmex.com;Password=Nongovernment67</ConnectionString>
+      <DataFilePath>C:\workspace\Sysmex\SourceCode\SonomaPartners.Xrm.DefaultData\state.country.data</DataFilePath>
+      <UseRandomData>false</UseRandomData>
+      <DoNotRun>false</DoNotRun>
+    </Profile>
+  </Profiles>
+</Root>

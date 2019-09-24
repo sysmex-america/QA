@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ImportConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Entity Name="sonoma_autonumber">
+    <Attribute>sonoma_autonumberid</Attribute>
+    <Attribute>sonoma_entity</Attribute>
+    <Attribute>sonoma_entity_field</Attribute>
+    <Attribute>sonoma_formatstring</Attribute>
+    <Attribute>sonoma_isnumeric</Attribute>
+    <Attribute>sonoma_maxlength</Attribute>
+    <Attribute>sonoma_name</Attribute>
+    <Attribute>sonoma_number</Attribute>
+    <Attribute>sonoma_prefix</Attribute>
+    <Attribute>sonoma_updating</Attribute>
+  </Entity>
+  <Entity Name="businessunit">
+    <Attribute>businessunitid</Attribute>
+    <Attribute>description</Attribute>
+    <Attribute>name</Attribute>
+    <Attribute>parentbusinessunitid</Attribute>
+  </Entity>
+  <Entity Name="duplicaterule">
+    <Attribute>duplicateruleid</Attribute>
+    <Attribute>baseentityname</Attribute>
+    <Attribute>description</Attribute>
+    <Attribute>iscasesensitive</Attribute>
+    <Attribute>matchingentityname</Attribute>
+    <Attribute>name</Attribute>
+    <Attribute>excludeinactiverecords</Attribute>
+  </Entity>
+  <Entity Name="duplicaterulecondition">
+    <Attribute>baseattributename</Attribute>
+    <Attribute>duplicateruleconditionid</Attribute>
+    <Attribute>ignoreblankvalues</Attribute>
+    <Attribute>matchingattributename</Attribute>
+    <Attribute>operatorcode</Attribute>
+    <Attribute>operatorparam</Attribute>
+    <Attribute>regardingobjectid</Attribute>
+  </Entity>
+  <Entity Name="sonoma_formsetting">
+    <Attribute>sonoma_name</Attribute>
+    <Attribute>sonoma_formsettingid</Attribute>
+  </Entity>
+  <Entity Name="sonoma_formrule">
+    <Attribute>sonoma_formruleid</Attribute>
+    <Attribute>sonoma_name</Attribute>
+    <Attribute>sonoma_formsettingid</Attribute>
+  </Entity>
+  <Entity Name="sonoma_formconditiongroup">
+    <Attribute>sonoma_formconditiongroupid</Attribute>
+    <Attribute>sonoma_formruleid</Attribute>
+    <Attribute>sonoma_name</Attribute>
+  </Entity>
+  <Entity Name="sonoma_formcondition">
+    <Attribute>sonoma_formconditionid</Attribute>
+    <Attribute>sonoma_formconditiongroupid</Attribute>
+    <Attribute>sonoma_formruleid</Attribute>
+    <Attribute>sonoma_name</Attribute>
+    <Attribute>sonoma_uidata</Attribute>
+    <Attribute>sonoma_valuedata</Attribute>
+  </Entity>
+  <Entity Name="sonoma_formaction">
+    <Attribute>sonoma_formactionid</Attribute>
+    <Attribute>sonoma_formruleid</Attribute>
+    <Attribute>sonoma_name</Attribute>
+    <Attribute>sonoma_uidata</Attribute>
+    <Attribute>sonoma_valuedata</Attribute>
+  </Entity>
+</ImportConfiguration>

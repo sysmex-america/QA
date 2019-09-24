@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ImportConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Entity Name="smx_state">
+    <Attribute>smx_country</Attribute>
+    <Attribute>smx_name</Attribute>
+    <Attribute>smx_region</Attribute>
+    <Attribute>smx_statecountrycombo</Attribute>
+    <Attribute>smx_stateid</Attribute>
+  </Entity>
+  <Entity Name="smx_country">
+    <Attribute>smx_countrycode</Attribute>
+    <Attribute>smx_countryid</Attribute>
+    <Attribute>smx_name</Attribute>
+  </Entity>
+</ImportConfiguration>

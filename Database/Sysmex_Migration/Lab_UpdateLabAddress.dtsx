@@ -1,0 +1,2063 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/29/2018 6:01:33 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="REBERNAK"
+  DTS:CreatorName="SONOMAPARTNERS\RRebernak"
+  DTS:DTSID="{E1FE7FE9-2315-4EA3-82F9-0D5A9046092D}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3002.101"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Lab_UpdateLabAddress"
+  DTS:PackageType="5"
+  DTS:VersionBuild="18"
+  DTS:VersionGUID="{4B95D181-F2A0-42A8-BB5D-E6457D4F9E29}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{21A34940-008B-4096-AA8E-5E91B4B938EB}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ErrorCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{CCB28B9B-4D4E-468E-9235-CBDD8534488B}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="InsertCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{48AF21D6-C008-4266-9AC2-750D4D08E535}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="LoadDate">
+      <DTS:VariableValue
+        DTS:DataType="7">1/29/2018 6:33:02 PM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D5AE00F5-3C2A-4CEB-B60D-78852D336AA8}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="PackageRunId">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5AF1D3B5-7793-4CFD-9DD9-CD8FE7A3EB8B}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\2nd Pass - Update smx_labaddress"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{fbc35561-addd-4a09-ae40-5bf27aa54118}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="2nd Pass - Update smx_labaddress"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\2nd Pass - Update smx_labaddress\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\2nd Pass - Update smx_labaddress\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\2nd Pass - Update smx_labaddress\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\2nd Pass - Update smx_labaddress\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Derived Column.Outputs[Derived Column Output].Columns[PackageRunId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\Derived Column.Outputs[Derived Column Output].Columns[PackageRunId]"
+                      name="PackageRunId"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[User::PackageRunId]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[User::PackageRunId]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Derived Column.Outputs[Derived Column Output].Columns[PackageStep]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="33"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\Derived Column.Outputs[Derived Column Output].Columns[PackageStep]"
+                      name="PackageStep"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"Update Lab - Lab_Addresses to CRM"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"Update Lab - Lab_Addresses to CRM"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Derived Column.Outputs[Derived Column Output].Columns[PackageName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="20"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\Derived Column.Outputs[Derived Column Output].Columns[PackageName]"
+                      name="PackageName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[System::PackageName]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[System::PackageName]</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\2nd Pass - Update smx_labaddress\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\2nd Pass - Update smx_labaddress\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\2nd Pass - Update smx_labaddress\Derived Column 1"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column 1"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\2nd Pass - Update smx_labaddress\Derived Column 1.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\2nd Pass - Update smx_labaddress\Derived Column 1.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\2nd Pass - Update smx_labaddress\Derived Column 1.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Derived Column 1.Outputs[Derived Column Output].Columns[PackageRunId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\Derived Column 1.Outputs[Derived Column Output].Columns[PackageRunId]"
+                      name="PackageRunId"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[User::PackageRunId]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[User::PackageRunId]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Derived Column 1.Outputs[Derived Column Output].Columns[PackageStep]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="33"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\Derived Column 1.Outputs[Derived Column Output].Columns[PackageStep]"
+                      name="PackageStep"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"Update Lab - Lab_Addresses to CRM"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"Update Lab - Lab_Addresses to CRM"</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\2nd Pass - Update smx_labaddress\Derived Column 1.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\2nd Pass - Update smx_labaddress\Derived Column 1.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\2nd Pass - Update smx_labaddress\ErrorCount"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="ErrorCount">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::ErrorCount</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\2nd Pass - Update smx_labaddress\ErrorCount.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\2nd Pass - Update smx_labaddress\ErrorCount.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\2nd Pass - Update smx_labaddress\ErrorCount.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\2nd Pass - Update smx_labaddress\Insert Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Insert Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::InsertCount</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\2nd Pass - Update smx_labaddress\Insert Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\2nd Pass - Update smx_labaddress\Insert Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\2nd Pass - Update smx_labaddress\Insert Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\2nd Pass - Update smx_labaddress\LabID and AddressID"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="LabID and AddressID"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT  
+la_smx_addressid as smx_labaddress
+,smx_labid
+FROM   Stage_Lab(nolock)
+where isnew = 1</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\2nd Pass - Update smx_labaddress\LabID and AddressID.Connections[OleDbConnection]"
+                  connectionManagerID="{C5BC22F6-3A6D-40F0-9393-E9CD90B60BF6}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SysmexMigration_Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\2nd Pass - Update smx_labaddress\LabID and AddressID.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\LabID and AddressID.Outputs[OLE DB Source Output].Columns[smx_labaddress]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\2nd Pass - Update smx_labaddress\LabID and AddressID.Outputs[OLE DB Source Output].ExternalColumns[smx_labaddress]"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\LabID and AddressID.Outputs[OLE DB Source Output].Columns[smx_labaddress]"
+                      name="smx_labaddress"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\LabID and AddressID.Outputs[OLE DB Source Output].Columns[smx_labid]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\2nd Pass - Update smx_labaddress\LabID and AddressID.Outputs[OLE DB Source Output].ExternalColumns[smx_labid]"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\LabID and AddressID.Outputs[OLE DB Source Output].Columns[smx_labid]"
+                      name="smx_labid"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\LabID and AddressID.Outputs[OLE DB Source Output].ExternalColumns[smx_labaddress]"
+                      dataType="guid"
+                      name="smx_labaddress" />
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\LabID and AddressID.Outputs[OLE DB Source Output].ExternalColumns[smx_labid]"
+                      dataType="guid"
+                      name="smx_labid" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\2nd Pass - Update smx_labaddress\LabID and AddressID.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\LabID and AddressID.Outputs[OLE DB Source Error Output].Columns[smx_labaddress]"
+                      dataType="guid"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\LabID and AddressID.Outputs[OLE DB Source Error Output].Columns[smx_labaddress]"
+                      name="smx_labaddress" />
+                    <outputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\LabID and AddressID.Outputs[OLE DB Source Error Output].Columns[smx_labid]"
+                      dataType="guid"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\LabID and AddressID.Outputs[OLE DB Source Error Output].Columns[smx_labid]"
+                      name="smx_labid" />
+                    <outputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\LabID and AddressID.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\LabID and AddressID.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\LabID and AddressID.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\LabID and AddressID.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\2nd Pass - Update smx_labaddress\Log Errors"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Log Errors"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Log].[Errors]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\2nd Pass - Update smx_labaddress\Log Errors.Connections[OleDbConnection]"
+                  connectionManagerID="{C5BC22F6-3A6D-40F0-9393-E9CD90B60BF6}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SysmexMigration_Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\2nd Pass - Update smx_labaddress\Log Errors.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Errors.Inputs[OLE DB Destination Input].Columns[ErrorCode]"
+                      cachedDataType="i4"
+                      cachedName="ErrorCode"
+                      externalMetadataColumnId="Package\2nd Pass - Update smx_labaddress\Log Errors.Inputs[OLE DB Destination Input].ExternalColumns[ErrorCode]"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Outputs[Error Output].Columns[ErrorCode]" />
+                    <inputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Errors.Inputs[OLE DB Destination Input].Columns[ErrorColumn]"
+                      cachedDataType="i4"
+                      cachedName="ErrorColumn"
+                      externalMetadataColumnId="Package\2nd Pass - Update smx_labaddress\Log Errors.Inputs[OLE DB Destination Input].ExternalColumns[ErrorColumn]"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Outputs[Error Output].Columns[ErrorColumn]" />
+                    <inputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Errors.Inputs[OLE DB Destination Input].Columns[PackageRunId]"
+                      cachedDataType="i4"
+                      cachedName="PackageRunId"
+                      externalMetadataColumnId="Package\2nd Pass - Update smx_labaddress\Log Errors.Inputs[OLE DB Destination Input].ExternalColumns[PackageRunId]"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\Derived Column.Outputs[Derived Column Output].Columns[PackageRunId]" />
+                    <inputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Errors.Inputs[OLE DB Destination Input].Columns[PackageStep]"
+                      cachedDataType="wstr"
+                      cachedLength="33"
+                      cachedName="PackageStep"
+                      externalMetadataColumnId="Package\2nd Pass - Update smx_labaddress\Log Errors.Inputs[OLE DB Destination Input].ExternalColumns[PackageStep]"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\Derived Column.Outputs[Derived Column Output].Columns[PackageStep]" />
+                    <inputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Errors.Inputs[OLE DB Destination Input].Columns[PackageName]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="PackageName"
+                      externalMetadataColumnId="Package\2nd Pass - Update smx_labaddress\Log Errors.Inputs[OLE DB Destination Input].ExternalColumns[PackageName]"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\Derived Column.Outputs[Derived Column Output].Columns[PackageName]" />
+                    <inputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Errors.Inputs[OLE DB Destination Input].Columns[CrmErrorMessage]"
+                      cachedDataType="wstr"
+                      cachedLength="2048"
+                      cachedName="CrmErrorMessage"
+                      externalMetadataColumnId="Package\2nd Pass - Update smx_labaddress\Log Errors.Inputs[OLE DB Destination Input].ExternalColumns[ErrorDescription]"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Outputs[Error Output].Columns[CrmErrorMessage]" />
+                    <inputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Errors.Inputs[OLE DB Destination Input].Columns[smx_labid]"
+                      cachedDataType="guid"
+                      cachedName="smx_labid"
+                      externalMetadataColumnId="Package\2nd Pass - Update smx_labaddress\Log Errors.Inputs[OLE DB Destination Input].ExternalColumns[RecordSourceId]"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\LabID and AddressID.Outputs[OLE DB Source Output].Columns[smx_labid]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Errors.Inputs[OLE DB Destination Input].ExternalColumns[Id]"
+                      dataType="i4"
+                      name="Id" />
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Errors.Inputs[OLE DB Destination Input].ExternalColumns[CreatedOn]"
+                      dataType="dbTimeStamp"
+                      name="CreatedOn" />
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Errors.Inputs[OLE DB Destination Input].ExternalColumns[PackageRunId]"
+                      dataType="i4"
+                      name="PackageRunId" />
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Errors.Inputs[OLE DB Destination Input].ExternalColumns[PackageName]"
+                      dataType="wstr"
+                      length="100"
+                      name="PackageName" />
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Errors.Inputs[OLE DB Destination Input].ExternalColumns[PackageStep]"
+                      dataType="wstr"
+                      length="100"
+                      name="PackageStep" />
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Errors.Inputs[OLE DB Destination Input].ExternalColumns[RecordSourceId]"
+                      dataType="wstr"
+                      length="100"
+                      name="RecordSourceId" />
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Errors.Inputs[OLE DB Destination Input].ExternalColumns[ErrorCode]"
+                      dataType="i4"
+                      name="ErrorCode" />
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Errors.Inputs[OLE DB Destination Input].ExternalColumns[ErrorDescription]"
+                      dataType="nText"
+                      name="ErrorDescription" />
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Errors.Inputs[OLE DB Destination Input].ExternalColumns[ErrorColumn]"
+                      dataType="i4"
+                      name="ErrorColumn" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\2nd Pass - Update smx_labaddress\Log Errors.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\2nd Pass - Update smx_labaddress\Log Errors.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Errors.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\Log Errors.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Errors.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\Log Errors.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\2nd Pass - Update smx_labaddress\Log Success"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Log Success"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Log].[Success]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\2nd Pass - Update smx_labaddress\Log Success.Connections[OleDbConnection]"
+                  connectionManagerID="{C5BC22F6-3A6D-40F0-9393-E9CD90B60BF6}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SysmexMigration_Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\2nd Pass - Update smx_labaddress\Log Success.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Success.Inputs[OLE DB Destination Input].Columns[PackageStep]"
+                      cachedDataType="wstr"
+                      cachedLength="33"
+                      cachedName="PackageStep"
+                      externalMetadataColumnId="Package\2nd Pass - Update smx_labaddress\Log Success.Inputs[OLE DB Destination Input].ExternalColumns[PackageStep]"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\Derived Column 1.Outputs[Derived Column Output].Columns[PackageStep]" />
+                    <inputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Success.Inputs[OLE DB Destination Input].Columns[PackageRunId]"
+                      cachedDataType="i4"
+                      cachedName="PackageRunId"
+                      externalMetadataColumnId="Package\2nd Pass - Update smx_labaddress\Log Success.Inputs[OLE DB Destination Input].ExternalColumns[PackageRunId]"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\Derived Column 1.Outputs[Derived Column Output].Columns[PackageRunId]" />
+                    <inputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Success.Inputs[OLE DB Destination Input].Columns[CrmRecordId]"
+                      cachedDataType="guid"
+                      cachedName="CrmRecordId"
+                      externalMetadataColumnId="Package\2nd Pass - Update smx_labaddress\Log Success.Inputs[OLE DB Destination Input].ExternalColumns[CRM_GUID]"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Outputs[Default Output].Columns[CrmRecordId]" />
+                    <inputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Success.Inputs[OLE DB Destination Input].Columns[smx_labid]"
+                      cachedDataType="guid"
+                      cachedName="smx_labid"
+                      externalMetadataColumnId="Package\2nd Pass - Update smx_labaddress\Log Success.Inputs[OLE DB Destination Input].ExternalColumns[RecordSourceId]"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\LabID and AddressID.Outputs[OLE DB Source Output].Columns[smx_labid]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Success.Inputs[OLE DB Destination Input].ExternalColumns[Id]"
+                      dataType="i4"
+                      name="Id" />
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Success.Inputs[OLE DB Destination Input].ExternalColumns[CreatedOn]"
+                      dataType="dbTimeStamp"
+                      name="CreatedOn" />
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Success.Inputs[OLE DB Destination Input].ExternalColumns[RecordSourceId]"
+                      dataType="wstr"
+                      length="100"
+                      name="RecordSourceId" />
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Success.Inputs[OLE DB Destination Input].ExternalColumns[CRM_GUID]"
+                      dataType="guid"
+                      name="CRM_GUID" />
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Success.Inputs[OLE DB Destination Input].ExternalColumns[PackageRunId]"
+                      dataType="i4"
+                      name="PackageRunId" />
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Success.Inputs[OLE DB Destination Input].ExternalColumns[PackageStep]"
+                      dataType="wstr"
+                      length="100"
+                      name="PackageStep" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\2nd Pass - Update smx_labaddress\Log Success.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\2nd Pass - Update smx_labaddress\Log Success.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Success.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\Log Success.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Log Success.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\Log Success.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\2nd Pass - Update smx_labaddress\Source Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Source Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::SourceCount</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\2nd Pass - Update smx_labaddress\Source Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\2nd Pass - Update smx_labaddress\Source Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\2nd Pass - Update smx_labaddress\Source Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="KingswaySoft Inc.; http://www.kingswaysoft.com; support@kingswaysoft.com; Copyright 2011-2017 KingswaySoft Inc."
+              description="Populate data into Microsoft Dynamics CRM."
+              name="Update Lab smx_labaddress"
+              usesDispositions="true"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Destination entity to write data."
+                  expressionType="Notify"
+                  name="DestinationEntity">smx_lab</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how data is written to CRM server."
+                  name="ActionType"
+                  typeConverter="KingswaySoft.IntegrationToolkit.DynamicsCrm.CrmDestinationActionType">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the values of CRM lookup fields should be removed if the reference records cannot be found. "
+                  expressionType="Notify"
+                  name="RemoveUnresolvableReferences">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether duplicate detection should be enabled when creating or updating CRM records. Duplicate records are determined by the duplicate detection rules and settings defined in Microsoft Dynamics CRM."
+                  expressionType="Notify"
+                  name="EnableDuplicateDetection">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the matching criteria to be used when Upsert action is chosen."
+                  expressionType="Notify"
+                  name="UpsertMatchingCriteria"
+                  typeConverter="KingswaySoft.IntegrationToolkit.Common.DescriptiveEnumTypeConverter`1[[KingswaySoft.IntegrationToolkit.DynamicsCrm.CrmUpsertMatchingCriteria">1</property>
+                <property
+                  dataType="System.String"
+                  description="Specify the matching fields to be used to determine the matching records that exist in CRM when Manually Specify option is chosen for Upsert action."
+                  expressionType="Notify"
+                  name="UpsertMatchingFields"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether to ignore those NULL-valued fields."
+                  expressionType="Notify"
+                  name="IgnoreNullValuedFields">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether to ignore those fields that have no value changes in the target system. "
+                  expressionType="Notify"
+                  name="IgnoreUnchangedFields">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specify whether to remove those invalid characters before writing to CRM."
+                  expressionType="Notify"
+                  name="RemoveInvalidCharacters">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specify the flag field(s) that are used to track the source of changes. The field(s) will not posted to CRM server unless there are changes to other fields if specified. &quot;Ignore Unchange Fields&quot; option is required in order for the specified flag field(s) to work. "
+                  expressionType="Notify"
+                  name="ChangeFlagFields"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify what action will be taken when multiple matches are found with Upsert action."
+                  expressionType="Notify"
+                  name="HandlingOfMultipleMatches"
+                  typeConverter="KingswaySoft.IntegrationToolkit.Common.DescriptiveEnumTypeConverter`1[[KingswaySoft.IntegrationToolkit.DynamicsCrm.CrmUpsertHandlingOfMultipleMatches">0</property>
+                <property
+                  dataType="System.String"
+                  description="Workflow to be executed."
+                  expressionType="Notify"
+                  name="Workflow"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of records to be sent to Microsoft Dynamics 365/CRM server in each service call."
+                  expressionType="Notify"
+                  name="BatchSize">50</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the total number or concurrent threads to write to Dynamics 365/CRM server simultaneously. "
+                  expressionType="Notify"
+                  name="ConcurrentWritingThreadsInTotal">2</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether datetime values should be sent to CRM server in UTC format."
+                  expressionType="Notify"
+                  name="SendDateTimeInUtcFormat">false</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">KingswaySoft.IntegrationToolkit.DynamicsCrm.CrmDestinationComponent</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Connections[DynamicsCRM]"
+                  connectionManagerID="{AE9846A7-8EFA-4BEB-A233-D4B08C771D6C}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Sysmex_CRM]"
+                  description="Dynamics CRM Connection Manager"
+                  name="DynamicsCRM" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="RedirectRow"
+                  hasSideEffects="true"
+                  name="Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].Columns[smx_labaddress]"
+                      cachedDataType="guid"
+                      cachedName="smx_labaddress"
+                      externalMetadataColumnId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_labaddress]"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\LabID and AddressID.Outputs[OLE DB Source Output].Columns[smx_labaddress]" />
+                    <inputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].Columns[smx_labid]"
+                      cachedDataType="guid"
+                      cachedName="smx_labid"
+                      externalMetadataColumnId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_labid]"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\LabID and AddressID.Outputs[OLE DB Source Output].Columns[smx_labid]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[modifiedby]"
+                      dataType="guid"
+                      name="modifiedby">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Lookup</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes">systemuser</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[ownerid]"
+                      dataType="guid"
+                      name="ownerid">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Owner</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes">systemuser;team</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[owneridtype]"
+                      dataType="wstr"
+                      length="64"
+                      name="owneridtype">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">EntityName</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_account]"
+                      dataType="guid"
+                      name="smx_account">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Lookup</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes">account</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_annualmicrovolume]"
+                      dataType="i4"
+                      name="smx_annualmicrovolume">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Integer</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_annualstripvolume]"
+                      dataType="i4"
+                      name="smx_annualstripvolume">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Integer</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_chemistryiainstruments]"
+                      dataType="i4"
+                      name="smx_chemistryiainstruments">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Integer</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_city]"
+                      dataType="wstr"
+                      length="80"
+                      name="smx_city">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">String</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_coagulationinstruments]"
+                      dataType="i4"
+                      name="smx_coagulationinstruments">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Integer</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_country]"
+                      dataType="wstr"
+                      length="50"
+                      name="smx_country">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">String</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_countryid]"
+                      dataType="i4"
+                      name="smx_countryid">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Picklist</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_countrysap]"
+                      dataType="guid"
+                      name="smx_countrysap">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Lookup</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes">smx_country</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_daysofoperation]"
+                      dataType="i4"
+                      name="smx_daysofoperation">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Picklist</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_esrinstruments]"
+                      dataType="i4"
+                      name="smx_esrinstruments">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Integer</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_flowinstruments]"
+                      dataType="i4"
+                      name="smx_flowinstruments">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Integer</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_hemeinstruments]"
+                      dataType="i4"
+                      name="smx_hemeinstruments">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Integer</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_labaddress]"
+                      dataType="guid"
+                      name="smx_labaddress">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Lookup</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes">smx_address</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_labid]"
+                      dataType="guid"
+                      name="smx_labid">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Uniqueidentifier</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes">smx_lab</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_migrationsourceid]"
+                      dataType="wstr"
+                      length="100"
+                      name="smx_migrationsourceid">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">String</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_name]"
+                      dataType="wstr"
+                      length="100"
+                      name="smx_name">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">String</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_noofcbc]"
+                      dataType="i4"
+                      name="smx_noofcbc">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Integer</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_respondent]"
+                      dataType="guid"
+                      name="smx_respondent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Lookup</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes">contact</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_sapid]"
+                      dataType="wstr"
+                      length="100"
+                      name="smx_sapid">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">String</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_stateprovince]"
+                      dataType="wstr"
+                      length="2"
+                      name="smx_stateprovince">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">String</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_stateprovinceid]"
+                      dataType="i4"
+                      name="smx_stateprovinceid">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Picklist</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_statesap]"
+                      dataType="guid"
+                      name="smx_statesap">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Lookup</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes">smx_state</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_street1]"
+                      dataType="wstr"
+                      length="250"
+                      name="smx_street1">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">String</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_street2]"
+                      dataType="wstr"
+                      length="250"
+                      name="smx_street2">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">String</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_street3]"
+                      dataType="wstr"
+                      length="250"
+                      name="smx_street3">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">String</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_tla]"
+                      dataType="i4"
+                      name="smx_tla">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Picklist</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_urinalysisinstruments]"
+                      dataType="i4"
+                      name="smx_urinalysisinstruments">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Integer</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[smx_zippostalcode]"
+                      dataType="wstr"
+                      length="20"
+                      name="smx_zippostalcode">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">String</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[statecode]"
+                      dataType="i4"
+                      name="statecode">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">State</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[statuscode]"
+                      dataType="i4"
+                      name="statuscode">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Status</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[timezoneruleversionnumber]"
+                      dataType="i4"
+                      name="timezoneruleversionnumber">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Integer</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input].ExternalColumns[utcconversiontimezonecode]"
+                      dataType="i4"
+                      name="utcconversiontimezonecode">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Integer</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Outputs[Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error Output"
+                  synchronousInputId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Outputs[Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Outputs[Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Outputs[Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Outputs[Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Outputs[Error Output].Columns[CrmErrorMessage]"
+                      dataType="wstr"
+                      length="2048"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Outputs[Error Output].Columns[CrmErrorMessage]"
+                      name="CrmErrorMessage" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Outputs[Default Output]"
+                  exclusionGroup="1"
+                  name="Default Output"
+                  synchronousInputId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Outputs[Default Output].Columns[CrmRecordId]"
+                      dataType="guid"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Outputs[Default Output].Columns[CrmRecordId]"
+                      name="CrmRecordId" />
+                    <outputColumn
+                      refId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Outputs[Default Output].Columns[IsNew]"
+                      dataType="bool"
+                      lineageId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Outputs[Default Output].Columns[IsNew]"
+                      name="IsNew" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\2nd Pass - Update smx_labaddress.Paths[Default Output]"
+              endId="Package\2nd Pass - Update smx_labaddress\Insert Count.Inputs[Row Count Input 1]"
+              name="Default Output"
+              startId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Outputs[Default Output]" />
+            <path
+              refId="Package\2nd Pass - Update smx_labaddress.Paths[Derived Column Output]"
+              endId="Package\2nd Pass - Update smx_labaddress\Log Errors.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\2nd Pass - Update smx_labaddress\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\2nd Pass - Update smx_labaddress.Paths[Derived Column Output1]"
+              endId="Package\2nd Pass - Update smx_labaddress\Log Success.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\2nd Pass - Update smx_labaddress\Derived Column 1.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\2nd Pass - Update smx_labaddress.Paths[Error Output]"
+              endId="Package\2nd Pass - Update smx_labaddress\ErrorCount.Inputs[Row Count Input 1]"
+              name="Error Output"
+              startId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Outputs[Error Output]" />
+            <path
+              refId="Package\2nd Pass - Update smx_labaddress.Paths[OLE DB Source Output]"
+              endId="Package\2nd Pass - Update smx_labaddress\Source Count.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\2nd Pass - Update smx_labaddress\LabID and AddressID.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\2nd Pass - Update smx_labaddress.Paths[Row Count Output 1]"
+              endId="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress.Inputs[Input]"
+              name="Row Count Output 1"
+              startId="Package\2nd Pass - Update smx_labaddress\Source Count.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\2nd Pass - Update smx_labaddress.Paths[Row Count Output 11]"
+              endId="Package\2nd Pass - Update smx_labaddress\Derived Column.Inputs[Derived Column Input]"
+              name="Row Count Output 1"
+              startId="Package\2nd Pass - Update smx_labaddress\ErrorCount.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\2nd Pass - Update smx_labaddress.Paths[Row Count Output 12]"
+              endId="Package\2nd Pass - Update smx_labaddress\Derived Column 1.Inputs[Derived Column Input]"
+              name="Row Count Output 1"
+              startId="Package\2nd Pass - Update smx_labaddress\Insert Count.Outputs[Row Count Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Log Package Run"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{b93d8a26-4f46-4b0f-94d0-e4821e589d18}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Log Package Run"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{C5BC22F6-3A6D-40F0-9393-E9CD90B60BF6}"
+          SQLTask:SqlStatementSource="INSERT INTO [log].[PackageRuns] ( &#xA;    [PackageName], &#xA;    [Step], &#xA;    [Status], &#xA;    [StartDate], &#xA;    [SourceCount], &#xA;    [InsertCount], &#xA;    [UpdateCount], &#xA;    [DeleteCount], &#xA;    [ErrorCount], &#xA;    [RunningUser] &#xA;)&#xA;OUTPUT INSERTED.Id&#xA;SELECT &#xA;    [PackageName] = ?, &#xA;    [Step] = 'Update Lab - Lab_Addresses to CRM', &#xA;    [Status] = 'Running', &#xA;    [StartDate] = ?, &#xA;    [SourceCount] = 0, &#xA;    [InsertCount] = 0, &#xA;    [UpdateCount] = 0, &#xA;    [DeleteCount] = 0, &#xA;    [ErrorCount] = 0, &#xA;    [RunningUser] = ? "
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="Id"
+            SQLTask:DtsVariableName="User::PackageRunId" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="100" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::StartTime"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="7"
+            SQLTask:ParameterSize="20" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="System::UserName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="250" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update Package Log Record"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{8076f441-1498-4256-8f35-2890dcfe1980}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update Package Log Record"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{C5BC22F6-3A6D-40F0-9393-E9CD90B60BF6}"
+          SQLTask:SqlStatementSource="DECLARE @PackageRunId int = ?&#xA;UPDATE P SET &#xA;    [Status] =   &#xA;        CASE   &#xA;            WHEN ISNULL(E.ErrorCount, 0) &gt; 0 THEN 'Completed - Errors'   &#xA;            ELSE 'Completed - Success'  &#xA;        END, &#xA;    [EndDate] = GETDATE(), &#xA;    [InsertCount] = ?, &#xA;    [ErrorCount] = ?,&#xA;    [SourceCount] = ? &#xA;FROM [log].[PackageRuns] P&#xA;WHERE &#xA;    P.Id = @PackageRunId " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::PackageRunId"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="131"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::InsertCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="131"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::ErrorCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="131"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="User::SourceCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="131"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{F999F496-E8F8-49A2-8E6C-97B07C837254}"
+      DTS:From="Package\Log Package Run"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\2nd Pass - Update smx_labaddress" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{7411E2CB-7167-4A46-8E3B-7161E492A5EC}"
+      DTS:From="Package\2nd Pass - Update smx_labaddress"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Update Package Log Record" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="244,42"
+          Id="Package\2nd Pass - Update smx_labaddress"
+          TopLeft="38,113" />
+        <NodeLayout
+          Size="160,42"
+          Id="Package\Log Package Run"
+          TopLeft="54,20" />
+        <NodeLayout
+          Size="211,42"
+          Id="Package\Update Package Log Record"
+          TopLeft="92,205" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="134,62">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="26,51"
+              Start="0,0"
+              End="26,43.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.5"
+                    Point2="0,25.5"
+                    Point3="4,25.5" />
+                  <mssgle:LineSegment
+                    End="22,25.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="22,25.5"
+                    Point2="26,25.5"
+                    Point3="26,29.5" />
+                  <mssgle:LineSegment
+                    End="26,43.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="160,155">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="37.5,50"
+              Start="0,0"
+              End="37.5,42.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21"
+                    Point2="0,25"
+                    Point3="4,25" />
+                  <mssgle:LineSegment
+                    End="33.5,25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="33.5,25"
+                    Point2="37.5,25"
+                    Point3="37.5,29" />
+                  <mssgle:LineSegment
+                    End="37.5,42.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\2nd Pass - Update smx_labaddress">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="138,42"
+          Id="Package\2nd Pass - Update smx_labaddress\Insert Count"
+          TopLeft="5.50000000000006,311.5" />
+        <NodeLayout
+          Size="142,42"
+          Id="Package\2nd Pass - Update smx_labaddress\Source Count"
+          TopLeft="198.5,107.5" />
+        <NodeLayout
+          Size="130,42"
+          Id="Package\2nd Pass - Update smx_labaddress\ErrorCount"
+          TopLeft="330.5,302.5" />
+        <NodeLayout
+          Size="211,42"
+          Id="Package\2nd Pass - Update smx_labaddress\Update Lab smx_labaddress"
+          TopLeft="164,209.5" />
+        <NodeLayout
+          Size="127,42"
+          Id="Package\2nd Pass - Update smx_labaddress\Log Errors"
+          TopLeft="352,476" />
+        <NodeLayout
+          Size="136,42"
+          Id="Package\2nd Pass - Update smx_labaddress\Log Success"
+          TopLeft="61,490" />
+        <NodeLayout
+          Size="180,42"
+          Id="Package\2nd Pass - Update smx_labaddress\LabID and AddressID"
+          TopLeft="179.5,5.5" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\2nd Pass - Update smx_labaddress\Derived Column"
+          TopLeft="331,385" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\2nd Pass - Update smx_labaddress\Derived Column 1"
+          TopLeft="23,401" />
+        <EdgeLayout
+          Id="Package\2nd Pass - Update smx_labaddress.Paths[Row Count Output 12]"
+          TopLeft="74.5000000000001,353.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="25.4999999999999,47.5"
+              Start="0,0"
+              End="25.4999999999999,40">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.75"
+                    Point2="0,23.75"
+                    Point3="4,23.75" />
+                  <mssgle:LineSegment
+                    End="21.4999999999999,23.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="21.4999999999999,23.75"
+                    Point2="25.4999999999999,23.75"
+                    Point3="25.4999999999999,27.75" />
+                  <mssgle:LineSegment
+                    End="25.4999999999999,40" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\2nd Pass - Update smx_labaddress.Paths[Row Count Output 11]"
+          TopLeft="395.5,344.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="12.4999999999999,40.5"
+              Start="0,0"
+              End="12.4999999999999,33">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.25"
+                    Point2="0,20.25"
+                    Point3="4,20.25" />
+                  <mssgle:LineSegment
+                    End="8.49999999999994,20.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="8.49999999999994,20.25"
+                    Point2="12.4999999999999,20.25"
+                    Point3="12.4999999999999,24.25" />
+                  <mssgle:LineSegment
+                    End="12.4999999999999,33" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\2nd Pass - Update smx_labaddress.Paths[Row Count Output 1]"
+          TopLeft="269.5,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\2nd Pass - Update smx_labaddress.Paths[OLE DB Source Output]"
+          TopLeft="269.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\2nd Pass - Update smx_labaddress.Paths[Error Output]"
+          TopLeft="303.333333333333,251.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="92.1666666666667,51"
+              Start="0,0"
+              End="92.1666666666667,43.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.6302916274694" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.6302916274694"
+                    Point2="0,20.6302916274694"
+                    Point3="4,20.6302916274694" />
+                  <mssgle:LineSegment
+                    End="88.1666666666667,20.6302916274694" />
+                  <mssgle:CubicBezierSegment
+                    Point1="88.1666666666667,20.6302916274694"
+                    Point2="92.1666666666667,20.6302916274694"
+                    Point3="92.1666666666667,24.6302916274694" />
+                  <mssgle:LineSegment
+                    End="92.1666666666667,43.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="17.7469466145833,25.6302916274694,56.6727734375,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\2nd Pass - Update smx_labaddress.Paths[Derived Column Output1]"
+          TopLeft="100,443">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="29,47"
+              Start="0,0"
+              End="29,39.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.5"
+                    Point2="0,23.5"
+                    Point3="4,23.5" />
+                  <mssgle:LineSegment
+                    End="25,23.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="25,23.5"
+                    Point2="29,23.5"
+                    Point3="29,27.5" />
+                  <mssgle:LineSegment
+                    End="29,39.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\2nd Pass - Update smx_labaddress.Paths[Derived Column Output]"
+          TopLeft="411.75,427">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49"
+              Start="0,0"
+              End="0,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\2nd Pass - Update smx_labaddress.Paths[Default Output]"
+          TopLeft="235.666666666667,251.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-161.166666666667,60"
+              Start="0,0"
+              End="-161.166666666667,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.2709313264346" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.2709313264346"
+                    Point2="0,24.2709313264346"
+                    Point3="-4,24.2709313264346" />
+                  <mssgle:LineSegment
+                    End="-157.166666666667,24.2709313264346" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-157.166666666667,24.2709313264346"
+                    Point2="-161.166666666667,24.2709313264346"
+                    Point3="-161.166666666667,28.2709313264346" />
+                  <mssgle:LineSegment
+                    End="-161.166666666667,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\2nd Pass - Update smx_labaddress\Log Errors">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\2nd Pass - Update smx_labaddress\Log Success">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\2nd Pass - Update smx_labaddress\LabID and AddressID">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,6 @@
+﻿{
+  "CrmUrl": "https://sysmexdev.crm.dynamics.com",
+  "Username": "",
+  "Password": "",
+  "AuthenticationType":  "Office365" 
+}

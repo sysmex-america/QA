@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<schema xmlns:ns3="http://Microsoft.LobServices.Sap/2007/03/Types/Rfc/" elementFormDefault="qualified" targetNamespace="http://Microsoft.LobServices.Sap/2007/03/Rfc/" version="1.0" xmlns="http://www.w3.org/2001/XMLSchema">
+  <import schemaLocation=".\Z_BIZ_BAPI_CONTRACT_CREATE1__Rfc_1.xsd" namespace="http://Microsoft.LobServices.Sap/2007/03/Types/Rfc/" />
+  <annotation>
+    <appinfo>
+      <fileNameHint xmlns="http://schemas.microsoft.com/servicemodel/adapters/metadata/xsd">Rfc</fileNameHint>
+    </appinfo>
+  </annotation>
+  <element name="Z_BIZ_BAPI_CONTRACT_CREATE1">
+    <annotation>
+      <documentation>
+        <doc:action xmlns:doc="http://schemas.microsoft.com/servicemodel/adapters/metadata/documentation">http://Microsoft.LobServices.Sap/2007/03/Rfc/Z_BIZ_BAPI_CONTRACT_CREATE1</doc:action>
+        <doc:description xmlns:doc="http://schemas.microsoft.com/servicemodel/adapters/metadata/documentation">The Metadata for this RFC was generated using the RFC SDK.</doc:description>
+      </documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element minOccurs="0" maxOccurs="1" name="TRANSACTION_ID" nillable="true">
+          <annotation>
+            <documentation>Char 15</documentation>
+          </annotation>
+          <simpleType>
+            <restriction base="string">
+              <maxLength value="15" />
+            </restriction>
+          </simpleType>
+        </element>
+        <element minOccurs="0" maxOccurs="1" name="CONTRACT_HEADER" nillable="true" type="ns3:ZBAPI_CON_HEADER">
+          <annotation>
+            <documentation>Communication Fields: Sales and Distribution Document Header</documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" maxOccurs="1" name="CONTRACT_ITEM" nillable="true" type="ns3:ArrayOfZBAPI_CON_ITEM">
+          <annotation>
+            <documentation>Contract item</documentation>
+          </annotation>
+        </element>
+      </sequence>
+    </complexType>
+  </element>
+  <element name="Z_BIZ_BAPI_CONTRACT_CREATE1Response">
+    <annotation>
+      <documentation>
+        <doc:action xmlns:doc="http://schemas.microsoft.com/servicemodel/adapters/metadata/documentation">http://Microsoft.LobServices.Sap/2007/03/Rfc/Z_BIZ_BAPI_CONTRACT_CREATE1/response</doc:action>
+        <doc:description xmlns:doc="http://schemas.microsoft.com/servicemodel/adapters/metadata/documentation">The Metadata for this RFC was generated using the RFC SDK.</doc:description>
+      </documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element minOccurs="0" maxOccurs="1" name="TRANSACTION_ID" nillable="true">
+          <annotation>
+            <documentation>Char 15</documentation>
+          </annotation>
+          <simpleType>
+            <restriction base="string">
+              <maxLength value="15" />
+            </restriction>
+          </simpleType>
+        </element>
+        <element minOccurs="1" maxOccurs="1" name="RETURN" nillable="true" type="ns3:ZBAPI_RETURN">
+          <annotation>
+            <documentation>Return Import for PREQ Create</documentation>
+          </annotation>
+        </element>
+        <element minOccurs="1" maxOccurs="1" name="SALESDOCUMENT" nillable="true">
+          <annotation>
+            <documentation>Sales Document</documentation>
+          </annotation>
+          <simpleType>
+            <restriction base="string">
+              <maxLength value="10" />
+            </restriction>
+          </simpleType>
+        </element>
+        <element minOccurs="0" maxOccurs="1" name="CONTRACT_ITEM" nillable="true" type="ns3:ArrayOfZBAPI_CON_ITEM">
+          <annotation>
+            <documentation>Contract item</documentation>
+          </annotation>
+        </element>
+      </sequence>
+    </complexType>
+  </element>
+</schema>

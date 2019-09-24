@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{67582BB0-7C52-4F16-B485-E87802F7F952}"
+	ProjectSection(SolutionItems) = preProject
+		CustomDictionary.xml = CustomDictionary.xml
+		ProjectConfig.xml = ProjectConfig.xml
+		Sysmex.build = Sysmex.build
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sysmex.Crm.Model", "Sysmex.Crm.Model\Sysmex.Crm.Model.csproj", "{A23333E7-2605-4909-A46F-7D0B52C8C913}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sysmex.Crm.Plugins", "Sysmex.Crm.Plugins\Sysmex.Crm.Plugins.csproj", "{4315C338-EC8E-4ADE-9DC9-4D2B8F762F29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sysmex.Crm.WorkflowActivities", "Sysmex.Crm.WorkflowActivities\Sysmex.Crm.WorkflowActivities.csproj", "{5DB4DCA2-82FD-4B78-AE5D-F344F6451312}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sysmex.Crm.WebResources", "Sysmex.Crm.WebResources\Sysmex.Crm.WebResources.csproj", "{7BFF46CE-441A-46AF-82C8-D82DC430DB74}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConsoleApp", "ConsoleApp", "{198743E5-86A5-406C-872F-EEB8B22CE359}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sysmex.Crm.SampleConsoleApplication", "Sample Console Application\Sysmex.Crm.ConsoleApplication\Sysmex.Crm.ConsoleApplication\Sysmex.Crm.SampleConsoleApplication.csproj", "{24942F29-03E6-4529-A73C-1A8AA2BBD9B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecordPullExample", "RecordPullExample\RecordPullExample.csproj", "{E740D55A-297F-4B17-B897-326A62D9E13D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A23333E7-2605-4909-A46F-7D0B52C8C913}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A23333E7-2605-4909-A46F-7D0B52C8C913}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A23333E7-2605-4909-A46F-7D0B52C8C913}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A23333E7-2605-4909-A46F-7D0B52C8C913}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4315C338-EC8E-4ADE-9DC9-4D2B8F762F29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4315C338-EC8E-4ADE-9DC9-4D2B8F762F29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4315C338-EC8E-4ADE-9DC9-4D2B8F762F29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4315C338-EC8E-4ADE-9DC9-4D2B8F762F29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DB4DCA2-82FD-4B78-AE5D-F344F6451312}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DB4DCA2-82FD-4B78-AE5D-F344F6451312}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DB4DCA2-82FD-4B78-AE5D-F344F6451312}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DB4DCA2-82FD-4B78-AE5D-F344F6451312}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BFF46CE-441A-46AF-82C8-D82DC430DB74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BFF46CE-441A-46AF-82C8-D82DC430DB74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BFF46CE-441A-46AF-82C8-D82DC430DB74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BFF46CE-441A-46AF-82C8-D82DC430DB74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24942F29-03E6-4529-A73C-1A8AA2BBD9B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24942F29-03E6-4529-A73C-1A8AA2BBD9B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E740D55A-297F-4B17-B897-326A62D9E13D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E740D55A-297F-4B17-B897-326A62D9E13D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E740D55A-297F-4B17-B897-326A62D9E13D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E740D55A-297F-4B17-B897-326A62D9E13D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{24942F29-03E6-4529-A73C-1A8AA2BBD9B7} = {198743E5-86A5-406C-872F-EEB8B22CE359}
+		{E740D55A-297F-4B17-B897-326A62D9E13D} = {198743E5-86A5-406C-872F-EEB8B22CE359}
+	EndGlobalSection
+EndGlobal

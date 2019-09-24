@@ -1,0 +1,1067 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/28/2018 5:50:20 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="REBERNAK"
+  DTS:CreatorName="SONOMAPARTNERS\RRebernak"
+  DTS:DTSID="{173CABA7-A3F7-4A02-A820-29E6B0452584}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3002.101"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Lab_Stage"
+  DTS:PackageType="5"
+  DTS:VersionBuild="11"
+  DTS:VersionGUID="{36F2CDF9-7932-488E-ACF6-7166779206FB}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Clear Cache"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{0B697545-EC73-4742-9B99-0A187FE40F48}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Clear Cache"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{C5BC22F6-3A6D-40F0-9393-E9CD90B60BF6}"
+          SQLTask:SqlStatementSource="truncate table stage_lab" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load Stage_Lab"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{63D22508-9CA6-4E2D-92AB-4FA122BD4C99}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Stage_Lab"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load Stage_Lab\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select
+--========================================
+--LAB ADDRESS FIELDS
+--========================================
+la_smx_addressid = newid()
+,la_smx_type = 180700001
+,L.Address_1 as la_smx_addressstreet1
+,L.Address_2 as la_smx_addressstreet2
+,L.city as la_smx_city
+,L.State_ as la_smx_stateprovinceid
+,L.Zip as la_smx_zippostalcode
+,L.Lab_Name as la_smx_name
+--=========================================
+--LAB FIELDS
+--========================================
+,smx_labid = newid()
+,convert(nvarchar(100), convert(bigint, ctlab_id)) as smx_migrationsourceid
+,convert(nvarchar(100), '0x' + Inactive_Reason) as smx_newmigrationsourceid
+,convert(nvarchar(100), convert(bigint, company_id)) as smx_account
+,A.accountid as smx_accountID
+,statecode = (
+	case
+		when inactive = 0 then 0
+		else 1
+	end
+)
+,rn_create_date as overriddencreatedon
+--,A.[aa_smx_addressid] as smx_labaddress	--POPULATE THIS AFTER CREATING THE ADDRESSES\
+											--(1) LAB (SANS ADDRESSID) (2) LAB ADDRESS (3) LAB - UPDATE ADDRESSID
+,days_of_operation as smx_daysofoperation
+,no_of_cbc as smx_noofcbc
+,OwnerId = ac.ownerid
+,owneridtype = ac.owneridtype
+,statuscode = (
+	case
+		when inactive = 0 then 1
+		else 2
+	end
+)
+from [TestProd_ED].dbo.ctLab L (nolock)
+inner join Stage_Account A (nolock)
+	on A.smx_MigrationSourceId = convert(nvarchar(100), convert(bigint, L.company_id))
+left outer join [dbo].[crm_account_cache] ac
+	on ac.accountid = A.accountid
+where L.company_id in (select company_id from [TestProd_ED].dbo.company where cfsales_company = 1 and Country = 'US' and cfClass_Type is null)</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Stage_Lab\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{C5BC22F6-3A6D-40F0-9393-E9CD90B60BF6}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SysmexMigration_Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[la_smx_addressid]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[la_smx_addressid]"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[la_smx_addressid]"
+                      name="la_smx_addressid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[la_smx_type]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[la_smx_type]"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[la_smx_type]"
+                      name="la_smx_type"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[la_smx_addressstreet1]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[la_smx_addressstreet1]"
+                      length="50"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[la_smx_addressstreet1]"
+                      name="la_smx_addressstreet1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[la_smx_addressstreet2]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[la_smx_addressstreet2]"
+                      length="50"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[la_smx_addressstreet2]"
+                      name="la_smx_addressstreet2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[la_smx_city]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[la_smx_city]"
+                      length="20"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[la_smx_city]"
+                      name="la_smx_city"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[la_smx_stateprovinceid]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[la_smx_stateprovinceid]"
+                      length="10"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[la_smx_stateprovinceid]"
+                      name="la_smx_stateprovinceid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[la_smx_zippostalcode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[la_smx_zippostalcode]"
+                      length="12"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[la_smx_zippostalcode]"
+                      name="la_smx_zippostalcode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[la_smx_name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[la_smx_name]"
+                      length="80"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[la_smx_name]"
+                      name="la_smx_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_labid]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_labid]"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_labid]"
+                      name="smx_labid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_migrationsourceid]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_migrationsourceid]"
+                      length="100"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_migrationsourceid]"
+                      name="smx_migrationsourceid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_account]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_account]"
+                      length="100"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_account]"
+                      name="smx_account"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_accountID]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_accountID]"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_accountID]"
+                      name="smx_accountID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[statecode]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[statecode]"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[statecode]"
+                      name="statecode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[overriddencreatedon]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[overriddencreatedon]"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[overriddencreatedon]"
+                      name="overriddencreatedon"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_daysofoperation]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_daysofoperation]"
+                      length="10"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_daysofoperation]"
+                      name="smx_daysofoperation"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_noofcbc]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_noofcbc]"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_noofcbc]"
+                      name="smx_noofcbc"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[OwnerId]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OwnerId]"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[OwnerId]"
+                      name="OwnerId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[owneridtype]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[owneridtype]"
+                      length="64"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[owneridtype]"
+                      name="owneridtype"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[statuscode]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[statuscode]"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[statuscode]"
+                      name="statuscode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_newmigrationsourceid]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_newmigrationsourceid]"
+                      length="100"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_newmigrationsourceid]"
+                      name="smx_newmigrationsourceid"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[la_smx_addressid]"
+                      dataType="guid"
+                      name="la_smx_addressid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[la_smx_type]"
+                      dataType="i4"
+                      name="la_smx_type" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[la_smx_addressstreet1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="la_smx_addressstreet1" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[la_smx_addressstreet2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="la_smx_addressstreet2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[la_smx_city]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="la_smx_city" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[la_smx_stateprovinceid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="la_smx_stateprovinceid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[la_smx_zippostalcode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="la_smx_zippostalcode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[la_smx_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="80"
+                      name="la_smx_name" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_labid]"
+                      dataType="guid"
+                      name="smx_labid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_migrationsourceid]"
+                      dataType="wstr"
+                      length="100"
+                      name="smx_migrationsourceid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_account]"
+                      dataType="wstr"
+                      length="100"
+                      name="smx_account" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_accountID]"
+                      dataType="guid"
+                      name="smx_accountID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[statecode]"
+                      dataType="i4"
+                      name="statecode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[overriddencreatedon]"
+                      dataType="dbTimeStamp"
+                      name="overriddencreatedon" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_daysofoperation]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="smx_daysofoperation" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_noofcbc]"
+                      dataType="i4"
+                      name="smx_noofcbc" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OwnerId]"
+                      dataType="guid"
+                      name="OwnerId" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[owneridtype]"
+                      dataType="wstr"
+                      length="64"
+                      name="owneridtype" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[statuscode]"
+                      dataType="i4"
+                      name="statuscode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[smx_newmigrationsourceid]"
+                      dataType="wstr"
+                      length="100"
+                      name="smx_newmigrationsourceid" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[la_smx_addressid]"
+                      dataType="guid"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[la_smx_addressid]"
+                      name="la_smx_addressid" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[la_smx_type]"
+                      dataType="i4"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[la_smx_type]"
+                      name="la_smx_type" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[la_smx_addressstreet1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[la_smx_addressstreet1]"
+                      name="la_smx_addressstreet1" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[la_smx_addressstreet2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[la_smx_addressstreet2]"
+                      name="la_smx_addressstreet2" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[la_smx_city]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[la_smx_city]"
+                      name="la_smx_city" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[la_smx_stateprovinceid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[la_smx_stateprovinceid]"
+                      name="la_smx_stateprovinceid" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[la_smx_zippostalcode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[la_smx_zippostalcode]"
+                      name="la_smx_zippostalcode" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[la_smx_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="80"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[la_smx_name]"
+                      name="la_smx_name" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_labid]"
+                      dataType="guid"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_labid]"
+                      name="smx_labid" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_migrationsourceid]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_migrationsourceid]"
+                      name="smx_migrationsourceid" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_newmigrationsourceid]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_newmigrationsourceid]"
+                      name="smx_newmigrationsourceid" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_account]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_account]"
+                      name="smx_account" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_accountID]"
+                      dataType="guid"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_accountID]"
+                      name="smx_accountID" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[statecode]"
+                      dataType="i4"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[statecode]"
+                      name="statecode" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[overriddencreatedon]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[overriddencreatedon]"
+                      name="overriddencreatedon" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_daysofoperation]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_daysofoperation]"
+                      name="smx_daysofoperation" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_noofcbc]"
+                      dataType="i4"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[smx_noofcbc]"
+                      name="smx_noofcbc" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OwnerId]"
+                      dataType="guid"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OwnerId]"
+                      name="OwnerId" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[owneridtype]"
+                      dataType="wstr"
+                      length="64"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[owneridtype]"
+                      name="owneridtype" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[statuscode]"
+                      dataType="i4"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[statuscode]"
+                      name="statuscode" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Stage_Lab\Stage_Lab"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Stage_Lab"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Stage_Lab]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Stage_Lab\Stage_Lab.Connections[OleDbConnection]"
+                  connectionManagerID="{C5BC22F6-3A6D-40F0-9393-E9CD90B60BF6}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SysmexMigration_Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].Columns[la_smx_addressid]"
+                      cachedDataType="guid"
+                      cachedName="la_smx_addressid"
+                      externalMetadataColumnId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[la_smx_addressid]"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[la_smx_addressid]" />
+                    <inputColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].Columns[la_smx_type]"
+                      cachedDataType="i4"
+                      cachedName="la_smx_type"
+                      externalMetadataColumnId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[la_smx_type]"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[la_smx_type]" />
+                    <inputColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].Columns[la_smx_addressstreet1]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="la_smx_addressstreet1"
+                      externalMetadataColumnId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[la_smx_addressstreet1]"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[la_smx_addressstreet1]" />
+                    <inputColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].Columns[la_smx_addressstreet2]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="la_smx_addressstreet2"
+                      externalMetadataColumnId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[la_smx_addressstreet2]"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[la_smx_addressstreet2]" />
+                    <inputColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].Columns[la_smx_city]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="la_smx_city"
+                      externalMetadataColumnId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[la_smx_city]"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[la_smx_city]" />
+                    <inputColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].Columns[la_smx_stateprovinceid]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="la_smx_stateprovinceid"
+                      externalMetadataColumnId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[la_smx_stateprovinceid]"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[la_smx_stateprovinceid]" />
+                    <inputColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].Columns[la_smx_zippostalcode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="12"
+                      cachedName="la_smx_zippostalcode"
+                      externalMetadataColumnId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[la_smx_zippostalcode]"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[la_smx_zippostalcode]" />
+                    <inputColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].Columns[la_smx_name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="80"
+                      cachedName="la_smx_name"
+                      externalMetadataColumnId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[la_smx_name]"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[la_smx_name]" />
+                    <inputColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].Columns[smx_labid]"
+                      cachedDataType="guid"
+                      cachedName="smx_labid"
+                      externalMetadataColumnId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[smx_labid]"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_labid]" />
+                    <inputColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].Columns[smx_migrationsourceid]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="smx_migrationsourceid"
+                      externalMetadataColumnId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[smx_migrationsourceid]"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_migrationsourceid]" />
+                    <inputColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].Columns[smx_account]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="smx_account"
+                      externalMetadataColumnId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[smx_account]"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_account]" />
+                    <inputColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].Columns[smx_accountID]"
+                      cachedDataType="guid"
+                      cachedName="smx_accountID"
+                      externalMetadataColumnId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[smx_accountID]"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_accountID]" />
+                    <inputColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].Columns[statecode]"
+                      cachedDataType="i4"
+                      cachedName="statecode"
+                      externalMetadataColumnId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[statecode]"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[statecode]" />
+                    <inputColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].Columns[overriddencreatedon]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="overriddencreatedon"
+                      externalMetadataColumnId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[overriddencreatedon]"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[overriddencreatedon]" />
+                    <inputColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].Columns[smx_daysofoperation]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="smx_daysofoperation"
+                      externalMetadataColumnId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[smx_daysofoperation]"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_daysofoperation]" />
+                    <inputColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].Columns[smx_noofcbc]"
+                      cachedDataType="i4"
+                      cachedName="smx_noofcbc"
+                      externalMetadataColumnId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[smx_noofcbc]"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_noofcbc]" />
+                    <inputColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].Columns[OwnerId]"
+                      cachedDataType="guid"
+                      cachedName="OwnerId"
+                      externalMetadataColumnId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[OwnerId]"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[OwnerId]" />
+                    <inputColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].Columns[owneridtype]"
+                      cachedDataType="wstr"
+                      cachedLength="64"
+                      cachedName="owneridtype"
+                      externalMetadataColumnId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[owneridtype]"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[owneridtype]" />
+                    <inputColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].Columns[statuscode]"
+                      cachedDataType="i4"
+                      cachedName="statuscode"
+                      externalMetadataColumnId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[statuscode]"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[statuscode]" />
+                    <inputColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].Columns[smx_newmigrationsourceid]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="smx_newmigrationsourceid"
+                      externalMetadataColumnId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[smx_newmigrationsourceid]"
+                      lineageId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output].Columns[smx_newmigrationsourceid]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[la_smx_addressid]"
+                      dataType="guid"
+                      name="la_smx_addressid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[la_smx_type]"
+                      dataType="i4"
+                      name="la_smx_type" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[la_smx_addressstreet1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="la_smx_addressstreet1" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[la_smx_addressstreet2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="la_smx_addressstreet2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[la_smx_city]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="la_smx_city" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[la_smx_stateprovinceid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="la_smx_stateprovinceid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[la_smx_zippostalcode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="la_smx_zippostalcode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[la_smx_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="80"
+                      name="la_smx_name" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[smx_labid]"
+                      dataType="guid"
+                      name="smx_labid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[smx_migrationsourceid]"
+                      dataType="wstr"
+                      length="100"
+                      name="smx_migrationsourceid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[smx_account]"
+                      dataType="wstr"
+                      length="100"
+                      name="smx_account" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[smx_accountID]"
+                      dataType="guid"
+                      name="smx_accountID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[statecode]"
+                      dataType="i4"
+                      name="statecode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[overriddencreatedon]"
+                      dataType="dbTimeStamp"
+                      name="overriddencreatedon" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[smx_daysofoperation]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="smx_daysofoperation" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[smx_noofcbc]"
+                      dataType="i4"
+                      name="smx_noofcbc" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[OwnerId]"
+                      dataType="guid"
+                      name="OwnerId" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[owneridtype]"
+                      dataType="wstr"
+                      length="64"
+                      name="owneridtype" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[statuscode]"
+                      dataType="i4"
+                      name="statuscode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[isnew]"
+                      dataType="ui1"
+                      name="isnew" />
+                    <externalMetadataColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input].ExternalColumns[smx_newmigrationsourceid]"
+                      dataType="wstr"
+                      length="100"
+                      name="smx_newmigrationsourceid" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Stage_Lab\Stage_Lab.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Stage_Lab\Stage_Lab.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Stage_Lab\Stage_Lab.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Stage_Lab\Stage_Lab.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load Stage_Lab.Paths[OLE DB Source Output]"
+              endId="Package\Load Stage_Lab\Stage_Lab.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load Stage_Lab\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{271191F3-B010-4742-85F9-C91818E68EB9}"
+      DTS:From="Package\Clear Cache"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Load Stage_Lab" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="135,42"
+          Id="Package\Clear Cache"
+          TopLeft="77,59" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Load Stage_Lab"
+          TopLeft="70,175" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="145.75,101">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,74"
+              Start="0,0"
+              End="0,66.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,66.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load Stage_Lab">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="128,42"
+          Id="Package\Load Stage_Lab\Stage_Lab"
+          TopLeft="349,149" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Load Stage_Lab\OLE DB Source"
+          TopLeft="331,45" />
+        <EdgeLayout
+          Id="Package\Load Stage_Lab.Paths[OLE DB Source Output]"
+          TopLeft="409.5,87">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,62"
+              Start="0,0"
+              End="0,54.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,54.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Stage_Lab\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Stage_Lab\Stage_Lab">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

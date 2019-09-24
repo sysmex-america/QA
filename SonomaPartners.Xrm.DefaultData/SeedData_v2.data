@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ImportedData>
+  <Entity SchemaName="sonoma_autonumber">
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="sonoma_autonumberid" Value="d21ab062-ab18-e811-812f-e0071b6a8131" />
+      <Attribute Name="sonoma_entity" Value="account" />
+      <Attribute Name="sonoma_entity_field" Value="accountnumber" />
+      <Attribute Name="sonoma_formatstring" Value="1234578901234567890" />
+      <Attribute Name="sonoma_isnumeric" Value="False" />
+      <Attribute Name="sonoma_maxlength" Value="1000000" />
+      <Attribute Name="sonoma_name" Value="Account" />
+      <Attribute Name="sonoma_number" Value="100012" />
+      <Attribute Name="sonoma_prefix" Value="AC" />
+      <Attribute Name="sonoma_updating" Value="04/21/2018 01:26 AM" />
+    </Instance>
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="sonoma_autonumberid" Value="7ca8e98d-7c37-e811-812e-e0071b6a82a1" />
+      <Attribute Name="sonoma_entity" Value="smx_salesopportunity" />
+      <Attribute Name="sonoma_entity_field" Value="smx_salesopportunitynumber" />
+      <Attribute Name="sonoma_formatstring" Value="" />
+      <Attribute Name="sonoma_isnumeric" Value="False" />
+      <Attribute Name="sonoma_maxlength" Value="1000" />
+      <Attribute Name="sonoma_name" Value="Sales Opportunity" />
+      <Attribute Name="sonoma_number" Value="6" />
+      <Attribute Name="sonoma_prefix" Value="" />
+      <Attribute Name="sonoma_updating" Value="04/20/2018 02:36 AM" />
+    </Instance>
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="sonoma_autonumberid" Value="733e7d3d-4139-e811-8138-e0071b6a9211" />
+      <Attribute Name="sonoma_entity" Value="smx_Salesproduct" />
+      <Attribute Name="sonoma_entity_field" Value="smx_salesproductnumber" />
+      <Attribute Name="sonoma_formatstring" Value="" />
+      <Attribute Name="sonoma_isnumeric" Value="False" />
+      <Attribute Name="sonoma_maxlength" Value="10000" />
+      <Attribute Name="sonoma_name" Value="Sales Product" />
+      <Attribute Name="sonoma_number" Value="19" />
+      <Attribute Name="sonoma_prefix" Value="" />
+      <Attribute Name="sonoma_updating" Value="04/26/2018 09:00 PM" />
+    </Instance>
+  </Entity>
+  <Entity SchemaName="duplicaterule">
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="duplicateruleid" Value="e68d2246-d8b0-4e85-967d-07d82a3d61eb" />
+      <Attribute Name="baseentityname" Value="account" />
+      <Attribute Name="description" Value="Detects account records that have the same value in the Website field." />
+      <Attribute Name="iscasesensitive" Value="False" />
+      <Attribute Name="matchingentityname" Value="account" />
+      <Attribute Name="name" Value="Accounts with the same website" />
+      <Attribute Name="excludeinactiverecords" Value="False" />
+    </Instance>
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="duplicateruleid" Value="0c16fb72-201d-4581-9ed9-1d4ac969af81" />
+      <Attribute Name="baseentityname" Value="contact" />
+      <Attribute Name="description" Value="Detects contact records that have the same values in the First Name and Last Name fields." />
+      <Attribute Name="iscasesensitive" Value="False" />
+      <Attribute Name="matchingentityname" Value="contact" />
+      <Attribute Name="name" Value="Contacts with the same first name and last name" />
+      <Attribute Name="excludeinactiverecords" Value="False" />
+    </Instance>
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="duplicateruleid" Value="7fc828b5-5703-4320-95ae-38b835f9091b" />
+      <Attribute Name="baseentityname" Value="contact" />
+      <Attribute Name="description" Value="Detects contact records that have the same value in the Business Phone field." />
+      <Attribute Name="iscasesensitive" Value="False" />
+      <Attribute Name="matchingentityname" Value="contact" />
+      <Attribute Name="name" Value="Contacts with the same business phone number" />
+      <Attribute Name="excludeinactiverecords" Value="False" />
+    </Instance>
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="duplicateruleid" Value="0c56882e-35a2-4898-b094-8575f1368160" />
+      <Attribute Name="baseentityname" Value="contact" />
+      <Attribute Name="description" Value="Detects contact records that have the same value in the E-mail attribute." />
+      <Attribute Name="iscasesensitive" Value="False" />
+      <Attribute Name="matchingentityname" Value="contact" />
+      <Attribute Name="name" Value="Contacts with the same e-mail address" />
+      <Attribute Name="excludeinactiverecords" Value="" />
+    </Instance>
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="duplicateruleid" Value="e4e8866a-97c2-4938-8b71-8743731e59c8" />
+      <Attribute Name="baseentityname" Value="account" />
+      <Attribute Name="description" Value="Detects account records that have the same value in the Phone field." />
+      <Attribute Name="iscasesensitive" Value="False" />
+      <Attribute Name="matchingentityname" Value="account" />
+      <Attribute Name="name" Value="Accounts with the same phone number" />
+      <Attribute Name="excludeinactiverecords" Value="False" />
+    </Instance>
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="duplicateruleid" Value="9c552bd0-52f0-41ea-a9fd-a3df4a399f4a" />
+      <Attribute Name="baseentityname" Value="lead" />
+      <Attribute Name="description" Value="Detects lead records that have the same value in the E-mail attribute." />
+      <Attribute Name="iscasesensitive" Value="False" />
+      <Attribute Name="matchingentityname" Value="lead" />
+      <Attribute Name="name" Value="Leads with the same e-mail address" />
+      <Attribute Name="excludeinactiverecords" Value="" />
+    </Instance>
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="duplicateruleid" Value="eb211e6a-e9b9-46f5-8db0-b1932db0fd9a" />
+      <Attribute Name="baseentityname" Value="account" />
+      <Attribute Name="description" Value="Detects account records that have the same value in the E-mail attribute." />
+      <Attribute Name="iscasesensitive" Value="False" />
+      <Attribute Name="matchingentityname" Value="account" />
+      <Attribute Name="name" Value="Accounts with the same e-mail address" />
+      <Attribute Name="excludeinactiverecords" Value="" />
+    </Instance>
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="duplicateruleid" Value="d8d2e6cc-3a9b-48f8-a0c6-b9a1f10b9fb4" />
+      <Attribute Name="baseentityname" Value="account" />
+      <Attribute Name="description" Value="Detects account records that have the same value in the Account Name attribute." />
+      <Attribute Name="iscasesensitive" Value="False" />
+      <Attribute Name="matchingentityname" Value="account" />
+      <Attribute Name="name" Value="Accounts with the same Account Name" />
+      <Attribute Name="excludeinactiverecords" Value="False" />
+    </Instance>
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="duplicateruleid" Value="b99f9d91-6bcd-4ae7-8585-d1ae2046622d" />
+      <Attribute Name="baseentityname" Value="socialprofile" />
+      <Attribute Name="description" Value="Detects social profile records that have the same value in the full name and social channel fields." />
+      <Attribute Name="iscasesensitive" Value="False" />
+      <Attribute Name="matchingentityname" Value="socialprofile" />
+      <Attribute Name="name" Value="Social profiles with same full name and social channel" />
+      <Attribute Name="excludeinactiverecords" Value="False" />
+    </Instance>
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="duplicateruleid" Value="21237acb-1501-e711-810e-e0071b6a9211" />
+      <Attribute Name="baseentityname" Value="smx_instrument" />
+      <Attribute Name="description" Value="" />
+      <Attribute Name="iscasesensitive" Value="False" />
+      <Attribute Name="matchingentityname" Value="smx_instrument" />
+      <Attribute Name="name" Value="Instrument Dupe Detect" />
+      <Attribute Name="excludeinactiverecords" Value="False" />
+    </Instance>
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="duplicateruleid" Value="ce5b28f4-1501-e711-810e-e0071b6a9211" />
+      <Attribute Name="baseentityname" Value="contact" />
+      <Attribute Name="description" Value="" />
+      <Attribute Name="iscasesensitive" Value="False" />
+      <Attribute Name="matchingentityname" Value="contact" />
+      <Attribute Name="name" Value="Contacts with the same first initial and last name" />
+      <Attribute Name="excludeinactiverecords" Value="False" />
+    </Instance>
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="duplicateruleid" Value="e027f314-1601-e711-810e-e0071b6a9211" />
+      <Attribute Name="baseentityname" Value="contact" />
+      <Attribute Name="description" Value="" />
+      <Attribute Name="iscasesensitive" Value="False" />
+      <Attribute Name="matchingentityname" Value="contact" />
+      <Attribute Name="name" Value="Contacts with the same last name and last 8 characters of the email address" />
+      <Attribute Name="excludeinactiverecords" Value="False" />
+    </Instance>
+  </Entity>
+  <Entity SchemaName="duplicaterulecondition">
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="baseattributename" Value="emailaddress1" />
+      <Attribute Name="duplicateruleconditionid" Value="06bef87a-dcb9-424b-b716-2d698275c6a4" />
+      <Attribute Name="ignoreblankvalues" Value="" />
+      <Attribute Name="matchingattributename" Value="emailaddress1" />
+      <Attribute Name="operatorcode" Value="0" />
+      <Attribute Name="operatorparam" Value="0" />
+      <Attribute Name="regardingobjectid" Value="duplicaterule=9c552bd0-52f0-41ea-a9fd-a3df4a399f4a" />
+    </Instance>
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="baseattributename" Value="emailaddress1" />
+      <Attribute Name="duplicateruleconditionid" Value="da07657c-8bc5-4013-a31a-5c18a65ea41d" />
+      <Attribute Name="ignoreblankvalues" Value="" />
+      <Attribute Name="matchingattributename" Value="emailaddress1" />
+      <Attribute Name="operatorcode" Value="0" />
+      <Attribute Name="operatorparam" Value="0" />
+      <Attribute Name="regardingobjectid" Value="duplicaterule=eb211e6a-e9b9-46f5-8db0-b1932db0fd9a" />
+    </Instance>
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="baseattributename" Value="emailaddress1" />
+      <Attribute Name="duplicateruleconditionid" Value="3a8c3fd9-fe15-4f0a-8184-c34dd29cf6ed" />
+      <Attribute Name="ignoreblankvalues" Value="" />
+      <Attribute Name="matchingattributename" Value="emailaddress1" />
+      <Attribute Name="operatorcode" Value="0" />
+      <Attribute Name="operatorparam" Value="0" />
+      <Attribute Name="regardingobjectid" Value="duplicaterule=0c56882e-35a2-4898-b094-8575f1368160" />
+    </Instance>
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="baseattributename" Value="name" />
+      <Attribute Name="duplicateruleconditionid" Value="f9c5087d-74fa-e611-8106-e0071b6700e1" />
+      <Attribute Name="ignoreblankvalues" Value="False" />
+      <Attribute Name="matchingattributename" Value="name" />
+      <Attribute Name="operatorcode" Value="0" />
+      <Attribute Name="operatorparam" Value="0" />
+      <Attribute Name="regardingobjectid" Value="duplicaterule=d8d2e6cc-3a9b-48f8-a0c6-b9a1f10b9fb4" />
+    </Instance>
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="baseattributename" Value="websiteurl" />
+      <Attribute Name="duplicateruleconditionid" Value="fac5087d-74fa-e611-8106-e0071b6700e1" />
+      <Attribute Name="ignoreblankvalues" Value="False" />
+      <Attribute Name="matchingattributename" Value="websiteurl" />
+      <Attribute Name="operatorcode" Value="0" />
+      <Attribute Name="operatorparam" Value="0" />
+      <Attribute Name="regardingobjectid" Value="duplicaterule=e68d2246-d8b0-4e85-967d-07d82a3d61eb" />
+    </Instance>
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="baseattributename" Value="telephone1" />
+      <Attribute Name="duplicateruleconditionid" Value="fbc5087d-74fa-e611-8106-e0071b6700e1" />
+      <Attribute Name="ignoreblankvalues" Value="False" />
+      <Attribute Name="matchingattributename" Value="telephone1" />
+      <Attribute Name="operatorcode" Value="0" />
+      <Attribute Name="operatorparam" Value="0" />
+      <Attribute Name="regardingobjectid" Value="duplicaterule=e4e8866a-97c2-4938-8b71-8743731e59c8" />
+    </Instance>
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="baseattributename" Value="telephone1" />
+      <Attribute Name="duplicateruleconditionid" Value="fdc5087d-74fa-e611-8106-e0071b6700e1" />
+      <Attribute Name="ignoreblankvalues" Value="False" />
+      <Attribute Name="matchingattributename" Value="telephone1" />
+      <Attribute Name="operatorcode" Value="0" />
+      <Attribute Name="operatorparam" Value="0" />
+      <Attribute Name="regardingobjectid" Value="duplicaterule=7fc828b5-5703-4320-95ae-38b835f9091b" />
+    </Instance>
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="baseattributename" Value="firstname" />
+      <Attribute Name="duplicateruleconditionid" Value="04c6087d-74fa-e611-8106-e0071b6700e1" />
+      <Attribute Name="ignoreblankvalues" Value="False" />
+      <Attribute Name="matchingattributename" Value="firstname" />
+      <Attribute Name="operatorcode" Value="0" />
+      <Attribute Name="operatorparam" Value="0" />
+      <Attribute Name="regardingobjectid" Value="duplicaterule=0c16fb72-201d-4581-9ed9-1d4ac969af81" />
+    </Instance>
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="baseattributename" Value="lastname" />
+      <Attribute Name="duplicateruleconditionid" Value="0dc6087d-74fa-e611-8106-e0071b6700e1" />
+      <Attribute Name="ignoreblankvalues" Value="False" />
+      <Attribute Name="matchingattributename" Value="lastname" />
+      <Attribute Name="operatorcode" Value="0" />
+      <Attribute Name="operatorparam" Value="0" />
+      <Attribute Name="regardingobjectid" Value="duplicaterule=0c16fb72-201d-4581-9ed9-1d4ac969af81" />
+    </Instance>
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="baseattributename" Value="profilefullname" />
+      <Attribute Name="duplicateruleconditionid" Value="13c6087d-74fa-e611-8106-e0071b6700e1" />
+      <Attribute Name="ignoreblankvalues" Value="False" />
+      <Attribute Name="matchingattributename" Value="profilefullname" />
+      <Attribute Name="operatorcode" Value="0" />
+      <Attribute Name="operatorparam" Value="0" />
+      <Attribute Name="regardingobjectid" Value="duplicaterule=b99f9d91-6bcd-4ae7-8585-d1ae2046622d" />
+    </Instance>
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="baseattributename" Value="community" />
+      <Attribute Name="duplicateruleconditionid" Value="17c6087d-74fa-e611-8106-e0071b6700e1" />
+      <Attribute Name="ignoreblankvalues" Value="False" />
+      <Attribute Name="matchingattributename" Value="community" />
+      <Attribute Name="operatorcode" Value="0" />
+      <Attribute Name="operatorparam" Value="0" />
+      <Attribute Name="regardingobjectid" Value="duplicaterule=b99f9d91-6bcd-4ae7-8585-d1ae2046622d" />
+    </Instance>
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="baseattributename" Value="smx_lab" />
+      <Attribute Name="duplicateruleconditionid" Value="22237acb-1501-e711-810e-e0071b6a9211" />
+      <Attribute Name="ignoreblankvalues" Value="False" />
+      <Attribute Name="matchingattributename" Value="smx_lab" />
+      <Attribute Name="operatorcode" Value="0" />
+      <Attribute Name="operatorparam" Value="" />
+      <Attribute Name="regardingobjectid" Value="duplicaterule=21237acb-1501-e711-810e-e0071b6a9211" />
+    </Instance>
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="baseattributename" Value="smx_model" />
+      <Attribute Name="duplicateruleconditionid" Value="23237acb-1501-e711-810e-e0071b6a9211" />
+      <Attribute Name="ignoreblankvalues" Value="False" />
+      <Attribute Name="matchingattributename" Value="smx_model" />
+      <Attribute Name="operatorcode" Value="0" />
+      <Attribute Name="operatorparam" Value="" />
+      <Attribute Name="regardingobjectid" Value="duplicaterule=21237acb-1501-e711-810e-e0071b6a9211" />
+    </Instance>
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="baseattributename" Value="firstname" />
+      <Attribute Name="duplicateruleconditionid" Value="cf5b28f4-1501-e711-810e-e0071b6a9211" />
+      <Attribute Name="ignoreblankvalues" Value="False" />
+      <Attribute Name="matchingattributename" Value="firstname" />
+      <Attribute Name="operatorcode" Value="1" />
+      <Attribute Name="operatorparam" Value="1" />
+      <Attribute Name="regardingobjectid" Value="duplicaterule=ce5b28f4-1501-e711-810e-e0071b6a9211" />
+    </Instance>
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="baseattributename" Value="lastname" />
+      <Attribute Name="duplicateruleconditionid" Value="d05b28f4-1501-e711-810e-e0071b6a9211" />
+      <Attribute Name="ignoreblankvalues" Value="False" />
+      <Attribute Name="matchingattributename" Value="lastname" />
+      <Attribute Name="operatorcode" Value="0" />
+      <Attribute Name="operatorparam" Value="" />
+      <Attribute Name="regardingobjectid" Value="duplicaterule=ce5b28f4-1501-e711-810e-e0071b6a9211" />
+    </Instance>
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="baseattributename" Value="lastname" />
+      <Attribute Name="duplicateruleconditionid" Value="e127f314-1601-e711-810e-e0071b6a9211" />
+      <Attribute Name="ignoreblankvalues" Value="False" />
+      <Attribute Name="matchingattributename" Value="lastname" />
+      <Attribute Name="operatorcode" Value="0" />
+      <Attribute Name="operatorparam" Value="" />
+      <Attribute Name="regardingobjectid" Value="duplicaterule=e027f314-1601-e711-810e-e0071b6a9211" />
+    </Instance>
+    <Instance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <Attribute Name="baseattributename" Value="emailaddress1" />
+      <Attribute Name="duplicateruleconditionid" Value="e227f314-1601-e711-810e-e0071b6a9211" />
+      <Attribute Name="ignoreblankvalues" Value="False" />
+      <Attribute Name="matchingattributename" Value="emailaddress1" />
+      <Attribute Name="operatorcode" Value="2" />
+      <Attribute Name="operatorparam" Value="8" />
+      <Attribute Name="regardingobjectid" Value="duplicaterule=e027f314-1601-e711-810e-e0071b6a9211" />
+    </Instance>
+  </Entity>
+</ImportedData>

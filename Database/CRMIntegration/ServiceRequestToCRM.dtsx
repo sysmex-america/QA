@@ -1,0 +1,1887 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/29/2017 3:19:07 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="SCRIBEDEV"
+  DTS:CreatorName="SONOMAPARTNERS\rjasinski"
+  DTS:DTSID="{7CE0F229-B090-4408-BC17-48AE550D732D}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.6020.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="LabToCRM"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="2"
+  DTS:VersionBuild="46"
+  DTS:VersionGUID="{ADB96A9E-C2AE-4143-95DA-0E4D86499CF5}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Metric]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{F0FA8B15-83CC-484F-A76C-D4F80CC5988D}"
+      DTS:ObjectName="Metric">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=dsql08r202.dev.sonomapartners.local;Initial Catalog=Metrix_M5_Pub;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-RefreshViews-{6FDAB3FB-0463-4941-BFB2-5D336E239100}dsql08r202.dev.sonomapartners.local.Metrix_M5_Pub;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MSCRM]"
+      DTS:CreationName="DynamicsCRM"
+      DTS:DTSID="{FCA5027E-287F-423C-8480-FD30A0F70D04}"
+      DTS:ObjectName="MSCRM">
+      <DTS:ObjectData>
+        <CrmConnectionManager
+          ConnectionString="AuthenticationType=OnlineFederation;ServiceEndpoint=Soap2011;DiscoveryServerUrl=https://disco.crm.dynamics.com;UserName=anargyrosa@sysmex.com;Domain=;OrganizationName=&quot;Sysmex QA&quot;;CrmServerUrl=https://sysmexqa.api.crm.dynamics.com;ProxyUsername=;ProxyMode=NoProxy;ProxyServer=;ProxyServerPort=0;BypassProxyOnLocal=False;HomeRealmUri=;ApiVersion=;ServiceTimeout=120;RetryOnIntermittentErrors=True;IgnoreCertificateErrors=False">
+          <EncryptedData
+            Type="http://www.w3.org/2001/04/xmlenc#Element"
+            Salt="+gpOkRrLuQ=="
+            IV="AWGYfMrt468=" xmlns="http://www.w3.org/2001/04/xmlenc#">
+            <EncryptionMethod
+              Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc" />
+            <CipherData>
+              <CipherValue>AWGYfMrt468brw+QzN6fpJnYYSH6nNwUX9pBFHIGpefneDM9HKQRLPkQkb3+evHK1srG4ZfK9uTAhBynqOtd6s7UGrH36JSehkVpQdzsGKHd5QuaOdZ/YBw3R7c4wjXZoI0V17KHU28=</CipherValue>
+            </CipherData>
+          </EncryptedData>
+        </CrmConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Staging]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{2E28AF3D-0DBB-402F-B992-5A999F446557}"
+      DTS:ObjectName="Staging">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DSQL12R201.dev.sonomapartners.local;Initial Catalog=SysmexStaging;Provider=SQLNCLI11;Integrated Security=SSPI;Application Name=SSIS-LabToCRM-{2E28AF3D-0DBB-402F-B992-5A999F446557}DSQL12R201.dev.sonomapartners.local.SysmexStaging;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F9B4970E-4CA7-4CCB-94F6-5C898EEC07AF}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="IntegrationExecutionLogID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{629B8BE3-C0D7-4FC7-91C5-EAABA4C084F8}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="IntegrationName">
+      <DTS:VariableValue
+        DTS:DataType="8">ServiceRequestToCRM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{59D72660-2CB2-46CE-A190-CA0AC2256545}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="LastRunDate">
+      <DTS:VariableValue
+        DTS:DataType="7">3/30/2017 12:38:42 PM</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Get Last Run Date"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{248EEAD1-C13F-4DB1-87DF-C3040EFA889B}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get Last Run Date"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2E28AF3D-0DBB-402F-B992-5A999F446557}"
+          SQLTask:SqlStatementSource="select max(StartDate) as LastRunDate from CRMIntegrationExecutionLog where IntegrationName = ? and StatusCode = 'S'"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="LastRunDate"
+            SQLTask:DtsVariableName="User::LastRunDate" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::IntegrationName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Service Request to CRM"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{7D50E7CC-5D37-4E1D-A86E-04D226FB0AE4}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Service Request to CRM"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\Service Request to CRM\Derived Column"
+              componentClassID="{49928E82-9C4E-49F0-AABE-3812B82707EC}"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Service Request to CRM\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Service Request to CRM\Derived Column.Inputs[Derived Column Input].Columns[smx_sapid]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="smx_sapid"
+                      lineageId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].Columns[smx_sapid]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Service Request to CRM\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Service Request to CRM\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Service Request to CRM\Derived Column.Outputs[Derived Column Output].Columns[LabSAPID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="128"
+                      lineageId="Package\Service Request to CRM\Derived Column.Outputs[Derived Column Output].Columns[LabSAPID]"
+                      name="LabSAPID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].Columns[smx_sapid]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">smx_sapid</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Service Request to CRM\Derived Column.Outputs[Derived Column Output].Columns[IntegrationExecutionLogID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Service Request to CRM\Derived Column.Outputs[Derived Column Output].Columns[IntegrationExecutionLogID]"
+                      name="IntegrationExecutionLogID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[User::IntegrationExecutionLogID]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[User::IntegrationExecutionLogID]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Service Request to CRM\Derived Column.Outputs[Derived Column Output].Columns[IntegrationName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="19"
+                      lineageId="Package\Service Request to CRM\Derived Column.Outputs[Derived Column Output].Columns[IntegrationName]"
+                      name="IntegrationName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[User::IntegrationName]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[User::IntegrationName]</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Service Request to CRM\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Service Request to CRM\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Service Request to CRM\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Service Request to CRM\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Service Request to CRM\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Service Request to CRM\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Service Request to CRM\Derived Column 1"
+              componentClassID="{49928E82-9C4E-49F0-AABE-3812B82707EC}"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column 1"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Service Request to CRM\Derived Column 1.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Service Request to CRM\Derived Column 1.Inputs[Derived Column Input].Columns[IsNew]"
+                      cachedDataType="bool"
+                      cachedName="IsNew"
+                      lineageId="Package\Service Request to CRM\MSCRM.Outputs[Default Output].Columns[IsNew]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Service Request to CRM\Derived Column 1.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Service Request to CRM\Derived Column 1.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Service Request to CRM\Derived Column 1.Outputs[Derived Column Output].Columns[RecordAction]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\Service Request to CRM\Derived Column 1.Outputs[Derived Column Output].Columns[RecordAction]"
+                      name="RecordAction"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\Service Request to CRM\MSCRM.Outputs[Default Output].Columns[IsNew]} ==  TRUE  ? "I" : "U"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">IsNew ==  TRUE  ? "I" : "U"</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Service Request to CRM\Derived Column 1.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Service Request to CRM\Derived Column 1.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Service Request to CRM\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Service Request to CRM\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Service Request to CRM\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Service Request to CRM\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Service Request to CRM\ErrorLog"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="ErrorLog"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[CRMIntegrationErrorLog]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Service Request to CRM\ErrorLog.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Staging]"
+                  connectionManagerRefId="Package.ConnectionManagers[Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Service Request to CRM\ErrorLog.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Service Request to CRM\ErrorLog.Inputs[OLE DB Destination Input].Columns[smx_metrixinstrumentid]"
+                      cachedDataType="wstr"
+                      cachedLength="32"
+                      cachedName="smx_metrixinstrumentid"
+                      externalMetadataColumnId="Package\Service Request to CRM\ErrorLog.Inputs[OLE DB Destination Input].ExternalColumns[ObjectID]"
+                      lineageId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].Columns[smx_metrixinstrumentid]" />
+                    <inputColumn
+                      refId="Package\Service Request to CRM\ErrorLog.Inputs[OLE DB Destination Input].Columns[CrmErrorMessage]"
+                      cachedDataType="wstr"
+                      cachedLength="2048"
+                      cachedName="CrmErrorMessage"
+                      externalMetadataColumnId="Package\Service Request to CRM\ErrorLog.Inputs[OLE DB Destination Input].ExternalColumns[ErrorMessage]"
+                      lineageId="Package\Service Request to CRM\MSCRM.Outputs[Error Output].Columns[CrmErrorMessage]" />
+                    <inputColumn
+                      refId="Package\Service Request to CRM\ErrorLog.Inputs[OLE DB Destination Input].Columns[IntegrationName]"
+                      cachedDataType="wstr"
+                      cachedLength="19"
+                      cachedName="IntegrationName"
+                      externalMetadataColumnId="Package\Service Request to CRM\ErrorLog.Inputs[OLE DB Destination Input].ExternalColumns[IntegrationName]"
+                      lineageId="Package\Service Request to CRM\Derived Column.Outputs[Derived Column Output].Columns[IntegrationName]" />
+                    <inputColumn
+                      refId="Package\Service Request to CRM\ErrorLog.Inputs[OLE DB Destination Input].Columns[IntegrationExecutionLogID]"
+                      cachedDataType="i4"
+                      cachedName="IntegrationExecutionLogID"
+                      externalMetadataColumnId="Package\Service Request to CRM\ErrorLog.Inputs[OLE DB Destination Input].ExternalColumns[CRMIntegrationExecutionLogID]"
+                      lineageId="Package\Service Request to CRM\Derived Column.Outputs[Derived Column Output].Columns[IntegrationExecutionLogID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\ErrorLog.Inputs[OLE DB Destination Input].ExternalColumns[IntegrationName]"
+                      dataType="wstr"
+                      length="100"
+                      name="IntegrationName" />
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\ErrorLog.Inputs[OLE DB Destination Input].ExternalColumns[CRMIntegrationExecutionLogID]"
+                      dataType="i4"
+                      name="CRMIntegrationExecutionLogID" />
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\ErrorLog.Inputs[OLE DB Destination Input].ExternalColumns[ObjectID]"
+                      dataType="wstr"
+                      length="100"
+                      name="ObjectID" />
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\ErrorLog.Inputs[OLE DB Destination Input].ExternalColumns[ErrorMessage]"
+                      dataType="wstr"
+                      length="2048"
+                      name="ErrorMessage" />
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\ErrorLog.Inputs[OLE DB Destination Input].ExternalColumns[ErrorDate]"
+                      dataType="dbTimeStamp"
+                      name="ErrorDate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Service Request to CRM\ErrorLog.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Service Request to CRM\ErrorLog.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Service Request to CRM\ErrorLog.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Service Request to CRM\ErrorLog.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Service Request to CRM\ErrorLog.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Service Request to CRM\ErrorLog.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Service Request to CRM\Metric"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Metric"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select
+	request_id as smx_rid, convert(nvarchar(10), req_type) as smx_type, left(cust_prob_descr, 200) as smx_name, req_status as smx_status, 
+	created_dttm as overriddencreatedon, product_id as smx_metrixinstrumentid,
+	[SAP ID] as smx_sapid, Months as smx_months
+from [dbo].[Z_DYNAMICS_METRIX_SERVICE_REQUESTS](nolock)
+where modified_dttm &gt;= ?</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"Parameter0:Input",{59D72660-2CB2-46CE-A190-CA0AC2256545};</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Service Request to CRM\Metric.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Metric]"
+                  connectionManagerRefId="Package.ConnectionManagers[Metric]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].Columns[smx_sapid]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].ExternalColumns[smx_sapid]"
+                      length="128"
+                      lineageId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].Columns[smx_sapid]"
+                      name="smx_sapid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].Columns[smx_metrixinstrumentid]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].ExternalColumns[smx_metrixinstrumentid]"
+                      length="32"
+                      lineageId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].Columns[smx_metrixinstrumentid]"
+                      name="smx_metrixinstrumentid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].Columns[smx_rid]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].ExternalColumns[smx_rid]"
+                      length="32"
+                      lineageId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].Columns[smx_rid]"
+                      name="smx_rid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].Columns[smx_type]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].ExternalColumns[smx_type]"
+                      length="128"
+                      lineageId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].Columns[smx_type]"
+                      name="smx_type"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].Columns[smx_name]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].ExternalColumns[smx_name]"
+                      lineageId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].Columns[smx_name]"
+                      name="smx_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].Columns[smx_status]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].ExternalColumns[smx_status]"
+                      length="32"
+                      lineageId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].Columns[smx_status]"
+                      name="smx_status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].Columns[overriddencreatedon]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].ExternalColumns[overriddencreatedon]"
+                      lineageId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].Columns[overriddencreatedon]"
+                      name="overriddencreatedon"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].Columns[smx_months]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].ExternalColumns[smx_months]"
+                      lineageId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].Columns[smx_months]"
+                      name="smx_months"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].ExternalColumns[smx_sapid]"
+                      dataType="wstr"
+                      length="128"
+                      name="smx_sapid" />
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].ExternalColumns[smx_metrixinstrumentid]"
+                      dataType="wstr"
+                      length="32"
+                      name="smx_metrixinstrumentid" />
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].ExternalColumns[smx_rid]"
+                      dataType="wstr"
+                      length="32"
+                      name="smx_rid" />
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].ExternalColumns[smx_type]"
+                      dataType="wstr"
+                      length="10"
+                      name="smx_type" />
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].ExternalColumns[smx_name]"
+                      dataType="nText"
+                      name="smx_name" />
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].ExternalColumns[smx_status]"
+                      dataType="wstr"
+                      length="32"
+                      name="smx_status" />
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].ExternalColumns[overriddencreatedon]"
+                      dataType="dbTimeStamp"
+                      name="overriddencreatedon" />
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].ExternalColumns[smx_months]"
+                      dataType="i4"
+                      name="smx_months" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Error Output].Columns[smx_rid]"
+                      dataType="wstr"
+                      length="32"
+                      lineageId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Error Output].Columns[smx_rid]"
+                      name="smx_rid" />
+                    <outputColumn
+                      refId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Error Output].Columns[smx_type]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Error Output].Columns[smx_type]"
+                      name="smx_type" />
+                    <outputColumn
+                      refId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Error Output].Columns[smx_name]"
+                      dataType="nText"
+                      lineageId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Error Output].Columns[smx_name]"
+                      name="smx_name" />
+                    <outputColumn
+                      refId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Error Output].Columns[smx_status]"
+                      dataType="wstr"
+                      length="32"
+                      lineageId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Error Output].Columns[smx_status]"
+                      name="smx_status" />
+                    <outputColumn
+                      refId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Error Output].Columns[overriddencreatedon]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Error Output].Columns[overriddencreatedon]"
+                      name="overriddencreatedon" />
+                    <outputColumn
+                      refId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Error Output].Columns[smx_sapid]"
+                      dataType="wstr"
+                      length="128"
+                      lineageId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Error Output].Columns[smx_sapid]"
+                      name="smx_sapid" />
+                    <outputColumn
+                      refId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Error Output].Columns[smx_metrixinstrumentid]"
+                      dataType="wstr"
+                      length="32"
+                      lineageId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Error Output].Columns[smx_metrixinstrumentid]"
+                      name="smx_metrixinstrumentid" />
+                    <outputColumn
+                      refId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Error Output].Columns[smx_months]"
+                      dataType="i4"
+                      lineageId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Error Output].Columns[smx_months]"
+                      name="smx_months" />
+                    <outputColumn
+                      refId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Service Request to CRM\MSCRM"
+              componentClassID="{874F7595-FB5F-40FF-96AF-FBFF8250E3EF}"
+              contactInfo="KingswaySoft Inc.; http://www.kingswaysoft.com; support@kingswaysoft.com; Copyright 2011-2017 KingswaySoft Inc."
+              description="Populate data into Microsoft Dynamics CRM."
+              name="MSCRM"
+              usesDispositions="true"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Destination entity to write data."
+                  expressionType="Notify"
+                  name="DestinationEntity">smx_servicerequest</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how data is written to CRM server."
+                  name="ActionType"
+                  typeConverter="KingswaySoft.IntegrationToolkit.DynamicsCrm.CrmDestinationActionType, KingswaySoft.IntegrationToolkit.DynamicsCrm, Version=1.0.2012.0, Culture=neutral, PublicKeyToken=705df8e0751bcea7">5</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the values of CRM lookup fields should be removed if the reference records cannot be found. "
+                  expressionType="Notify"
+                  name="RemoveUnresolvableReferences">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether duplicate detection should be enabled when creating or updating CRM records. Duplicate records are determined by the duplicate detection rules and settings defined in Microsoft Dynamics CRM."
+                  expressionType="Notify"
+                  name="EnableDuplicateDetection">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the matching criteria to be used when Upsert action is chosen."
+                  expressionType="Notify"
+                  name="UpsertMatchingCriteria"
+                  typeConverter="KingswaySoft.IntegrationToolkit.Common.DescriptiveEnumTypeConverter`1[[KingswaySoft.IntegrationToolkit.DynamicsCrm.CrmUpsertMatchingCriteria, KingswaySoft.IntegrationToolkit.DynamicsCrm, Version=1.0.2012.0, Culture=neutral, PublicKeyToken=705df8e0751bcea7]], KingswaySoft.IntegrationToolkit.DynamicsCrm, Version=1.0.2012.0, Culture=neutral, PublicKeyToken=705df8e0751bcea7">3</property>
+                <property
+                  dataType="System.String"
+                  description="Specify the matching fields to be used to determine the matching records that exist in CRM when Manually Specify option is chosen for Upsert action."
+                  expressionType="Notify"
+                  name="UpsertMatchingFields">smx_rid</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether to ignore those NULL-valued fields."
+                  expressionType="Notify"
+                  name="IgnoreNullValuedFields">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether to ignore those fields that have no value changes in the target system. "
+                  expressionType="Notify"
+                  name="IgnoreUnchangedFields">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specify whether to remove those invalid characters before writing to CRM."
+                  expressionType="Notify"
+                  name="RemoveInvalidCharacters">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specify the flag field(s) that are used to track the source of changes. The field(s) will not posted to CRM server unless there are changes to other fields if specified. &quot;Ignore Unchange Fields&quot; option is required in order for the specified flag field(s) to work. "
+                  expressionType="Notify"
+                  name="ChangeFlagFields"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify what action will be taken when multiple matches are found with Upsert action."
+                  expressionType="Notify"
+                  name="HandlingOfMultipleMatches"
+                  typeConverter="KingswaySoft.IntegrationToolkit.Common.DescriptiveEnumTypeConverter`1[[KingswaySoft.IntegrationToolkit.DynamicsCrm.CrmUpsertHandlingOfMultipleMatches, KingswaySoft.IntegrationToolkit.DynamicsCrm, Version=1.0.2012.0, Culture=neutral, PublicKeyToken=705df8e0751bcea7]], KingswaySoft.IntegrationToolkit.DynamicsCrm, Version=1.0.2012.0, Culture=neutral, PublicKeyToken=705df8e0751bcea7">1</property>
+                <property
+                  dataType="System.String"
+                  description="Workflow to be executed."
+                  expressionType="Notify"
+                  name="Workflow"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of records to be sent to Microsoft Dynamics CRM in each batch (CRM 2011 Update Rollup 12 or later is required if batch size is greater than 1)."
+                  expressionType="Notify"
+                  name="BatchSize">200</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether datetime values should be sent to CRM server in UTC format."
+                  expressionType="Notify"
+                  name="SendDateTimeInUtcFormat">false</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">KingswaySoft.IntegrationToolkit.DynamicsCrm.CrmDestinationComponent, KingswaySoft.IntegrationToolkit.DynamicsCrm, Version=1.0.2012.0, Culture=neutral, PublicKeyToken=705df8e0751bcea7</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Service Request to CRM\MSCRM.Connections[DynamicsCRM]"
+                  connectionManagerID="Package.ConnectionManagers[MSCRM]"
+                  connectionManagerRefId="Package.ConnectionManagers[MSCRM]"
+                  description="Dynamics CRM Connection Manager"
+                  name="DynamicsCRM" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Service Request to CRM\MSCRM.Inputs[Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="RedirectRow"
+                  hasSideEffects="true"
+                  name="Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Service Request to CRM\MSCRM.Inputs[Input].Columns[overriddencreatedon]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="overriddencreatedon"
+                      externalMetadataColumnId="Package\Service Request to CRM\MSCRM.Inputs[Input].ExternalColumns[overriddencreatedon]"
+                      lineageId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].Columns[overriddencreatedon]" />
+                    <inputColumn
+                      refId="Package\Service Request to CRM\MSCRM.Inputs[Input].Columns[smx_metrixinstrumentid]"
+                      cachedDataType="wstr"
+                      cachedLength="32"
+                      cachedName="smx_metrixinstrumentid"
+                      externalMetadataColumnId="Package\Service Request to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_metrixinstrumentid]"
+                      lineageId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].Columns[smx_metrixinstrumentid]" />
+                    <inputColumn
+                      refId="Package\Service Request to CRM\MSCRM.Inputs[Input].Columns[smx_months]"
+                      cachedDataType="i4"
+                      cachedName="smx_months"
+                      externalMetadataColumnId="Package\Service Request to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_months]"
+                      lineageId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].Columns[smx_months]" />
+                    <inputColumn
+                      refId="Package\Service Request to CRM\MSCRM.Inputs[Input].Columns[smx_name]"
+                      cachedDataType="nText"
+                      cachedName="smx_name"
+                      externalMetadataColumnId="Package\Service Request to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_name]"
+                      lineageId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].Columns[smx_name]" />
+                    <inputColumn
+                      refId="Package\Service Request to CRM\MSCRM.Inputs[Input].Columns[smx_rid]"
+                      cachedDataType="wstr"
+                      cachedLength="32"
+                      cachedName="smx_rid"
+                      externalMetadataColumnId="Package\Service Request to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_rid]"
+                      lineageId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].Columns[smx_rid]" />
+                    <inputColumn
+                      refId="Package\Service Request to CRM\MSCRM.Inputs[Input].Columns[smx_sapid]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="smx_sapid"
+                      externalMetadataColumnId="Package\Service Request to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_sapid]"
+                      lineageId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].Columns[smx_sapid]" />
+                    <inputColumn
+                      refId="Package\Service Request to CRM\MSCRM.Inputs[Input].Columns[smx_status]"
+                      cachedDataType="wstr"
+                      cachedLength="32"
+                      cachedName="smx_status"
+                      externalMetadataColumnId="Package\Service Request to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_status]"
+                      lineageId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].Columns[smx_status]" />
+                    <inputColumn
+                      refId="Package\Service Request to CRM\MSCRM.Inputs[Input].Columns[smx_type]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="smx_type"
+                      externalMetadataColumnId="Package\Service Request to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_type]"
+                      lineageId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].Columns[smx_type]" />
+                    <inputColumn
+                      refId="Package\Service Request to CRM\MSCRM.Inputs[Input].Columns[LabSAPID]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="LabSAPID"
+                      externalMetadataColumnId="Package\Service Request to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_lab]"
+                      lineageId="Package\Service Request to CRM\Derived Column.Outputs[Derived Column Output].Columns[LabSAPID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\MSCRM.Inputs[Input].ExternalColumns[createdby]"
+                      dataType="guid"
+                      name="createdby">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Lookup</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes">systemuser</property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Createable">true</property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Updateable">false</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\MSCRM.Inputs[Input].ExternalColumns[importsequencenumber]"
+                      dataType="i4"
+                      name="importsequencenumber">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Integer</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Createable">true</property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Updateable">false</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\MSCRM.Inputs[Input].ExternalColumns[overriddencreatedon]"
+                      dataType="dbTimeStamp"
+                      name="overriddencreatedon">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">DateTime</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Createable">true</property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Updateable">false</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\MSCRM.Inputs[Input].ExternalColumns[ownerid]"
+                      dataType="guid"
+                      name="ownerid">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Owner</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes">systemuser;team</property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Createable">true</property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Updateable">true</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\MSCRM.Inputs[Input].ExternalColumns[owneridtype]"
+                      dataType="wstr"
+                      length="64"
+                      name="owneridtype">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">EntityName</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Createable">true</property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Updateable">true</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_lab]"
+                      dataType="guid"
+                      name="smx_lab">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Lookup</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes">smx_lab</property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Createable">true</property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Updateable">true</property>
+                        <property
+                          dataType="System.String"
+                          name="TextLookup">&lt;TextLookupSetting&gt;
+  &lt;IgnoreCase&gt;true&lt;/IgnoreCase&gt;
+  &lt;CacheStrategy&gt;FullCache&lt;/CacheStrategy&gt;
+  &lt;LookupTargets&gt;
+    &lt;LookupTarget&gt;
+      &lt;TargetEntity&gt;smx_lab&lt;/TargetEntity&gt;
+      &lt;TargetTextField&gt;smx_sapid&lt;/TargetTextField&gt;
+    &lt;/LookupTarget&gt;
+  &lt;/LookupTargets&gt;
+&lt;/TextLookupSetting&gt;</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_metrixinstrumentid]"
+                      dataType="guid"
+                      name="smx_metrixinstrumentid">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Lookup</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes">smx_instrument</property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Createable">true</property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Updateable">true</property>
+                        <property
+                          dataType="System.String"
+                          name="TextLookup">&lt;TextLookupSetting&gt;
+  &lt;IgnoreCase&gt;true&lt;/IgnoreCase&gt;
+  &lt;CacheStrategy&gt;FullCache&lt;/CacheStrategy&gt;
+  &lt;LookupTargets&gt;
+    &lt;LookupTarget&gt;
+      &lt;TargetEntity&gt;smx_instrument&lt;/TargetEntity&gt;
+      &lt;TargetTextField&gt;smx_metrixinstrumentid&lt;/TargetTextField&gt;
+    &lt;/LookupTarget&gt;
+  &lt;/LookupTargets&gt;
+&lt;/TextLookupSetting&gt;</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_months]"
+                      dataType="i4"
+                      name="smx_months">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Integer</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Createable">true</property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Updateable">true</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_name]"
+                      dataType="wstr"
+                      length="200"
+                      name="smx_name">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">String</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Createable">true</property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Updateable">true</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_rid]"
+                      dataType="wstr"
+                      length="12"
+                      name="smx_rid">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">String</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Createable">true</property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Updateable">true</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_sapid]"
+                      dataType="wstr"
+                      length="50"
+                      name="smx_sapid">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">String</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Createable">true</property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Updateable">true</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_servicerequestid]"
+                      dataType="guid"
+                      name="smx_servicerequestid">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Uniqueidentifier</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Createable">true</property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Updateable">true</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_status]"
+                      dataType="wstr"
+                      length="10"
+                      name="smx_status">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">String</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Createable">true</property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Updateable">true</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\MSCRM.Inputs[Input].ExternalColumns[smx_type]"
+                      dataType="wstr"
+                      length="10"
+                      name="smx_type">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">String</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Createable">true</property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Updateable">true</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\MSCRM.Inputs[Input].ExternalColumns[statecode]"
+                      dataType="i4"
+                      name="statecode">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">State</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Createable">true</property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Updateable">true</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\MSCRM.Inputs[Input].ExternalColumns[statuscode]"
+                      dataType="i4"
+                      name="statuscode">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Status</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Createable">true</property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Updateable">true</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\MSCRM.Inputs[Input].ExternalColumns[timezoneruleversionnumber]"
+                      dataType="i4"
+                      name="timezoneruleversionnumber">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Integer</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Createable">true</property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Updateable">true</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\MSCRM.Inputs[Input].ExternalColumns[utcconversiontimezonecode]"
+                      dataType="i4"
+                      name="utcconversiontimezonecode">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CrmFieldType">Integer</property>
+                        <property
+                          dataType="System.String"
+                          name="LookupTypes"></property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Createable">true</property>
+                        <property
+                          dataType="System.Boolean"
+                          name="Updateable">true</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Service Request to CRM\MSCRM.Outputs[Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error Output"
+                  synchronousInputId="Package\Service Request to CRM\MSCRM.Inputs[Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Service Request to CRM\MSCRM.Outputs[Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Service Request to CRM\MSCRM.Outputs[Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Service Request to CRM\MSCRM.Outputs[Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Service Request to CRM\MSCRM.Outputs[Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Service Request to CRM\MSCRM.Outputs[Error Output].Columns[CrmErrorMessage]"
+                      dataType="wstr"
+                      length="2048"
+                      lineageId="Package\Service Request to CRM\MSCRM.Outputs[Error Output].Columns[CrmErrorMessage]"
+                      name="CrmErrorMessage" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Service Request to CRM\MSCRM.Outputs[Default Output]"
+                  exclusionGroup="1"
+                  name="Default Output"
+                  synchronousInputId="Package\Service Request to CRM\MSCRM.Inputs[Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Service Request to CRM\MSCRM.Outputs[Default Output].Columns[CrmRecordId]"
+                      dataType="guid"
+                      lineageId="Package\Service Request to CRM\MSCRM.Outputs[Default Output].Columns[CrmRecordId]"
+                      name="CrmRecordId" />
+                    <outputColumn
+                      refId="Package\Service Request to CRM\MSCRM.Outputs[Default Output].Columns[IsNew]"
+                      dataType="bool"
+                      lineageId="Package\Service Request to CRM\MSCRM.Outputs[Default Output].Columns[IsNew]"
+                      name="IsNew" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Service Request to CRM\Success"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Success"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[CRMIntegrationSuccessLog]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Service Request to CRM\Success.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Staging]"
+                  connectionManagerRefId="Package.ConnectionManagers[Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Service Request to CRM\Success.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Service Request to CRM\Success.Inputs[OLE DB Destination Input].Columns[IntegrationName]"
+                      cachedDataType="wstr"
+                      cachedLength="19"
+                      cachedName="IntegrationName"
+                      externalMetadataColumnId="Package\Service Request to CRM\Success.Inputs[OLE DB Destination Input].ExternalColumns[IntegrationName]"
+                      lineageId="Package\Service Request to CRM\Derived Column.Outputs[Derived Column Output].Columns[IntegrationName]" />
+                    <inputColumn
+                      refId="Package\Service Request to CRM\Success.Inputs[OLE DB Destination Input].Columns[RecordAction]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="RecordAction"
+                      externalMetadataColumnId="Package\Service Request to CRM\Success.Inputs[OLE DB Destination Input].ExternalColumns[RecordAction]"
+                      lineageId="Package\Service Request to CRM\Derived Column 1.Outputs[Derived Column Output].Columns[RecordAction]" />
+                    <inputColumn
+                      refId="Package\Service Request to CRM\Success.Inputs[OLE DB Destination Input].Columns[CrmRecordId]"
+                      cachedDataType="guid"
+                      cachedName="CrmRecordId"
+                      externalMetadataColumnId="Package\Service Request to CRM\Success.Inputs[OLE DB Destination Input].ExternalColumns[CRMID]"
+                      lineageId="Package\Service Request to CRM\MSCRM.Outputs[Default Output].Columns[CrmRecordId]" />
+                    <inputColumn
+                      refId="Package\Service Request to CRM\Success.Inputs[OLE DB Destination Input].Columns[smx_rid]"
+                      cachedDataType="wstr"
+                      cachedLength="32"
+                      cachedName="smx_rid"
+                      externalMetadataColumnId="Package\Service Request to CRM\Success.Inputs[OLE DB Destination Input].ExternalColumns[ObjectID]"
+                      lineageId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output].Columns[smx_rid]" />
+                    <inputColumn
+                      refId="Package\Service Request to CRM\Success.Inputs[OLE DB Destination Input].Columns[IntegrationExecutionLogID]"
+                      cachedDataType="i4"
+                      cachedName="IntegrationExecutionLogID"
+                      externalMetadataColumnId="Package\Service Request to CRM\Success.Inputs[OLE DB Destination Input].ExternalColumns[CRMIntegrationExecutionLogID]"
+                      lineageId="Package\Service Request to CRM\Derived Column.Outputs[Derived Column Output].Columns[IntegrationExecutionLogID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\Success.Inputs[OLE DB Destination Input].ExternalColumns[IntegrationName]"
+                      dataType="wstr"
+                      length="100"
+                      name="IntegrationName" />
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\Success.Inputs[OLE DB Destination Input].ExternalColumns[CRMIntegrationExecutionLogID]"
+                      dataType="i4"
+                      name="CRMIntegrationExecutionLogID" />
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\Success.Inputs[OLE DB Destination Input].ExternalColumns[ObjectID]"
+                      dataType="wstr"
+                      length="100"
+                      name="ObjectID" />
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\Success.Inputs[OLE DB Destination Input].ExternalColumns[CRMID]"
+                      dataType="guid"
+                      name="CRMID" />
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\Success.Inputs[OLE DB Destination Input].ExternalColumns[RecordAction]"
+                      dataType="wstr"
+                      length="1"
+                      name="RecordAction" />
+                    <externalMetadataColumn
+                      refId="Package\Service Request to CRM\Success.Inputs[OLE DB Destination Input].ExternalColumns[ProcessDate]"
+                      dataType="dbTimeStamp"
+                      name="ProcessDate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Service Request to CRM\Success.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Service Request to CRM\Success.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Service Request to CRM\Success.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Service Request to CRM\Success.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Service Request to CRM\Success.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Service Request to CRM\Success.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Service Request to CRM.Paths[Default Output]"
+              endId="Package\Service Request to CRM\Derived Column 1.Inputs[Derived Column Input]"
+              name="Default Output"
+              startId="Package\Service Request to CRM\MSCRM.Outputs[Default Output]" />
+            <path
+              refId="Package\Service Request to CRM.Paths[Derived Column Output]"
+              endId="Package\Service Request to CRM\MSCRM.Inputs[Input]"
+              name="Derived Column Output"
+              startId="Package\Service Request to CRM\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Service Request to CRM.Paths[Derived Column Output1]"
+              endId="Package\Service Request to CRM\Success.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Service Request to CRM\Derived Column 1.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Service Request to CRM.Paths[Error Output]"
+              endId="Package\Service Request to CRM\ErrorLog.Inputs[OLE DB Destination Input]"
+              name="Error Output"
+              startId="Package\Service Request to CRM\MSCRM.Outputs[Error Output]" />
+            <path
+              refId="Package\Service Request to CRM.Paths[OLE DB Source Output]"
+              endId="Package\Service Request to CRM\Derived Column.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\Service Request to CRM\Metric.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Start Execution Log"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{EDCA4F3B-A1BA-4BC9-932E-D38AB3ACA291}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Start Execution Log"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2E28AF3D-0DBB-402F-B992-5A999F446557}"
+          SQLTask:SqlStatementSource="insert CRMIntegrationExecutionLog (IntegrationName, StartDate, StatusCode, StatusMessage)&#xA;values (?, getdate(), 'P', 'Processing');&#xA;select @@identity as IntegrationExecutionLogID;"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="IntegrationExecutionLogID"
+            SQLTask:DtsVariableName="User::IntegrationExecutionLogID" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::IntegrationName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Stop Execution Log"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{2329E1DA-9ECE-4FA5-9247-E5DC3BEFFD16}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Stop Execution Log"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2E28AF3D-0DBB-402F-B992-5A999F446557}"
+          SQLTask:SqlStatementSource="update CRMIntegrationExecutionLog set StatusCode = 'S', StatusMessage = 'Completed Succesfully', EndDate = getdate() where CRMIntegrationExecutionLogID = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::IntegrationExecutionLogID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{C2A9D132-CE9D-4E14-9959-AC826632997C}"
+      DTS:From="Package\Get Last Run Date"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Start Execution Log" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{01B131D2-5077-44B2-9B75-A3C3D7F81588}"
+      DTS:From="Package\Start Execution Log"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Service Request to CRM" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{FD7AD89C-9D86-4836-BA68-236BB0EA37BC}"
+      DTS:From="Package\Service Request to CRM"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Stop Execution Log" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="174,44"
+          Id="Package\Get Last Run Date"
+          TopLeft="15.5,5.5" />
+        <NodeLayout
+          Size="191,42"
+          Id="Package\Service Request to CRM"
+          TopLeft="7.5,178.216981132075" />
+        <NodeLayout
+          Size="173,44"
+          Id="Package\Start Execution Log"
+          TopLeft="15.5754716981132,87.3867924528302" />
+        <NodeLayout
+          Size="169,42"
+          Id="Package\Stop Execution Log"
+          TopLeft="16,277" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="102.287735849057,49.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.8867924528302"
+              Start="0,0"
+              End="0,30.3867924528302">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.3867924528302" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="102.537735849057,131.38679245283">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46.8301886792448"
+              Start="0,0"
+              End="0,39.3301886792448">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.3301886792448" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="101.75,220.216981132075">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56.783018867925"
+              Start="0,0"
+              End="0,49.283018867925">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.283018867925" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Service Request to CRM">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="116,42"
+          Id="Package\Service Request to CRM\Success"
+          TopLeft="447,385" />
+        <NodeLayout
+          Size="119,42"
+          Id="Package\Service Request to CRM\ErrorLog"
+          TopLeft="213,384" />
+        <NodeLayout
+          Size="114,42"
+          Id="Package\Service Request to CRM\MSCRM"
+          TopLeft="221,284" />
+        <NodeLayout
+          Size="108,42"
+          Id="Package\Service Request to CRM\Metric"
+          TopLeft="227,97" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Service Request to CRM\Derived Column"
+          TopLeft="204,189" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Service Request to CRM\Derived Column 1"
+          TopLeft="428,289" />
+        <EdgeLayout
+          Id="Package\Service Request to CRM.Paths[OLE DB Source Output]"
+          TopLeft="281,139">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50"
+              Start="0,0"
+              End="0,42.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Service Request to CRM.Paths[Error Output]"
+          TopLeft="275.25,326">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,58"
+              Start="0,0"
+              End="0,50.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-28.33638671875,19.533203125,56.6727734375,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Service Request to CRM.Paths[Derived Column Output1]"
+          TopLeft="507.25,331">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,54"
+              Start="0,0"
+              End="0,46.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Service Request to CRM.Paths[Derived Column Output]"
+          TopLeft="279.5,231">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53"
+              Start="0,0"
+              End="0,45.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Service Request to CRM.Paths[Default Output]"
+          TopLeft="335,307.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="93,0"
+              Start="0,0"
+              End="85.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="85.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Service Request to CRM\Success">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Service Request to CRM\ErrorLog">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Service Request to CRM\Metric">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
