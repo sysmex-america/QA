@@ -83,14 +83,14 @@ namespace Sysmex.Crm.Plugins.Logic
                     throw new InvalidPluginExecutionException($"Sales Order {salesOrderId} does not exist");
                 }
 
-                var lineItems = GetLineItems(salesOrderId);
+                var lineItems = GetLineItems(salesOrder);
 
                 return CreateRequest(salesOrder, lineItems);
             }
 
 
 
-            private IEnumerable<new_cpq_lineitem_tmp> GetLineItems(Guid salesOrderId)
+            private IEnumerable<new_cpq_lineitem_tmp> GetLineItems(smx_salesorder salesOrder)
             {
                 var fetch = $@"<fetch>
                   <entity name='new_cpq_lineitem_tmp'>
@@ -105,16 +105,41 @@ namespace Sysmex.Crm.Plugins.Logic
                         </filter>
                     </link-entity>
                     <filter type='and'>
-                        <condition attribute='smx_salesorderid' operator='eq' value='{{{salesOrderId}}}'/>
+                        <condition attribute='smx_salesorderid' operator='eq' value='{{{salesOrder.Id}}}'/>
                          </filter>
                    <filter type='and'>
                           <condition attribute='new_producttype' operator='ne' value='Service' />
+                          {GetProductTypeFiltersByOrderReason(salesOrder.smx_OrderReason)}
                            </filter>
                 </entity>
             </fetch>";
 
                 return _orgService.RetrieveMultiple<new_cpq_lineitem_tmp>(new FetchExpression(fetch));
             }
+
+        string GetProductTypeFiltersByOrderReason(OptionSetValue orderReason)
+        {
+            if (orderReason != null)
+            {
+                switch ((smx_orderreason)orderReason.Value)
+                {
+                    case smx_orderreason.COPurchaseAInstrumentOnly:
+                    case smx_orderreason.COPurchaseBInstrmtOptService:
+                    case smx_orderreason.COLeaseAInstrumentOnly:
+                    case smx_orderreason.COLeaseBInstrumentService:
+                    case smx_orderreason.COLabPurchaseAInstrumentOnly:
+                    case smx_orderreason.COLABPurchaseBInstrmtOptService:
+                    case smx_orderreason.COPurchaseADistributor:
+                    case smx_orderreason.COPurchaseBDistributor:
+                    case smx_orderreason.CODonation:
+                        return @"<condition attribute='new_producttype' operator='ne' value='Reagents' />
+                                 <condition attribute='new_producttype' operator='ne' value='Consumables' />";
+                }
+            }
+
+            return string.Empty;
+        }
+
 
             private string RetrieveSAPEndpointURL()
             {
