@@ -61,7 +61,7 @@ namespace Sysmex.Crm.Plugins.Logic
                         <attribute name='smx_distributionchannel' />
                         <attribute name='smx_sapnumber' />
                     </link-entity>
-                    <link-entity name='smx_address' from='smx_addressid' to='smx_lablocationid' link-type='outer' alias='smx_lablocation'>
+                    <link-entity name='smx_address' from='smx_addressid' to='smx_instrumentshiptoidid' link-type='outer' alias='smx_instrumentshipto'>
                         <attribute name='smx_sapnumber' />
                     </link-entity>
                     <link-entity name='smx_address' from='smx_addressid' to='smx_billtoaddressid' link-type='outer' alias='smx_billtoaddress'>
@@ -83,14 +83,14 @@ namespace Sysmex.Crm.Plugins.Logic
                     throw new InvalidPluginExecutionException($"Sales Order {salesOrderId} does not exist");
                 }
 
-                var lineItems = GetLineItems(salesOrderId);
+                var lineItems = GetLineItems(salesOrder);
 
                 return CreateRequest(salesOrder, lineItems);
             }
 
 
 
-            private IEnumerable<new_cpq_lineitem_tmp> GetLineItems(Guid salesOrderId)
+            private IEnumerable<new_cpq_lineitem_tmp> GetLineItems(smx_salesorder salesOrder)
             {
                 var fetch = $@"<fetch>
                   <entity name='new_cpq_lineitem_tmp'>
@@ -105,16 +105,41 @@ namespace Sysmex.Crm.Plugins.Logic
                         </filter>
                     </link-entity>
                     <filter type='and'>
-                        <condition attribute='smx_salesorderid' operator='eq' value='{{{salesOrderId}}}'/>
+                        <condition attribute='smx_salesorderid' operator='eq' value='{{{salesOrder.Id}}}'/>
                          </filter>
                    <filter type='and'>
                           <condition attribute='new_producttype' operator='ne' value='Service' />
+                          {GetProductTypeFiltersByOrderReason(salesOrder.smx_OrderReason)}
                            </filter>
                 </entity>
             </fetch>";
 
                 return _orgService.RetrieveMultiple<new_cpq_lineitem_tmp>(new FetchExpression(fetch));
             }
+
+        string GetProductTypeFiltersByOrderReason(OptionSetValue orderReason)
+        {
+            if (orderReason != null)
+            {
+                switch ((smx_orderreason)orderReason.Value)
+                {
+                    case smx_orderreason.COPurchaseAInstrumentOnly:
+                    case smx_orderreason.COPurchaseBInstrmtOptService:
+                    case smx_orderreason.COLeaseAInstrumentOnly:
+                    case smx_orderreason.COLeaseBInstrumentService:
+                    case smx_orderreason.COLabPurchaseAInstrumentOnly:
+                    case smx_orderreason.COLABPurchaseBInstrmtOptService:
+                    case smx_orderreason.COPurchaseADistributor:
+                    case smx_orderreason.COPurchaseBDistributor:
+                    case smx_orderreason.CODonation:
+                        return @"<condition attribute='new_producttype' operator='ne' value='Reagents' />
+                                 <condition attribute='new_producttype' operator='ne' value='Consumables' />";
+                }
+            }
+
+            return string.Empty;
+        }
+
 
             private string RetrieveSAPEndpointURL()
             {
@@ -225,11 +250,11 @@ namespace Sysmex.Crm.Plugins.Logic
                     SALES_ORG = salesOrder.GetAliasedAttributeValue<string>("smx_soldtoaddress.smx_salesorganization"),
                     DISTR_CHAN = "10",
                     SOLD_TO_PARTY = salesOrder.GetAliasedAttributeValue<string>("smx_soldtoaddress.smx_sapnumber"),
-                    SHIP_TO_PARTY = salesOrder.GetAliasedAttributeValue<string>("smx_lablocation.smx_sapnumber"),
+                    SHIP_TO_PARTY = salesOrder.GetAliasedAttributeValue<string>("smx_instrumentshipto.smx_sapnumber"),
                     BILL_TO_PARTY = salesOrder.GetAliasedAttributeValue<string>("smx_billtoaddress.smx_sapnumber"),
                     PAYER = salesOrder.GetAliasedAttributeValue<string>("smx_payeraddress.smx_sapnumber"),
                     PURCH_NO_C = salesOrder.GetAttributeValue<string>("smx_purchaseorder"),
-                    PURCH_DATE = salesOrder.GetAttributeValue<DateTime?>("smx_purchaseorderdate")?.ToString("yyyyMMdd"),
+                    PURCH_DATE = salesOrder.GetAttributeValue<DateTime?>("smx_purchaseorderdate")?.ToString("yyyy-MM-dd"),
                     ZMINMBILL = salesOrder.GetAttributeValue<string>("smx_minimummonthlybilling"),
                     ZSTCOM = salesOrder.GetAttributeValue<string>("smx_standardcontractcompliance"),
                     ZSITES = CountOpportunityLabs(salesOrder.GetAliasedAttributeValue<Guid?>("opportunity.opportunityid")),
