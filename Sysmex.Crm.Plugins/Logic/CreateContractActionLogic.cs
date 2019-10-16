@@ -61,7 +61,7 @@ namespace Sysmex.Crm.Plugins.Logic
                         <attribute name='smx_distributionchannel' />
                         <attribute name='smx_sapnumber' />
                     </link-entity>
-                    <link-entity name='smx_address' from='smx_addressid' to='smx_lablocationid' link-type='outer' alias='smx_lablocation'>
+                    <link-entity name='smx_address' from='smx_addressid' to='smx_instrumentshiptoidid' link-type='outer' alias='smx_instrumentshipto'>
                         <attribute name='smx_sapnumber' />
                     </link-entity>
                     <link-entity name='smx_address' from='smx_addressid' to='smx_billtoaddressid' link-type='outer' alias='smx_billtoaddress'>
@@ -250,11 +250,11 @@ namespace Sysmex.Crm.Plugins.Logic
                     SALES_ORG = salesOrder.GetAliasedAttributeValue<string>("smx_soldtoaddress.smx_salesorganization"),
                     DISTR_CHAN = "10",
                     SOLD_TO_PARTY = salesOrder.GetAliasedAttributeValue<string>("smx_soldtoaddress.smx_sapnumber"),
-                    SHIP_TO_PARTY = salesOrder.GetAliasedAttributeValue<string>("smx_lablocation.smx_sapnumber"),
+                    SHIP_TO_PARTY = salesOrder.GetAliasedAttributeValue<string>("smx_instrumentshipto.smx_sapnumber"),
                     BILL_TO_PARTY = salesOrder.GetAliasedAttributeValue<string>("smx_billtoaddress.smx_sapnumber"),
                     PAYER = salesOrder.GetAliasedAttributeValue<string>("smx_payeraddress.smx_sapnumber"),
                     PURCH_NO_C = salesOrder.GetAttributeValue<string>("smx_purchaseorder"),
-                    PURCH_DATE = salesOrder.GetAttributeValue<DateTime?>("smx_purchaseorderdate")?.ToString("yyyyMMdd"),
+                    PURCH_DATE = salesOrder.GetAttributeValue<DateTime?>("smx_purchaseorderdate")?.ToString("yyyy-MM-dd"),
                     ZMINMBILL = salesOrder.GetAttributeValue<string>("smx_minimummonthlybilling"),
                     ZSTCOM = salesOrder.GetAttributeValue<string>("smx_standardcontractcompliance"),
                     ZSITES = CountOpportunityLabs(salesOrder.GetAliasedAttributeValue<Guid?>("opportunity.opportunityid")),
