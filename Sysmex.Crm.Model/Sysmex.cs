@@ -27344,11 +27344,29 @@ namespace Sysmex.Crm.Model
 				this.OnPropertyChanged("smx_GreenBonus");
 			}
 		}
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("smx_hsamq")]
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("smx_green_bonus")]
+        public Microsoft.Xrm.Sdk.OptionSetValue smx_Green_bonus
+        {
+            get
+            {
+                return this.GetAttributeValue<Microsoft.Xrm.Sdk.OptionSetValue>("smx_green_bonus");
+            }
+            set
+            {
+                this.OnPropertyChanging("smx_Green_bonus");
+                this.SetAttributeValue("smx_green_bonus", value);
+                this.OnPropertyChanged("smx_Green_bonus");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("smx_hsamq")]
 		public string smx_HSAMQ
 		{
 			get

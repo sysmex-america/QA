@@ -62,7 +62,8 @@ namespace Sysmex.Crm.Plugins.Logic
                 "smx_billtoaddressid",
                 "smx_purchaseorder",
                 "smx_competitivedisplacement",
-                "smx_competitor"
+                "smx_competitor",
+                "smx_executiondate"
             });
             var salesOrderBillToAddress = RetrieveCRMRecord<smx_address>(smx_address.EntityLogicalName, salesOrder.smx_BillToAddressId?.Id, new string[] {
                 "smx_name"
@@ -87,14 +88,27 @@ namespace Sysmex.Crm.Plugins.Logic
             });
             var oppLabOwner = RetrieveUserDataFromOpportunityLab(salesOrder.smx_OpportunityLabID?.Id);
             var opportunity = RetrieveCRMRecord<Opportunity>(Opportunity.EntityLogicalName, salesOrder.smx_OpportunityId?.Id, new string[] {
-                "smx_directordistributorsales",
                 "smx_distributor",
-                "smx_corporateaccountexecihn"
+                "smx_corporateaccountexecihn",
+                "smx_fcam",
+                "smx_lsc",
+                "smx_distributionsalesmanager"
             });
-            var directorDistSales = RetrieveCRMRecord<SystemUser>(SystemUser.EntityLogicalName, opportunity?.smx_DirectorDistributorSales?.Id, new string[] {
+            var distributionSalesManager = RetrieveCRMRecord<SystemUser>(SystemUser.EntityLogicalName, opportunity?.smx_DistributionSalesManager?.Id, new string[] {
                 "internalemailaddress",
                 "smx_sapidnumber1"
             });
+
+            var fcamRecord = RetrieveCRMRecord<SystemUser>(SystemUser.EntityLogicalName, opportunity?.GetAttributeValue<EntityReference>("smx_fcam")?.Id, new string[] {
+                "internalemailaddress",
+                "smx_sapidnumber1"
+            });
+
+            var lscRecord = RetrieveCRMRecord<SystemUser>(SystemUser.EntityLogicalName, opportunity?.GetAttributeValue<EntityReference>("smx_lsc")?.Id, new string[] {
+                "internalemailaddress",
+                "smx_sapidnumber1"
+            });
+
             var oppLabAccount = RetrieveAccountFromOpportunityLab(salesOrder?.smx_OpportunityLabID?.Id);
             var corpAccountExecUser = RetrieveCRMRecord<SystemUser>(SystemUser.EntityLogicalName, opportunity?.smx_CorporateAccountExecIHN?.Id, new string[] {
                 "internalemailaddress",
@@ -118,7 +132,7 @@ namespace Sysmex.Crm.Plugins.Logic
 
             var commissionRecord = new smx_commission()
             {
-                smx_LineCreationDate = DateTime.Now.ToString(),
+                smx_LineCreationDate = salesOrder.GetAttributeValue<DateTime?>("smx_executiondate")?.ToString("MM/dd/yyyy"),
                 smx_DIID = cpqLineItem.new_name,
                 smx_ProposalID = cpqLineItemQuote?.new_name,
                 smx_SAPcontractID = salesOrder.smx_ContractNumber,
@@ -133,10 +147,10 @@ namespace Sysmex.Crm.Plugins.Logic
                 smx_SalesHSAMEmpN = oppLabOwner?.smx_SAPIDNumber1,
                 smx_HSAMQ = "Yes",
                 smx_HSAMR = "Yes",
-                smx_SalesMDS = ParseFirstHalfOfEmail(directorDistSales?.InternalEMailAddress),
-                smx_SalesMDSEmpN = directorDistSales?.smx_SAPIDNumber1,
-                smx_MDSQ = opportunity?.smx_Distributor != null ? "Yes" : String.Empty,
-                smx_MDSR = opportunity?.smx_Distributor != null ? "Yes" : String.Empty,
+                smx_SalesMDS = ParseFirstHalfOfEmail(distributionSalesManager?.InternalEMailAddress),
+                smx_SalesMDSEmpN = distributionSalesManager?.smx_SAPIDNumber1,
+                smx_MDSQ = "Yes",
+                smx_MDSR = "Yes",
                 smx_PartnerAcute = oppLabAccount?.smx_ClassType?.Value == (int)smx_companyclasstype.Hospital_Acute ? "Acute" : "Other",
                 smx_SalesCAE = ParseFirstHalfOfEmail(corpAccountExecUser?.InternalEMailAddress),
                 smx_SalesCAEEmpN = corpAccountExecUser?.smx_SAPIDNumber1,
@@ -148,10 +162,11 @@ namespace Sysmex.Crm.Plugins.Logic
                     : String.Empty,
                 smx_APPSQ = salesOrder.smx_APPSQ == true ? "Yes" : "No",
                 smx_APPSR = salesOrder.smx_APPSR == true ? "Yes" : "No",
-                smx_GreenBonus = cpqLineItemQuote?.new_DealColor?.ToUpper() == "GREEN" ? "Yes" : String.Empty,
+                smx_Green_bonus = cpqLineItemQuote?.new_DealColor?.ToUpper() == "GREEN" ? new OptionSetValue(180700001) : null,
+                //smx_GreenBonus = cpqLineItemQuote?.new_DealColor?.ToUpper() == "GREEN" ? "Yes" : String.Empty,
                 smx_DealSourceID = opportunity?.smx_Distributor != null ? opportunity?.smx_Distributor.Name : "Sysmex",
                 smx_sdiPartName = cpqLineItem.new_optionidId?.Name,
-                smx_sdiOrderDDate = DateTime.Now.ToString(),
+                smx_sdiOrderDDate = salesOrder.GetAttributeValue<DateTime?>("smx_executiondate")?.ToString("MM/dd/yyyy"),
                 smx_ContractType = primaryQuote?.new_acquisitiontype == new_cpq_quote_new_acquisitiontype.CPR && primaryQuote?.new_Financing == new_cpq_quote_new_financing.LAB 
                     ? "CPR-Lab" 
                     : primaryQuote != null && primaryQuote.FormattedValues.Contains("new_acquisitiontype")
@@ -180,6 +195,47 @@ namespace Sysmex.Crm.Plugins.Logic
                 smx_SalesOrderID = salesOrder.ToEntityReference(),
                 smx_LineItemID = cpqLineItem.ToEntityReference()
             };
+
+            commissionRecord["smx_quotaprice"] = cpqLineItem.new_Price;
+
+            if (fcamRecord != null)
+            {
+                commissionRecord["smx_fcam"] = opportunity?.GetAttributeValue<EntityReference>("smx_fcam");
+                commissionRecord["smx_fcamq"] = new OptionSetValue(180700001); //Yes;
+                commissionRecord["smx_fcamr"] = new OptionSetValue(180700001); //Yes;
+                commissionRecord["smx_fcamempn"] = fcamRecord.smx_SAPIDNumber1;
+                commissionRecord["smx_salesfcam"] = ParseFirstHalfOfEmail(fcamRecord.InternalEMailAddress);
+            }
+            else
+            {
+                commissionRecord["smx_fcamq"] = new OptionSetValue(180700000); //No;
+                commissionRecord["smx_fcamr"] = new OptionSetValue(180700000); //No;
+            }
+
+            if (lscRecord != null)
+            {
+                commissionRecord["smx_lsc"] = opportunity?.GetAttributeValue<EntityReference>("smx_lsc");
+                commissionRecord["smx_lscq"] = new OptionSetValue(180700001); //Yes;
+                commissionRecord["smx_lscr"] = new OptionSetValue(180700001); //Yes;
+                commissionRecord["smx_saleslscempn"] = lscRecord.smx_SAPIDNumber1;
+                commissionRecord["smx_saleslsc"] = ParseFirstHalfOfEmail(lscRecord.InternalEMailAddress);
+            }
+            else
+            {
+                commissionRecord["smx_lscq"] = new OptionSetValue(180700000); //No;
+                commissionRecord["smx_lscr"] = new OptionSetValue(180700000); //No;
+            }
+
+            if (string.Compare(commissionRecord.smx_PartnerAcute, "Acute", true) == 0 &&
+                string.Compare(commissionRecord.smx_DealSourceID, "Sysmex", true) != 0)
+            {
+                commissionRecord["smx_mdsq"] = "No";
+                commissionRecord["smx_mdsr"] = "No";
+            }
+            
+            commissionRecord["smx_hsam"] = salesOrder.smx_OpportunityLabID;
+            commissionRecord["smx_sales_mds_user"] = opportunity?.smx_DistributionSalesManager;
+            commissionRecord["smx_cae"] = opportunity?.smx_CorporateAccountExecIHN;
 
             //These must take place after initial creation above, since it uses fields from that creation
             commissionRecord.smx_iQuotaPrice = (product?.smx_EVEPrice == null || product?.smx_EVEPrice.Value == 0) ? commissionRecord.smx_ItemNetPrice : commissionRecord.smx_ItemEVEPrice;
@@ -317,6 +373,8 @@ namespace Sysmex.Crm.Plugins.Logic
                     <attribute name='new_cpq_lineitem_tmpid' />
                     <filter type='and'>
                       <condition attribute='smx_salesorderid' operator='eq' value='{salesOrderId}' />
+                      <condition attribute='new_producttype' operator='ne' value='Service' />
+                      <condition attribute='new_producttype' operator='ne' value='Reagents' />
                     </filter>
                   </entity>
                 </fetch>";
