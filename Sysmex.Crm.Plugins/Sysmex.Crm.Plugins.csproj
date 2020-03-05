@@ -63,8 +63,8 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="SonomaPartners.Crm.Toolkit, Version=9.0.1.0, Culture=neutral, PublicKeyToken=f30227255a839074, processorArchitecture=MSIL">
-      <HintPath>..\packages\SonomaPartners.Crm.Toolkit.9.0.1\lib\SonomaPartners.Crm.Toolkit.dll</HintPath>
+    <Reference Include="sonomapartners.crm.toolkit">
+      <HintPath>..\Dlls\sonomapartners.crm.toolkit.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -86,12 +86,15 @@
   <ItemGroup>
     <Compile Include="Common\Rfc.cs" />
     <Compile Include="CreateContractActionPlugin.cs" />
+    <Compile Include="InstrumentUpdateTotalValueCalculationPlugin.cs" />
+    <Compile Include="LabNameAssignmentPlugin.cs" />
     <Compile Include="Logic\CreateContractActionLogic.cs" />
     <Compile Include="CreateCommissionRecordsPlugin.cs" />
     <Compile Include="CreateInstrumentRecordsPlugin.cs" />
     <Compile Include="Logic\CreateCommissionRecordsLogic.cs" />
     <Compile Include="Logic\CreateInstrumentRecordsLogic.cs" />
     <Compile Include="Logic\UpdateOwnerOnSalesOrderBPFLogic.cs" />
+    <Compile Include="SalesOrderProductConfigurationUpdatePlugin.cs" />
     <Compile Include="UpdateOwnerOnSalesOrderBPFPlugin.cs" />
     <Compile Include="CreateSalesOrderFromWinPlugin.cs" />
     <Compile Include="Logic\CreateSalesOrderFromWinLogic.cs" />

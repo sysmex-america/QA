@@ -28,6 +28,7 @@ namespace Sysmex.Crm.Plugins
 
             var logic = new SyncLabAccountAddressLogic(orgService, tracer);
             var preImage = context.PreEntityImages.Contains("PreImage") ? context.PreEntityImages["PreImage"] : null;
+
             if (target.LogicalName.ToLower() == "smx_lab")
             {
                 logic.SetAddressTypeToShipTo(target);
@@ -58,7 +59,12 @@ namespace Sysmex.Crm.Plugins
             }
             if (target.LogicalName.ToLower() == "account" && (target.Contains("address1_postalcode") || target.Contains("smx_countrysap")))
             {
-                logic.PopulateFieldsBasedOnAddressZipCode(target, context.MessageName.ToLower());
+                logic.PopulateAccountFieldsBasedOnAddressZipCode(target, context.MessageName.ToLower(), preImage);
+            }
+
+            if (string.Compare(target.LogicalName, "smx_lab", true) == 0 && target.Contains("smx_zippostalcode"))
+            {
+                logic.PopulateLabFieldsBasedOnAddressZipCode(target, context.MessageName.ToLower());
             }
         }
     }

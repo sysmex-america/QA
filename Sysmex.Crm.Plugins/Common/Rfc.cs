@@ -64,329 +64,417 @@ namespace Sysmex.Crm.Plugins.Common {
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://Microsoft.LobServices.Sap/2007/03/Types/Rfc/")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="http://Microsoft.LobServices.Sap/2007/03/Types/Rfc/", IsNullable=true)]
-    public partial class ZBAPI_CON_HEADER {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://Microsoft.LobServices.Sap/2007/03/Types/Rfc/")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://Microsoft.LobServices.Sap/2007/03/Types/Rfc/", IsNullable = true)]
+    public partial class ZBAPI_CON_HEADER
+    {
+
         private string dOC_TYPEField;
-        
+
         private string sALES_ORGField;
-        
+
         private string dISTR_CHANField;
-        
+
         private string sOLD_TO_PARTYField;
-        
+
         private string sHIP_TO_PARTYField;
-        
+
         private string bILL_TO_PARTYField;
-        
+
         private string pAYERField;
-        
+
         private string pURCH_NO_CField;
-        
+
         private string pURCH_DATEField;
-        
+
         private string zCONTRACT_TERMField;
-        
+
         private string pRICE_DATEField;
-        
+
         private string oRD_REASONField;
-        
+
         private string vBELN_GRPField;
-        
+
         private string aDD_VAL_DYField;
-        
+
         private string sHIP_TOField;
-        
+
         private string zCRM_IDField;
-        
+
         private string zSITESField;
-        
+
         private string zTCOUNTField;
-        
+
         private string zSTCOMField;
-        
+
         private string zMINMBILLField;
-        
+
         private System.Nullable<decimal> zKBETRField;
-        
+
         private bool zKBETRFieldSpecified;
-        
+
         private string zCONIN5Field;
-        
+
         private string zCONIN4Field;
-        
+
         private string zCONIN6Field;
-        
+
+        //private string zCONIN1Field;
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string DOC_TYPE {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string DOC_TYPE
+        {
+            get
+            {
                 return this.dOC_TYPEField;
             }
-            set {
+            set
+            {
                 this.dOC_TYPEField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string SALES_ORG {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string SALES_ORG
+        {
+            get
+            {
                 return this.sALES_ORGField;
             }
-            set {
+            set
+            {
                 this.sALES_ORGField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string DISTR_CHAN {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string DISTR_CHAN
+        {
+            get
+            {
                 return this.dISTR_CHANField;
             }
-            set {
+            set
+            {
                 this.dISTR_CHANField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string SOLD_TO_PARTY {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string SOLD_TO_PARTY
+        {
+            get
+            {
                 return this.sOLD_TO_PARTYField;
             }
-            set {
+            set
+            {
                 this.sOLD_TO_PARTYField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string SHIP_TO_PARTY {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string SHIP_TO_PARTY
+        {
+            get
+            {
                 return this.sHIP_TO_PARTYField;
             }
-            set {
+            set
+            {
                 this.sHIP_TO_PARTYField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string BILL_TO_PARTY {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string BILL_TO_PARTY
+        {
+            get
+            {
                 return this.bILL_TO_PARTYField;
             }
-            set {
+            set
+            {
                 this.bILL_TO_PARTYField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string PAYER {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string PAYER
+        {
+            get
+            {
                 return this.pAYERField;
             }
-            set {
+            set
+            {
                 this.pAYERField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string PURCH_NO_C {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string PURCH_NO_C
+        {
+            get
+            {
                 return this.pURCH_NO_CField;
             }
-            set {
+            set
+            {
                 this.pURCH_NO_CField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string PURCH_DATE {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string PURCH_DATE
+        {
+            get
+            {
                 return this.pURCH_DATEField;
             }
-            set {
+            set
+            {
                 this.pURCH_DATEField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string ZCONTRACT_TERM {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string ZCONTRACT_TERM
+        {
+            get
+            {
                 return this.zCONTRACT_TERMField;
             }
-            set {
+            set
+            {
                 this.zCONTRACT_TERMField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string PRICE_DATE {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string PRICE_DATE
+        {
+            get
+            {
                 return this.pRICE_DATEField;
             }
-            set {
+            set
+            {
                 this.pRICE_DATEField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string ORD_REASON {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string ORD_REASON
+        {
+            get
+            {
                 return this.oRD_REASONField;
             }
-            set {
+            set
+            {
                 this.oRD_REASONField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string VBELN_GRP {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string VBELN_GRP
+        {
+            get
+            {
                 return this.vBELN_GRPField;
             }
-            set {
+            set
+            {
                 this.vBELN_GRPField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string ADD_VAL_DY {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string ADD_VAL_DY
+        {
+            get
+            {
                 return this.aDD_VAL_DYField;
             }
-            set {
+            set
+            {
                 this.aDD_VAL_DYField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string SHIP_TO {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string SHIP_TO
+        {
+            get
+            {
                 return this.sHIP_TOField;
             }
-            set {
+            set
+            {
                 this.sHIP_TOField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string ZCRM_ID {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string ZCRM_ID
+        {
+            get
+            {
                 return this.zCRM_IDField;
             }
-            set {
+            set
+            {
                 this.zCRM_IDField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string ZSITES {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string ZSITES
+        {
+            get
+            {
                 return this.zSITESField;
             }
-            set {
+            set
+            {
                 this.zSITESField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string ZTCOUNT {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string ZTCOUNT
+        {
+            get
+            {
                 return this.zTCOUNTField;
             }
-            set {
+            set
+            {
                 this.zTCOUNTField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string ZSTCOM {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string ZSTCOM
+        {
+            get
+            {
                 return this.zSTCOMField;
             }
-            set {
+            set
+            {
                 this.zSTCOMField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string ZMINMBILL {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string ZMINMBILL
+        {
+            get
+            {
                 return this.zMINMBILLField;
             }
-            set {
+            set
+            {
                 this.zMINMBILLField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<decimal> ZKBETR {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public System.Nullable<decimal> ZKBETR
+        {
+            get
+            {
                 return this.zKBETRField;
             }
-            set {
+            set
+            {
                 this.zKBETRField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string ZCONIN5 {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string ZCONIN5
+        {
+            get
+            {
                 return this.zCONIN5Field;
             }
-            set {
+            set
+            {
                 this.zCONIN5Field = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string ZCONIN4 {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string ZCONIN4
+        {
+            get
+            {
                 return this.zCONIN4Field;
             }
-            set {
+            set
+            {
                 this.zCONIN4Field = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string ZCONIN6 {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string ZCONIN6
+        {
+            get
+            {
                 return this.zCONIN6Field;
             }
-            set {
+            set
+            {
                 this.zCONIN6Field = value;
             }
         }
+
+        //[System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        //public string ZCONIN1
+        //{
+        //    get
+        //    {
+        //        return this.zCONIN1Field;
+        //    }
+        //    set
+        //    {
+        //        this.zCONIN1Field = value;
+        //    }
+        //}
     }
     
     /// <remarks/>

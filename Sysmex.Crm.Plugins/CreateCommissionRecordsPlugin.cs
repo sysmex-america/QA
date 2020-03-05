@@ -1,5 +1,5 @@
-﻿using SonomaPartners.Crm.Toolkit.Plugins;
-using Sysmex.Crm.Model;
+﻿using Microsoft.Xrm.Sdk;
+using SonomaPartners.Crm.Toolkit.Plugins;
 using Sysmex.Crm.Plugins.Logic;
 using System;
 
@@ -14,18 +14,11 @@ namespace Sysmex.Crm.Plugins
             var tracer = serviceProvider.GetTracingService();
                                                                                                                                                     
             tracer.Trace("Start Create Commission Records Plugin");
-
-
-            var salesOrder = context.GetTargetEntity().ToEntity<smx_salesorder>();
-
-            if (String.IsNullOrWhiteSpace(salesOrder.smx_ContractNumber))
-            {
-                tracer.Trace("smx_contractnumber empty, returning");
-                return;
-            }
-
+            
+            var targetRef = context.GetInputParameter<EntityReference>("Target"); //salesorder
+            
             var logic = new CreateCommissionRecordsLogic(orgService, tracer);
-            logic.CreateCommissionRecordsFromSalesOrder(salesOrder.Id);
+            logic.CreateCommissionRecordsFromSalesOrder(targetRef.Id);
 
             tracer.Trace("End Create Commission Records Plugin");
         }

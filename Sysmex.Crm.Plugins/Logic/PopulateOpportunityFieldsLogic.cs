@@ -40,6 +40,8 @@ namespace Sysmex.Crm.Plugins
                 var account = RetrieveAccountRelatedFields(accountId);
                 if (account != null)
                 {
+                    _tracer.Trace($"Account is not null. hemegpo - {account.GetAttributeValue<EntityReference>("smx_hemegpo")?.Id}");
+
                     opportunity["smx_distributor"] = account.Contains("smx_partneraccount") ? account.GetAttributeValue<EntityReference>("smx_partneraccount") : null;
                     opportunity["smx_ihn"] = account.Contains("smx_accountihn") ? account.GetAttributeValue<EntityReference>("smx_accountihn") : null;
                     opportunity["smx_gpoheme"] = account.Contains("smx_hemegpo") ? account.GetAttributeValue<EntityReference>("smx_hemegpo") : null;
@@ -56,6 +58,13 @@ namespace Sysmex.Crm.Plugins
                     opportunity["smx_canadiandirectorofsales"] = account.Contains("ab.smx_accountmanager") ? account.GetAliasedAttributeValue<EntityReference>("ab.smx_regionalmanager") : null;
                     opportunity["smx_directordistributorsales"] = account.Contains("ah.smx_regionalmanager") ? account.GetAliasedAttributeValue<EntityReference>("ah.smx_regionalmanager") : null;
                     opportunity["smx_corporateaccountdirector"] = account.Contains("ac.smx_corporateaccountdirector") ? account.GetAliasedAttributeValue<EntityReference>("ac.smx_corporateaccountdirector") : null;
+
+                    opportunity["smx_hematologytier"] = account.Contains("smx_hemetier") ? account.GetAttributeValue<EntityReference>("smx_hemetier") : null;
+                    opportunity["smx_urinalysistier"] = account.Contains("smx_urinetier") ? account.GetAttributeValue<EntityReference>("smx_urinetier") : null;
+                    opportunity["smx_flowtier"] = account.Contains("smx_flowtier") ? account.GetAttributeValue<EntityReference>("smx_flowtier") : null;
+                    opportunity["smx_esrtier"] = account.Contains("smx_esrtier") ? account.GetAttributeValue<EntityReference>("smx_esrtier") : null;
+                    opportunity["smx_coagulationtier"] = account.Contains("smx_coagtier") ? account.GetAttributeValue<EntityReference>("smx_coagtier") : null;
+                    opportunity["smx_chemistryiatier"] = account.Contains("smx_chemiatier") ? account.GetAttributeValue<EntityReference>("smx_chemiatier") : null;
                 }
             }
             

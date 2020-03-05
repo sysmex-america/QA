@@ -32,6 +32,7 @@ namespace Sysmex.Crm.Plugins.Logic
                 var fetch = $@"<fetch top='1'>
                 <entity name='smx_salesorder'>
                     <attribute name='smx_contracttype' />
+                    <attribute name='smx_contractcategory' />
                     <attribute name='smx_purchaseorder' />
                     <attribute name='smx_purchaseorderdate' />
                     <attribute name='smx_minimummonthlybilling' />
@@ -132,6 +133,18 @@ namespace Sysmex.Crm.Plugins.Logic
                     case smx_orderreason.COPurchaseADistributor:
                     case smx_orderreason.COPurchaseBDistributor:
                     case smx_orderreason.CODonation:
+                    case smx_orderreason.COCPRInstrmntServiceReagents:
+                    case smx_orderreason.COCPRFixedBilling:
+                    case smx_orderreason.COCPRFixedBillingREATestCounts:
+                    case smx_orderreason.COLABCRHandling:
+                    case smx_orderreason.COLeaseCInstrmntServiceReagts:
+                    case smx_orderreason.COLeaseCInstrmntServiceReagts2:
+                    case smx_orderreason.COLeaseReagentsPurchaseIS:
+                    case smx_orderreason.COPurchaseCReagentsOnly:
+                    case smx_orderreason.COReagentPlanCInstrmtServiceReagt:
+                    case smx_orderreason.COVAIMPSInstmntServiceReagents2:
+                    case smx_orderreason.COVAIMPSInstrumentOnly:
+                    case smx_orderreason.COVAIMPSInstmntServiceReagents:
                         return @"<condition attribute='new_producttype' operator='ne' value='Reagents' />
                                  <condition attribute='new_producttype' operator='ne' value='Consumables' />";
                 }
@@ -267,7 +280,8 @@ namespace Sysmex.Crm.Plugins.Logic
                     ZKBETR = salesOrder.GetAttributeValue<decimal?>("smx_currentcprrate"),
                     ZCONIN5 = salesOrder.GetAttributeValue<string>("bcqmprogram"),
                     ZCONIN4 = salesOrder.GetAttributeValue<string>("smx_automaticbilling"),
-                    ZCONIN6 = salesOrder.GetAttributeValue<string>("smx_dontsendemail")
+                    ZCONIN6 = salesOrder.GetAttributeValue<string>("smx_dontsendemail"),
+                    //ZCONIN1 = ParseContractCategory(salesOrder.GetAttributeValue<OptionSetValue>("smx_contractcategory"))
                 };
 
                 return requestHeader;
@@ -287,6 +301,29 @@ namespace Sysmex.Crm.Plugins.Logic
                 };
 
                 return requestItem;
+            }
+
+            private string ParseContractCategory(OptionSetValue contractCategory)
+            {
+                if (contractCategory == null)
+                {
+                    return null;
+                }
+
+                switch (contractCategory.Value)
+                {
+                    case 180700000:
+                        return "S";
+
+                    case 180700001:
+                        return "F";
+
+                    case 180700002:
+                        return "O";
+
+                    default:
+                        return null;
+                }
             }
 
             private string ParseContractType(OptionSetValue contractType)

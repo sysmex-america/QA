@@ -46,14 +46,16 @@ namespace Sysmex.Crm.Plugins
                 Trace("Address Created: " + addressId.ToString());
 
                 target["smx_address"] = new EntityReference("smx_address", addressId);
+                
                 _orgService.Update(target);
+                
                 Trace("Account updated with address association");
             }
             else if (target.LogicalName.ToLower() == "smx_lab")
             {
                 Trace("Create new address record from lab.");
                 Entity address = new Entity("smx_address");
-                address["smx_name"] = target.GetAttributeValue<string>("smx_name") + " Address";
+                address["smx_name"] = target?.GetAttributeValue<string>("smx_name") + " Address";
                 address["smx_account"] = target.GetAttributeValue<EntityReference>("smx_account");
                 address["smx_lab"] = new EntityReference("smx_lab", target.Id);
                 address["smx_type"] = new OptionSetValue(SHIP_TO);
@@ -218,10 +220,42 @@ namespace Sysmex.Crm.Plugins
             _orgService.Update(addressUpdate);
         }
 
-        public void PopulateFieldsBasedOnAddressZipCode(Entity account, string message)
+        public void PopulateLabFieldsBasedOnAddressZipCode(Entity lab, string message)
+        {
+            Trace("Executing PopulateLabFieldsBasedOnAddressZipCode");
+
+            var labZip = lab.GetAttributeValue<string>("smx_zippostalcode");
+            if (string.IsNullOrEmpty(labZip))
+            {
+                return;
+            }
+
+            var zipPostal = RetrieveAddressZipCodeRecord(labZip);
+            if (zipPostal == null)
+            {
+                Trace("smx_zippostalcode record not found for the specified zip/postal code.");
+                return;
+            }
+
+            var territory = zipPostal.GetAttributeValue<EntityReference>("smx_territory");
+            lab["smx_territory"] = territory;
+
+            if (territory != null)
+            {
+                var ter = _orgService.Retrieve(territory.LogicalName, territory.Id, new ColumnSet("smx_accountmanager"));
+                lab["smx_regionalmanager"] = ter.GetAttributeValue<EntityReference>("smx_accountmanager");
+            }
+
+            if (message == "create")
+            {
+                _orgService.Update(lab);
+            }
+        }
+
+        public void PopulateAccountFieldsBasedOnAddressZipCode(Entity account, string message, Entity image)
         {
             // We want to get the Zip/Postal code of the address they chose, and then set the account's TIS, LSC, DSM, Territory, AltTerritory, and AltTerritoryManager Id
-            Trace("Executing PopulateFieldsBasedOnAddressZipCode");
+            Trace("Executing PopulateAccountFieldsBasedOnAddressZipCode");
 
             // Do not continue if account type is GPO or IHN
             var accountType = _orgService.Retrieve(account.LogicalName, account.Id, new ColumnSet("smx_accounttype"));
@@ -233,18 +267,29 @@ namespace Sysmex.Crm.Plugins
                 return;
             }
 
-            string accountZip = account.GetAttributeValue<string>("address1_postalcode");
+            string accountZip = null;
+            if (account.Contains("address1_postalcode"))
+            {
+                accountZip = account.GetAttributeValue<string>("address1_postalcode");
+            }
+            else
+            {
+                accountZip = image?.GetAttributeValue<string>("address1_postalcode");
+            }
+
             EntityReference accountAddressCountry = new EntityReference();
 
             if (!account.Contains("smx_countrysap"))
             {
-                Trace("Retrieving address record.");
-                var addressCountry = _orgService.Retrieve(account.LogicalName, account.Id, new ColumnSet("smx_countrysap"));
-                accountAddressCountry = addressCountry.GetAttributeValue<EntityReference>("smx_countrysap");
+                //Trace("Retrieving address record.");
+                //var addressCountry = _orgService.Retrieve(account.LogicalName, account.Id, new ColumnSet("smx_countrysap"));
+                accountAddressCountry = image?.GetAttributeValue<EntityReference>("smx_countrysap");
+                Trace($"Country from image - {accountAddressCountry?.Id}");
             }
             else
             {
                 accountAddressCountry = account.GetAttributeValue<EntityReference>("smx_countrysap");
+                Trace($"Updating Country - {accountAddressCountry?.Id}");
             }
 
             //Check if country lookup is United State of America or Canada, if not exit
@@ -279,7 +324,8 @@ namespace Sysmex.Crm.Plugins
             account["smx_altterritory"] = zipPostal.GetAttributeValue<EntityReference>("smx_distributorzone");
             account["smx_altterritorymanager"] = zipPostal.GetAliasedAttributeValue<EntityReference>("distributorzone.smx_accountmanager");
             account["smx_region"] = zipPostal.GetAliasedAttributeValue<EntityReference>("territory.smx_region");
-
+            account["smx_lscuser"] = zipPostal.GetAttributeValue<EntityReference>("smx_lscuser");
+            
             var accountManager = zipPostal.GetAliasedAttributeValue<EntityReference>("territory.smx_accountmanager");
             if (accountManager != null && VerifyUserRoles(accountManager.Id))
             {
@@ -408,7 +454,7 @@ namespace Sysmex.Crm.Plugins
         {
             var query = new QueryExpression("smx_zippostalcode");
             query.Criteria.AddCondition(new ConditionExpression("smx_name", ConditionOperator.Equal, zipcode));
-            query.ColumnSet.AddColumns("smx_dsm", "smx_lsc", "smx_tis", "smx_territory", "smx_distributorzone");
+            query.ColumnSet.AddColumns("smx_dsm", "smx_lsc", "smx_tis", "smx_territory", "smx_distributorzone", "smx_lscuser");
 
             // The AltTerritory / AltTerritoryManagerId field are from the DistributorZone field on the Zip/Postal Code
             query.LinkEntities.Add(new LinkEntity("smx_zippostalcode", "territory", "smx_distributorzone", "territoryid", JoinOperator.LeftOuter));

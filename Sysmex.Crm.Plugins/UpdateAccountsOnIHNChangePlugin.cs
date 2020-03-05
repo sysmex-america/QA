@@ -15,6 +15,11 @@ namespace Sysmex.Crm.Plugins
 
             //Account owner has changed, check if account type = IHN and update all accounts assocated to this IHN account
             tracer.Trace("Starting UpdateAccountsOnIHNChangeLogic");
+            if (!context.PostEntityImages.Contains("PostImage"))
+            {
+                return;
+            }
+
             var account = context.GetPostEntityImage("PostImage");
             tracer.Trace("Using Post Image");
             

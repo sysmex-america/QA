@@ -16,6 +16,21 @@ namespace Sysmex.Crm.Plugins
 
         public void UpdateOwner(smx_salesorderbusinessprocess salesOrderBP)
         {
+            if (salesOrderBP == null)
+            {
+                _tracer.Trace("salesOrderBP is NULL!!!");
+            }
+
+            if (salesOrderBP.bpf_smx_salesorderid == null)
+            {
+                _tracer.Trace("salesOrderBP.bpf_smx_salesorderid is NULL!!!");
+            }
+
+            if (salesOrderBP.ActiveStageId == null)
+            {
+                _tracer.Trace("salesOrderBP.ActiveStageId is NULL!!!");
+            }
+
             var updatedSalesOrder = new smx_salesorder()
             {
                 Id = salesOrderBP.bpf_smx_salesorderid.Id

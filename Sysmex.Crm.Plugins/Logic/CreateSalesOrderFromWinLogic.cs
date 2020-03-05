@@ -20,7 +20,7 @@ namespace Sysmex.Crm.Plugins.Logic
             _tracer.Trace("Create Sales Orders From Opportunity Labs");
 
             var opportunityLabs = RetrieveOpportunityLabsAndRelatedFields(opportunityId);
-            var cpqLineItems = RetrieveCPQLineItems(opportunityId);
+            var cpqLineItems = RetrieveCPQLineItems2(opportunityId);
 
             foreach (var opportunityLab in opportunityLabs)
             {
@@ -65,7 +65,7 @@ namespace Sysmex.Crm.Plugins.Logic
                 smx_OpportunityId = opportunityLab.smx_OpportunityId,
                 OwnerId = opportunityLab.OwnerId,
                 smx_OpportunityLabID = opportunityLab.ToEntityReference(),
-                smx_AgreementURL = agreementRecord?.new_agreementurltoapttus,
+                smx_AgreementURL = agreementRecord?.GetAttributeValue<string>("new_agreementurl"), //agreementRecord?.new_agreementurltoapttus,
                 smx_TerritoryId = opportunityLab.GetAliasedAttributeValue<EntityReference>("account.territoryid"),
                 smx_RegionId = opportunityLab.GetAliasedAttributeValue<EntityReference>("territory.smx_region"),
                 smx_AccountManagerId = opportunityLab.GetAliasedAttributeValue<EntityReference>("account.ownerid")
@@ -86,6 +86,11 @@ namespace Sysmex.Crm.Plugins.Logic
                 salesOrder.smx_soldtoaddressid = opportunityLab.GetAliasedAttributeValue<EntityReference>("DistributorAccount.smx_address");
             }
 
+            if (agreementRecord != null)
+            {
+                salesOrder["smx_clmagreement"] = agreementRecord.ToEntityReference();
+            }
+
             var newSalesOrderId = _orgService.Create(salesOrder);
 
             //Update Instrument Update records with new Sales Order
@@ -103,7 +108,7 @@ namespace Sysmex.Crm.Plugins.Logic
             }
 
             //Update CPQ Line Items with new Sales Order
-            var filteredCPQLineItems = cpqLineItems.Where(x => x.new_LocationId?.Id == opportunityLab.smx_ShipToAddressId?.Id).Select(x => x.Id);
+            var filteredCPQLineItems = cpqLineItems.Select(x => x.Id); //cpqLineItems.Where(x => x.new_LocationId?.Id == opportunityLab.smx_ShipToAddressId?.Id).Select(x => x.Id);
             _tracer.Trace($"CPQ Line items to update: {filteredCPQLineItems.Count()}");
             foreach (var cpqLineItemId in filteredCPQLineItems)
             {
@@ -196,10 +201,126 @@ namespace Sysmex.Crm.Plugins.Logic
             }
         }
 
+        private IEnumerable<new_cpq_lineitem_tmp> RetrieveCPQLineItems2(Guid opportunityId)
+        {
+            _tracer.Trace("Retrieve CPQ Line Items");
+            var agreementQe = new QueryExpression("new_clm_agreement");
+            agreementQe.Criteria = new FilterExpression();
+            agreementQe.Criteria.AddCondition("new_opportunityid", ConditionOperator.Equal, opportunityId);
+            agreementQe.Criteria.AddCondition("new_status", ConditionOperator.Equal, 100000011);
+            agreementQe.TopCount = 1;
+            agreementQe.ColumnSet = new ColumnSet("new_quotenumber");
+            
+            var agreements = _orgService.RetrieveMultiple(agreementQe);
+            if (agreements.Entities.Count == 0)
+            {
+                return new List<new_cpq_lineitem_tmp>();
+            }
+
+            var quoteNumber = agreements[0].GetAttributeValue<string>("new_quotenumber");
+            if (string.IsNullOrEmpty(quoteNumber))
+            {
+                return new List<new_cpq_lineitem_tmp>();
+            }
+
+            var qe = new QueryExpression("new_cpq_productconfiguration");
+            qe.ColumnSet = new ColumnSet("new_cpqstatus");
+            qe.AddOrder("new_versionnumber", OrderType.Descending);
+            qe.NoLock = true;
+
+            var le = qe.AddLink("new_cpq_quote", "new_quoteid", "new_cpq_quoteid", JoinOperator.Inner);
+            le.LinkCriteria = new FilterExpression();
+            le.LinkCriteria.AddCondition("new_name", ConditionOperator.Equal, quoteNumber);
+
+            var configs = _orgService.RetrieveMultiple(qe);
+
+            var config = configs.Entities.FirstOrDefault(c => c.GetAttributeValue<OptionSetValue>("new_cpqstatus")?.Value == 100000006); // finalized
+            if (config == null)
+            {
+                config = configs.Entities.FirstOrDefault();
+            }
+
+            if (config == null)
+            {
+                return new List<new_cpq_lineitem_tmp>();
+            }
+
+            var fetch = $@"
+                <fetch>
+                  <entity name='new_cpq_lineitem_tmp'>
+                    <attribute name='new_cpq_lineitem_tmpid' />
+                    <attribute name='new_locationid' />
+                    <attribute name='smx_annualtargettestcount' />
+                    <filter type='and'>
+                          <condition attribute='new_productconfigurationid' operator='eq' value='{config.Id}' />
+                    </filter>
+                  </entity>
+                </fetch>";
+
+            return _orgService.RetrieveMultipleAll(fetch).Entities.Select(x => x.ToEntity<new_cpq_lineitem_tmp>());
+        }
+
+
+        //Deprecated
         private IEnumerable<new_cpq_lineitem_tmp> RetrieveCPQLineItems(Guid opportunityId)
         {
             _tracer.Trace("Retrieve CPQ Line Items");
 
+            var quoteQe = new QueryExpression("new_cpq_quote");
+            quoteQe.Criteria = new FilterExpression();
+            quoteQe.Criteria.AddCondition("new_opportunityid", ConditionOperator.Equal, opportunityId);
+            quoteQe.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
+            quoteQe.ColumnSet = new ColumnSet(false);
+            quoteQe.AddOrder("new_isprimary", OrderType.Descending);
+            quoteQe.AddOrder("createdon", OrderType.Descending);
+            quoteQe.TopCount = 1;
+
+            var quotes = _orgService.RetrieveMultiple(quoteQe);
+            if (quotes.Entities.Count == 0)
+            {
+                return new List<new_cpq_lineitem_tmp>();
+            }
+            
+            var qe = new QueryExpression("new_cpq_productconfiguration");
+            qe.ColumnSet = new ColumnSet("new_cpqstatus");
+            qe.AddOrder("new_versionnumber", OrderType.Descending);
+            qe.NoLock = true;
+
+            qe.Criteria = new FilterExpression();
+            qe.Criteria.AddCondition("new_quoteid", ConditionOperator.Equal, quotes[0].Id);
+
+            //var le = qe.AddLink("new_cpq_quote", "new_quoteid", "new_cpq_quoteid", JoinOperator.Inner);
+            //le.LinkCriteria = new FilterExpression();
+            //le.LinkCriteria.AddCondition("new_opportunityid", ConditionOperator.Equal, opportunityId);
+            //le.LinkCriteria.AddCondition("new_isprimary", ConditionOperator.Equal, true);
+            //le.Columns = new ColumnSet(false);
+
+            var configs = _orgService.RetrieveMultiple(qe);
+
+            var config = configs.Entities.FirstOrDefault(c => c.GetAttributeValue<OptionSetValue>("new_cpqstatus")?.Value == 100000006); // finalized
+            if (config == null)
+            {
+                config = configs.Entities.FirstOrDefault();
+            }
+            
+            if (config == null)
+            {
+                return new List<new_cpq_lineitem_tmp>();
+            }
+            
+            var fetch = $@"
+                <fetch>
+                  <entity name='new_cpq_lineitem_tmp'>
+                    <attribute name='new_cpq_lineitem_tmpid' />
+                    <attribute name='new_locationid' />
+                    <attribute name='smx_annualtargettestcount' />
+                    <filter type='and'>
+                          <condition attribute='new_productconfigurationid' operator='eq' value='{config.Id}' />
+                    </filter>
+                  </entity>
+                </fetch>";
+                
+            /*
             var fetch = $@"
                 <fetch>
                   <entity name='new_cpq_lineitem_tmp'>
@@ -220,6 +341,7 @@ namespace Sysmex.Crm.Plugins.Logic
                     </link-entity>
                   </entity>
                 </fetch>";
+                */
 
             return _orgService.RetrieveMultipleAll(fetch).Entities.Select(x => x.ToEntity<new_cpq_lineitem_tmp>());
         }
@@ -251,6 +373,7 @@ namespace Sysmex.Crm.Plugins.Logic
                     <attribute name='new_clm_agreementid' />
                     <attribute name='new_extendedpaymentterms' />
                     <attribute name='new_agreementurltoapttus' />
+                    <attribute name='new_agreementurl' />
                     <filter type='and'>
                       <condition attribute='new_opportunityid' operator='eq' value='{opportunityId}' />
                       <condition attribute='new_status' operator='eq' value='{(int)new_clm_agreement_new_status.Activated}' />
