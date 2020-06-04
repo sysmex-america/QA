@@ -54,7 +54,9 @@ namespace Sysmex.Crm.Plugins
             {
                 //two cases changing address, changing address fields,
                 logic.CopyAddressFields(target, preImage);
-
+                tracer.Trace("calling PopulateTerritoryAndRegionalManager"); 
+                logic.PopulateTerritoryAndRegionalManager(target, orgService);
+                tracer.Trace(" PopulateTerritoryAndRegionalManager executed");
             }
             if (target.LogicalName.ToLower() == "account" && (target.Contains("address1_postalcode") || target.Contains("smx_countrysap")))
             {
