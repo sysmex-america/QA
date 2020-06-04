@@ -45,6 +45,29 @@ namespace Sysmex.Crm.Plugins
                 var addressId = _orgService.Create(address);
                 Trace("Address Created: " + addressId.ToString());
 
+                string zipCode = target.GetAttributeValue<string>("address1_postalcode");
+                Entity territoryDetails = new Entity();
+                EntityReference territory = new EntityReference();
+                EntityReference regionalmanager = new EntityReference();
+
+                if (!string.IsNullOrEmpty(zipCode))
+                {
+                    territoryDetails = GetTerritoryDetails(_orgService, zipCode);
+                    if (territoryDetails != null && territoryDetails.Id != null && territoryDetails.Id != Guid.Empty)
+                    {
+                        territory = new EntityReference("territory", territoryDetails.Id);
+                        regionalmanager = territoryDetails.Contains("smx_accountmanager") ? territoryDetails.GetAttributeValue<EntityReference>("smx_accountmanager") : null;
+                        if (VerifyUserRoles(regionalmanager.Id))
+                        {
+                            target["ownerid"] = regionalmanager;
+                        }
+                        else
+                        {
+                            Trace("regional manager is not Verified");
+                        }
+                        target["territoryid"] = territory;
+                    }
+                }
                 target["smx_address"] = new EntityReference("smx_address", addressId);
                 _orgService.Update(target);
                 Trace("Account updated with address association");
@@ -63,7 +86,23 @@ namespace Sysmex.Crm.Plugins
                 address["smx_zippostalcode"] = target.GetAttributeValue<string>("smx_zippostalcode");
                 address["smx_statesap"] = target.GetAttributeValue<EntityReference>("smx_statesap");
                 address["smx_countrysap"] = target.GetAttributeValue<EntityReference>("smx_countrysap");
+                
+                string zipCode = target.GetAttributeValue<string>("smx_zippostalcode");
+                Entity territoryDetails = new Entity();
+                EntityReference territory = new EntityReference();
+                EntityReference regionalmanager = new EntityReference();
 
+                if (!string.IsNullOrEmpty(zipCode))
+                {
+                    territoryDetails = GetTerritoryDetails(_orgService, zipCode);
+                    if (territoryDetails != null && territoryDetails.Id != null && territoryDetails.Id != Guid.Empty)
+                    {
+                        territory = new EntityReference("territory", territoryDetails.Id);
+                        regionalmanager = territoryDetails.Contains("smx_accountmanager") ? territoryDetails.GetAttributeValue<EntityReference>("smx_accountmanager") : null;
+                        target["smx_regionalmanager"] = regionalmanager;
+                        target["smx_territory"] = territory;
+                    }
+                }
                 var addressId = _orgService.Create(address);
                 Trace("Address Created: " + addressId.ToString());
 
@@ -248,10 +287,12 @@ namespace Sysmex.Crm.Plugins
             }
 
             //Check if country lookup is United State of America or Canada, if not exit
-            var countryList = new EntityReferenceCollection(){
-                new EntityReference("smx_country", new Guid("509252F6-E2E1-E711-812F-E0071B6A3101")), //USA
-                new EntityReference("smx_country", new Guid("D89052F6-E2E1-E711-812F-E0071B6A3101"))  //Canda
-            };
+            //var countryList = new EntityReferenceCollection(){
+            //    new EntityReference("smx_country", new Guid("509252F6-E2E1-E711-812F-E0071B6A3101")), //USA
+            //    new EntityReference("smx_country", new Guid("D89052F6-E2E1-E711-812F-E0071B6A3101"))  //Canda
+            //};
+
+            var countryList = GetUSAndCanadaCountries(_orgService);
             if (accountAddressCountry == null || !countryList.Contains(accountAddressCountry))
             {
                 Trace("Country lookup is not United State of America or Canada. EXIT");
@@ -321,6 +362,29 @@ namespace Sysmex.Crm.Plugins
                     updatedAccount["smx_stateprovincesap"] = address.GetAttributeValue<EntityReference>("smx_statesap");
                     updatedAccount["smx_countrysap"] = address.GetAttributeValue<EntityReference>("smx_countrysap");
 
+                    string zipCode = address.GetAttributeValue<string>("smx_zippostalcode");
+                    Entity territoryDetails = new Entity();
+                    EntityReference territory = new EntityReference();
+                    EntityReference regionalmanager = new EntityReference();
+
+                    if (!string.IsNullOrEmpty(zipCode))
+                    {
+                        territoryDetails = GetTerritoryDetails(_orgService, zipCode);
+                        if (territoryDetails != null && territoryDetails.Id != null && territoryDetails.Id != Guid.Empty)
+                        {
+                            territory = new EntityReference("territory", territoryDetails.Id);
+                            regionalmanager = territoryDetails.Contains("smx_accountmanager") ? territoryDetails.GetAttributeValue<EntityReference>("smx_accountmanager") : null;
+                            if (VerifyUserRoles(regionalmanager.Id))
+                            {
+                                updatedAccount["ownerid"] = regionalmanager;
+                            }
+                            else
+                            {
+                                Trace("regional manager is not Verified User Roles");
+                            }
+                            updatedAccount["territoryid"] = territory;
+                        }
+                    }
                     var updateRequest = new UpdateRequest()
                     {
                         Target = updatedAccount
@@ -345,6 +409,22 @@ namespace Sysmex.Crm.Plugins
                     updatedLab["smx_zippostalcode"] = address.GetAttributeValue<string>("smx_zippostalcode");
                     updatedLab["smx_countrysap"] = address.GetAttributeValue<EntityReference>("smx_countrysap");
 
+                    string zipCode = address.GetAttributeValue<string>("smx_zippostalcode");
+                    Entity territoryDetails = new Entity();
+                    EntityReference territory = new EntityReference();
+                    EntityReference regionalmanager = new EntityReference();
+
+                    if (!string.IsNullOrEmpty(zipCode))
+                    {
+                        territoryDetails = GetTerritoryDetails(_orgService, zipCode);
+                        if (territoryDetails != null && territoryDetails.Id != null && territoryDetails.Id != Guid.Empty)
+                        {
+                            territory = new EntityReference("territory", territoryDetails.Id);
+                            regionalmanager = territoryDetails.Contains("smx_accountmanager") ? territoryDetails.GetAttributeValue<EntityReference>("smx_accountmanager") : null;
+                            updatedLab["smx_regionalmanager"] = regionalmanager;
+                            updatedLab["smx_territory"] = territory;
+                        }
+                    }
                     var updateRequest = new UpdateRequest()
                     {
                         Target = updatedLab
@@ -355,7 +435,7 @@ namespace Sysmex.Crm.Plugins
             }
         }
 
-        private Boolean VerifyUserRoles(Guid userId)
+        public Boolean VerifyUserRoles(Guid userId)
         {
             var fetch = new FetchExpression($@"
                 <fetch>
@@ -473,6 +553,121 @@ namespace Sysmex.Crm.Plugins
             {
                 _tracer.Trace(message, args);
             }
+        }
+        private Entity GetTerritoryDetails(IOrganizationService service, string zipCode)
+        {
+            Entity territory = new Entity();
+            try
+            {
+                var qe = $@"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='true'>
+                              <entity name='territory'>
+                                <attribute name='name' />
+                                <attribute name='territoryid' />
+                                <attribute name='smx_accountmanager' />
+                                <order attribute='name' descending='false' />
+                                <link-entity name='smx_zippostalcode' from='smx_territory' to='territoryid' link-type='inner' alias='ad'>
+                                  <filter type='and'>
+                                    <condition attribute='smx_name' operator='eq' value='{ zipCode }' />
+                                  </filter>
+                                </link-entity>
+                              </entity>
+                            </fetch>";
+
+                EntityCollection accountList = service.RetrieveMultiple(new FetchExpression(qe));
+                if (accountList.Entities.Count() > 0)
+                {
+                    territory = accountList.Entities.FirstOrDefault();
+                }
+
+            }
+            catch (Exception)
+            {
+                return territory;
+            }
+            return territory;
+        }
+
+        public void PopulateTerritoryAndRegionalManager(Entity target, IOrganizationService _orgService)
+        {
+            Entity territoryDetails = new Entity();
+            EntityReference territory = new EntityReference();
+            EntityReference regionalmanager = new EntityReference();
+            if (target.LogicalName.ToLower() == "account" && target.Contains("smx_zippostalcode"))
+            {
+                string zipCode = target.GetAttributeValue<string>("smx_zippostalcode");
+
+                if (!string.IsNullOrEmpty(zipCode))
+                {
+                    territoryDetails = GetTerritoryDetails(_orgService, zipCode);
+                    if (territoryDetails != null && territoryDetails.Id != null && territoryDetails.Id != Guid.Empty)
+                    {
+                        territory = new EntityReference("territory", territoryDetails.Id);
+                        regionalmanager = territoryDetails.Contains("smx_accountmanager") ? territoryDetails.GetAttributeValue<EntityReference>("smx_accountmanager") : null;
+                        if (VerifyUserRoles(regionalmanager.Id))
+                        {
+                            target["ownerid"] = regionalmanager;
+                        }
+                        else
+                        {
+                            _tracer.Trace("reginal manager was not verified");
+                        }
+                        target["territoryid"] = territory;
+                    }
+                }
+            }
+            else if (target.LogicalName.ToLower() == "smx_lab" && target.Contains("smx_zippostalcode"))
+            {
+                string zipCode = target.GetAttributeValue<string>("smx_zippostalcode");
+
+                if (!string.IsNullOrEmpty(zipCode))
+                {
+                    territoryDetails = GetTerritoryDetails(_orgService, zipCode);
+                    if (territoryDetails != null && territoryDetails.Id != null && territoryDetails.Id != Guid.Empty)
+                    {
+                        territory = new EntityReference("territory", territoryDetails.Id);
+                        regionalmanager = territoryDetails.Contains("smx_accountmanager") ? territoryDetails.GetAttributeValue<EntityReference>("smx_accountmanager") : null;
+                        target["smx_regionalmanager"] = regionalmanager;
+                        target["smx_territory"] = territory;
+                    }
+                }
+            }
+        }
+
+        private EntityReferenceCollection GetUSAndCanadaCountries(IOrganizationService service)
+        {
+            EntityReferenceCollection countriesRefcollection = new EntityReferenceCollection ();
+            try
+            {
+                var qe = $@"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>
+                              <entity name='smx_country'>
+                                <attribute name='smx_name' />
+                                <attribute name='smx_countrycode' />
+                                <attribute name='smx_countryid' />
+                                <order attribute='smx_name' descending='false' />
+                                <filter type='and'>
+                                  <filter type='or'>
+                                    <condition attribute='smx_name' operator='like' value='%united states of america%' />
+                                    <condition attribute='smx_name' operator='like' value='%Canada%' />
+                                  </filter>
+                                </filter>
+                              </entity>
+                            </fetch>";
+
+                EntityCollection countrylist = service.RetrieveMultiple(new FetchExpression(qe));
+                if (countrylist.Entities.Count() > 0)
+                {
+                    Trace("received countries :" + countrylist.Entities.Count());
+                    foreach (var country in countrylist.Entities)
+                    {
+                        countriesRefcollection.Add(country.ToEntityReference());
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return countriesRefcollection;
+            }
+            return countriesRefcollection;
         }
     }
 }
