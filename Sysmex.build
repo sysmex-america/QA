@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="Sysmex" default="build" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sonomapartners.com/nant.xsd ../nant.xsd" xmlns="http://sonomapartners.com/nant.xsd">
+
+  <include buildfile="${libs}\compile.build" />
+
+  <!-- TODO: Update these connection strings to match your Dev and QA environments. As long as you add the sonomapartners\ccnet user
+       to your org, you should not need to specify credentials, just the Url and OrgName.  -->
+  <!-- NOTE: These connection strings are passed directly to the regular CrmConnection.Parse method, so you can use any of those settings
+       here if you need to. For example, expecially for larger solutions or slow servers, you may want to add the Timeout value to the
+	   connection string to increase it past the default 2 minutes. -->
+  <property name="project.devConnectionString" value="Url=https://sysmexdev.crm.dynamics.com; RequireNewInstance=true; AuthType=Office365; Username=anargyrosa@sysmex.com; Password=Sonomapartners1; Timeout=00:15:00" />
+  <property name="project.qaConnectionString" value="Url=https://sysmexqa.crm.dynamics.com; RequireNewInstance=true; AuthType=Office365; Username=anargyrosa@sysmex.com; Password=Sonomapartners1; Timeout=00:15:00" />
+  <property name="project.CPQConnectionString" value="Url=https://sysmexcpqqa.crm.dynamics.com; RequireNewInstance=true; AuthType=Office365; Username=anargyrosa@sysmex.com; Password=Sonomapartners1; Timeout=00:15:00" />
+  <property name="project.solutionUniqueName" value="CPQ_Release" />
+  <property name="project.solutionFileName" value="${project.destination}\${project.solutionUniqueName}-Unmanaged-${project.version}.zip" />
+  <property name="project.buildDescription" value="" />
+  <property name="nant.onsuccess" value="onSuccess.create" if="${project.buildType == 'Create'}" />
+
+  <target name="onSuccess.create">
+    <prepend
+      file="C:\BuildVersions\${project.ccnetProjectName}.txt"
+      text="${project.version}" />
+	  <createBuildRecord
+      failonerror="false"
+      projectName="${project.grapevineProjectName}"
+      description="Requested by ${CCNetRequestSource}${environment::newline()}${project.buildDescription}" />
+  </target>
+  
+  <target name="exportSolutionFromDev">
+    <publishCustomizations connectionString="${project.devConnectionString}" />
+	  <exportSolution
+      connectionString="${project.devConnectionString}"
+      solution="${project.solutionUniqueName}"
+      fileName="${project.solutionFileName}"
+      exportAsUnmanaged="true" />
+  </target>
+   
+  <target name="importSolutionToQa">
+    <importSolution
+	    connectionString="${project.qaConnectionString}"
+	    fileName="${project.solutionFileName}" />
+	  <publishCustomizations
+      connectionString="${project.qaConnectionString}" />
+  </target>
+
+  <!-- Mark Release for Production Deploy -->
+  <target name="markBuildAsReleased">
+    <updateBuildToReleased
+	    projectName="${project.grapevineProjectName}" />
+  </target>
+
+  <target name="continuous" depends="compile" />
+  <target name="create" depends="project.init, compile, exportSolutionFromDev, importSolutionToQa" />
+  <target name="release" depends="project.init, compile, exportSolutionFromDev, importSolutionToQa" />
+</project>

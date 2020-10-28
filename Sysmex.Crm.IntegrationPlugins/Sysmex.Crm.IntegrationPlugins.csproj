@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.props" Condition="Exists('..\packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{53483EAD-B113-4B24-BF70-C037C769FE7E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sysmex.Crm.IntegrationPlugins</RootNamespace>
+    <AssemblyName>Sysmex.Crm.IntegrationPlugins</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Sysmex.Crm.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Crm.Sdk.Proxy, Version=9.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CrmSdk.CoreAssemblies.9.0.2.5\lib\net452\Microsoft.Crm.Sdk.Proxy.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xrm.Sdk, Version=9.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CrmSdk.CoreAssemblies.9.0.2.5\lib\net452\Microsoft.Xrm.Sdk.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationFramework" />
+    <Reference Include="SonomaPartners.Crm.Toolkit, Version=9.0.1.0, Culture=neutral, PublicKeyToken=f30227255a839074, processorArchitecture=MSIL">
+      <HintPath>..\packages\SonomaPartners.Crm.Toolkit.9.0.1\lib\SonomaPartners.Crm.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Activities" />
+    <Reference Include="System.Activities.Presentation" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.IdentityModel">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Workflow.Activities" />
+    <Reference Include="System.Workflow.ComponentModel" />
+    <Reference Include="System.Workflow.Runtime" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AutoDeactivateImplementationProductPlugin.cs" />
+    <Compile Include="AutoPopulateICNDatePlugin.cs" />
+    <Compile Include="AutoPopulateMissingICNData.cs" />
+    <Compile Include="Logic\MapSalesOrderToImplementationLogic.cs" />
+    <Compile Include="Logic\WriteAsSysUserLogic.cs" />
+    <Compile Include="WriteAsSysUserPlugin.cs" />
+    <Compile Include="Logic\AutoDeactivateImplementationProductLogic.cs" />
+    <Compile Include="Logic\AutoPopulateICNDateLogic.cs" />
+    <Compile Include="Logic\MapCASToImplementationProductLogic.cs" />
+    <Compile Include="MapCASToImplementationProductPlugin.cs" />
+    <Compile Include="MapImplementationToSalesOrderPlugin.cs" />
+    <Compile Include="CalculateActualRevenueDatePlugin.cs" />
+    <Compile Include="GetWorkOrderFieldMappingAction.cs" />
+    <Compile Include="ImplementationAutoAssignmentPlugin.cs" />
+    <Compile Include="Logic\CalculateImplementationClassificationAndRevenueDatesLogic.cs" />
+    <Compile Include="CalculateImplementationClassificationAndRevenueDatesPlugin.cs" />
+    <Compile Include="CreateImplementationNoteRollupPlugin.cs" />
+    <Compile Include="Logic\CalculateActualRevenueDateLogic.cs" />
+    <Compile Include="Logic\CreateImplementationProductRecordsLogic.cs" />
+    <Compile Include="CreateImplementationProductRecordsPlugin.cs" />
+    <Compile Include="Logic\CreateImplementationNoteRollupLogic.cs" />
+    <Compile Include="MapSalesOrderToImplementationPlugin.cs" />
+    <Compile Include="Logic\GetWorkOrderFieldMappingActionLogic.cs" />
+    <Compile Include="Logic\ImplementationAutoAssignmentLogic.cs" />
+    <Compile Include="Logic\PreCreateWorkOrderLogic.cs" />
+    <Compile Include="Logic\MapImplementationToSalesOrderLogic.cs" />
+    <Compile Include="Logic\SetImplementationRollupFieldsLogic.cs" />
+    <Compile Include="Logic\WorkOrderFieldMappingLogic.cs" />
+    <Compile Include="PreCreateWorkOrderPlugin.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Logic\SendImplementationDatesToSAPLogic.cs" />
+    <Compile Include="SendImplementationDatesToSAPPlugin.cs" />
+    <Compile Include="Logic\SetImplementationFieldsOnUpdateLogic.cs" />
+    <Compile Include="SetImplementationFieldsOnUpdatePlugin.cs" />
+    <Compile Include="SetImplementationRollupFieldsPlugin.cs" />
+    <Compile Include="Logic\UpdateImplementationProductLogic.cs" />
+    <Compile Include="Logic\SetTimeToNoonLogic.cs" />
+    <Compile Include="SetTimeToNoonPlugin.cs" />
+    <Compile Include="UpdateImplementationProductPlugin.cs" />
+    <Compile Include="WorkOrderFieldMappingPlugin.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ILMerge.props" />
+    <None Include="packages.config" />
+    <None Include="Sysmex.Crm.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sysmex.Crm.Model\Sysmex.Crm.Model.csproj">
+      <Project>{a23333e7-2605-4909-a46f-7d0b52c8c913}</Project>
+      <Name>Sysmex.Crm.Model</Name>
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ILMergeOrder.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.props'))" />
+    <Error Condition="!Exists('..\packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.targets'))" />
+  </Target>
+  <Import Project="..\packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.targets" Condition="Exists('..\packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.targets')" />
+</Project>

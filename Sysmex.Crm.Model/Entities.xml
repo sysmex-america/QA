@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Model.xsd"
+    IncludeAllEntities="false" IncludeAllGlobalOptionSets="false">
+    <GlobalOptionSets>
+      <GlobalOptionSet Name='smx_department' />
+      <GlobalOptionSet Name='smx_freefreightcodeforthiscase' />
+      <GlobalOptionSet Name='smx_function' />
+      <GlobalOptionSet Name='smx_sapcustomertype' />
+      <GlobalOptionSet Name='smx_sapsourcecode' />
+      <GlobalOptionSet Name='smx_termsofpayment' />
+      <GlobalOptionSet Name='smx_paymentterms' />
+      <GlobalOptionSet Name="smx_producttype" />
+      <GlobalOptionSet Name="smx_contractoption" />
+      <GlobalOptionSet Name="smx_contracttype" />
+      <GlobalOptionSet Name="smx_paymentterms" />
+      <GlobalOptionSet Name="smx_companyclasstype" />
+	  <GlobalOptionSet Name="smx_yesno" />
+	  <GlobalOptionSet Name="smx_classification" />
+	  <GlobalOptionSet Name="smx_orderreason" />
+	  <GlobalOptionSet Name="smx_product_status" />	  
+    </GlobalOptionSets>
+    <Entities>
+        <!-- System Defined Entities -->
+	<Entity Name="annotation" />
+      <Entity Name="organization" >
+        <Attributes>
+          <Attribute Name="trackingprefix" PropertyName="TrackingPrefix"/>
+          <Attribute Name="trackingtokenidbase" PropertyName="TrackingTokenIdBase"/>
+          <Attribute Name="uniquespecifierlength" PropertyName="UniqueSpecifierLength"/>
+          <Attribute Name="trackingtokeniddigits" PropertyName="TrackingTokenIdDigits"/>
+          <Attribute Name="maximumtrackingnumber" PropertyName="MaximumTrackingNumber"/>
+        </Attributes>
+      </Entity>
+        <Entity Name="account" />
+		    <Entity Name="contact" />
+        <Entity Name="opportunity" />
+        <Entity Name="systemuser" />
+		    <Entity Name="smx_address" />
+        <Entity Name="smx_demoeval" />
+		    <Entity Name="competitor" />
+		    <Entity Name="pompetitoraddress" />
+		    <Entity Name="customeraddress" />
+		    <Entity Name="smx_gpo" />
+		    <Entity Name="smx_ihn" />
+		    <Entity Name="smx_instrument" />
+		    <Entity Name="smx_lab" />
+		    <Entity Name="smx_manufacturer" />
+		    <Entity Name="smx_model" />
+		    <Entity Name="smx_productline" />
+		    <Entity Name="territory" />
+		    <Entity Name="smx_zippostalcode" />
+        <Entity Name="smx_flowcytometryproduct" />
+		<Entity Name="smx_implementation" />
+		<Entity Name="smx_implementationproduct" />
+		<Entity Name="smx_implementationsapdateslog" />
+        <Entity Name="smx_pricelist" />
+        <Entity Name="smx_stageduration" />
+        <Entity Name="smx_salesorder" />
+        <Entity Name="opportunityclose" />
+        <Entity Name="smx_opportunitylab" />
+        <Entity Name="smx_fcsopportunity" />
+        <Entity Name="smx_instrumentupdate" />
+        <Entity Name="new_clm_agreement" />
+        <Entity Name="new_cpq_quote" />
+        <Entity Name="new_cpq_lineitem_tmp" />
+        <Entity Name="smx_salesorderbusinessprocess" />
+        <Entity Name="processstage" />
+        <Entity Name="team" />
+        <Entity Name="smx_commission" />
+        <Entity Name="new_quote" />
+        <Entity Name="smx_state" />
+        <Entity Name="smx_product" />
+        <Entity Name="smx_sysmexconfig" />	
+		<Entity Name="msdyn_workorder" />
+		<Entity Name="bookableresourcebooking" />
+		<Entity Name="bookableresource" />
+		
+		    <!--
+            <Entity Name="incident" ClassName="Case" />
+            <Entity Name="queue" ClassName="CrmQueue" />
+            <Entity Name="subject" />        
+		    <Entity Name="email" />
+		    <Entity Name="template" ClassName="EmailTemplate" >
+            <Attributes>
+                <Attribute Name="subject" PropertyName="Subject" />
+                <Attribute Name="subjectpresentationxml" PropertyName="SubjectPresentationXml" />
+                <Attribute Name="body" PropertyName="Body" />
+                <Attribute Name="presentationxml" PropertyName="PresentationXml" />
+            </Attributes>
+        </Entity>
+        -->
+        <!--Custom Entities-->
+    </Entities>
+</Model>
