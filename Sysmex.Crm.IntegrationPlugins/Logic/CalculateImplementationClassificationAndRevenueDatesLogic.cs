@@ -176,7 +176,7 @@ namespace Sysmex.Crm.IntegrationPlugins.Logic
 				int convertedClassification;
 				if (updateAll?.Value == (int)smx_yesno.Yes)
 				{
-					var maxDateProduct = FindMaxDateProduct();
+					var maxDateProduct = FindProperProduct();
 					convertedClassification = maxDateProduct?.smx_Classification == null ? 0 : maxDateProduct.smx_Classification.Value;
 				}
 				else
@@ -251,7 +251,7 @@ namespace Sysmex.Crm.IntegrationPlugins.Logic
 						updateProduct.Id = product.Id;
 						updateProduct.smx_CalculatedRevRecDate = revRecDate;
 						updateProduct.smx_NormalProcessDate = normalDate;
-						updateProduct.smx_PotentialRevenueDate = potRevDate;
+							updateProduct.smx_PotentialRevenueDate = potRevDate;
 						orgService.Update(updateProduct.ToEntity<Entity>());
 					}
 					else
@@ -268,7 +268,7 @@ namespace Sysmex.Crm.IntegrationPlugins.Logic
 			return revRecDate;
 		}
 
-		private smx_implementationproduct FindMaxDateProduct()
+		private smx_implementationproduct FindProperProduct()
 		{
 			var tempProduct = products.Where(w => w.smx_Classification?.Value == (int)smx_classification.WR
 											|| w.smx_Classification?.Value == (int)smx_classification.WAC).FirstOrDefault();
@@ -281,10 +281,10 @@ namespace Sysmex.Crm.IntegrationPlugins.Logic
 					tempProduct = products.Where(w => w.smx_Classification?.Value == (int)smx_classification.FLO || w.smx_Classification?.Value == (int)smx_classification.STD).FirstOrDefault();
 					if (tempProduct == null)
 					{
-						tempProduct = products.Where(w => w.smx_Classification?.Value != (int)smx_classification.POC
-													&& w.smx_Classification?.Value != (int)smx_classification.SED
-													&& w.smx_Classification?.Value != (int)smx_classification.XP
-													&& w.smx_Classification?.Value != (int)smx_classification.GLO).FirstOrDefault();
+						tempProduct = products.Where(w => w.smx_Classification?.Value == (int)smx_classification.POC
+													|| w.smx_Classification?.Value == (int)smx_classification.SED
+													|| w.smx_Classification?.Value == (int)smx_classification.XP
+													|| w.smx_Classification?.Value == (int)smx_classification.GLO).FirstOrDefault();
 
 						if (tempProduct == null)
 						{
