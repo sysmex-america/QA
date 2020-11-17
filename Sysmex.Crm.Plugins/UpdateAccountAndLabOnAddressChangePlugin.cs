@@ -12,6 +12,8 @@ namespace Sysmex.Crm.Plugins
             var orgService = serviceProvider.CreateOrganizationServiceAsCurrentUser();
             var tracer = serviceProvider.GetTracingService();
 
+            string businessUnitName = string.Empty;
+
             if (context.Depth > 2)
             {
                 tracer.Trace("UpdateAccountsLabsOnAddressChangePlugin running twice, exit out.");
@@ -20,7 +22,13 @@ namespace Sysmex.Crm.Plugins
 
             var address = context.GetPostEntityImage("Target");
             var logic = new SyncLabAccountAddressLogic(orgService, tracer);
-            logic.UpdateAssociatedAccountsAndLabs(address);
+
+            //Added by Yash on 19-06-2020 
+            businessUnitName = logic.getUserBusinessUnit(context.InitiatingUserId);
+            tracer.Trace("Business Unit Name " + businessUnitName);
+            
+
+            logic.UpdateAssociatedAccountsAndLabs(address, businessUnitName);
         }
     }
 }
