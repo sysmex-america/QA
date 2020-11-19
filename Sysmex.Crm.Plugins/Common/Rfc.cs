@@ -449,8 +449,11 @@ namespace Sysmex.Crm.Plugins.Common {
         private System.Nullable<decimal> pRICEField;
         
         private bool pRICEFieldSpecified;
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+
+		private string ADD_VAL_DYField; //Added by Yash on 30-06-2020 ticket id:57130
+
+		/// <remarks/>
+		[System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
         public string LINEITEM_ID
         {
             get
@@ -516,10 +519,26 @@ namespace Sysmex.Crm.Plugins.Common {
                 this.pRICEField = value;
             }
         }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1590.0")]
+
+		//Added by Yash on 30-06-2020 ticket id:57130
+		/// <remarks/>
+		[System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+		public string ADD_VAL_DY
+		{
+			get
+			{
+				return this.ADD_VAL_DYField;
+			}
+			set
+			{
+				this.ADD_VAL_DYField = value;
+			}
+		}
+		//end
+	}
+
+	/// <remarks/>
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]

@@ -12,8 +12,10 @@ namespace Sysmex.Crm.Plugins
         {
             var context = serviceProvider.GetPluginExecutionContext();
             var tracer = serviceProvider.GetTracingService();
-
-            tracer.Trace("Start Create Instrument Records Plugin");
+			//Added by Yash on 09-10-2020--Ticket No 58546
+			var orgService = serviceProvider.CreateOrganizationService(context.UserId);
+			//End
+			tracer.Trace("Start Create Instrument Records Plugin");
 
             var opportunityClose = context.GetInputParameter<Entity>("OpportunityClose").ToEntity<OpportunityClose>();
             var status = context.GetInputParameter<OptionSetValue>("Status");
@@ -28,9 +30,11 @@ namespace Sysmex.Crm.Plugins
                 tracer.Trace("Opportunity Close has no Opportunity Id, returning");
                 return;
             }
-
-            var logic = new CreateInstrumentRecordsLogic(serviceProvider, tracer);
-            logic.CreateInstrumentRecordsFromCPQLineItems(opportunityClose.OpportunityId.Id);
+			//Added by Yash on 09-10-2020--Ticket No 58546
+			//var logic = new CreateInstrumentRecordsLogic(serviceProvider, tracer);
+			var logic = new CreateInstrumentRecordsLogic(serviceProvider, tracer, orgService);
+			//End
+			logic.CreateInstrumentRecordsFromCPQLineItems(opportunityClose.OpportunityId.Id);
 
             tracer.Trace("End Create Instrument Records Plugin");
         }

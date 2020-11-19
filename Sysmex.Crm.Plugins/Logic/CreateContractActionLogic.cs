@@ -92,21 +92,25 @@ namespace Sysmex.Crm.Plugins.Logic
         
         private IEnumerable<new_cpq_lineitem_tmp> GetLineItems(smx_salesorder salesOrder)
         {
-            var fetch = $@"<fetch>
+			//Added by Yash on 24-08-2020--Ticket No 57839---><condition attribute='new_producttype' operator='ne' value='Reagents' />
+			var fetch = $@"<fetch>
                   <entity name='new_cpq_lineitem_tmp'>
                     <attribute name='new_name' />
                     <attribute name='new_quantity' />
                     <attribute name='smx_unitofmeasure' />
                     <attribute name='new_baseprice' />
                     <attribute name='new_optionid' />
-                    <link-entity name='smx_product' from='smx_productid' to='new_optionid' alias='smx_product'>
+                    <attribute name='smx_ncmonths' />
+                    <attribute name='smx_combinedwarranty' />
+					<link-entity name='smx_product' from='smx_productid' to='new_optionid' alias='smx_product'>
                         <filter type='and'>
                             <condition attribute='smx_excludefromcontract' operator='ne' value='1' />
-                        </filter>
+						</filter>
                     </link-entity>
                     <filter type='and'>
                         <condition attribute='smx_salesorderid' operator='eq' value='{{{salesOrder.Id}}}'/>
-                         </filter>
+                        <condition attribute='new_producttype' operator='ne' value='Reagents' />
+                    </filter>
                    <filter type='and'>
                           <condition attribute='new_producttype' operator='ne' value='Service' />
                           {GetProductTypeFiltersByOrderReason(salesOrder.smx_OrderReason)}
@@ -172,10 +176,6 @@ namespace Sysmex.Crm.Plugins.Logic
 
             };
 
-
-
-
-
             var serializerRequest = new XmlSerializer(typeof(Z_BIZ_BAPI_CONTRACT_CREATE1));
             string serializedRequest;
 
@@ -222,8 +222,10 @@ namespace Sysmex.Crm.Plugins.Logic
 
                 contractId = xmlResponse.SALESDOCUMENT;
                 UpdateSalesOrder(salesOrder.Id, contractId, serializedRequest);
-            }
-            else
+
+				
+			}
+			else
             {
                 //BAPI or endpoint threw a hard error
                 throw new InvalidPluginExecutionException($"Error returned from endpoint: {response.Content.ReadAsStringAsync().Result} - Request XML: {serializedRequest}");
@@ -242,11 +244,60 @@ namespace Sysmex.Crm.Plugins.Logic
             var update = new smx_salesorder() { Id = salesOrderId };
             update.smx_ContractNumber = contractId;
             update.smx_ContractXML = contractXml;
+			//Added by Yash on 28-10-2020--Ticket No 58798
+			//_orgService.Update(update);
 
-            _orgService.Update(update);
-        }
+			//Added by Yash on 13-08-2020--Ticket No 57589
+			Entity saleorderDetails = GetSaleOrderDetails(salesOrderId);
+			AliasedValue opportunityLabLab = saleorderDetails.Contains("OpportunityLab.smx_labid") ? saleorderDetails.GetAttributeValue<AliasedValue>("OpportunityLab.smx_labid") : null;
+			//Added by Yash on 28-10-2020--Ticket No 58798
+			if(opportunityLabLab!=null)
+			{
+				EntityReference labDetails = (EntityReference)opportunityLabLab.Value;
+				Entity labEntity = _orgService.Retrieve(labDetails.LogicalName, labDetails.Id, new ColumnSet("smx_casprimary"));
+				if(labEntity.Contains("smx_casprimary"))
+				{
+					string labCASPrimary = labEntity.Contains("smx_casprimary") ? labEntity.GetAttributeValue<string>("smx_casprimary") : string.Empty;
+					if(labCASPrimary!=string.Empty)
+					{
+						Entity user = GetUserfromCASPrimery(labCASPrimary);
+						if(user!=null)
+						{
+							update["smx_cas"] = new EntityReference(user.LogicalName, user.Id);
+						}
+					}
+					
+				}
+			}
+			_orgService.Update(update);
+			//End
+			AliasedValue sapNumber = saleorderDetails.Contains("InstrumentShipTo.smx_sapnumber") ? saleorderDetails.GetAttributeValue<AliasedValue>("InstrumentShipTo.smx_sapnumber") : null;
+			if (opportunityLabLab != null && sapNumber != null)
+			{
+				UpdateLabandLabAddressSapNumber((EntityReference)opportunityLabLab.Value, sapNumber.Value.ToString(), "smx_sapid",saleorderDetails);
+				Entity labAddress = _orgService.Retrieve(((EntityReference)opportunityLabLab.Value).LogicalName, ((EntityReference)opportunityLabLab.Value).Id, new ColumnSet("smx_labaddress"));
+				if (labAddress.Contains("smx_labaddress"))
+					UpdateLabandLabAddressSapNumber((EntityReference)labAddress.Attributes["smx_labaddress"], sapNumber.Value.ToString(), "smx_sapnumber",saleorderDetails);
+				//Added by Yash on 27-08-2020--Ticket No 57589
+				AliasedValue opportunityLabAccount = saleorderDetails.Contains("OpportunityLab.smx_accountid") ? saleorderDetails.GetAttributeValue<AliasedValue>("OpportunityLab.smx_accountid") : null;
+				if(opportunityLabAccount!=null && opportunityLabLab!=null)
+				{
+					EntityReference instrumentShipTo = saleorderDetails.GetAttributeValue<EntityReference>("smx_instrumentshiptoidid");
+					UpdateSoldToandShipToAddresses(instrumentShipTo,(EntityReference) opportunityLabAccount.Value, (EntityReference)opportunityLabLab.Value, "shipto");
+				}
+				if(opportunityLabAccount!=null)
+				{
+					EntityReference soldToAddress = saleorderDetails.Contains("smx_soldtoaddressid") ? saleorderDetails.GetAttributeValue<EntityReference>("smx_soldtoaddressid") : null;
+					if(soldToAddress!=null)
+						UpdateSoldToandShipToAddresses(soldToAddress, (EntityReference)opportunityLabAccount.Value,null, "soldto");
+				}
+			}
+			//End
+			
 
-        private ZBAPI_CON_HEADER GetRequestHeader(smx_salesorder salesOrder)
+		}
+
+		private ZBAPI_CON_HEADER GetRequestHeader(smx_salesorder salesOrder)
         {
             var requestHeader = new ZBAPI_CON_HEADER()
             {
@@ -286,9 +337,11 @@ namespace Sysmex.Crm.Plugins.Logic
                 MATERIAL_NUMBER = lineItem.new_optionid?.Name,
                 TARGET_QUANTITY = lineItem.new_quantity,
                 UOM = lineItem.smx_UnitofMeasure,
-                PRICE = lineItem.new_BasePrice?.Value
+                PRICE = lineItem.new_BasePrice?.Value,
+				//ADD_VAL_DY = lineItem.Attributes.Contains("smx_ncmonths")?(lineItem.GetAttributeValue<int>("smx_ncmonths")).ToString():string.Empty  //Added by Yash on 30-06-2020 ticket id:57130   
+				ADD_VAL_DY = lineItem.Attributes.Contains("smx_combinedwarranty") ?(lineItem.GetAttributeValue<int>("smx_combinedwarranty")).ToString():string.Empty  //Added by Yash on 23-09-2020 ticket id:57130 
 
-            };
+			};
 
             return requestItem;
         }
@@ -344,8 +397,114 @@ namespace Sysmex.Crm.Plugins.Logic
 
             return labs.GetAliasedAttributeValue<int?>("opportunitylab_count")?.ToString();
         }
+		//Added by Yash on 13-08-2020--Ticket No 57589
+		//Added by Yash on 19-10-2020--Ticket No 58434
+		private Entity GetSaleOrderDetails(Guid saleOrderId)
+		{
+			Entity saleOrder = null;
+			try
+			{
+				var fetch = $@"<fetch>
+                             <entity name='smx_salesorder'>
+                             <attribute name='smx_salesorderid' />
+                             <attribute name='smx_name' />
+                             <attribute name='smx_opportunitylabid' />
+                             <attribute name='smx_instrumentshiptoidid' />
+                             <attribute name='smx_wamsite' />
+                             <attribute name='smx_wamconnects' />
+                             <attribute name='smx_soldtoaddressid' />
+							  <filter type='and'>
+                                <condition attribute='smx_salesorderid' operator='eq' value='{saleOrderId}' />
+                              </filter>
+                           <link-entity name='smx_opportunitylab' from='smx_opportunitylabid' to='smx_opportunitylabid' link-type='outer' alias='OpportunityLab'>
+                             <attribute name='smx_labid' />
+                             <attribute name='smx_accountid' />
+						   </link-entity>
+                          <link-entity name='smx_address' from='smx_addressid' to='smx_instrumentshiptoidid' link-type='outer' alias='InstrumentShipTo'>
+                            <attribute name='smx_sapnumber' />
+                         </link-entity>
+                        </entity>
+                       </fetch>";
+				EntityCollection ecSaleorders = _orgService.RetrieveMultiple(new FetchExpression(fetch));
+				if (ecSaleorders.Entities.Count() > 0)
+				{
+					_tracer.Trace("Saleorders Count" + ecSaleorders.Entities.Count());
+					saleOrder = ecSaleorders.Entities.FirstOrDefault();
+				}
+			}
+			catch (Exception ex)
+			{
+				return saleOrder;
+			}
+			return saleOrder;
+		}
 
-    }
+		private void UpdateLabandLabAddressSapNumber(EntityReference labandlabAddress, string sapNumber, string sapNumberFieldName, Entity saleOrderDetails)
+		{
+			_tracer.Trace("Entered UpdateLabandLabAddressSapNumber Method");
+			Entity enLabandlabAddress = new Entity(labandlabAddress.LogicalName, labandlabAddress.Id);
+			enLabandlabAddress.Attributes.Add(sapNumberFieldName, sapNumber);
+			//Added by Yash on 08-10-2020--Ticket No 58434
+			if (saleOrderDetails.Contains("smx_wamsite") && labandlabAddress.LogicalName == "smx_lab")
+				enLabandlabAddress.Attributes.Add("smx_wamsite", saleOrderDetails.GetAttributeValue<OptionSetValue>("smx_wamsite"));
+			if (saleOrderDetails.Contains("smx_wamconnects") && labandlabAddress.LogicalName == "smx_lab")
+				enLabandlabAddress.Attributes.Add("smx_wamconnects", saleOrderDetails.GetAttributeValue<OptionSetValue>("smx_wamconnects"));
+			//End
+			_orgService.Update(enLabandlabAddress);
+			_tracer.Trace("Lab or Lab Address Updated");
+		}
+		//End
+		//Added by Yash on 27-08-2020--Ticket No 57589
+		private void UpdateSoldToandShipToAddresses(EntityReference SoldToandShipTo, EntityReference account,EntityReference lab,string SoldToorShipTo)
+		{
+			_tracer.Trace("Entered UpdateSoldToandShipToAddresses Method");
+			Entity enSoldToandShipTo = new Entity(SoldToandShipTo.LogicalName, SoldToandShipTo.Id);
+			if (SoldToorShipTo == "soldto")
+				enSoldToandShipTo.Attributes.Add("smx_account", new EntityReference(account.LogicalName, account.Id));
+			else if (SoldToorShipTo == "shipto")
+			{
+				enSoldToandShipTo.Attributes.Add("smx_account", new EntityReference(account.LogicalName, account.Id));
+				enSoldToandShipTo.Attributes.Add("smx_lab", new EntityReference(lab.LogicalName, lab.Id));
+			}
+			_orgService.Update(enSoldToandShipTo);
+			_tracer.Trace("ShipTo or SoldTo Address Updated");
+		}
+
+		//End
+		//Added by Yash on 28-10-2020--Ticket No 57589
+		private Entity GetUserfromCASPrimery(string CASPrimary)
+		{
+			Entity user = null;
+			string userName = "%" + CASPrimary + "%";
+			try
+			{
+				var fetch = $@"<fetch>
+                             <entity name='systemuser'>
+                               <attribute name='fullname' />
+                               <attribute name='systemuserid' />
+                               <attribute name='domainname' />
+                                  <filter type='and'>
+                                       <condition attribute='domainname' operator='like' value='{userName}' />
+                                  </filter>
+                             </entity>
+                       </fetch>";
+				EntityCollection ecUsers = _orgService.RetrieveMultiple(new FetchExpression(fetch));
+				if (ecUsers.Entities.Count() > 0)
+				{
+					_tracer.Trace("users Count" + ecUsers.Entities.Count());
+					user = ecUsers.Entities.FirstOrDefault();
+				}
+			}
+			catch (Exception ex)
+			{
+				_tracer.Trace("users not found");
+				return user;
+			}
+			return user;
+
+		}
+		//End
+	}
 }
 
 

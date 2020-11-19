@@ -75,7 +75,16 @@ namespace Sysmex.Crm.Plugins.Logic
             _tracer.Trace("Create Sales Order");
 
             var opportunityId = opportunityLab.smx_OpportunityId.Id;
-            EntityReference HSAManager = new EntityReference();
+
+            //Added by Yash on 23-06-2020 - ticket id 57042
+            Entity _opportunityEntity=_orgService.Retrieve("opportunity", opportunityId,new ColumnSet("ownerid", "smx_opportunitytype", "smx_distributionsalesmanager", "smx_distributor", "smx_accountmanager"));
+            //end
+
+            //Added by yash on 26-06-2020 - ticket Id 57086
+            Entity _opportunityOwner=_orgService.Retrieve("systemuser", _opportunityEntity.GetAttributeValue<EntityReference>("ownerid").Id, new ColumnSet("smx_cpqapprovalrole"));
+            //end
+
+            // EntityReference HSAManager = new EntityReference();
 
             string salesOrderName = string.Empty;
             salesOrderName = $"{opportunityLab.GetAliasedAttributeValue<string>("Opportunity.name")}";
@@ -84,19 +93,31 @@ namespace Sysmex.Crm.Plugins.Logic
                 salesOrderName = salesOrderName + " - " + opportunityLab.smx_AccountId.Name;
             }
 
-            HSAManager = opportunityLab.GetAliasedAttributeValue<EntityReference>("account.ownerid");
-            if (opportunityLab.Contains("Opportunity.smx_opportunitytype") && opportunityLab.GetAliasedAttributeValue<OptionSetValue>("Opportunity.smx_opportunitytype").Value == 180700001)
-            {
-                _tracer.Trace("this is Multisite opp");
-                if (!opportunityLab.Contains("Opportunity.smx_distributor") || opportunityLab.GetAliasedAttributeValue<EntityReference>("Opportunity.smx_distributor").Id == Guid.Empty)
-                {
-                    _tracer.Trace("distributor not available");
-                    Entity labDetails = GetLabDetailsFromOpportunity(opportunityLab.Id);
-                    HSAManager = labDetails.Contains("smx_regionalmanager") ? labDetails.GetAttributeValue<EntityReference>("smx_regionalmanager") : null;
-                    _tracer.Trace($"HSAManager: { (HSAManager != null ? HSAManager.Name : "HSAManager is null")}");
-                }
-            }
-            var salesOrder = new smx_salesorder()
+            //Commented By yash 01-07-2020 ticket id = 57086 
+            //HSAManager = opportunityLab.GetAliasedAttributeValue<EntityReference>("account.ownerid");
+            //if (opportunityLab.Contains("Opportunity.smx_opportunitytype") && opportunityLab.GetAliasedAttributeValue<OptionSetValue>("Opportunity.smx_opportunitytype").Value == 180700001)
+            //{
+            //    _tracer.Trace("this is Multisite opp");
+            //    if (!opportunityLab.Contains("Opportunity.smx_distributor") || opportunityLab.GetAliasedAttributeValue<EntityReference>("Opportunity.smx_distributor").Id == Guid.Empty)
+            //    {
+            //        _tracer.Trace("distributor not available");
+            //        Entity labDetails = GetLabDetailsFromOpportunity(opportunityLab.Id);
+            //        HSAManager = labDetails.Contains("smx_regionalmanager") ? labDetails.GetAttributeValue<EntityReference>("smx_regionalmanager") : null;
+            //        _tracer.Trace($"HSAManager: { (HSAManager != null ? HSAManager.Name : "HSAManager is null")}");
+            //    }
+            //}
+
+
+            //Added by yash 01-07-2020 ticket id = 57086
+            EntityReference _HSAM = new EntityReference();
+            Entity labInfo = GetLabDetailsFromOpportunity(opportunityLab.Id);
+            _HSAM = labInfo.Contains("smx_regionalmanager") ? labInfo.GetAttributeValue<EntityReference>("smx_regionalmanager") : null;
+			//end
+			//Added by yash 12-08-2020 ticket id = 57665
+			EntityReference opportunityHSAM = new EntityReference();
+			opportunityHSAM = _opportunityEntity.Contains("smx_accountmanager") ? _opportunityEntity.GetAttributeValue<EntityReference>("smx_accountmanager") : null;
+			//End
+			var salesOrder = new smx_salesorder()
             {
                 smx_name = salesOrderName,
                 smx_ESRTier = opportunityLab.GetAliasedAttributeValue<OptionSetValue>("Opportunity.smx_esrtier"),
@@ -123,20 +144,70 @@ namespace Sysmex.Crm.Plugins.Logic
                 smx_ReagentControlShipToId = opportunityLab.smx_ShipToAddressId,
                 smx_AnnualTargetTestCount = SumAnnualTargetTestCount(cpqLineItems),
                 smx_OpportunityId = opportunityLab.smx_OpportunityId,
-                OwnerId = opportunityLab.OwnerId,
-                smx_OpportunityLabID = opportunityLab.ToEntityReference(),
+				// OwnerId = opportunityLab.OwnerId,
+
+				//Added by Yash on 23-06-2020 - ticket id 57042 Single site==180700000
+				// OwnerId = (_opportunityEntity.GetAttributeValue<OptionSetValue>("smx_opportunitytype").Value== 180700000)?_opportunityEntity.GetAttributeValue<EntityReference>("ownerid"): opportunityLab.OwnerId,
+				//end
+
+				smx_OpportunityLabID = opportunityLab.ToEntityReference(),
                 smx_TerritoryId = opportunityLab.GetAliasedAttributeValue<EntityReference>("account.territoryid"),
                 smx_RegionId = opportunityLab.GetAliasedAttributeValue<EntityReference>("territory.smx_region"),
-                smx_AccountManagerId = HSAManager,
+                smx_AccountManagerId = _HSAM,
                 smx_clmagreement = agreementRecord?.ToEntityReference(),
                 smx_agreementnumber = agreementRecord?.new_name,
                 smx_AgreementURL = agreementRecord?.smx_agreementurl,
                 smx_DSM = opportunityLab.GetAliasedAttributeValue<EntityReference>("smx_shiptoaddress.smx_dsmid"),
-                smx_ProductConfig = prodConfig
+                smx_ProductConfig = prodConfig,
             };
+			//Added by Yash on 08-10-2020 - ticket id 58477
+			salesOrder.Attributes.Add("smx_pending", new OptionSetValueCollection(new List<OptionSetValue>() { new OptionSetValue(180700000) }));
+			//End
+			//Added by yash on 26-06-2020 - ticket Id 57086
+			//Added by Yash on 14-10-2020 - ticket id 58607
+			int opportunityOwnerApprovalRole = _opportunityOwner.Contains("smx_cpqapprovalrole") ? _opportunityOwner.GetAttributeValue<OptionSetValue>("smx_cpqapprovalrole").Value : 0;
+			int _opportunityType = _opportunityEntity.GetAttributeValue<OptionSetValue>("smx_opportunitytype").Value;
+            if (_opportunityType == 180700000 )  // Single site==180700000  
+            {
+				if(opportunityOwnerApprovalRole == 180700001 && opportunityHSAM != null) //CAE=180700001
+					salesOrder.OwnerId = opportunityHSAM;
+				else if (opportunityOwnerApprovalRole == 180700006 && _HSAM != null) //HSAM=180700006
+					salesOrder.OwnerId = _HSAM;
+				else
+				salesOrder.OwnerId = _opportunityEntity.GetAttributeValue<EntityReference>("ownerid");
+            }
+            else if (_opportunityType == 180700001) // Multi-Site == 180700001
+            {
+                if (_opportunityOwner.Attributes.Contains("smx_cpqapprovalrole") && _opportunityOwner.GetAttributeValue<OptionSetValue>("smx_cpqapprovalrole").Value == 180700003) // MDS ==180700003
+                {
+                    salesOrder.OwnerId = _opportunityEntity.GetAttributeValue<EntityReference>("ownerid");
+                }
+                else if(_HSAM!=null)
+                {
+                    salesOrder.OwnerId = _HSAM;
+                }
+                else
+                {
+                    _tracer.Trace("Owner Doesn't Exist");
+                    throw new InvalidPluginExecutionException("Owner Doesn't Exist");
+                }
+            }
+            else
+            {
+                salesOrder.OwnerId = opportunityLab.OwnerId;
+            }
 
-            //Popilate Bill To/Payer Address fields
-            var distributorRef = opportunityLab.GetAliasedAttributeValue<EntityReference>("Opportunity.smx_distributor");
+			//end
+
+			//Added by yash on 29-06-2020 - ticket Id 57045
+			 
+			if ( _opportunityEntity.Attributes.Contains("smx_distributor") && _opportunityEntity.Attributes.Contains("smx_distributionsalesmanager") && _opportunityOwner.Attributes.Contains("smx_cpqapprovalrole") && _opportunityOwner.GetAttributeValue<OptionSetValue>("smx_cpqapprovalrole").Value == 180700003) // MDS ==180700003
+				salesOrder.smx_mds= _opportunityEntity.GetAttributeValue<EntityReference>("smx_distributionsalesmanager");
+
+			//end
+			
+			//Popilate Bill To/Payer Address fields
+			var distributorRef = opportunityLab.GetAliasedAttributeValue<EntityReference>("Opportunity.smx_distributor");
             if (distributorRef == null)
             {
                 salesOrder.smx_BillToAddressId = opportunityLab.GetAliasedAttributeValue<EntityReference>("Opportunity.smx_contractsoldtoaddress");

@@ -17,7 +17,9 @@ namespace Sysmex.Crm.Plugins
             var context = serviceProvider.GetPluginExecutionContext();
             var orgService = serviceProvider.CreateOrganizationServiceAsCurrentUser();
             var tracer = serviceProvider.GetTracingService();
-            
+
+            string businessUnitName = string.Empty;
+
             if (context.Depth > 1)
             {
                 tracer.Trace("SyncLabAccountAddressPlugin running twice, exit out.");
@@ -42,8 +44,16 @@ namespace Sysmex.Crm.Plugins
                 }
                 else if ((target.LogicalName.ToLower() == "smx_lab" && target.GetAttributeValue<EntityReference>("smx_labaddress") == null) || (target.LogicalName.ToLower() == "account" && target.GetAttributeValue<EntityReference>("smx_address") == null))
                 {
-                    //create
-                    logic.CreateAddressRecord(target);
+                    //Added by Yash on 19-06-2020                     
+                    if (target.LogicalName.ToLower() == "account")
+                    {
+                        businessUnitName = logic.getUserBusinessUnit(context.InitiatingUserId);
+                        tracer.Trace("Business Unit Name " + businessUnitName);
+                    }
+                    //End
+
+                    //create                    
+                    logic.CreateAddressRecord(target, businessUnitName);
                 }
             }
             else if (preImage == null){
@@ -54,12 +64,31 @@ namespace Sysmex.Crm.Plugins
             {
                 //two cases changing address, changing address fields,
                 logic.CopyAddressFields(target, preImage);
-                tracer.Trace("calling PopulateTerritoryAndRegionalManager"); 
-                logic.PopulateTerritoryAndRegionalManager(target, orgService);
-                tracer.Trace(" PopulateTerritoryAndRegionalManager executed");
+
+                //Added by Yash on 19-06-2020  
+                businessUnitName = logic.getUserBusinessUnit(context.InitiatingUserId);
+                tracer.Trace("Business Unit Name " + businessUnitName);
+				//if (target.LogicalName.ToLower() == "account" && businessUnitName == "Latin America")
+				//{
+				//	return;
+				//}
+				//End
+
+				tracer.Trace("calling PopulateTerritoryAndRegionalManager");
+				logic.PopulateTerritoryAndRegionalManager(target, orgService, businessUnitName);
+				tracer.Trace(" PopulateTerritoryAndRegionalManager executed");
             }
             if (target.LogicalName.ToLower() == "account" && (target.Contains("address1_postalcode") || target.Contains("smx_countrysap")))
             {
+                //Added by Yash on 19-06-2020  
+                businessUnitName = logic.getUserBusinessUnit(context.InitiatingUserId);
+                tracer.Trace("Business Unit Name " + businessUnitName);
+                if (businessUnitName == "Latin America")
+                {
+                    return;
+                }
+                //End
+
                 logic.PopulateFieldsBasedOnAddressZipCode(target, context.MessageName.ToLower());
             }
         }
