@@ -53,7 +53,7 @@
     </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="SonomaPartners.Crm.Toolkit, Version=9.0.1.0, Culture=neutral, PublicKeyToken=f30227255a839074, processorArchitecture=MSIL">
-      <HintPath>..\packages\SonomaPartners.Crm.Toolkit.9.0.1\lib\SonomaPartners.Crm.Toolkit.dll</HintPath>
+      <HintPath>..\..\..\..\Downloads\SonomaPartners.Crm.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Activities" />
@@ -84,8 +84,10 @@
     <Compile Include="AutoDeactivateImplementationProductPlugin.cs" />
     <Compile Include="AutoPopulateICNDatePlugin.cs" />
     <Compile Include="AutoPopulateMissingICNData.cs" />
+    <Compile Include="Logic\MapImplementationProducttoTaskLogic.cs" />
     <Compile Include="Logic\MapSalesOrderToImplementationLogic.cs" />
     <Compile Include="Logic\WriteAsSysUserLogic.cs" />
+    <Compile Include="MapImplementationProducttoTaskPlugin.cs" />
     <Compile Include="WriteAsSysUserPlugin.cs" />
     <Compile Include="Logic\AutoDeactivateImplementationProductLogic.cs" />
     <Compile Include="Logic\AutoPopulateICNDateLogic.cs" />

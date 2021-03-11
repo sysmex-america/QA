@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Sysmex.Crm.IntegrationPlugins
 {
-    public class AutoPopulateICNDatePlugin : PluginBase
+    class AutoPopulateICNDatePlugin : PluginBase
     {
         public override void OnExecute(IServiceProvider serviceProvider) 
         {

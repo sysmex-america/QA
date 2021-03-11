@@ -73,10 +73,12 @@ namespace Sysmex.Crm.IntegrationPlugins.Logic
 				}
 				else
 				{
-					updateProduct.smx_ImplementationRep = null;
-					updateProduct.smx_CASId = null;
-					updateProduct.smx_ImplementationDate = null;
-					orgService.Update(updateProduct.ToEntity<Entity>());
+					//Added by Yash on 26-02-2021 Ticket No 60447
+					//updateProduct.smx_ImplementationRep = null;
+					//updateProduct.smx_CASId = null;
+					//updateProduct.smx_ImplementationDate = null;
+					//orgService.Update(updateProduct.ToEntity<Entity>());
+					//End
 				}
 			}				
 		}
