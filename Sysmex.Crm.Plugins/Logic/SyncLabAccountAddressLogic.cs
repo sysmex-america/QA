@@ -47,8 +47,9 @@ namespace Sysmex.Crm.Plugins
 
 				var addressId = _orgService.Create(address);
 				Trace("Address Created: " + addressId.ToString());
-
-				string zipCode = target.GetAttributeValue<string>("address1_postalcode");
+				//Added by Yash on 01-12-2020 - 59225
+				//string zipCode = target.GetAttributeValue<string>("address1_postalcode"); 
+		        string zipCode = target.GetAttributeValue<string>("smx_shiptozip");
 				Entity territoryDetails = new Entity();
 				EntityReference territory = new EntityReference();
 				EntityReference regionalmanager = new EntityReference();
@@ -72,6 +73,13 @@ namespace Sysmex.Crm.Plugins
 						}
 						_tracer.Trace("Account Type Is :" + accountType.Value);
 						target["territoryid"] = territory;
+						//Added by Yash on 03-02-2021 - 60081
+						var zipPostal = RetrieveAddressZipCodeRecord(zipCode);
+						var accountManager = zipPostal.Contains("territory.smx_accountmanager") ? zipPostal.GetAliasedAttributeValue<EntityReference>("territory.smx_accountmanager") : null;
+						target["smx_flowterritory"] = zipPostal.Contains("smx_flowterritory") ? zipPostal.GetAttributeValue<EntityReference>("smx_flowterritory") : null;
+						target["smx_fcam"] = accountManager;
+						_tracer.Trace("Updated flowTerritory and FlowCytometryAccountManager");
+						//End
 					}
 				}
 				//End
@@ -100,7 +108,9 @@ namespace Sysmex.Crm.Plugins
 				//Added by yash on 29-09-2020 - 58350
 				string labTypeText = target.Contains("smx_labtype") ? target.FormattedValues["smx_labtype"].ToString() : string.Empty;
 				//address["smx_name"] = _accountName.GetAttributeValue<string>("name");
-				address["smx_name"] = _accountName.GetAttributeValue<string>("name") + "-" + labTypeText;
+				//Added by yash on 08-02-2021 - 60296
+				//address["smx_name"] = _accountName.GetAttributeValue<string>("name") + "-" + labTypeText;
+				address["smx_name"] = _accountName.GetAttributeValue<string>("name");
 				address["smx_account"] = target.GetAttributeValue<EntityReference>("smx_account");
 				address["smx_lab"] = new EntityReference("smx_lab", target.Id);
 				address["smx_type"] = new OptionSetValue(SHIP_TO);
@@ -308,8 +318,9 @@ namespace Sysmex.Crm.Plugins
 				_tracer.Trace("Account is not a customer or prospect or Tradeshow, exiting PopulateFieldsBasedOnAddressZipCode");
 				return;
 			}
-
-			string accountZip = account.GetAttributeValue<string>("address1_postalcode");
+			// Added by Yash on 01 - 12 - 2020 - 59225
+			//string accountZip = account.GetAttributeValue<string>("address1_postalcode");
+			string accountZip = account.GetAttributeValue<string>("smx_shiptozip");
 			EntityReference accountAddressCountry = new EntityReference();
 
 			if (!account.Contains("smx_countrysap"))
@@ -358,14 +369,19 @@ namespace Sysmex.Crm.Plugins
 			account["smx_altterritory"] = zipPostal.GetAttributeValue<EntityReference>("smx_distributorzone");
 			account["smx_altterritorymanager"] = zipPostal.GetAliasedAttributeValue<EntityReference>("distributorzone.smx_accountmanager");
 			account["smx_region"] = zipPostal.GetAliasedAttributeValue<EntityReference>("territory.smx_region");
+			//Added by Yash on 03-02-2021 - 60081
+			var accountManager = zipPostal.Contains("territory.smx_accountmanager") ? zipPostal.GetAliasedAttributeValue<EntityReference>("territory.smx_accountmanager") : null;
+			account["smx_flowterritory"] = zipPostal.Contains("smx_flowterritory") ? zipPostal.GetAttributeValue<EntityReference>("smx_flowterritory") : null;
+			account["smx_fcam"] = accountManager;
+			//End
 			//account["smx_lscuser"] = zipPostal.Contains("smx_lscuser") ? zipPostal.GetAttributeValue<EntityReference>("smx_lscuser") : null;
-			var accountManager = zipPostal.GetAliasedAttributeValue<EntityReference>("territory.smx_accountmanager");
+
 			if (accountManager != null && VerifyUserRoles(accountManager.Id))
 			{
 				Trace($"Changing Account Owner");
 				account["ownerid"] = accountManager;
 			}
-
+			
 			//Adding Update for create since it runs on postOperation for another reason
 			if (message == "create")
 			{
@@ -403,14 +419,15 @@ namespace Sysmex.Crm.Plugins
 					string zipCode = address.GetAttributeValue<string>("smx_zippostalcode");
 
 					//Added by Yash on 23-07-2020 - 57410
-					if (!string.IsNullOrEmpty(zipCode))
-					{
-						Entity zipPostalCode = new Entity();
-						EntityReference lscUser = new EntityReference();
-						zipPostalCode = GetZipPostalCode(_orgService, zipCode);
-						lscUser = zipPostalCode.Contains("smx_lscuser") ? zipPostalCode.GetAttributeValue<EntityReference>("smx_lscuser") : null;
-						updatedAccount["smx_lscuser"] = lscUser;
-					}
+					//Added by Yash on 01-12-2020 - 59225
+					//if (!string.IsNullOrEmpty(zipCode))
+					//{
+					//	Entity zipPostalCode = new Entity();
+					//	EntityReference lscUser = new EntityReference();
+					//	zipPostalCode = GetZipPostalCode(_orgService, zipCode);
+					//	lscUser = zipPostalCode.Contains("smx_lscuser") ? zipPostalCode.GetAttributeValue<EntityReference>("smx_lscuser") : null;
+					//	updatedAccount["smx_lscuser"] = lscUser;
+					//}
 					//End
 
 					Entity territoryDetails = new Entity();
@@ -420,24 +437,25 @@ namespace Sysmex.Crm.Plugins
 					int _accountType = account.GetAttributeValue<OptionSetValue>("smx_accounttype").Value;
 
 					//Added by Yash on 19-06-2020  Customer = 180700000  Prospect = 180700002
-					if ((!string.IsNullOrEmpty(zipCode)) && businessUnitName != "Latin America" && (_accountType == 180700000 || _accountType == 180700002))
-					{
-						territoryDetails = GetTerritoryDetails(_orgService, zipCode);
-						if (territoryDetails != null && territoryDetails.Id != null && territoryDetails.Id != Guid.Empty)
-						{
-							territory = new EntityReference("territory", territoryDetails.Id);
-							regionalmanager = territoryDetails.Contains("smx_accountmanager") ? territoryDetails.GetAttributeValue<EntityReference>("smx_accountmanager") : null;
-							if (VerifyUserRoles(regionalmanager.Id))
-							{
-								updatedAccount["ownerid"] = regionalmanager;
-							}
-							else
-							{
-								Trace("regional manager is not Verified User Roles");
-							}
-							updatedAccount["territoryid"] = territory;
-						}
-					}
+					//Added by Yash on 01-12-2020 - 59225
+					//if ((!string.IsNullOrEmpty(zipCode)) && businessUnitName != "Latin America" && (_accountType == 180700000 || _accountType == 180700002))
+					//{
+					//	territoryDetails = GetTerritoryDetails(_orgService, zipCode);
+					//	if (territoryDetails != null && territoryDetails.Id != null && territoryDetails.Id != Guid.Empty)
+					//	{
+					//		territory = new EntityReference("territory", territoryDetails.Id);
+					//		regionalmanager = territoryDetails.Contains("smx_accountmanager") ? territoryDetails.GetAttributeValue<EntityReference>("smx_accountmanager") : null;
+					//		if (VerifyUserRoles(regionalmanager.Id))
+					//		{
+					//			updatedAccount["ownerid"] = regionalmanager;
+					//		}
+					//		else
+					//		{
+					//			Trace("regional manager is not Verified User Roles");
+					//		}
+					//		updatedAccount["territoryid"] = territory;
+					//	}
+					//}
 					var updateRequest = new UpdateRequest()
 					{
 						Target = updatedAccount
@@ -540,11 +558,12 @@ namespace Sysmex.Crm.Plugins
 		private Entity RetrieveAddressZipCodeRecord(string zipcode)
 		{
 			//Added by Yash on 06-10-2020 - 58322
+			//Added by Yash on 03-02-2021 - 60081
 			if (zipcode != null)
 			{
 				var query = new QueryExpression("smx_zippostalcode");
 				query.Criteria.AddCondition(new ConditionExpression("smx_name", ConditionOperator.Equal, zipcode));
-				query.ColumnSet.AddColumns("smx_dsm", "smx_lsc", "smx_tis", "smx_territory", "smx_distributorzone", "smx_lscuser");
+				query.ColumnSet.AddColumns("smx_dsm", "smx_lsc", "smx_tis", "smx_territory", "smx_distributorzone", "smx_lscuser", "smx_flowterritory", "smx_fcam");
 
 				// The AltTerritory / AltTerritoryManagerId field are from the DistributorZone field on the Zip/Postal Code
 				query.LinkEntities.Add(new LinkEntity("smx_zippostalcode", "territory", "smx_distributorzone", "territoryid", JoinOperator.LeftOuter));
@@ -683,9 +702,11 @@ namespace Sysmex.Crm.Plugins
 			EntityReference territory = new EntityReference();
 			EntityReference regionalmanager = new EntityReference();
 			//Added by Yash on 23-07-2020 - 57410
-			if (target.LogicalName.ToLower() == "account" && target.Contains("address1_postalcode"))
+			//Added by Yash on 01-12-2020 - 59225
+			//if (target.LogicalName.ToLower() == "account" && target.Contains("address1_postalcode"))
+			if (target.LogicalName.ToLower() == "account" && target.Contains("smx_shiptozip"))
 			{
-				string zipCode = target.GetAttributeValue<string>("address1_postalcode");
+				string zipCode = target.GetAttributeValue<string>("smx_shiptozip");
 				if (!string.IsNullOrEmpty(zipCode))
 				{
 					Entity zipPostalCode = new Entity();
@@ -720,8 +741,14 @@ namespace Sysmex.Crm.Plugins
 						}
 						_tracer.Trace("Account Type Is :" + accountType.Value);
 						target["territoryid"] = territory;
-						
-						
+						//Added by Yash on 03-02-2021 - 60081
+						var zipPostal = RetrieveAddressZipCodeRecord(zipCode);
+						var accountManager = zipPostal.Contains("territory.smx_accountmanager") ? zipPostal.GetAliasedAttributeValue<EntityReference>("territory.smx_accountmanager") : null;
+						target["smx_flowterritory"] = zipPostal.Contains("smx_flowterritory") ? zipPostal.GetAttributeValue<EntityReference>("smx_flowterritory") : null;
+						target["smx_fcam"] = accountManager;
+						_tracer.Trace("Updated flowTerritory and FlowCytometryAccountManager");
+						//End
+
 					}
 				}
 				//End
@@ -739,6 +766,18 @@ namespace Sysmex.Crm.Plugins
 						regionalmanager = territoryDetails.Contains("smx_accountmanager") ? territoryDetails.GetAttributeValue<EntityReference>("smx_accountmanager") : null;
 						target["smx_regionalmanager"] = regionalmanager;
 						target["smx_territory"] = territory;
+						//Added by Yash on 08-02-2021 - 60312
+						EntityCollection opportunityLabs = GetRelatedOpportunityLabs(_orgService, target.Id);
+						if(opportunityLabs.Entities.Count > 0)
+						{
+							_tracer.Trace("opportunityLabs Count : " +opportunityLabs.Entities.Count);
+							foreach (Entity opportunityLab in opportunityLabs.Entities)
+							{
+								opportunityLab["smx_territory"] = territory;
+								_orgService.Update(opportunityLab);
+							}
+						}
+						//End
 					}
 				}
 			}
@@ -779,6 +818,37 @@ namespace Sysmex.Crm.Plugins
 				return countriesRefcollection;
 			}
 			return countriesRefcollection;
+		}
+		//Added by Yash on 08-02-2021 - 60312
+		private EntityCollection GetRelatedOpportunityLabs(IOrganizationService service, Guid labId)
+		{
+			EntityCollection opportunityLabs = new EntityCollection();
+			try
+			{
+				var qe = $@"<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>
+                              <entity name='smx_opportunitylab'>
+								<attribute name='smx_opportunitylabid' />
+							    <attribute name='smx_name' />
+									<filter type='and'>
+										 <condition attribute='smx_labid' operator='eq' value='{labId }' />
+									 </filter>
+							 <link-entity name='opportunity' from='opportunityid' to='smx_opportunityid' link-type='inner' alias='aa'>
+								<filter type='and'>
+									<condition attribute='statecode' operator='eq' value='0' />
+							    </filter>
+						    </link-entity>
+							 </entity>
+                            </fetch>";
+
+				opportunityLabs = service.RetrieveMultiple(new FetchExpression(qe));
+				
+
+			}
+			catch (Exception)
+			{
+				return opportunityLabs;
+			}
+			return opportunityLabs;
 		}
 	}
 }

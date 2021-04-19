@@ -250,12 +250,14 @@ namespace Sysmex.Crm.Plugins.Logic
 			//Added by Yash on 13-08-2020--Ticket No 57589
 			Entity saleorderDetails = GetSaleOrderDetails(salesOrderId);
 			AliasedValue opportunityLabLab = saleorderDetails.Contains("OpportunityLab.smx_labid") ? saleorderDetails.GetAttributeValue<AliasedValue>("OpportunityLab.smx_labid") : null;
+			AliasedValue opportunityLabAccount = saleorderDetails.Contains("OpportunityLab.smx_accountid") ? saleorderDetails.GetAttributeValue<AliasedValue>("OpportunityLab.smx_accountid") : null;
 			//Added by Yash on 28-10-2020--Ticket No 58798
-			if(opportunityLabLab!=null)
+			if (opportunityLabLab!=null)
 			{
 				EntityReference labDetails = (EntityReference)opportunityLabLab.Value;
-				Entity labEntity = _orgService.Retrieve(labDetails.LogicalName, labDetails.Id, new ColumnSet("smx_casprimary"));
-				if(labEntity.Contains("smx_casprimary"))
+				//Entity labEntity = _orgService.Retrieve(labDetails.LogicalName, labDetails.Id, new ColumnSet("smx_casprimary"));
+				Entity labEntity = GetLabDetails(labDetails);
+				if (labEntity.Contains("smx_casprimary"))
 				{
 					string labCASPrimary = labEntity.Contains("smx_casprimary") ? labEntity.GetAttributeValue<string>("smx_casprimary") : string.Empty;
 					if(labCASPrimary!=string.Empty)
@@ -275,11 +277,11 @@ namespace Sysmex.Crm.Plugins.Logic
 			if (opportunityLabLab != null && sapNumber != null)
 			{
 				UpdateLabandLabAddressSapNumber((EntityReference)opportunityLabLab.Value, sapNumber.Value.ToString(), "smx_sapid",saleorderDetails);
-				Entity labAddress = _orgService.Retrieve(((EntityReference)opportunityLabLab.Value).LogicalName, ((EntityReference)opportunityLabLab.Value).Id, new ColumnSet("smx_labaddress"));
-				if (labAddress.Contains("smx_labaddress"))
-					UpdateLabandLabAddressSapNumber((EntityReference)labAddress.Attributes["smx_labaddress"], sapNumber.Value.ToString(), "smx_sapnumber",saleorderDetails);
+				//Added by Yash on 15-02-2021--Ticket No 60420
+				//Entity labAddress = _orgService.Retrieve(((EntityReference)opportunityLabLab.Value).LogicalName, ((EntityReference)opportunityLabLab.Value).Id, new ColumnSet("smx_labaddress"));
+				//if (labAddress.Contains("smx_labaddress"))
+				//	UpdateLabandLabAddressSapNumber((EntityReference)labAddress.Attributes["smx_labaddress"], sapNumber.Value.ToString(), "smx_sapnumber",saleorderDetails);
 				//Added by Yash on 27-08-2020--Ticket No 57589
-				AliasedValue opportunityLabAccount = saleorderDetails.Contains("OpportunityLab.smx_accountid") ? saleorderDetails.GetAttributeValue<AliasedValue>("OpportunityLab.smx_accountid") : null;
 				if(opportunityLabAccount!=null && opportunityLabLab!=null)
 				{
 					EntityReference instrumentShipTo = saleorderDetails.GetAttributeValue<EntityReference>("smx_instrumentshiptoidid");
@@ -293,8 +295,26 @@ namespace Sysmex.Crm.Plugins.Logic
 				}
 			}
 			//End
-			
-
+			//Added by Yash on 15-01-2021--Ticket No 59963
+			EntityReference equipmentLocation = saleorderDetails.Contains("smx_lablocationid") ? saleorderDetails.GetAttributeValue<EntityReference>("smx_lablocationid") : null;
+			if (equipmentLocation != null)
+			{
+				_tracer.Trace("Started EquipmentLocation Process");
+				Entity enEquipmentLocation = new Entity(equipmentLocation.LogicalName, equipmentLocation.Id);
+				if (opportunityLabAccount != null)
+				{
+					EntityReference accountLookup = (EntityReference)opportunityLabAccount.Value;
+					enEquipmentLocation.Attributes.Add("smx_account", new EntityReference(accountLookup.LogicalName, accountLookup.Id));
+				}
+				if (opportunityLabLab != null)
+				{
+					EntityReference labLookup = (EntityReference)opportunityLabLab.Value;
+					enEquipmentLocation.Attributes.Add("smx_lab", new EntityReference(labLookup.LogicalName, labLookup.Id));
+				}
+				_orgService.Update(enEquipmentLocation);
+				_tracer.Trace("End EquipmentLocation Process");
+			}
+			//End
 		}
 
 		private ZBAPI_CON_HEADER GetRequestHeader(smx_salesorder salesOrder)
@@ -337,9 +357,9 @@ namespace Sysmex.Crm.Plugins.Logic
                 MATERIAL_NUMBER = lineItem.new_optionid?.Name,
                 TARGET_QUANTITY = lineItem.new_quantity,
                 UOM = lineItem.smx_UnitofMeasure,
-                PRICE = lineItem.new_BasePrice?.Value,
+                PRICE = lineItem.new_BasePrice?.Value
 				//ADD_VAL_DY = lineItem.Attributes.Contains("smx_ncmonths")?(lineItem.GetAttributeValue<int>("smx_ncmonths")).ToString():string.Empty  //Added by Yash on 30-06-2020 ticket id:57130   
-				ADD_VAL_DY = lineItem.Attributes.Contains("smx_combinedwarranty") ?(lineItem.GetAttributeValue<int>("smx_combinedwarranty")).ToString():string.Empty  //Added by Yash on 23-09-2020 ticket id:57130 
+				//ADD_VAL_DY = lineItem.Attributes.Contains("smx_combinedwarranty") ?(lineItem.GetAttributeValue<int>("smx_combinedwarranty")).ToString():string.Empty  //Added by Yash on 23-09-2020 ticket id:57130 
 
 			};
 
@@ -399,6 +419,7 @@ namespace Sysmex.Crm.Plugins.Logic
         }
 		//Added by Yash on 13-08-2020--Ticket No 57589
 		//Added by Yash on 19-10-2020--Ticket No 58434
+		//Added by Yash on 15-01-2021--Ticket No 59963
 		private Entity GetSaleOrderDetails(Guid saleOrderId)
 		{
 			Entity saleOrder = null;
@@ -413,6 +434,7 @@ namespace Sysmex.Crm.Plugins.Logic
                              <attribute name='smx_wamsite' />
                              <attribute name='smx_wamconnects' />
                              <attribute name='smx_soldtoaddressid' />
+							 <attribute name='smx_lablocationid' />
 							  <filter type='and'>
                                 <condition attribute='smx_salesorderid' operator='eq' value='{saleOrderId}' />
                               </filter>
@@ -445,10 +467,20 @@ namespace Sysmex.Crm.Plugins.Logic
 			Entity enLabandlabAddress = new Entity(labandlabAddress.LogicalName, labandlabAddress.Id);
 			enLabandlabAddress.Attributes.Add(sapNumberFieldName, sapNumber);
 			//Added by Yash on 08-10-2020--Ticket No 58434
-			if (saleOrderDetails.Contains("smx_wamsite") && labandlabAddress.LogicalName == "smx_lab")
-				enLabandlabAddress.Attributes.Add("smx_wamsite", saleOrderDetails.GetAttributeValue<OptionSetValue>("smx_wamsite"));
-			if (saleOrderDetails.Contains("smx_wamconnects") && labandlabAddress.LogicalName == "smx_lab")
-				enLabandlabAddress.Attributes.Add("smx_wamconnects", saleOrderDetails.GetAttributeValue<OptionSetValue>("smx_wamconnects"));
+			//Added by Yash on 23-11-2020--Ticket No 59244
+			//if (saleOrderDetails.Contains("smx_wamsite") && labandlabAddress.LogicalName == "smx_lab")
+			//	enLabandlabAddress.Attributes.Add("smx_wamsite", saleOrderDetails.GetAttributeValue<OptionSetValue>("smx_wamsite"));
+			//if (saleOrderDetails.Contains("smx_wamconnects") && labandlabAddress.LogicalName == "smx_lab")
+			//	enLabandlabAddress.Attributes.Add("smx_wamconnects", saleOrderDetails.GetAttributeValue<OptionSetValue>("smx_wamconnects"));
+			//Added by Yash on 23-11-2020--Ticket No 59244
+			if (labandlabAddress.LogicalName == "smx_lab")
+			{
+				Entity labEntity = GetLabDetails(labandlabAddress);
+				if (saleOrderDetails.Contains("smx_wamsite") && (!labEntity.Contains("smx_wamsite")))
+					enLabandlabAddress.Attributes.Add("smx_wamsite", saleOrderDetails.GetAttributeValue<OptionSetValue>("smx_wamsite"));
+				if (saleOrderDetails.Contains("smx_wamconnects") && (!labEntity.Contains("smx_wamconnects")))
+					enLabandlabAddress.Attributes.Add("smx_wamconnects", saleOrderDetails.GetAttributeValue<OptionSetValue>("smx_wamconnects"));
+			}
 			//End
 			_orgService.Update(enLabandlabAddress);
 			_tracer.Trace("Lab or Lab Address Updated");
@@ -502,6 +534,13 @@ namespace Sysmex.Crm.Plugins.Logic
 			}
 			return user;
 
+		}
+		//End
+		//Added by Yash on 23-11-2020--Ticket No 59244
+		private Entity GetLabDetails(EntityReference labDetails)
+		{
+			Entity labEntity = _orgService.Retrieve(labDetails.LogicalName, labDetails.Id, new ColumnSet("smx_casprimary", "smx_wamsite", "smx_wamconnects"));
+			return labEntity;
 		}
 		//End
 	}

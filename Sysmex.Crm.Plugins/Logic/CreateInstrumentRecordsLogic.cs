@@ -124,6 +124,12 @@ namespace Sysmex.Crm.Plugins.Logic
 						//End
 						
 						_tracer.Trace("Instrument Created");
+						//Added by Yash on 02-02-2021--Ticket No 59844
+						Entity opportunity = new Entity("opportunity", opportunityId);
+						opportunity["smx_createinstruments"] = false;
+						_orgService.Update(opportunity);
+						_tracer.Trace("Opportunty createinstruments set to no");
+						//End
 
 					}
 					else
@@ -311,7 +317,7 @@ namespace Sysmex.Crm.Plugins.Logic
 		{
 			_tracer.Trace("Started GetProduct Method");
 			Entity model = new Entity();
-
+			//Added by Yash on 01-03-2021--Ticket No 60569--Added Model Codintion.
 			var fetch = $@"
                       <fetch>
                         <entity name='smx_product'>
@@ -321,8 +327,11 @@ namespace Sysmex.Crm.Plugins.Logic
                        <filter type='and'>
                            <condition attribute='smx_productid' operator='eq' value='{productId}' />
                        </filter>
-                       <link-entity name='smx_model' from='smx_modelid' to='smx_crmmodelid' link-type='outer' alias='Model'>
+                       <link-entity name='smx_model' from='smx_modelid' to='smx_crmmodelid' link-type='inner' alias='Model'>
                          <attribute name='smx_productline' />
+                         <filter type='and'>
+                             <condition attribute='statecode' operator='eq' value='0' />
+                        </filter>
                        </link-entity>
                        </entity>
                      </fetch>";
@@ -360,5 +369,17 @@ namespace Sysmex.Crm.Plugins.Logic
 			}
 			return quote;
 		}
+		//Added by Yash on 14-01-2021--Ticket No 59844
+		public Entity getOpportunity(Guid opportunityId)
+		{
+			Entity opportunity = _orgService.Retrieve("opportunity", opportunityId, new ColumnSet("ownerid", "smx_createinstruments"));
+			return opportunity;
+		}
+		public string getUserBusinessUnit(Guid opportunityManagerId)
+		{
+			Entity _businessUnitEntity = _orgService.Retrieve("systemuser", opportunityManagerId, new ColumnSet("businessunitid"));
+			return (_businessUnitEntity.GetAttributeValue<EntityReference>("businessunitid").Name);
+		}
+		//End
 	}
 }

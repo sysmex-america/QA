@@ -48,10 +48,12 @@ namespace Sysmex.Crm.Plugins.Logic
 				"new_producttype"
 			});
             _tracer.Trace("before retrive product data");
-            var productData = RetrieveCRMRecord<smx_product>(smx_product.EntityLogicalName, cpqLineItem.new_optionid.Id, new string[] {
+			//Added by Yash on 08-02-2021--Ticket No 60353
+			var productData = RetrieveCRMRecord<smx_product>(smx_product.EntityLogicalName, cpqLineItem.new_optionid.Id, new string[] {
                 "smx_revenue",
-                "smx_quota"
-            });
+                "smx_quota",
+				"smx_family"
+			});
 
             _tracer.Trace("after retrive product data");
             var salesOrder = RetrieveCRMRecord<smx_salesorder>(smx_salesorder.EntityLogicalName, salesOrderId, new string[] {
@@ -244,9 +246,12 @@ namespace Sysmex.Crm.Plugins.Logic
                 if (smx_GreenBonusFromLineItem == "Yes")
                 {
                     _tracer.Trace("smx_GreenBonusFrom Quote line = YES, So Checking from Sales Order");
-                    smx_GreenBonus = (salesOrder.Contains("smx_distributor") && salesOrder.GetAttributeValue<EntityReference>("smx_distributor").Id != Guid.Empty) ? "No" : "Yes";
-                }
-                else
+					//Added by Yash on 08-02-2021--Ticket No 60353
+					//smx_GreenBonus = (salesOrder.Contains("smx_distributor") && salesOrder.GetAttributeValue<EntityReference>("smx_distributor").Id != Guid.Empty) ? "No" : "Yes";
+					smx_GreenBonus = ((salesOrder.Contains("smx_distributor") && salesOrder.GetAttributeValue<EntityReference>("smx_distributor").Id != Guid.Empty) || productData.GetAttributeValue<OptionSetValue>("smx_family").Value == 180700006) ? "No" : "Yes";
+
+				}
+				else
                 {
                     _tracer.Trace("smx_GreenBonusFrom Quote line = NO");
                     smx_GreenBonus = smx_GreenBonusFromLineItem;
@@ -291,7 +296,9 @@ namespace Sysmex.Crm.Plugins.Logic
 				//smx_Quotaprice = cpqLineItem.Contains("new_price") && cpqLineItem.GetAttributeValue<Money>("new_price") != null ? cpqLineItem.new_Price : null,
 				//Added by Yash on 02-11-2020--Ticket No 58905
 				//smx_Quotaprice = (overrideEve == false ) ? quotaprice : productEVEPrice,
-				smx_Quotaprice = (overrideEve == true || saleOrder.Contains("smx_distributor")) ? productEVEPrice  : quotaprice,
+				//Added by Yash on 19-11-2020--Ticket No 58905
+				//smx_Quotaprice = (overrideEve == true || salesOrder.Contains("smx_distributor")) ? productEVEPrice  : quotaprice,
+				smx_Quotaprice = ((overrideEve == true || salesOrder.Contains("smx_distributor")) && productEVEPrice != null) ? productEVEPrice : quotaprice,
 				//End
 				smx_sdiOrderDDate = DateTime.Now.ToString(),
 				smx_ContractType = smx_ContractType,
@@ -301,13 +308,15 @@ namespace Sysmex.Crm.Plugins.Logic
 				//smx_ItemEVEPrice = product?.smx_EVEPrice?.Value.ToString(),
 				//Added by Yash on 02-11-2020--Ticket No 58905
 				//smx_ItemEVEPrice = overrideEve == false ? string.Empty : productEVEPrice.Value.ToString(),
-				smx_ItemEVEPrice = (overrideEve == true || saleOrder.Contains("smx_distributor")) ?productEVEPrice.Value.ToString()  : string.Empty,
+				smx_ItemEVEPrice = (overrideEve == true || salesOrder.Contains("smx_distributor")) ? productEVEPrice?.Value.ToString() : string.Empty,
 				//End
 				smx_AMPBonusMiles1 = "0",
 				smx_AMPBonusMiles2 = "0",
 				smx_TotalAMP = "0",
 				smx_sdiPONumber = salesOrder.smx_PurchaseOrder,
-				smx_sdiCompetDisp = salesOrder.smx_CompetitiveDisplacement == true ? "CPT" : "STD",
+				//Added by Yash on 08-02-2021--Ticket No 60353
+				//smx_sdiCompetDisp = salesOrder.smx_CompetitiveDisplacement == true  ? "CPT" : "STD",
+				smx_sdiCompetDisp = (salesOrder.smx_CompetitiveDisplacement == true && productData.GetAttributeValue<OptionSetValue>("smx_family").Value != 180700006) ? "CPT" : "STD",
 				smx_Competitor = salesOrder.smx_CompetitiveDisplacement == true ? salesOrder.smx_Competitor?.Name : "SYSMEX",
 				smx_ItemCmpDspEQP = model?.smx_name,
 				smx_ItemShipDate = String.Empty,
@@ -324,7 +333,7 @@ namespace Sysmex.Crm.Plugins.Logic
 				smx_LineItemID = cpqLineItem.ToEntityReference(),
 				//Added by Yash on 13-11-2020--Ticket No 58839
 				smx_HSAMQ = (salesOrder.Contains("smx_accountmanagerid") && salesOrder.GetAttributeValue<EntityReference>("smx_accountmanagerid").Id != Guid.Empty) ? isQutaStr : null,
-			    smx_HSAMR = (salesOrder.Contains("smx_accountmanagerid") && salesOrder.GetAttributeValue<EntityReference>("smx_accountmanagerid").Id != Guid.Empty) ? isRevenueStr : null,
+				smx_HSAMR = (salesOrder.Contains("smx_accountmanagerid") && salesOrder.GetAttributeValue<EntityReference>("smx_accountmanagerid").Id != Guid.Empty) ? isRevenueStr : null,
 				//smx_HSAMQ = (salesOrder.Contains("smx_accountmanagerid") && salesOrder.GetAttributeValue<EntityReference>("smx_accountmanagerid").Id != Guid.Empty && openTerriory != 180700001) ? isQutaStr : null,
 				//smx_HSAMR = (salesOrder.Contains("smx_accountmanagerid") && salesOrder.GetAttributeValue<EntityReference>("smx_accountmanagerid").Id != Guid.Empty && openTerriory != 180700001) ? isRevenueStr : null,
 				smx_MDSQ = (salesOrder.Contains("smx_mds") && salesOrder.GetAttributeValue<EntityReference>("smx_mds").Id != Guid.Empty) ? isQutaStr : null,
@@ -364,14 +373,16 @@ namespace Sysmex.Crm.Plugins.Logic
 				//smx_SalesHSAM = hsamEmpDetails.nameDerivedFromEmail,
 				//Added by Yash on 02-11-2020--Ticket No 58839
 				//smx_SalesHSAM = openTerriory != 180700001 ? hsamEmpDetails.nameDerivedFromEmail:null,
-				smx_SalesHSAM = "OPEN Territory" + "-" + instrumentShipToAccount?.TerritoryId?.Name,
+				//Added by Yash on 24-11-2020--Ticket No 58839
+				smx_SalesHSAM = openTerriory == 180700001 ? "OPEN Territory" + "-" + instrumentShipToAccount?.TerritoryId?.Name : hsamEmpDetails.nameDerivedFromEmail,
 				smx_SalesMDS = mdsEmpDetails.nameDerivedFromEmail,
-                smx_SalesCAE = caeEmpDetails.nameDerivedFromEmail,
-                smx_SalesLSC = lscEmpDetails.nameDerivedFromEmail,
+				smx_SalesCAE = caeEmpDetails.nameDerivedFromEmail,
+				smx_SalesLSC = lscEmpDetails.nameDerivedFromEmail,
 				//Added by Yash on 23-09-2020--Ticket No 58244
 				smx_SalesFCAM = fcaEmpDetails.nameDerivedFromEmail,
 				//End
 				//smx_Green_bonus = (salesOrder.Contains("smx_distributor") && salesOrder.GetAttributeValue<EntityReference>("smx_distributor").Id != Guid.Empty) ? new OptionSetValue(180700001) : new OptionSetValue(180700000),
+				
 			};
             _tracer.Trace("quota entry obj created");
 			//These must take place after initial creation above, since it uses fields from that creation
@@ -379,7 +390,9 @@ namespace Sysmex.Crm.Plugins.Logic
 			//commissionRecord.smx_iQuotaPrice = (product?.smx_EVEPrice == null || product?.smx_EVEPrice.Value == 0) ? commissionRecord.smx_ItemNetPrice : commissionRecord.smx_ItemEVEPrice;
 			//Added by Yash on 02-11-2020--Ticket No 58905
 			//commissionRecord.smx_iQuotaPrice = overrideEve == false ? commissionRecord.smx_ItemNetPrice : productEVEPrice?.Value.ToString();
-			commissionRecord.smx_iQuotaPrice = (overrideEve == true || saleOrder.Contains("smx_distributor")) ? productEVEPrice?.Value.ToString()  : commissionRecord.smx_ItemNetPrice;
+			//Added by Yash on 19-11-2020--Ticket No 58905
+			//commissionRecord.smx_iQuotaPrice = (overrideEve == true || salesOrder.Contains("smx_distributor")) ? productEVEPrice?.Value.ToString()  : commissionRecord.smx_ItemNetPrice;
+			commissionRecord.smx_iQuotaPrice = ((overrideEve == true || salesOrder.Contains("smx_distributor")) && productEVEPrice != null) ? productEVEPrice?.Value.ToString() : commissionRecord.smx_ItemNetPrice;
 			//End
 			commissionRecord.smx_CPTBonusMiles = commissionRecord.smx_sdiCompetDisp == "CPT" ? ((product?.smx_EVEPrice?.Value ?? 0) * (decimal)0.25).ToString() : "0";
             commissionRecord.smx_Distrib3PartBonusMiles = (product?.smx_EVEPrice != null && product?.smx_EVEPrice.Value != 0

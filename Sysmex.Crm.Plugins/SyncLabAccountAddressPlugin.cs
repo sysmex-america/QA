@@ -78,7 +78,9 @@ namespace Sysmex.Crm.Plugins
 				logic.PopulateTerritoryAndRegionalManager(target, orgService, businessUnitName);
 				tracer.Trace(" PopulateTerritoryAndRegionalManager executed");
             }
-            if (target.LogicalName.ToLower() == "account" && (target.Contains("address1_postalcode") || target.Contains("smx_countrysap")))
+			//Added by Yash on 01-12-2020 - 59225
+			//if (target.LogicalName.ToLower() == "account" && (target.Contains("address1_postalcode") || target.Contains("smx_countrysap")))
+			if (target.LogicalName.ToLower() == "account" && (target.Contains("smx_shiptozip") || target.Contains("smx_countrysap")))
             {
                 //Added by Yash on 19-06-2020  
                 businessUnitName = logic.getUserBusinessUnit(context.InitiatingUserId);

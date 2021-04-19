@@ -10,20 +10,22 @@ namespace Sysmex.Crm.Plugins.Logic
 {
     class CreateSalesOrderFromWinLogic : LogicBase
     {
-        public CreateSalesOrderFromWinLogic(IOrganizationService orgService, ITracingService tracer)
+		
+		public CreateSalesOrderFromWinLogic(IOrganizationService orgService, ITracingService tracer)
             : base(orgService, tracer)
         {
-        }
+		}
 
         public void CreateSalesOrdersFromOpportunityLabs(Guid opportunityId)
         {
             _tracer.Trace("Create Sales Orders From Opportunity Labs");
-
+			
             try
             {
                 var cpqRecord = RetrieveFirstCPQQuote(opportunityId);
                 bool opportunityIsWon = IsOpportunityWon(opportunityId);
-                _tracer.Trace(" and isWon: " + opportunityIsWon.ToString());
+				
+				_tracer.Trace(" and isWon: " + opportunityIsWon.ToString());
                 if (cpqRecord != null && cpqRecord.Id != Guid.Empty && cpqRecord.Id != null && opportunityIsWon)
                 {
                     var opportunityLabs = RetrieveOpportunityLabsAndRelatedFields(opportunityId);

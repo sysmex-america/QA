@@ -450,7 +450,7 @@ namespace Sysmex.Crm.Plugins.Common {
         
         private bool pRICEFieldSpecified;
 
-		private string ADD_VAL_DYField; //Added by Yash on 30-06-2020 ticket id:57130
+		//private string ADD_VAL_DYField; //Added by Yash on 30-06-2020 ticket id:57130
 
 		/// <remarks/>
 		[System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
@@ -522,18 +522,18 @@ namespace Sysmex.Crm.Plugins.Common {
 
 		//Added by Yash on 30-06-2020 ticket id:57130
 		/// <remarks/>
-		[System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-		public string ADD_VAL_DY
-		{
-			get
-			{
-				return this.ADD_VAL_DYField;
-			}
-			set
-			{
-				this.ADD_VAL_DYField = value;
-			}
-		}
+		//[System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+		//public string ADD_VAL_DY
+		//{
+		//	get
+		//	{
+		//		return this.ADD_VAL_DYField;
+		//	}
+		//	set
+		//	{
+		//		this.ADD_VAL_DYField = value;
+		//	}
+		//}
 		//end
 	}
 
