@@ -58,7 +58,8 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="SonomaPartners.Crm.Toolkit, Version=9.0.1.0, Culture=neutral, PublicKeyToken=f30227255a839074, processorArchitecture=MSIL">
-      <HintPath>..\packages\SonomaPartners.Crm.Toolkit.9.0.1\lib\SonomaPartners.Crm.Toolkit.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Downloads\SonomaPartners.Crm.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
