@@ -61,7 +61,8 @@ namespace Sysmex.Crm.Plugins.Logic
                              <attribute name='new_versionnumber' />
                              <attribute name='smx_revenue' />
                              <attribute name='new_cpq_productconfigurationid' /> 
-                               <filter type='and'>
+							 <attribute name='createdon' />
+							   <filter type='and'>
                                    <condition attribute='new_quoteid' operator='eq' value='{quoteId}' />
                                    <condition attribute='new_cpqstatus' operator='eq' value='100000006' />
                               </filter>
@@ -74,7 +75,11 @@ namespace Sysmex.Crm.Plugins.Logic
 				if (productConfigurationList.Entities.Count() > 0)
 				{
 					_tracer.Trace("Finalyzed productConfigurations " + productConfigurationList.Entities.Count());
-					productConfiguration = productConfigurationList.Entities.FirstOrDefault();
+					//Added by Yash on 28-04-2021--Ticket No 60439
+					var recentPC =productConfigurationList.Entities?.OrderByDescending(n => n.GetAttributeValue<DateTime>("createdon")).Take(1);
+					//productConfiguration = productConfigurationList.Entities.FirstOrDefault();
+					productConfiguration = recentPC.ToList().FirstOrDefault();
+
 				}
 			}
 			catch (Exception)

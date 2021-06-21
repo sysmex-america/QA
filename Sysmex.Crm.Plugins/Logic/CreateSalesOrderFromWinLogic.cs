@@ -39,9 +39,11 @@ namespace Sysmex.Crm.Plugins.Logic
                     _tracer.Trace($"Quote Number {  agreementRecord.new_QuoteNumber }");
 
                     EntityReference prodConfig = null;
+					//Added by yash on 21-04-2021 ticket id = 60802
+					var cpqLineItems = RetrieveCPQLineItemsByQuoteNumber(agreementRecord.new_QuoteNumber, out prodConfig);
+					//var cpqLineItems = RetrieveCPQLineItemsByQuoteNumberUsingFetch(agreementRecord.new_QuoteNumber, out prodConfig);
 
-                    var cpqLineItems = RetrieveCPQLineItemsByQuoteNumber(agreementRecord.new_QuoteNumber, out prodConfig);
-                    if (cpqLineItems != null && cpqLineItems.Count() > 0)
+					if (cpqLineItems != null && cpqLineItems.Count() > 0)
                     {
                         _tracer.Trace($"total line items: {cpqLineItems.Count()}");
                         IEnumerable<Guid> distinctAddresses = cpqLineItems.Where(x => x.Contains("new_locationid")).Select(x => x.GetAttributeValue<EntityReference>("new_locationid").Id).ToList().Distinct();
@@ -396,8 +398,67 @@ namespace Sysmex.Crm.Plugins.Logic
                 return null;
             }
         }
+		//Added by yash on 21-04-2021 ticket id = 60802
+		private IEnumerable<new_cpq_lineitem_tmp> RetrieveCPQLineItemsByQuoteNumberUsingFetch(String quoteNumber, out EntityReference prodConfig)
+		{
+			List<new_cpq_lineitem_tmp> allitems = new List<new_cpq_lineitem_tmp>();
+			prodConfig = null;
+			try
+			{
+				QueryExpression qeProductConfiguration = new QueryExpression("new_cpq_productconfiguration")
+				{
+					ColumnSet = new ColumnSet("new_versionnumber"),
+					Criteria =
+					{
+						Conditions =
+						{
+						new ConditionExpression("new_cpqstatus",ConditionOperator.Equal,100000006)   // 100000006  -Finalized
+                        }
+					}
+				};
+				LinkEntity toQuoteLink = new LinkEntity("new_cpq_productconfiguration", "new_cpq_quote", "new_quoteid", "new_cpq_quoteid", JoinOperator.Inner);
+				toQuoteLink.LinkCriteria.AddCondition(new ConditionExpression("statecode", ConditionOperator.Equal, (int)new_cpq_quoteState.Active));
+				toQuoteLink.LinkCriteria.AddCondition(new ConditionExpression("new_name", ConditionOperator.Equal, quoteNumber));
+				qeProductConfiguration.LinkEntities.Add(toQuoteLink);
+				EntityCollection pcList = _orgService.RetrieveMultiple(qeProductConfiguration);
+				
+				if (pcList != null && pcList.Entities.Count > 0)
+				{
+					if (pcList.Entities.Count == 1)
+						prodConfig = pcList.Entities.FirstOrDefault().ToEntityReference();
+					string fetchXml = "<fetch version='1.0' output-format='xml-platform' mapping='logical' distinct='false'>"
+					+ "<entity name='new_cpq_lineitem_tmp'>"
+					+ "<attribute name='new_name' />"
+					+ "<attribute name='createdon' />"
+					+ "<attribute name='new_cpq_lineitem_tmpid' />"
+					+ "<attribute name='smx_annualtargettestcount' />"
+					+ "<attribute name='new_locationid' />"
+					+ "<filter type='or'>";
+					foreach (var pcs in pcList.Entities)
+					{
+						fetchXml+= "<condition attribute='new_productconfigurationid' operator='eq' value='"+pcs.Id+"' />";
+					}
+					fetchXml+="</filter>"
+					+"</entity>"
+					+"</fetch>";
+					EntityCollection quoteLineList = _orgService.RetrieveMultiple(new FetchExpression(fetchXml));
+					return quoteLineList.Entities.Select(x => x.ToEntity<new_cpq_lineitem_tmp>());
+				}
+				else
+				{
+					_tracer.Trace("No CPQ Line items Found");
+					return null;
+				}
+			}
+			catch (Exception ex)
+			{
+				_tracer.Trace($"Exception :{ ex.Message }");
+				return null;
+			}
+		}
 
-        private IEnumerable<Guid> RetrieveInstrumentUpdates(Guid opportunityLabId)
+
+		private IEnumerable<Guid> RetrieveInstrumentUpdates(Guid opportunityLabId)
         {
             _tracer.Trace("Retrieve Instrument Updates");
 

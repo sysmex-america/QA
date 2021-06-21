@@ -123,9 +123,13 @@ namespace Sysmex.Crm.Plugins.Common {
         private string zCONIN4Field;
         
         private string zCONIN6Field;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+
+		private string SITE_TYPEField; //Added by Yash on 27-04-2021 ticket id:61038
+
+		private string PARENT_SITEField; //Added by Yash on 27-04-2021 ticket id:61038
+
+		/// <remarks/>
+		[System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public string DOC_TYPE {
             get {
                 return this.dOC_TYPEField;
@@ -387,10 +391,39 @@ namespace Sysmex.Crm.Plugins.Common {
                 this.zCONIN6Field = value;
             }
         }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1590.0")]
+
+		//Added by Yash on 27-04-2021 ticket id:61038
+		/// <remarks/>
+		[System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+		public string SITE_TYPE
+		{
+			get
+			{
+				return this.SITE_TYPEField;
+			}
+			set
+			{
+				this.SITE_TYPEField = value;
+			}
+		}
+		/// <remarks/>
+		[System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+		public string PARENT_SITE
+		{
+			get
+			{
+				return this.PARENT_SITEField;
+			}
+			set
+			{
+				this.PARENT_SITEField = value;
+			}
+		}
+		//End
+	}
+
+	/// <remarks/>
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -450,7 +483,7 @@ namespace Sysmex.Crm.Plugins.Common {
         
         private bool pRICEFieldSpecified;
 
-		//private string ADD_VAL_DYField; //Added by Yash on 30-06-2020 ticket id:57130
+		private string ADD_VAL_DYField; //Added by Yash on 24-05-2021 ticket id:59827
 
 		/// <remarks/>
 		[System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
@@ -520,21 +553,21 @@ namespace Sysmex.Crm.Plugins.Common {
             }
         }
 
-		//Added by Yash on 30-06-2020 ticket id:57130
+		//Added by Yash on 24-05-2021 ticket id:59827
 		/// <remarks/>
-		//[System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-		//public string ADD_VAL_DY
-		//{
-		//	get
-		//	{
-		//		return this.ADD_VAL_DYField;
-		//	}
-		//	set
-		//	{
-		//		this.ADD_VAL_DYField = value;
-		//	}
-		//}
-		//end
+		[System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+		public string ADD_VAL_DY
+		{
+			get
+			{
+				return this.ADD_VAL_DYField;
+			}
+			set
+			{
+				this.ADD_VAL_DYField = value;
+			}
+		}
+		//End
 	}
 
 	/// <remarks/>

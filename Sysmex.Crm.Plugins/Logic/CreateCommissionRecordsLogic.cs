@@ -49,6 +49,7 @@ namespace Sysmex.Crm.Plugins.Logic
 			});
             _tracer.Trace("before retrive product data");
 			//Added by Yash on 08-02-2021--Ticket No 60353
+			//Added by Yash on 25-05-2021--Ticket No 61871
 			var productData = RetrieveCRMRecord<smx_product>(smx_product.EntityLogicalName, cpqLineItem.new_optionid.Id, new string[] {
                 "smx_revenue",
                 "smx_quota",
@@ -400,11 +401,29 @@ namespace Sysmex.Crm.Plugins.Logic
                 ? commissionRecord.smx_ItemEVEPrice
                 : commissionRecord.smx_ItemNetPrice;
 
-            _tracer.Trace("before quota creation");
+			_tracer.Trace("before quota creation");
             try
             {
-                _orgService.Create(commissionRecord);
+				//Added by Yash on 25-05-2021--Ticket No 61871
+			    Guid commissionId=_orgService.Create(commissionRecord);
 				_tracer.Trace("quote is created");
+				Entity commissionEntity = new Entity(commissionRecord.LogicalName,commissionId);
+				bool? productQuota= productData.Contains("smx_quota") ? productData?.GetAttributeValue<bool>("smx_quota") : null;
+				bool? ProductRevenue = productData.Contains("smx_revenue") ? productData?.GetAttributeValue<bool>("smx_revenue") : null;
+				if (productQuota != null)
+				commissionEntity["smx_backupmgrq"] = productQuota == true ? new OptionSetValue(180700001) : new OptionSetValue(180700000);
+				if(ProductRevenue != null)
+				commissionEntity["smx_backupmgrr"] = ProductRevenue == true ? new OptionSetValue(180700001) : new OptionSetValue(180700000);
+				AliasedValue backupManager = saleOrder.Contains("territory.smx_backupmanager") ? saleOrder.GetAttributeValue<AliasedValue>("territory.smx_backupmanager") : null;
+				commissionEntity["smx_backupmanager"] = backupManager !=null ? (EntityReference)backupManager.Value : null;
+				hsamEmpDetails = RetrieveUserEmpDetailsByUserId(backupManager != null ? ((EntityReference)backupManager.Value).Id : Guid.Empty);
+				commissionEntity["smx_backupmgrempn"] = hsamEmpDetails.empNo;
+				commissionEntity["smx_salesbackupmgr"] = hsamEmpDetails.nameDerivedFromEmail;
+				_orgService.Update(commissionEntity);
+				_tracer.Trace("quote is updated");
+				//End
+
+				
 			}
             catch (Exception ex)
             {
@@ -720,6 +739,7 @@ namespace Sysmex.Crm.Plugins.Logic
             return quote;
         }
 		//Added by Yash on 12-08-2020--Ticket No 57667
+		//Added by Yash on 25-05-2021--Ticket No 61871
 		private Entity GetOpenTerritory(Guid saleorderId)
 		{
 			_tracer.Trace("Entered GetOpenTerritory Method");
@@ -737,6 +757,7 @@ namespace Sysmex.Crm.Plugins.Logic
                                <link-entity name='territory' from='territoryid' to='smx_territoryid'  link-type='outer' alias='territory'>
                                <attribute name='smx_openterritory' />
                               <attribute name='smx_territoryid' />
+                              <attribute name='smx_backupmanager' />
 							   </link-entity>
                                </entity>
                              </fetch>";

@@ -136,6 +136,10 @@ namespace Sysmex.Crm.Plugins
 						target["smx_regionalmanager"] = regionalmanager;
 						target["smx_territory"] = territory;
 					}
+					//Added by yash on 03-06-2021 - 62080
+					var zipPostal = RetrieveAddressZipCodeRecord(zipCode);
+					target["smx_flowterritory"] = zipPostal.Contains("smx_flowterritory") ? zipPostal.GetAttributeValue<EntityReference>("smx_flowterritory") : null;
+					//End
 				}
 
 
@@ -760,6 +764,10 @@ namespace Sysmex.Crm.Plugins
 				if (!string.IsNullOrEmpty(zipCode))
 				{
 					territoryDetails = GetTerritoryDetails(_orgService, zipCode);
+					//Added by yash on 09-06-2021 - 62080
+					var zipPostal = RetrieveAddressZipCodeRecord(zipCode);
+					target["smx_flowterritory"] = zipPostal.Contains("smx_flowterritory") ? zipPostal.GetAttributeValue<EntityReference>("smx_flowterritory") : null;
+					//End
 					if (territoryDetails != null && territoryDetails.Id != null && territoryDetails.Id != Guid.Empty)
 					{
 						territory = new EntityReference("territory", territoryDetails.Id);

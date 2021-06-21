@@ -29,7 +29,8 @@ namespace Sysmex.Crm.Plugins.Logic
 
         public string CreateContract(Guid salesOrderId)
         {
-            var fetch = $@"<fetch top='1'>
+			//Added by Yash on 27-04-2021 ticket id:61038(Fields : smx_cwssitetype,smx_parentsiteid)
+			var fetch = $@"<fetch top='1'>
                 <entity name='smx_salesorder'>
                     <attribute name='smx_contracttype' />
                     <attribute name='smx_purchaseorder' />
@@ -44,6 +45,8 @@ namespace Sysmex.Crm.Plugins.Logic
                     <attribute name='smx_bcqmprogram' />
                     <attribute name='smx_automaticbilling' />
                     <attribute name='smx_dontsendemail' />
+                    <attribute name='smx_cwssitetype' />
+                    <attribute name='smx_parentsiteid' />
                     <link-entity name='opportunity' from='opportunityid' to='smx_opportunityid' link-type='outer' alias='opportunity'>
                         <attribute name='opportunityid' />
                         <link-entity name='new_cpq_quote' from='new_opportunityid' to='opportunityid' link-type='outer' alias='new_cpq_quote'>
@@ -167,9 +170,11 @@ namespace Sysmex.Crm.Plugins.Logic
         private string CreateRequest(smx_salesorder salesOrder, IEnumerable<new_cpq_lineitem_tmp> lineItems)
         {
             var requestHeader = GetRequestHeader(salesOrder);
-            var requestLineItems = lineItems.Select(x => GetRequestLineItem(x)).ToArray();
+			//Added by Yash on 27-04-2021 ticket id:61038
+			//var requestLineItems = lineItems.Select(x => GetRequestLineItem(x)).ToArray();
+			var requestLineItems = lineItems.Select(x => GetRequestLineItem(x,salesOrder)).ToArray();
 
-            var contractRequest = new Z_BIZ_BAPI_CONTRACT_CREATE1()
+			var contractRequest = new Z_BIZ_BAPI_CONTRACT_CREATE1()
             {
                 CONTRACT_HEADER = requestHeader,
                 CONTRACT_ITEM = requestLineItems
@@ -319,7 +324,19 @@ namespace Sysmex.Crm.Plugins.Logic
 
 		private ZBAPI_CON_HEADER GetRequestHeader(smx_salesorder salesOrder)
         {
-            var requestHeader = new ZBAPI_CON_HEADER()
+			//Added by Yash on 27-04-2021 ticket id:61038
+			string CWSSiteType = string.Empty;
+			OptionSetValue CWSSiteTypeValue = salesOrder.Contains("smx_cwssitetype") ? salesOrder.GetAttributeValue<OptionSetValue>("smx_cwssitetype") : null;
+			if(CWSSiteTypeValue != null)
+			{
+				if (CWSSiteTypeValue.Value == 180700000)
+					CWSSiteType = "P";
+				else if (CWSSiteTypeValue.Value == 180700001)
+					CWSSiteType = "C";
+			}
+			//string CWSSiteType = salesOrder.Contains("smx_cwssitetype") ? salesOrder.FormattedValues["smx_cwssitetype"] : null;
+			string parentSite = salesOrder.Contains("smx_parentsiteid") ? salesOrder.GetAttributeValue<string>("smx_parentsiteid") : null;
+			var requestHeader = new ZBAPI_CON_HEADER()
             {
                 DOC_TYPE = ParseContractType(salesOrder.GetAttributeValue<OptionSetValue>("smx_contracttype")),
                 SALES_ORG = salesOrder.GetAliasedAttributeValue<string>("smx_soldtoaddress.smx_salesorganization"),
@@ -333,7 +350,8 @@ namespace Sysmex.Crm.Plugins.Logic
                 ZMINMBILL = salesOrder.GetAttributeValue<string>("smx_minimummonthlybilling"),
                 ZSTCOM = salesOrder.GetAttributeValue<string>("smx_standardcontractcompliance"),
                 ZSITES = CountOpportunityLabs(salesOrder.GetAliasedAttributeValue<Guid?>("opportunity.opportunityid")),
-                ADD_VAL_DY = salesOrder.GetAttributeValue<string>("smx_additionaltermwarranty"),
+				//Added by Yash on 24-05-2021 ticket id:59827
+				//ADD_VAL_DY = salesOrder.GetAttributeValue<string>("smx_additionaltermwarranty"),
                 ZTCOUNT = salesOrder.GetAttributeValue<string>("smx_annualtargettestcount"),
                 ZCONTRACT_TERM = salesOrder.GetAliasedAttributeValue<int?>("new_cpq_quote.new_terms")?.ToString(),
                 ORD_REASON = ParseOrderReason(salesOrder.GetAttributeValue<OptionSetValue>("smx_orderreason")),
@@ -342,13 +360,15 @@ namespace Sysmex.Crm.Plugins.Logic
                 ZKBETR = salesOrder.GetAttributeValue<decimal?>("smx_currentcprrate"),
                 ZCONIN5 = salesOrder.GetAttributeValue<string>("bcqmprogram"),
                 ZCONIN4 = salesOrder.GetAttributeValue<string>("smx_automaticbilling"),
-                ZCONIN6 = salesOrder.GetAttributeValue<string>("smx_dontsendemail")
-            };
+                ZCONIN6 = salesOrder.GetAttributeValue<string>("smx_dontsendemail"),
+				SITE_TYPE = CWSSiteType,
+				PARENT_SITE = parentSite
+			};
 
             return requestHeader;
         }
 
-        private ZBAPI_CON_ITEM GetRequestLineItem(new_cpq_lineitem_tmp lineItem)
+        private ZBAPI_CON_ITEM GetRequestLineItem(new_cpq_lineitem_tmp lineItem,Entity salesorder)
         {
             var requestItem = new ZBAPI_CON_ITEM()
             {
@@ -357,12 +377,10 @@ namespace Sysmex.Crm.Plugins.Logic
                 MATERIAL_NUMBER = lineItem.new_optionid?.Name,
                 TARGET_QUANTITY = lineItem.new_quantity,
                 UOM = lineItem.smx_UnitofMeasure,
-                PRICE = lineItem.new_BasePrice?.Value
+                PRICE = lineItem.new_BasePrice?.Value,
 				//ADD_VAL_DY = lineItem.Attributes.Contains("smx_ncmonths")?(lineItem.GetAttributeValue<int>("smx_ncmonths")).ToString():string.Empty  //Added by Yash on 30-06-2020 ticket id:57130   
-				//ADD_VAL_DY = lineItem.Attributes.Contains("smx_combinedwarranty") ?(lineItem.GetAttributeValue<int>("smx_combinedwarranty")).ToString():string.Empty  //Added by Yash on 23-09-2020 ticket id:57130 
-
+				ADD_VAL_DY = lineItem.Attributes.Contains("smx_combinedwarranty") ?(lineItem.GetAttributeValue<int>("smx_combinedwarranty")).ToString():string.Empty  //Added by Yash on 24-05-2021 ticket id:59827
 			};
-
             return requestItem;
         }
 

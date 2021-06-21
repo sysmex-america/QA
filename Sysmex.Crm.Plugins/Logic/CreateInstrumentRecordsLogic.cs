@@ -317,7 +317,7 @@ namespace Sysmex.Crm.Plugins.Logic
 		{
 			_tracer.Trace("Started GetProduct Method");
 			Entity model = new Entity();
-			//Added by Yash on 01-03-2021--Ticket No 60569--Added Model Codintion.
+			//Added by Yash on 01-03-2021--Ticket No 60569--Added Model Condition.
 			var fetch = $@"
                       <fetch>
                         <entity name='smx_product'>

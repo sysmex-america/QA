@@ -63,7 +63,7 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="SonomaPartners.Crm.Toolkit, Version=9.0.1.0, Culture=neutral, PublicKeyToken=f30227255a839074, processorArchitecture=MSIL">
+    <Reference Include="SonomaPartners.Crm.Toolkit">
       <HintPath>..\..\..\..\Downloads\SonomaPartners.Crm.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -89,6 +89,7 @@
     <Compile Include="CalculateLALabInstrumentRollupsPlugin.cs" />
     <Compile Include="CASSyncPlugin.cs" />
     <Compile Include="Common\Rfc.cs" />
+    <Compile Include="CPQPricingMGTPlugin.cs" />
     <Compile Include="CreateCommissionRecordsPlugin.cs" />
     <Compile Include="CreateContractActionPlugin.cs" />
     <Compile Include="CreateInstrumentRecordsPlugin.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Logic\CalculateLabInstrumentRollupsPluginLogic.cs" />
     <Compile Include="Logic\CalculateLALabInstrumentRollupsPluginLogic.cs" />
     <Compile Include="Logic\CASSyncPluginLogic.cs" />
+    <Compile Include="Logic\CPQPricingMGTPluginLogic.cs" />
     <Compile Include="Logic\CreateCommissionRecordsLogic.cs" />
     <Compile Include="Logic\CreateContractActionLogic.cs" />
     <Compile Include="Logic\CreateInstrumentRecordsLogic.cs" />
